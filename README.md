@@ -51,7 +51,7 @@ The classifier runs on CPU in ~16ms and uses zero VRAM — your GPU stays fully 
 ## Quickstart
 
 ```bash
-git clone https://github.com/skysavv/bubble-router
+git clone https://github.com/mohanish3/bubble-router
 cd bubble-router
 pip install -r requirements.txt
 

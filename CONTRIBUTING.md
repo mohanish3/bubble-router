@@ -3,7 +3,7 @@
 ## Setup
 
 ```bash
-git clone https://github.com/skysavv/bubble-router
+git clone https://github.com/mohanish3/bubble-router
 cd bubble-router
 pip install -e ".[dev]"
 
