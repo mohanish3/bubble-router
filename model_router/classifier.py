@@ -30,6 +30,17 @@ class TaskClassifier:
         self.threshold = threshold
         self._predictor = predictor
         self._load_lock = asyncio.Lock()
+        # Infer which config key maps to each semantic role from label descriptions.
+        # Falls back gracefully when a role is absent (e.g. 2-model setups).
+        self._general_key = self._infer_role_key(labels, r"\b(general|tool|plan|ordinary|question)\b")
+        self._reasoning_key = self._infer_role_key(labels, r"\b(reasoning|proof|analys|research|theorem)\b")
+        self._coding_key = self._infer_role_key(labels, r"\b(coding|code|software|debug|engineer)\b")
+
+    @staticmethod
+    def _infer_role_key(labels: dict[str, str], pattern: str) -> str | None:
+        scored = [(len(re.findall(pattern, desc, re.I)), key) for key, desc in labels.items()]
+        best_score, best_key = max(scored)
+        return best_key if best_score > 0 else None
 
     async def _load(self) -> None:
         if self._predictor is not None:
@@ -70,27 +81,38 @@ class TaskClassifier:
 
     @staticmethod
     def _heuristic_predict(pairs: list[tuple[str, str]]) -> list[float]:
-        text = pairs[0][0].lower() if pairs else ""
-        coding = len(re.findall(
+        """Deterministic fallback when sentence-transformers is unavailable.
+        Infers scores from hypothesis text so it works with any model names.
+        """
+        if not pairs:
+            return []
+        text = pairs[0][0].lower()
+        coding_count = len(re.findall(
             r"\b(code|coding|bug|debug|function|class|api|sql|python|typescript|"
             r"javascript|repository|refactor|test|compile|stack trace|git)\b", text
         ))
-        complex_reasoning = len(re.findall(
+        reasoning_count = len(re.findall(
             r"\b(prove|proof|derive|theorem|deep analysis|multi-step|optimi[sz]e|"
             r"research|trade-?off|architecture|root cause)\b", text
         ))
-        values = {
-            "omnicoder": min(0.99, 0.2 + 0.3 * coding),
-            "qwen-opus": min(0.99, 0.2 + 0.3 * complex_reasoning),
-            "gemma": 0.6,
-        }
-        return [float(values.get(cls, 0)) for cls in ("gemma", "qwen-opus", "omnicoder")]
+        scores = []
+        for _, hypothesis in pairs:
+            h = hypothesis.lower()
+            if re.search(r"\b(coding|code|software|debug|engineer|repository)\b", h):
+                scores.append(min(0.99, 0.2 + 0.3 * coding_count))
+            elif re.search(r"\b(reasoning|proof|analys|research|theorem)\b", h):
+                scores.append(min(0.99, 0.2 + 0.3 * reasoning_count))
+            else:
+                scores.append(0.6)
+        return scores
 
-    @staticmethod
-    def _intent_priors(text: str, latest_user: str = "") -> dict[str, float]:
+    def _intent_priors(self, text: str, latest_user: str = "") -> dict[str, float]:
         lowered = text.lower()
         latest = latest_user.lower()
-        priors = {"gemma": 0.0, "qwen-opus": 0.0, "omnicoder": 0.0}
+        priors = {key: 0.0 for key in self.labels}
+        gk = self._general_key    # key for general/tool-use role (may be None)
+        rk = self._reasoning_key  # key for reasoning role (may be None)
+        ck = self._coding_key     # key for coding role (may be None)
 
         # --- General tool-use (full text) ---
         general_tool = re.search(
@@ -98,7 +120,7 @@ class TaskClassifier:
             lowered,
         ) and re.search(r"\b(find|send|check|search|tell|group)\b", lowered)
         if general_tool:
-            priors["gemma"] += 5.0
+            if gk: priors[gk] += 5.0
 
         # --- Explanatory general ---
         # Check latest_user first (higher weight) — a latest-message switch to
@@ -111,10 +133,10 @@ class TaskClassifier:
         explanatory_general_latest = bool(latest) and bool(re.search(_expl_pattern, latest))
         explanatory_general_full = bool(re.search(_expl_pattern, lowered))
         if explanatory_general_latest:
-            priors["gemma"] += 6.0
-            priors["omnicoder"] -= 2.0  # override prior coding inertia
+            if gk: priors[gk] += 6.0
+            if ck: priors[ck] -= 2.0  # override prior coding inertia
         elif explanatory_general_full:
-            priors["gemma"] += 4.0
+            if gk: priors[gk] += 4.0
         explanatory_general = explanatory_general_latest or explanatory_general_full
 
         # Explicit "forget the code / explain simply" switch in latest message
@@ -125,8 +147,8 @@ class TaskClassifier:
             r"don't write code|no more code|just (summarize|explain|describe))\b",
             latest,
         ):
-            priors["gemma"] += 4.0
-            priors["omnicoder"] -= 2.0
+            if gk: priors[gk] += 4.0
+            if ck: priors[ck] -= 2.0
 
         # --- suppress_coding: scope to LATEST USER MESSAGE ONLY ---
         # A prior turn saying "no code" must not suppress coding intent in the
@@ -163,10 +185,10 @@ class TaskClassifier:
         ))
         # Latest-message reasoning signal gets higher weight to override prior context.
         if bool(latest) and not _reasoning_negated and re.search(_reasoning_pattern, latest):
-            priors["qwen-opus"] += 5.0
-            priors["omnicoder"] -= 2.0  # suppress prior coding inertia
+            if rk: priors[rk] += 5.0
+            if ck: priors[ck] -= 2.0  # suppress prior coding inertia
         elif re.search(_reasoning_pattern, lowered):
-            priors["qwen-opus"] += 3.5
+            if rk: priors[rk] += 3.5
 
         if re.search(
             r"\b(conflicting timelines|failure-domain constraints|uncertain demand|"
@@ -175,9 +197,9 @@ class TaskClassifier:
             r"eventual consistency|adverse scenarios|establish termination)\b",
             lowered,
         ):
-            priors["qwen-opus"] += 3.0
+            if rk: priors[rk] += 3.0
         if suppress_coding:
-            priors["qwen-opus"] += 2.0
+            if rk: priors[rk] += 2.0
 
         # --- Coding priors ---
         _coding_pattern = (
@@ -200,10 +222,10 @@ class TaskClassifier:
         # Use explanatory_general_LATEST only — a prior "explain to restaurant owner"
         # must not block a later "now build a REST API".
         if coding_signal_latest and not suppress_coding and not explanatory_general_latest:
-            priors["omnicoder"] += 4.5
-            priors["gemma"] -= 1.5
+            if ck: priors[ck] += 4.5
+            if gk: priors[gk] -= 1.5
         elif coding_signal_full and not suppress_coding and not explanatory_general:
-            priors["omnicoder"] += 3.5
+            if ck: priors[ck] += 3.5
 
         # In latest message: explicit coding verb + language = strong coding switch signal.
         # Covers "Write a Python simulation", "Build a TypeScript module", etc.
@@ -213,8 +235,8 @@ class TaskClassifier:
         if (bool(latest) and re.search(_action_verb, latest)
                 and re.search(_lang_pattern, latest)
                 and not suppress_coding and not explanatory_general_latest):
-            priors["omnicoder"] += 3.5
-            priors["qwen-opus"] -= 1.5  # suppress prior reasoning inertia
+            if ck: priors[ck] += 3.5
+            if rk: priors[rk] -= 1.5  # suppress prior reasoning inertia
 
         # lang + action in full text (covers single-turn cases)
         if re.search(_lang_pattern, lowered) and re.search(
@@ -222,7 +244,7 @@ class TaskClassifier:
             r"simulation|script|program|module|class|method)\b",
             lowered,
         ) and not suppress_coding and not explanatory_general_latest:
-            priors["omnicoder"] += 2.0
+            if ck: priors[ck] += 2.0
 
         return priors
 
@@ -288,7 +310,7 @@ class TaskClassifier:
         }
         total_entailment = sum(entailment.values()) or 1.0
         relative = {key: value / total_entailment for key, value in entailment.items()}
-        priors = self._intent_priors(text, latest_user)
+        priors = self._intent_priors(text, latest_user)  # instance method; uses self role keys
         logits = {
             key: relative.get(key, 0.0) + priors.get(key, 0.0)
             for key in keys
@@ -300,7 +322,7 @@ class TaskClassifier:
         selected = max(scores, key=scores.get)
         low_confidence = scores[selected] < self.threshold
         if low_confidence:
-            selected = "gemma"
+            selected = self._general_key or next(iter(self.labels))
         logger.info(
             "classification selected=%s low_confidence=%s scores=%s",
             selected,
