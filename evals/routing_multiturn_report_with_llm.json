@@ -1,0 +1,490 @@
+{
+  "cases": 17,
+  "method1_nli": {
+    "overall": {
+      "correct": 15,
+      "total": 17,
+      "accuracy": 0.8824
+    },
+    "by_kind": {
+      "follow_up": {
+        "correct": 11,
+        "total": 11,
+        "accuracy": 1.0
+      },
+      "truncation": {
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "context_switch": {
+        "correct": 1,
+        "total": 3,
+        "accuracy": 0.3333
+      }
+    },
+    "failures": [
+      {
+        "label": "switch: coding \u2192 explain to child",
+        "kind": "context_switch",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0368,
+          "qwen-opus": 0.0219,
+          "omnicoder": 0.9413
+        }
+      },
+      {
+        "label": "switch: general \u2192 write docker compose",
+        "kind": "context_switch",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": true,
+        "scores": {
+          "gemma": 0.4441,
+          "qwen-opus": 0.2525,
+          "omnicoder": 0.3034
+        }
+      }
+    ]
+  },
+  "method1_nli_results": [
+    {
+      "label": "coding follow-up: improve it",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0383,
+        "qwen-opus": 0.0221,
+        "omnicoder": 0.9396
+      }
+    },
+    {
+      "label": "coding follow-up: add tests",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.1015,
+        "qwen-opus": 0.0767,
+        "omnicoder": 0.8218
+      }
+    },
+    {
+      "label": "coding follow-up: edge case",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0513,
+        "qwen-opus": 0.0257,
+        "omnicoder": 0.9231
+      }
+    },
+    {
+      "label": "coding follow-up: same for others",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.005,
+        "qwen-opus": 0.0031,
+        "omnicoder": 0.9918
+      }
+    },
+    {
+      "label": "coding follow-up: make it faster",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0426,
+        "qwen-opus": 0.0233,
+        "omnicoder": 0.9341
+      }
+    },
+    {
+      "label": "reasoning follow-up: adversarial case",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0516,
+        "qwen-opus": 0.9194,
+        "omnicoder": 0.029
+      }
+    },
+    {
+      "label": "reasoning follow-up: go deeper",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0242,
+        "qwen-opus": 0.9533,
+        "omnicoder": 0.0225
+      }
+    },
+    {
+      "label": "reasoning follow-up: how so",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.9962,
+        "omnicoder": 0.0015
+      }
+    },
+    {
+      "label": "general follow-up: what else",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5245,
+        "qwen-opus": 0.2373,
+        "omnicoder": 0.2382
+      }
+    },
+    {
+      "label": "general follow-up: make it shorter",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5245,
+        "qwen-opus": 0.2294,
+        "omnicoder": 0.2461
+      }
+    },
+    {
+      "label": "general follow-up: suggest more",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5294,
+        "qwen-opus": 0.2346,
+        "omnicoder": 0.236
+      }
+    },
+    {
+      "label": "long system + coding user",
+      "kind": "truncation",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0285,
+        "qwen-opus": 0.0245,
+        "omnicoder": 0.947
+      }
+    },
+    {
+      "label": "long system + reasoning user",
+      "kind": "truncation",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0285,
+        "qwen-opus": 0.9431,
+        "omnicoder": 0.0285
+      }
+    },
+    {
+      "label": "long system + general user",
+      "kind": "truncation",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9867,
+        "qwen-opus": 0.0066,
+        "omnicoder": 0.0066
+      }
+    },
+    {
+      "label": "switch: coding \u2192 explain to child",
+      "kind": "context_switch",
+      "expected": "gemma",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0368,
+        "qwen-opus": 0.0219,
+        "omnicoder": 0.9413
+      }
+    },
+    {
+      "label": "switch: general \u2192 write docker compose",
+      "kind": "context_switch",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4441,
+        "qwen-opus": 0.2525,
+        "omnicoder": 0.3034
+      }
+    },
+    {
+      "label": "switch: coding \u2192 formal proof",
+      "kind": "context_switch",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0072,
+        "qwen-opus": 0.9883,
+        "omnicoder": 0.0045
+      }
+    }
+  ],
+  "method2_llm": {
+    "overall": {
+      "correct": 11,
+      "total": 17,
+      "accuracy": 0.6471
+    },
+    "by_kind": {
+      "follow_up": {
+        "correct": 7,
+        "total": 11,
+        "accuracy": 0.6364
+      },
+      "truncation": {
+        "correct": 1,
+        "total": 3,
+        "accuracy": 0.3333
+      },
+      "context_switch": {
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0
+      }
+    },
+    "failures": [
+      {
+        "label": "coding follow-up: improve it",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      },
+      {
+        "label": "coding follow-up: add tests",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      },
+      {
+        "label": "coding follow-up: edge case",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      },
+      {
+        "label": "coding follow-up: make it faster",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      },
+      {
+        "label": "long system + coding user",
+        "kind": "truncation",
+        "expected": "omnicoder",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      },
+      {
+        "label": "long system + reasoning user",
+        "kind": "truncation",
+        "expected": "qwen-opus",
+        "predicted": "gemma",
+        "correct": false,
+        "raw_output": "gemma"
+      }
+    ]
+  },
+  "method2_llm_results": [
+    {
+      "label": "coding follow-up: improve it",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "coding follow-up: add tests",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "coding follow-up: edge case",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "coding follow-up: same for others",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "raw_output": "omnicoder"
+    },
+    {
+      "label": "coding follow-up: make it faster",
+      "kind": "follow_up",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "reasoning follow-up: adversarial case",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "raw_output": "qwen-opus"
+    },
+    {
+      "label": "reasoning follow-up: go deeper",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "raw_output": "qwen-opus"
+    },
+    {
+      "label": "reasoning follow-up: how so",
+      "kind": "follow_up",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "raw_output": "qwen-opus"
+    },
+    {
+      "label": "general follow-up: what else",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "general follow-up: make it shorter",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "general follow-up: suggest more",
+      "kind": "follow_up",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "long system + coding user",
+      "kind": "truncation",
+      "expected": "omnicoder",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "long system + reasoning user",
+      "kind": "truncation",
+      "expected": "qwen-opus",
+      "predicted": "gemma",
+      "correct": false,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "long system + general user",
+      "kind": "truncation",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "switch: coding \u2192 explain to child",
+      "kind": "context_switch",
+      "expected": "gemma",
+      "predicted": "gemma",
+      "correct": true,
+      "raw_output": "gemma"
+    },
+    {
+      "label": "switch: general \u2192 write docker compose",
+      "kind": "context_switch",
+      "expected": "omnicoder",
+      "predicted": "omnicoder",
+      "correct": true,
+      "raw_output": "omnicoder"
+    },
+    {
+      "label": "switch: coding \u2192 formal proof",
+      "kind": "context_switch",
+      "expected": "qwen-opus",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "raw_output": "qwen-opus"
+    }
+  ]
+}

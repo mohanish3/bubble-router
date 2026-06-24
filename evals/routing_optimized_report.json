@@ -1,0 +1,703 @@
+{
+  "gemma": {
+    "public_id": "unsloth/gemma-4-12b-it-GGUF:Q5_K_M",
+    "accuracy": {
+      "overall": {
+        "correct": 13,
+        "total": 17,
+        "accuracy": 0.7647
+      },
+      "by_kind": {
+        "follow_up": {
+          "correct": 8,
+          "total": 11,
+          "accuracy": 0.7273
+        },
+        "truncation": {
+          "correct": 3,
+          "total": 3,
+          "accuracy": 1.0
+        },
+        "context_switch": {
+          "correct": 2,
+          "total": 3,
+          "accuracy": 0.6667
+        }
+      },
+      "failures": [
+        {
+          "label": "general follow-up: what else",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "general follow-up: make it shorter",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "general follow-up: suggest more",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "switch: coding \u2192 explain to child",
+          "kind": "context_switch",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        }
+      ]
+    },
+    "results": [
+      {
+        "label": "coding follow-up: improve it",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: add tests",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: edge case",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: same for others",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: make it faster",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "reasoning follow-up: adversarial case",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: go deeper",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: how so",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: what else",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "general follow-up: make it shorter",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: suggest more",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "long system + coding user",
+        "kind": "truncation",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "long system + reasoning user",
+        "kind": "truncation",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "long system + general user",
+        "kind": "truncation",
+        "expected": "gemma",
+        "predicted": "gemma",
+        "correct": true,
+        "raw_output": "general"
+      },
+      {
+        "label": "switch: coding \u2192 explain to child",
+        "kind": "context_switch",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "switch: general \u2192 write docker compose",
+        "kind": "context_switch",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "switch: coding \u2192 formal proof",
+        "kind": "context_switch",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      }
+    ]
+  },
+  "qwen-opus": {
+    "public_id": "Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-v2:Q5_K_M",
+    "accuracy": {
+      "overall": {
+        "correct": 9,
+        "total": 17,
+        "accuracy": 0.5294
+      },
+      "by_kind": {
+        "follow_up": {
+          "correct": 7,
+          "total": 11,
+          "accuracy": 0.6364
+        },
+        "truncation": {
+          "correct": 1,
+          "total": 3,
+          "accuracy": 0.3333
+        },
+        "context_switch": {
+          "correct": 1,
+          "total": 3,
+          "accuracy": 0.3333
+        }
+      },
+      "failures": [
+        {
+          "label": "reasoning follow-up: adversarial case",
+          "kind": "follow_up",
+          "expected": "qwen-opus",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "general follow-up: what else",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "general follow-up: make it shorter",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "general follow-up: suggest more",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "long system + reasoning user",
+          "kind": "truncation",
+          "expected": "qwen-opus",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "long system + general user",
+          "kind": "truncation",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "switch: coding \u2192 explain to child",
+          "kind": "context_switch",
+          "expected": "gemma",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        },
+        {
+          "label": "switch: coding \u2192 formal proof",
+          "kind": "context_switch",
+          "expected": "qwen-opus",
+          "predicted": "omnicoder",
+          "correct": false,
+          "raw_output": "coding"
+        }
+      ]
+    },
+    "results": [
+      {
+        "label": "coding follow-up: improve it",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: add tests",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: edge case",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: same for others",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "coding follow-up: make it faster",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "reasoning follow-up: adversarial case",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "reasoning follow-up: go deeper",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: how so",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: what else",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "general follow-up: make it shorter",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "general follow-up: suggest more",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "long system + coding user",
+        "kind": "truncation",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "long system + reasoning user",
+        "kind": "truncation",
+        "expected": "qwen-opus",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "long system + general user",
+        "kind": "truncation",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "switch: coding \u2192 explain to child",
+        "kind": "context_switch",
+        "expected": "gemma",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      },
+      {
+        "label": "switch: general \u2192 write docker compose",
+        "kind": "context_switch",
+        "expected": "omnicoder",
+        "predicted": "omnicoder",
+        "correct": true,
+        "raw_output": "coding"
+      },
+      {
+        "label": "switch: coding \u2192 formal proof",
+        "kind": "context_switch",
+        "expected": "qwen-opus",
+        "predicted": "omnicoder",
+        "correct": false,
+        "raw_output": "coding"
+      }
+    ]
+  },
+  "omnicoder": {
+    "public_id": "Tesslate/OmniCoder-9B:Q6_K",
+    "accuracy": {
+      "overall": {
+        "correct": 4,
+        "total": 17,
+        "accuracy": 0.2353
+      },
+      "by_kind": {
+        "follow_up": {
+          "correct": 3,
+          "total": 11,
+          "accuracy": 0.2727
+        },
+        "truncation": {
+          "correct": 0,
+          "total": 3,
+          "accuracy": 0.0
+        },
+        "context_switch": {
+          "correct": 1,
+          "total": 3,
+          "accuracy": 0.3333
+        }
+      },
+      "failures": [
+        {
+          "label": "coding follow-up: improve it",
+          "kind": "follow_up",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "coding follow-up: add tests",
+          "kind": "follow_up",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "coding follow-up: edge case",
+          "kind": "follow_up",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "coding follow-up: same for others",
+          "kind": "follow_up",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "coding follow-up: make it faster",
+          "kind": "follow_up",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "general follow-up: what else",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "general follow-up: make it shorter",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "general follow-up: suggest more",
+          "kind": "follow_up",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "long system + coding user",
+          "kind": "truncation",
+          "expected": "omnicoder",
+          "predicted": null,
+          "correct": false,
+          "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+        },
+        {
+          "label": "long system + reasoning user",
+          "kind": "truncation",
+          "expected": "qwen-opus",
+          "predicted": null,
+          "correct": false,
+          "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+        },
+        {
+          "label": "long system + general user",
+          "kind": "truncation",
+          "expected": "gemma",
+          "predicted": null,
+          "correct": false,
+          "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+        },
+        {
+          "label": "switch: coding \u2192 explain to child",
+          "kind": "context_switch",
+          "expected": "gemma",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        },
+        {
+          "label": "switch: general \u2192 write docker compose",
+          "kind": "context_switch",
+          "expected": "omnicoder",
+          "predicted": "qwen-opus",
+          "correct": false,
+          "raw_output": "reasoning"
+        }
+      ]
+    },
+    "results": [
+      {
+        "label": "coding follow-up: improve it",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "coding follow-up: add tests",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "coding follow-up: edge case",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "coding follow-up: same for others",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "coding follow-up: make it faster",
+        "kind": "follow_up",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: adversarial case",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: go deeper",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "reasoning follow-up: how so",
+        "kind": "follow_up",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: what else",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: make it shorter",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "general follow-up: suggest more",
+        "kind": "follow_up",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "long system + coding user",
+        "kind": "truncation",
+        "expected": "omnicoder",
+        "predicted": null,
+        "correct": false,
+        "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+      },
+      {
+        "label": "long system + reasoning user",
+        "kind": "truncation",
+        "expected": "qwen-opus",
+        "predicted": null,
+        "correct": false,
+        "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+      },
+      {
+        "label": "long system + general user",
+        "kind": "truncation",
+        "expected": "gemma",
+        "predicted": null,
+        "correct": false,
+        "raw_output": "ERROR: Client error '400 Bad Request' for url 'http://127.0.0.1:8080/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+      },
+      {
+        "label": "switch: coding \u2192 explain to child",
+        "kind": "context_switch",
+        "expected": "gemma",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "switch: general \u2192 write docker compose",
+        "kind": "context_switch",
+        "expected": "omnicoder",
+        "predicted": "qwen-opus",
+        "correct": false,
+        "raw_output": "reasoning"
+      },
+      {
+        "label": "switch: coding \u2192 formal proof",
+        "kind": "context_switch",
+        "expected": "qwen-opus",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "raw_output": "reasoning"
+      }
+    ]
+  }
+}

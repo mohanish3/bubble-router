@@ -1,0 +1,7191 @@
+{
+  "classifier": "cross-encoder/nli-MiniLM2-L6-H768",
+  "suite": "large",
+  "threshold": 0.55,
+  "overall": {
+    "correct": 496,
+    "total": 500,
+    "accuracy": 0.992
+  },
+  "normal": {
+    "correct": 400,
+    "total": 400,
+    "accuracy": 1.0
+  },
+  "curveball": {
+    "correct": 96,
+    "total": 100,
+    "accuracy": 0.96
+  },
+  "confusion": {
+    "gemma": {
+      "gemma": 164,
+      "omnicoder": 4
+    },
+    "qwen-opus": {
+      "qwen-opus": 166
+    },
+    "omnicoder": {
+      "omnicoder": 166
+    }
+  },
+  "failures": [
+    {
+      "index": 402,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Python API Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.1175,
+        "qwen-opus": 0.0774,
+        "omnicoder": 0.8051
+      }
+    },
+    {
+      "index": 418,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Race Condition Retrospective'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0389,
+        "qwen-opus": 0.0246,
+        "omnicoder": 0.9366
+      }
+    },
+    {
+      "index": 422,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Terraform Planning'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0495,
+        "qwen-opus": 0.0259,
+        "omnicoder": 0.9246
+      }
+    },
+    {
+      "index": 430,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'OpenAPI Discussion'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0425,
+        "qwen-opus": 0.0246,
+        "omnicoder": 0.9329
+      }
+    }
+  ],
+  "results": [
+    {
+      "index": 1,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize household budgeting for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5007,
+        "qwen-opus": 0.2342,
+        "omnicoder": 0.2651
+      }
+    },
+    {
+      "index": 2,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize household budgeting in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4986,
+        "qwen-opus": 0.2338,
+        "omnicoder": 0.2676
+      }
+    },
+    {
+      "index": 3,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize household budgeting using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5187,
+        "qwen-opus": 0.2294,
+        "omnicoder": 0.2519
+      }
+    },
+    {
+      "index": 4,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize household budgeting with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.497,
+        "qwen-opus": 0.2361,
+        "omnicoder": 0.2668
+      }
+    },
+    {
+      "index": 5,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize household budgeting as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.505,
+        "qwen-opus": 0.237,
+        "omnicoder": 0.258
+      }
+    },
+    {
+      "index": 6,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize healthy meal planning for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5285,
+        "qwen-opus": 0.2265,
+        "omnicoder": 0.2449
+      }
+    },
+    {
+      "index": 7,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize healthy meal planning in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5163,
+        "qwen-opus": 0.2291,
+        "omnicoder": 0.2546
+      }
+    },
+    {
+      "index": 8,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize healthy meal planning using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5435,
+        "qwen-opus": 0.2217,
+        "omnicoder": 0.2348
+      }
+    },
+    {
+      "index": 9,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize healthy meal planning with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5201,
+        "qwen-opus": 0.2292,
+        "omnicoder": 0.2507
+      }
+    },
+    {
+      "index": 10,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize healthy meal planning as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5301,
+        "qwen-opus": 0.2288,
+        "omnicoder": 0.2411
+      }
+    },
+    {
+      "index": 11,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize travel packing for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.477,
+        "qwen-opus": 0.2371,
+        "omnicoder": 0.286
+      }
+    },
+    {
+      "index": 12,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize travel packing in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4739,
+        "qwen-opus": 0.2379,
+        "omnicoder": 0.2881
+      }
+    },
+    {
+      "index": 13,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize travel packing using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4939,
+        "qwen-opus": 0.2333,
+        "omnicoder": 0.2728
+      }
+    },
+    {
+      "index": 14,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize travel packing with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4861,
+        "qwen-opus": 0.236,
+        "omnicoder": 0.2779
+      }
+    },
+    {
+      "index": 15,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize travel packing as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5108,
+        "qwen-opus": 0.2333,
+        "omnicoder": 0.2559
+      }
+    },
+    {
+      "index": 16,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize renewable energy for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.47,
+        "qwen-opus": 0.2391,
+        "omnicoder": 0.2909
+      }
+    },
+    {
+      "index": 17,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize renewable energy in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.464,
+        "qwen-opus": 0.2395,
+        "omnicoder": 0.2965
+      }
+    },
+    {
+      "index": 18,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize renewable energy using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4947,
+        "qwen-opus": 0.2326,
+        "omnicoder": 0.2726
+      }
+    },
+    {
+      "index": 19,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize renewable energy with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4793,
+        "qwen-opus": 0.2358,
+        "omnicoder": 0.2849
+      }
+    },
+    {
+      "index": 20,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize renewable energy as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5068,
+        "qwen-opus": 0.2349,
+        "omnicoder": 0.2583
+      }
+    },
+    {
+      "index": 21,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize public speaking for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4615,
+        "qwen-opus": 0.2459,
+        "omnicoder": 0.2926
+      }
+    },
+    {
+      "index": 22,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize public speaking in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4715,
+        "qwen-opus": 0.2429,
+        "omnicoder": 0.2856
+      }
+    },
+    {
+      "index": 23,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize public speaking using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4832,
+        "qwen-opus": 0.2403,
+        "omnicoder": 0.2766
+      }
+    },
+    {
+      "index": 24,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize public speaking with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4746,
+        "qwen-opus": 0.2425,
+        "omnicoder": 0.2829
+      }
+    },
+    {
+      "index": 25,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize public speaking as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4994,
+        "qwen-opus": 0.2395,
+        "omnicoder": 0.2611
+      }
+    },
+    {
+      "index": 26,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize home gardening for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4766,
+        "qwen-opus": 0.2357,
+        "omnicoder": 0.2877
+      }
+    },
+    {
+      "index": 27,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize home gardening in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4672,
+        "qwen-opus": 0.2366,
+        "omnicoder": 0.2962
+      }
+    },
+    {
+      "index": 28,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize home gardening using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5026,
+        "qwen-opus": 0.2307,
+        "omnicoder": 0.2667
+      }
+    },
+    {
+      "index": 29,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize home gardening with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4825,
+        "qwen-opus": 0.2354,
+        "omnicoder": 0.2821
+      }
+    },
+    {
+      "index": 30,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize home gardening as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5065,
+        "qwen-opus": 0.233,
+        "omnicoder": 0.2605
+      }
+    },
+    {
+      "index": 31,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize time management for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4519,
+        "qwen-opus": 0.2448,
+        "omnicoder": 0.3033
+      }
+    },
+    {
+      "index": 32,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize time management in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4463,
+        "qwen-opus": 0.2453,
+        "omnicoder": 0.3085
+      }
+    },
+    {
+      "index": 33,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize time management using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4836,
+        "qwen-opus": 0.2369,
+        "omnicoder": 0.2795
+      }
+    },
+    {
+      "index": 34,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize time management with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.471,
+        "qwen-opus": 0.2387,
+        "omnicoder": 0.2903
+      }
+    },
+    {
+      "index": 35,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize time management as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4917,
+        "qwen-opus": 0.2397,
+        "omnicoder": 0.2685
+      }
+    },
+    {
+      "index": 36,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize sleep habits for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4912,
+        "qwen-opus": 0.2374,
+        "omnicoder": 0.2714
+      }
+    },
+    {
+      "index": 37,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize sleep habits in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4744,
+        "qwen-opus": 0.2416,
+        "omnicoder": 0.284
+      }
+    },
+    {
+      "index": 38,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize sleep habits using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5035,
+        "qwen-opus": 0.2335,
+        "omnicoder": 0.263
+      }
+    },
+    {
+      "index": 39,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize sleep habits with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4883,
+        "qwen-opus": 0.239,
+        "omnicoder": 0.2727
+      }
+    },
+    {
+      "index": 40,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize sleep habits as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.505,
+        "qwen-opus": 0.2372,
+        "omnicoder": 0.2578
+      }
+    },
+    {
+      "index": 41,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize career interviews for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4469,
+        "qwen-opus": 0.25,
+        "omnicoder": 0.3032
+      }
+    },
+    {
+      "index": 42,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize career interviews in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4257,
+        "qwen-opus": 0.2533,
+        "omnicoder": 0.321
+      }
+    },
+    {
+      "index": 43,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize career interviews using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4834,
+        "qwen-opus": 0.2389,
+        "omnicoder": 0.2776
+      }
+    },
+    {
+      "index": 44,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize career interviews with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4464,
+        "qwen-opus": 0.2496,
+        "omnicoder": 0.304
+      }
+    },
+    {
+      "index": 45,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize career interviews as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4926,
+        "qwen-opus": 0.2423,
+        "omnicoder": 0.2651
+      }
+    },
+    {
+      "index": 46,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize team communication for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4464,
+        "qwen-opus": 0.2485,
+        "omnicoder": 0.3051
+      }
+    },
+    {
+      "index": 47,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize team communication in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4294,
+        "qwen-opus": 0.2509,
+        "omnicoder": 0.3197
+      }
+    },
+    {
+      "index": 48,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize team communication using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4851,
+        "qwen-opus": 0.238,
+        "omnicoder": 0.277
+      }
+    },
+    {
+      "index": 49,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize team communication with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4608,
+        "qwen-opus": 0.2417,
+        "omnicoder": 0.2976
+      }
+    },
+    {
+      "index": 50,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize team communication as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4908,
+        "qwen-opus": 0.2414,
+        "omnicoder": 0.2678
+      }
+    },
+    {
+      "index": 51,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize language learning for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4429,
+        "qwen-opus": 0.2465,
+        "omnicoder": 0.3106
+      }
+    },
+    {
+      "index": 52,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize language learning in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4466,
+        "qwen-opus": 0.2454,
+        "omnicoder": 0.308
+      }
+    },
+    {
+      "index": 53,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize language learning using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4719,
+        "qwen-opus": 0.2412,
+        "omnicoder": 0.2869
+      }
+    },
+    {
+      "index": 54,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize language learning with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4598,
+        "qwen-opus": 0.2409,
+        "omnicoder": 0.2994
+      }
+    },
+    {
+      "index": 55,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize language learning as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4751,
+        "qwen-opus": 0.243,
+        "omnicoder": 0.2818
+      }
+    },
+    {
+      "index": 56,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize museum visits for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.427,
+        "qwen-opus": 0.2425,
+        "omnicoder": 0.3305
+      }
+    },
+    {
+      "index": 57,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize museum visits in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4355,
+        "qwen-opus": 0.2421,
+        "omnicoder": 0.3224
+      }
+    },
+    {
+      "index": 58,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize museum visits using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4723,
+        "qwen-opus": 0.2359,
+        "omnicoder": 0.2918
+      }
+    },
+    {
+      "index": 59,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize museum visits with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4494,
+        "qwen-opus": 0.2415,
+        "omnicoder": 0.3092
+      }
+    },
+    {
+      "index": 60,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize museum visits as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4717,
+        "qwen-opus": 0.2408,
+        "omnicoder": 0.2875
+      }
+    },
+    {
+      "index": 61,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize personal fitness for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4722,
+        "qwen-opus": 0.2432,
+        "omnicoder": 0.2845
+      }
+    },
+    {
+      "index": 62,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize personal fitness in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4632,
+        "qwen-opus": 0.2433,
+        "omnicoder": 0.2935
+      }
+    },
+    {
+      "index": 63,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize personal fitness using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4983,
+        "qwen-opus": 0.2337,
+        "omnicoder": 0.2679
+      }
+    },
+    {
+      "index": 64,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize personal fitness with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4823,
+        "qwen-opus": 0.239,
+        "omnicoder": 0.2787
+      }
+    },
+    {
+      "index": 65,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize personal fitness as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5042,
+        "qwen-opus": 0.2373,
+        "omnicoder": 0.2586
+      }
+    },
+    {
+      "index": 66,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize pet adoption for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.464,
+        "qwen-opus": 0.2422,
+        "omnicoder": 0.2938
+      }
+    },
+    {
+      "index": 67,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize pet adoption in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4683,
+        "qwen-opus": 0.2414,
+        "omnicoder": 0.2904
+      }
+    },
+    {
+      "index": 68,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize pet adoption using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4926,
+        "qwen-opus": 0.2353,
+        "omnicoder": 0.2721
+      }
+    },
+    {
+      "index": 69,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize pet adoption with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4784,
+        "qwen-opus": 0.24,
+        "omnicoder": 0.2815
+      }
+    },
+    {
+      "index": 70,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize pet adoption as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5033,
+        "qwen-opus": 0.2364,
+        "omnicoder": 0.2603
+      }
+    },
+    {
+      "index": 71,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain household budgeting for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4793,
+        "qwen-opus": 0.2383,
+        "omnicoder": 0.2824
+      }
+    },
+    {
+      "index": 72,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain household budgeting in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4724,
+        "qwen-opus": 0.239,
+        "omnicoder": 0.2887
+      }
+    },
+    {
+      "index": 73,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain household budgeting using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9822,
+        "qwen-opus": 0.0083,
+        "omnicoder": 0.0095
+      }
+    },
+    {
+      "index": 74,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain household budgeting with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4987,
+        "qwen-opus": 0.2346,
+        "omnicoder": 0.2668
+      }
+    },
+    {
+      "index": 75,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain household budgeting as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5175,
+        "qwen-opus": 0.2316,
+        "omnicoder": 0.2509
+      }
+    },
+    {
+      "index": 76,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain healthy meal planning for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5079,
+        "qwen-opus": 0.2309,
+        "omnicoder": 0.2612
+      }
+    },
+    {
+      "index": 77,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain healthy meal planning in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4906,
+        "qwen-opus": 0.2343,
+        "omnicoder": 0.2751
+      }
+    },
+    {
+      "index": 78,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain healthy meal planning using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9842,
+        "qwen-opus": 0.0076,
+        "omnicoder": 0.0082
+      }
+    },
+    {
+      "index": 79,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain healthy meal planning with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5179,
+        "qwen-opus": 0.2282,
+        "omnicoder": 0.2539
+      }
+    },
+    {
+      "index": 80,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain healthy meal planning as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5316,
+        "qwen-opus": 0.2269,
+        "omnicoder": 0.2416
+      }
+    },
+    {
+      "index": 81,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain travel packing for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4616,
+        "qwen-opus": 0.24,
+        "omnicoder": 0.2984
+      }
+    },
+    {
+      "index": 82,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain travel packing in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4424,
+        "qwen-opus": 0.2443,
+        "omnicoder": 0.3133
+      }
+    },
+    {
+      "index": 83,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain travel packing using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9815,
+        "qwen-opus": 0.0085,
+        "omnicoder": 0.01
+      }
+    },
+    {
+      "index": 84,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain travel packing with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4652,
+        "qwen-opus": 0.2376,
+        "omnicoder": 0.2971
+      }
+    },
+    {
+      "index": 85,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain travel packing as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5084,
+        "qwen-opus": 0.233,
+        "omnicoder": 0.2586
+      }
+    },
+    {
+      "index": 86,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain renewable energy for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4632,
+        "qwen-opus": 0.2406,
+        "omnicoder": 0.2962
+      }
+    },
+    {
+      "index": 87,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain renewable energy in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.453,
+        "qwen-opus": 0.2446,
+        "omnicoder": 0.3023
+      }
+    },
+    {
+      "index": 88,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain renewable energy using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9824,
+        "qwen-opus": 0.0082,
+        "omnicoder": 0.0094
+      }
+    },
+    {
+      "index": 89,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain renewable energy with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4713,
+        "qwen-opus": 0.2353,
+        "omnicoder": 0.2935
+      }
+    },
+    {
+      "index": 90,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain renewable energy as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.512,
+        "qwen-opus": 0.2326,
+        "omnicoder": 0.2554
+      }
+    },
+    {
+      "index": 91,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain public speaking for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4428,
+        "qwen-opus": 0.2504,
+        "omnicoder": 0.3068
+      }
+    },
+    {
+      "index": 92,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain public speaking in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4423,
+        "qwen-opus": 0.2517,
+        "omnicoder": 0.306
+      }
+    },
+    {
+      "index": 93,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain public speaking using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9801,
+        "qwen-opus": 0.0091,
+        "omnicoder": 0.0107
+      }
+    },
+    {
+      "index": 94,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain public speaking with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4556,
+        "qwen-opus": 0.2446,
+        "omnicoder": 0.2998
+      }
+    },
+    {
+      "index": 95,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain public speaking as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4947,
+        "qwen-opus": 0.2393,
+        "omnicoder": 0.2661
+      }
+    },
+    {
+      "index": 96,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain home gardening for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4605,
+        "qwen-opus": 0.2379,
+        "omnicoder": 0.3016
+      }
+    },
+    {
+      "index": 97,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain home gardening in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4497,
+        "qwen-opus": 0.2398,
+        "omnicoder": 0.3105
+      }
+    },
+    {
+      "index": 98,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain home gardening using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9823,
+        "qwen-opus": 0.0082,
+        "omnicoder": 0.0095
+      }
+    },
+    {
+      "index": 99,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain home gardening with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4625,
+        "qwen-opus": 0.2364,
+        "omnicoder": 0.3011
+      }
+    },
+    {
+      "index": 100,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain home gardening as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5019,
+        "qwen-opus": 0.2329,
+        "omnicoder": 0.2653
+      }
+    },
+    {
+      "index": 101,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain time management for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4384,
+        "qwen-opus": 0.2478,
+        "omnicoder": 0.3137
+      }
+    },
+    {
+      "index": 102,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain time management in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4322,
+        "qwen-opus": 0.251,
+        "omnicoder": 0.3168
+      }
+    },
+    {
+      "index": 103,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain time management using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9807,
+        "qwen-opus": 0.0088,
+        "omnicoder": 0.0104
+      }
+    },
+    {
+      "index": 104,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain time management with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4617,
+        "qwen-opus": 0.2397,
+        "omnicoder": 0.2986
+      }
+    },
+    {
+      "index": 105,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain time management as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4964,
+        "qwen-opus": 0.238,
+        "omnicoder": 0.2656
+      }
+    },
+    {
+      "index": 106,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain sleep habits for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4725,
+        "qwen-opus": 0.2423,
+        "omnicoder": 0.2852
+      }
+    },
+    {
+      "index": 107,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain sleep habits in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4448,
+        "qwen-opus": 0.2512,
+        "omnicoder": 0.304
+      }
+    },
+    {
+      "index": 108,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain sleep habits using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9819,
+        "qwen-opus": 0.0085,
+        "omnicoder": 0.0096
+      }
+    },
+    {
+      "index": 109,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain sleep habits with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4731,
+        "qwen-opus": 0.2409,
+        "omnicoder": 0.286
+      }
+    },
+    {
+      "index": 110,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain sleep habits as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5015,
+        "qwen-opus": 0.2378,
+        "omnicoder": 0.2607
+      }
+    },
+    {
+      "index": 111,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain career interviews for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.425,
+        "qwen-opus": 0.2558,
+        "omnicoder": 0.3192
+      }
+    },
+    {
+      "index": 112,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain career interviews in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.3742,
+        "qwen-opus": 0.2673,
+        "omnicoder": 0.3585
+      }
+    },
+    {
+      "index": 113,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain career interviews using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9797,
+        "qwen-opus": 0.0093,
+        "omnicoder": 0.011
+      }
+    },
+    {
+      "index": 114,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain career interviews with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4296,
+        "qwen-opus": 0.2517,
+        "omnicoder": 0.3186
+      }
+    },
+    {
+      "index": 115,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain career interviews as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4779,
+        "qwen-opus": 0.2456,
+        "omnicoder": 0.2765
+      }
+    },
+    {
+      "index": 116,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain team communication for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4396,
+        "qwen-opus": 0.2496,
+        "omnicoder": 0.3108
+      }
+    },
+    {
+      "index": 117,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain team communication in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4083,
+        "qwen-opus": 0.257,
+        "omnicoder": 0.3347
+      }
+    },
+    {
+      "index": 118,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain team communication using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9808,
+        "qwen-opus": 0.0088,
+        "omnicoder": 0.0103
+      }
+    },
+    {
+      "index": 119,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain team communication with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4532,
+        "qwen-opus": 0.2426,
+        "omnicoder": 0.3042
+      }
+    },
+    {
+      "index": 120,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain team communication as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4918,
+        "qwen-opus": 0.2399,
+        "omnicoder": 0.2682
+      }
+    },
+    {
+      "index": 121,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain language learning for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4342,
+        "qwen-opus": 0.2477,
+        "omnicoder": 0.3181
+      }
+    },
+    {
+      "index": 122,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain language learning in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4332,
+        "qwen-opus": 0.2506,
+        "omnicoder": 0.3162
+      }
+    },
+    {
+      "index": 123,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain language learning using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9804,
+        "qwen-opus": 0.009,
+        "omnicoder": 0.0106
+      }
+    },
+    {
+      "index": 124,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain language learning with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.452,
+        "qwen-opus": 0.2404,
+        "omnicoder": 0.3076
+      }
+    },
+    {
+      "index": 125,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain language learning as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4797,
+        "qwen-opus": 0.2403,
+        "omnicoder": 0.28
+      }
+    },
+    {
+      "index": 126,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain museum visits for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4056,
+        "qwen-opus": 0.2456,
+        "omnicoder": 0.3488
+      }
+    },
+    {
+      "index": 127,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain museum visits in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.3973,
+        "qwen-opus": 0.2476,
+        "omnicoder": 0.355
+      }
+    },
+    {
+      "index": 128,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain museum visits using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9792,
+        "qwen-opus": 0.0092,
+        "omnicoder": 0.0116
+      }
+    },
+    {
+      "index": 129,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain museum visits with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4216,
+        "qwen-opus": 0.2433,
+        "omnicoder": 0.3351
+      }
+    },
+    {
+      "index": 130,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain museum visits as a practical checklist.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4569,
+        "qwen-opus": 0.2417,
+        "omnicoder": 0.3014
+      }
+    },
+    {
+      "index": 131,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain personal fitness for a beginner.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4502,
+        "qwen-opus": 0.2492,
+        "omnicoder": 0.3006
+      }
+    },
+    {
+      "index": 132,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain personal fitness in five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4312,
+        "qwen-opus": 0.255,
+        "omnicoder": 0.3138
+      }
+    },
+    {
+      "index": 133,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain personal fitness using plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9814,
+        "qwen-opus": 0.0086,
+        "omnicoder": 0.01
+      }
+    },
+    {
+      "index": 134,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain personal fitness with a short example.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4706,
+        "qwen-opus": 0.2406,
+        "omnicoder": 0.2888
+      }
+    },
+    {
+      "index": 135,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.048,
+        "qwen-opus": 0.9195,
+        "omnicoder": 0.0324
+      }
+    },
+    {
+      "index": 136,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.996,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 137,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0458,
+        "qwen-opus": 0.9212,
+        "omnicoder": 0.033
+      }
+    },
+    {
+      "index": 138,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0502,
+        "qwen-opus": 0.9178,
+        "omnicoder": 0.032
+      }
+    },
+    {
+      "index": 139,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0499,
+        "qwen-opus": 0.9174,
+        "omnicoder": 0.0326
+      }
+    },
+    {
+      "index": 140,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a graph-theory claim with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0464,
+        "qwen-opus": 0.9204,
+        "omnicoder": 0.0331
+      }
+    },
+    {
+      "index": 141,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0471,
+        "qwen-opus": 0.9212,
+        "omnicoder": 0.0318
+      }
+    },
+    {
+      "index": 142,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9961,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 143,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0447,
+        "qwen-opus": 0.922,
+        "omnicoder": 0.0333
+      }
+    },
+    {
+      "index": 144,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0454,
+        "qwen-opus": 0.9214,
+        "omnicoder": 0.0332
+      }
+    },
+    {
+      "index": 145,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0479,
+        "qwen-opus": 0.9192,
+        "omnicoder": 0.0329
+      }
+    },
+    {
+      "index": 146,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a probability paradox with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0445,
+        "qwen-opus": 0.9222,
+        "omnicoder": 0.0333
+      }
+    },
+    {
+      "index": 147,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0466,
+        "qwen-opus": 0.9205,
+        "omnicoder": 0.0329
+      }
+    },
+    {
+      "index": 148,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0021,
+        "qwen-opus": 0.9962,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 149,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0435,
+        "qwen-opus": 0.9221,
+        "omnicoder": 0.0344
+      }
+    },
+    {
+      "index": 150,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0449,
+        "qwen-opus": 0.9215,
+        "omnicoder": 0.0336
+      }
+    },
+    {
+      "index": 151,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0461,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0342
+      }
+    },
+    {
+      "index": 152,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a causal inference proposal with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0431,
+        "qwen-opus": 0.922,
+        "omnicoder": 0.035
+      }
+    },
+    {
+      "index": 153,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0451,
+        "qwen-opus": 0.9226,
+        "omnicoder": 0.0323
+      }
+    },
+    {
+      "index": 154,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.002,
+        "qwen-opus": 0.9963,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 155,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.041,
+        "qwen-opus": 0.9252,
+        "omnicoder": 0.0338
+      }
+    },
+    {
+      "index": 156,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0446,
+        "qwen-opus": 0.9224,
+        "omnicoder": 0.033
+      }
+    },
+    {
+      "index": 157,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0454,
+        "qwen-opus": 0.9209,
+        "omnicoder": 0.0337
+      }
+    },
+    {
+      "index": 158,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a voting-system property with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0403,
+        "qwen-opus": 0.9248,
+        "omnicoder": 0.0349
+      }
+    },
+    {
+      "index": 159,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0485,
+        "qwen-opus": 0.918,
+        "omnicoder": 0.0335
+      }
+    },
+    {
+      "index": 160,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9961,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 161,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0436,
+        "qwen-opus": 0.9208,
+        "omnicoder": 0.0356
+      }
+    },
+    {
+      "index": 162,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0452,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0351
+      }
+    },
+    {
+      "index": 163,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0468,
+        "qwen-opus": 0.9179,
+        "omnicoder": 0.0353
+      }
+    },
+    {
+      "index": 164,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constrained optimization problem with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0435,
+        "qwen-opus": 0.9202,
+        "omnicoder": 0.0363
+      }
+    },
+    {
+      "index": 165,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0534,
+        "qwen-opus": 0.9157,
+        "omnicoder": 0.0309
+      }
+    },
+    {
+      "index": 166,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0024,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0016
+      }
+    },
+    {
+      "index": 167,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0481,
+        "qwen-opus": 0.9201,
+        "omnicoder": 0.0318
+      }
+    },
+    {
+      "index": 168,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0533,
+        "qwen-opus": 0.9155,
+        "omnicoder": 0.0312
+      }
+    },
+    {
+      "index": 169,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0542,
+        "qwen-opus": 0.9149,
+        "omnicoder": 0.031
+      }
+    },
+    {
+      "index": 170,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a game-theory equilibrium with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0484,
+        "qwen-opus": 0.919,
+        "omnicoder": 0.0326
+      }
+    },
+    {
+      "index": 171,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0436,
+        "qwen-opus": 0.9217,
+        "omnicoder": 0.0347
+      }
+    },
+    {
+      "index": 172,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0019,
+        "qwen-opus": 0.9962,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 173,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0407,
+        "qwen-opus": 0.9221,
+        "omnicoder": 0.0372
+      }
+    },
+    {
+      "index": 174,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0435,
+        "qwen-opus": 0.9212,
+        "omnicoder": 0.0353
+      }
+    },
+    {
+      "index": 175,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0422,
+        "qwen-opus": 0.9206,
+        "omnicoder": 0.0372
+      }
+    },
+    {
+      "index": 176,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a thermodynamics argument with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0406,
+        "qwen-opus": 0.9211,
+        "omnicoder": 0.0383
+      }
+    },
+    {
+      "index": 177,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0484,
+        "qwen-opus": 0.9189,
+        "omnicoder": 0.0327
+      }
+    },
+    {
+      "index": 178,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 179,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.046,
+        "qwen-opus": 0.9189,
+        "omnicoder": 0.0352
+      }
+    },
+    {
+      "index": 180,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0466,
+        "qwen-opus": 0.9187,
+        "omnicoder": 0.0347
+      }
+    },
+    {
+      "index": 181,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0498,
+        "qwen-opus": 0.9162,
+        "omnicoder": 0.0341
+      }
+    },
+    {
+      "index": 182,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a constitutional interpretation with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0439,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0364
+      }
+    },
+    {
+      "index": 183,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0509,
+        "qwen-opus": 0.9178,
+        "omnicoder": 0.0313
+      }
+    },
+    {
+      "index": 184,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9961,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 185,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0482,
+        "qwen-opus": 0.9196,
+        "omnicoder": 0.0322
+      }
+    },
+    {
+      "index": 186,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0514,
+        "qwen-opus": 0.9168,
+        "omnicoder": 0.0318
+      }
+    },
+    {
+      "index": 187,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0524,
+        "qwen-opus": 0.9161,
+        "omnicoder": 0.0315
+      }
+    },
+    {
+      "index": 188,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a monetary-policy scenario with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0462,
+        "qwen-opus": 0.9204,
+        "omnicoder": 0.0333
+      }
+    },
+    {
+      "index": 189,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0444,
+        "qwen-opus": 0.9229,
+        "omnicoder": 0.0327
+      }
+    },
+    {
+      "index": 190,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0019,
+        "qwen-opus": 0.9964,
+        "omnicoder": 0.0016
+      }
+    },
+    {
+      "index": 191,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.041,
+        "qwen-opus": 0.9257,
+        "omnicoder": 0.0333
+      }
+    },
+    {
+      "index": 192,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0411,
+        "qwen-opus": 0.9257,
+        "omnicoder": 0.0332
+      }
+    },
+    {
+      "index": 193,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0443,
+        "qwen-opus": 0.9227,
+        "omnicoder": 0.0331
+      }
+    },
+    {
+      "index": 194,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a distributed-consensus invariant with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0389,
+        "qwen-opus": 0.9263,
+        "omnicoder": 0.0348
+      }
+    },
+    {
+      "index": 195,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0438,
+        "qwen-opus": 0.9186,
+        "omnicoder": 0.0375
+      }
+    },
+    {
+      "index": 196,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.002
+      }
+    },
+    {
+      "index": 197,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0381,
+        "qwen-opus": 0.9201,
+        "omnicoder": 0.0418
+      }
+    },
+    {
+      "index": 198,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0393,
+        "qwen-opus": 0.9189,
+        "omnicoder": 0.0418
+      }
+    },
+    {
+      "index": 199,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0468,
+        "qwen-opus": 0.9155,
+        "omnicoder": 0.0377
+      }
+    },
+    {
+      "index": 200,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove an experimental design with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0408,
+        "qwen-opus": 0.9185,
+        "omnicoder": 0.0406
+      }
+    },
+    {
+      "index": 201,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0516,
+        "qwen-opus": 0.9155,
+        "omnicoder": 0.0329
+      }
+    },
+    {
+      "index": 202,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 203,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0467,
+        "qwen-opus": 0.9185,
+        "omnicoder": 0.0347
+      }
+    },
+    {
+      "index": 204,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0489,
+        "qwen-opus": 0.9168,
+        "omnicoder": 0.0343
+      }
+    },
+    {
+      "index": 205,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0499,
+        "qwen-opus": 0.9154,
+        "omnicoder": 0.0347
+      }
+    },
+    {
+      "index": 206,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a supply-chain decision with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0432,
+        "qwen-opus": 0.9204,
+        "omnicoder": 0.0364
+      }
+    },
+    {
+      "index": 207,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0421,
+        "qwen-opus": 0.9243,
+        "omnicoder": 0.0336
+      }
+    },
+    {
+      "index": 208,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0021,
+        "qwen-opus": 0.9962,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 209,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0413,
+        "qwen-opus": 0.9242,
+        "omnicoder": 0.0346
+      }
+    },
+    {
+      "index": 210,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0394,
+        "qwen-opus": 0.9254,
+        "omnicoder": 0.0352
+      }
+    },
+    {
+      "index": 211,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0456,
+        "qwen-opus": 0.9206,
+        "omnicoder": 0.0338
+      }
+    },
+    {
+      "index": 212,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a statistical identification strategy with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0389,
+        "qwen-opus": 0.9254,
+        "omnicoder": 0.0357
+      }
+    },
+    {
+      "index": 213,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0415,
+        "qwen-opus": 0.9264,
+        "omnicoder": 0.0321
+      }
+    },
+    {
+      "index": 214,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0019,
+        "qwen-opus": 0.9964,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 215,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0398,
+        "qwen-opus": 0.9256,
+        "omnicoder": 0.0346
+      }
+    },
+    {
+      "index": 216,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0427,
+        "qwen-opus": 0.9244,
+        "omnicoder": 0.0329
+      }
+    },
+    {
+      "index": 217,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0433,
+        "qwen-opus": 0.9223,
+        "omnicoder": 0.0344
+      }
+    },
+    {
+      "index": 218,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove a formal logic puzzle with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0383,
+        "qwen-opus": 0.9262,
+        "omnicoder": 0.0355
+      }
+    },
+    {
+      "index": 219,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0499,
+        "qwen-opus": 0.9181,
+        "omnicoder": 0.032
+      }
+    },
+    {
+      "index": 220,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0025,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 221,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0479,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0324
+      }
+    },
+    {
+      "index": 222,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0532,
+        "qwen-opus": 0.9154,
+        "omnicoder": 0.0314
+      }
+    },
+    {
+      "index": 223,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0514,
+        "qwen-opus": 0.9164,
+        "omnicoder": 0.0322
+      }
+    },
+    {
+      "index": 224,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a graph-theory claim with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.049,
+        "qwen-opus": 0.9184,
+        "omnicoder": 0.0326
+      }
+    },
+    {
+      "index": 225,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0495,
+        "qwen-opus": 0.9191,
+        "omnicoder": 0.0314
+      }
+    },
+    {
+      "index": 226,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.996,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 227,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0465,
+        "qwen-opus": 0.9211,
+        "omnicoder": 0.0324
+      }
+    },
+    {
+      "index": 228,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0485,
+        "qwen-opus": 0.9188,
+        "omnicoder": 0.0327
+      }
+    },
+    {
+      "index": 229,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0491,
+        "qwen-opus": 0.9185,
+        "omnicoder": 0.0323
+      }
+    },
+    {
+      "index": 230,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a probability paradox with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0474,
+        "qwen-opus": 0.9198,
+        "omnicoder": 0.0328
+      }
+    },
+    {
+      "index": 231,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0498,
+        "qwen-opus": 0.9183,
+        "omnicoder": 0.0319
+      }
+    },
+    {
+      "index": 232,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.996,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 233,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0463,
+        "qwen-opus": 0.9207,
+        "omnicoder": 0.033
+      }
+    },
+    {
+      "index": 234,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.049,
+        "qwen-opus": 0.9186,
+        "omnicoder": 0.0324
+      }
+    },
+    {
+      "index": 235,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0485,
+        "qwen-opus": 0.9187,
+        "omnicoder": 0.0328
+      }
+    },
+    {
+      "index": 236,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a causal inference proposal with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0471,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0332
+      }
+    },
+    {
+      "index": 237,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0488,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0315
+      }
+    },
+    {
+      "index": 238,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9962,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 239,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.044,
+        "qwen-opus": 0.9231,
+        "omnicoder": 0.0329
+      }
+    },
+    {
+      "index": 240,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0482,
+        "qwen-opus": 0.9193,
+        "omnicoder": 0.0325
+      }
+    },
+    {
+      "index": 241,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0476,
+        "qwen-opus": 0.9198,
+        "omnicoder": 0.0325
+      }
+    },
+    {
+      "index": 242,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a voting-system property with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0441,
+        "qwen-opus": 0.9216,
+        "omnicoder": 0.0343
+      }
+    },
+    {
+      "index": 243,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0504,
+        "qwen-opus": 0.9169,
+        "omnicoder": 0.0327
+      }
+    },
+    {
+      "index": 244,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.996,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 245,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0447,
+        "qwen-opus": 0.9208,
+        "omnicoder": 0.0345
+      }
+    },
+    {
+      "index": 246,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0481,
+        "qwen-opus": 0.9179,
+        "omnicoder": 0.0339
+      }
+    },
+    {
+      "index": 247,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0481,
+        "qwen-opus": 0.9175,
+        "omnicoder": 0.0344
+      }
+    },
+    {
+      "index": 248,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constrained optimization problem with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0448,
+        "qwen-opus": 0.9196,
+        "omnicoder": 0.0356
+      }
+    },
+    {
+      "index": 249,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0553,
+        "qwen-opus": 0.9144,
+        "omnicoder": 0.0304
+      }
+    },
+    {
+      "index": 250,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0025,
+        "qwen-opus": 0.9958,
+        "omnicoder": 0.0016
+      }
+    },
+    {
+      "index": 251,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0492,
+        "qwen-opus": 0.9195,
+        "omnicoder": 0.0313
+      }
+    },
+    {
+      "index": 252,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0557,
+        "qwen-opus": 0.9136,
+        "omnicoder": 0.0307
+      }
+    },
+    {
+      "index": 253,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0544,
+        "qwen-opus": 0.9148,
+        "omnicoder": 0.0308
+      }
+    },
+    {
+      "index": 254,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a game-theory equilibrium with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.051,
+        "qwen-opus": 0.917,
+        "omnicoder": 0.032
+      }
+    },
+    {
+      "index": 255,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0471,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.0333
+      }
+    },
+    {
+      "index": 256,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0021,
+        "qwen-opus": 0.9961,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 257,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0439,
+        "qwen-opus": 0.921,
+        "omnicoder": 0.0351
+      }
+    },
+    {
+      "index": 258,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0486,
+        "qwen-opus": 0.918,
+        "omnicoder": 0.0334
+      }
+    },
+    {
+      "index": 259,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0453,
+        "qwen-opus": 0.9197,
+        "omnicoder": 0.035
+      }
+    },
+    {
+      "index": 260,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a thermodynamics argument with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0444,
+        "qwen-opus": 0.9195,
+        "omnicoder": 0.036
+      }
+    },
+    {
+      "index": 261,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0503,
+        "qwen-opus": 0.9174,
+        "omnicoder": 0.0323
+      }
+    },
+    {
+      "index": 262,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0018
+      }
+    },
+    {
+      "index": 263,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation while ranking alternative hypotheses.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0478,
+        "qwen-opus": 0.9179,
+        "omnicoder": 0.0343
+      }
+    },
+    {
+      "index": 264,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation for all possible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0496,
+        "qwen-opus": 0.9166,
+        "omnicoder": 0.0338
+      }
+    },
+    {
+      "index": 265,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation without assuming the conclusion.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0501,
+        "qwen-opus": 0.9163,
+        "omnicoder": 0.0336
+      }
+    },
+    {
+      "index": 266,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a constitutional interpretation with sensitivity analysis.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.047,
+        "qwen-opus": 0.9179,
+        "omnicoder": 0.035
+      }
+    },
+    {
+      "index": 267,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive a monetary-policy scenario and justify every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0525,
+        "qwen-opus": 0.9168,
+        "omnicoder": 0.0307
+      }
+    },
+    {
+      "index": 268,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0036,
+        "qwen-opus": 0.0025,
+        "omnicoder": 0.9939
+      }
+    },
+    {
+      "index": 269,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0362,
+        "qwen-opus": 0.0208,
+        "omnicoder": 0.943
+      }
+    },
+    {
+      "index": 270,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0209,
+        "qwen-opus": 0.0162,
+        "omnicoder": 0.9629
+      }
+    },
+    {
+      "index": 271,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0338,
+        "qwen-opus": 0.0203,
+        "omnicoder": 0.9459
+      }
+    },
+    {
+      "index": 272,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0317,
+        "qwen-opus": 0.0201,
+        "omnicoder": 0.9483
+      }
+    },
+    {
+      "index": 273,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python caching service and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0278,
+        "qwen-opus": 0.0188,
+        "omnicoder": 0.9534
+      }
+    },
+    {
+      "index": 274,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0033,
+        "qwen-opus": 0.0025,
+        "omnicoder": 0.9943
+      }
+    },
+    {
+      "index": 275,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0047,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9924
+      }
+    },
+    {
+      "index": 276,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0031,
+        "qwen-opus": 0.0024,
+        "omnicoder": 0.9944
+      }
+    },
+    {
+      "index": 277,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0047,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9924
+      }
+    },
+    {
+      "index": 278,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0044,
+        "qwen-opus": 0.0028,
+        "omnicoder": 0.9928
+      }
+    },
+    {
+      "index": 279,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a TypeScript authentication middleware and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0038,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9935
+      }
+    },
+    {
+      "index": 280,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0035,
+        "qwen-opus": 0.0026,
+        "omnicoder": 0.9939
+      }
+    },
+    {
+      "index": 281,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.005,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9921
+      }
+    },
+    {
+      "index": 282,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0034,
+        "qwen-opus": 0.0025,
+        "omnicoder": 0.9941
+      }
+    },
+    {
+      "index": 283,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0048,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9923
+      }
+    },
+    {
+      "index": 284,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0045,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9927
+      }
+    },
+    {
+      "index": 285,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a React state-management component and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0039,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9934
+      }
+    },
+    {
+      "index": 286,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0221,
+        "qwen-opus": 0.0165,
+        "omnicoder": 0.9615
+      }
+    },
+    {
+      "index": 287,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0331,
+        "qwen-opus": 0.0197,
+        "omnicoder": 0.9472
+      }
+    },
+    {
+      "index": 288,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0174,
+        "qwen-opus": 0.0145,
+        "omnicoder": 0.9681
+      }
+    },
+    {
+      "index": 289,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0311,
+        "qwen-opus": 0.0192,
+        "omnicoder": 0.9497
+      }
+    },
+    {
+      "index": 290,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0278,
+        "qwen-opus": 0.0185,
+        "omnicoder": 0.9537
+      }
+    },
+    {
+      "index": 291,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a PostgreSQL migration and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0243,
+        "qwen-opus": 0.0173,
+        "omnicoder": 0.9584
+      }
+    },
+    {
+      "index": 292,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0039,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9934
+      }
+    },
+    {
+      "index": 293,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0374,
+        "qwen-opus": 0.0211,
+        "omnicoder": 0.9415
+      }
+    },
+    {
+      "index": 294,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0233,
+        "qwen-opus": 0.0174,
+        "omnicoder": 0.9593
+      }
+    },
+    {
+      "index": 295,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0368,
+        "qwen-opus": 0.021,
+        "omnicoder": 0.9422
+      }
+    },
+    {
+      "index": 296,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0329,
+        "qwen-opus": 0.0203,
+        "omnicoder": 0.9467
+      }
+    },
+    {
+      "index": 297,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Rust async worker and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0301,
+        "qwen-opus": 0.0195,
+        "omnicoder": 0.9504
+      }
+    },
+    {
+      "index": 298,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0257,
+        "qwen-opus": 0.0183,
+        "omnicoder": 0.9561
+      }
+    },
+    {
+      "index": 299,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0365,
+        "qwen-opus": 0.021,
+        "omnicoder": 0.9425
+      }
+    },
+    {
+      "index": 300,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0219,
+        "qwen-opus": 0.0169,
+        "omnicoder": 0.9612
+      }
+    },
+    {
+      "index": 301,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0348,
+        "qwen-opus": 0.0207,
+        "omnicoder": 0.9446
+      }
+    },
+    {
+      "index": 302,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0316,
+        "qwen-opus": 0.0203,
+        "omnicoder": 0.948
+      }
+    },
+    {
+      "index": 303,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Go HTTP handler and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0281,
+        "qwen-opus": 0.0191,
+        "omnicoder": 0.9528
+      }
+    },
+    {
+      "index": 304,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0228,
+        "qwen-opus": 0.0165,
+        "omnicoder": 0.9608
+      }
+    },
+    {
+      "index": 305,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0381,
+        "qwen-opus": 0.0207,
+        "omnicoder": 0.9412
+      }
+    },
+    {
+      "index": 306,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0177,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.9678
+      }
+    },
+    {
+      "index": 307,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.036,
+        "qwen-opus": 0.0201,
+        "omnicoder": 0.9439
+      }
+    },
+    {
+      "index": 308,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0321,
+        "qwen-opus": 0.0193,
+        "omnicoder": 0.9486
+      }
+    },
+    {
+      "index": 309,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Docker deployment and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0259,
+        "qwen-opus": 0.0174,
+        "omnicoder": 0.9567
+      }
+    },
+    {
+      "index": 310,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0217,
+        "qwen-opus": 0.0163,
+        "omnicoder": 0.962
+      }
+    },
+    {
+      "index": 311,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0329,
+        "qwen-opus": 0.0195,
+        "omnicoder": 0.9476
+      }
+    },
+    {
+      "index": 312,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0179,
+        "qwen-opus": 0.0145,
+        "omnicoder": 0.9676
+      }
+    },
+    {
+      "index": 313,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0308,
+        "qwen-opus": 0.019,
+        "omnicoder": 0.9502
+      }
+    },
+    {
+      "index": 314,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0287,
+        "qwen-opus": 0.0187,
+        "omnicoder": 0.9525
+      }
+    },
+    {
+      "index": 315,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a GitHub Actions workflow and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0256,
+        "qwen-opus": 0.0176,
+        "omnicoder": 0.9568
+      }
+    },
+    {
+      "index": 316,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0246,
+        "qwen-opus": 0.0178,
+        "omnicoder": 0.9576
+      }
+    },
+    {
+      "index": 317,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0323,
+        "qwen-opus": 0.0196,
+        "omnicoder": 0.9481
+      }
+    },
+    {
+      "index": 318,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0204,
+        "qwen-opus": 0.0161,
+        "omnicoder": 0.9635
+      }
+    },
+    {
+      "index": 319,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0311,
+        "qwen-opus": 0.0195,
+        "omnicoder": 0.9495
+      }
+    },
+    {
+      "index": 320,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0286,
+        "qwen-opus": 0.0192,
+        "omnicoder": 0.9522
+      }
+    },
+    {
+      "index": 321,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Terraform module and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0253,
+        "qwen-opus": 0.018,
+        "omnicoder": 0.9567
+      }
+    },
+    {
+      "index": 322,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0033,
+        "qwen-opus": 0.0025,
+        "omnicoder": 0.9942
+      }
+    },
+    {
+      "index": 323,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0344,
+        "qwen-opus": 0.0204,
+        "omnicoder": 0.9452
+      }
+    },
+    {
+      "index": 324,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0209,
+        "qwen-opus": 0.0165,
+        "omnicoder": 0.9626
+      }
+    },
+    {
+      "index": 325,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0328,
+        "qwen-opus": 0.0201,
+        "omnicoder": 0.9472
+      }
+    },
+    {
+      "index": 326,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0302,
+        "qwen-opus": 0.0198,
+        "omnicoder": 0.95
+      }
+    },
+    {
+      "index": 327,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a FastAPI endpoint and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0271,
+        "qwen-opus": 0.0186,
+        "omnicoder": 0.9543
+      }
+    },
+    {
+      "index": 328,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0314,
+        "qwen-opus": 0.0205,
+        "omnicoder": 0.9481
+      }
+    },
+    {
+      "index": 329,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0389,
+        "qwen-opus": 0.0218,
+        "omnicoder": 0.9392
+      }
+    },
+    {
+      "index": 330,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.03,
+        "qwen-opus": 0.02,
+        "omnicoder": 0.95
+      }
+    },
+    {
+      "index": 331,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0429,
+        "qwen-opus": 0.023,
+        "omnicoder": 0.9342
+      }
+    },
+    {
+      "index": 332,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0423,
+        "qwen-opus": 0.0232,
+        "omnicoder": 0.9345
+      }
+    },
+    {
+      "index": 333,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Redis-backed job queue and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0356,
+        "qwen-opus": 0.022,
+        "omnicoder": 0.9425
+      }
+    },
+    {
+      "index": 334,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0229,
+        "qwen-opus": 0.0168,
+        "omnicoder": 0.9603
+      }
+    },
+    {
+      "index": 335,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0333,
+        "qwen-opus": 0.0196,
+        "omnicoder": 0.9471
+      }
+    },
+    {
+      "index": 336,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.019,
+        "qwen-opus": 0.0152,
+        "omnicoder": 0.9658
+      }
+    },
+    {
+      "index": 337,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0309,
+        "qwen-opus": 0.0189,
+        "omnicoder": 0.9502
+      }
+    },
+    {
+      "index": 338,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0278,
+        "qwen-opus": 0.0184,
+        "omnicoder": 0.9538
+      }
+    },
+    {
+      "index": 339,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Bash release script and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0249,
+        "qwen-opus": 0.0173,
+        "omnicoder": 0.9577
+      }
+    },
+    {
+      "index": 340,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0252,
+        "qwen-opus": 0.0177,
+        "omnicoder": 0.9571
+      }
+    },
+    {
+      "index": 341,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.038,
+        "qwen-opus": 0.0211,
+        "omnicoder": 0.9409
+      }
+    },
+    {
+      "index": 342,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0217,
+        "qwen-opus": 0.0165,
+        "omnicoder": 0.9619
+      }
+    },
+    {
+      "index": 343,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0349,
+        "qwen-opus": 0.0203,
+        "omnicoder": 0.9448
+      }
+    },
+    {
+      "index": 344,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0322,
+        "qwen-opus": 0.0199,
+        "omnicoder": 0.9479
+      }
+    },
+    {
+      "index": 345,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an OpenAPI client and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0283,
+        "qwen-opus": 0.0187,
+        "omnicoder": 0.953
+      }
+    },
+    {
+      "index": 346,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0213,
+        "qwen-opus": 0.0163,
+        "omnicoder": 0.9624
+      }
+    },
+    {
+      "index": 347,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0313,
+        "qwen-opus": 0.0192,
+        "omnicoder": 0.9495
+      }
+    },
+    {
+      "index": 348,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0206,
+        "qwen-opus": 0.016,
+        "omnicoder": 0.9633
+      }
+    },
+    {
+      "index": 349,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0285,
+        "qwen-opus": 0.0185,
+        "omnicoder": 0.953
+      }
+    },
+    {
+      "index": 350,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.027,
+        "qwen-opus": 0.0182,
+        "omnicoder": 0.9548
+      }
+    },
+    {
+      "index": 351,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement an npm monorepo build and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0232,
+        "qwen-opus": 0.017,
+        "omnicoder": 0.9598
+      }
+    },
+    {
+      "index": 352,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.9959
+      }
+    },
+    {
+      "index": 353,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0192,
+        "qwen-opus": 0.0148,
+        "omnicoder": 0.966
+      }
+    },
+    {
+      "index": 354,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0137,
+        "qwen-opus": 0.0125,
+        "omnicoder": 0.9737
+      }
+    },
+    {
+      "index": 355,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0178,
+        "qwen-opus": 0.0142,
+        "omnicoder": 0.968
+      }
+    },
+    {
+      "index": 356,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0161,
+        "qwen-opus": 0.0136,
+        "omnicoder": 0.9704
+      }
+    },
+    {
+      "index": 357,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Python caching service and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.016,
+        "qwen-opus": 0.0136,
+        "omnicoder": 0.9704
+      }
+    },
+    {
+      "index": 358,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0021,
+        "qwen-opus": 0.0018,
+        "omnicoder": 0.996
+      }
+    },
+    {
+      "index": 359,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0025,
+        "qwen-opus": 0.002,
+        "omnicoder": 0.9955
+      }
+    },
+    {
+      "index": 360,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0019,
+        "qwen-opus": 0.0018,
+        "omnicoder": 0.9963
+      }
+    },
+    {
+      "index": 361,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0024,
+        "qwen-opus": 0.002,
+        "omnicoder": 0.9956
+      }
+    },
+    {
+      "index": 362,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.9959
+      }
+    },
+    {
+      "index": 363,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a TypeScript authentication middleware and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.9959
+      }
+    },
+    {
+      "index": 364,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.996
+      }
+    },
+    {
+      "index": 365,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0026,
+        "qwen-opus": 0.0021,
+        "omnicoder": 0.9953
+      }
+    },
+    {
+      "index": 366,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.002,
+        "qwen-opus": 0.0018,
+        "omnicoder": 0.9961
+      }
+    },
+    {
+      "index": 367,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0025,
+        "qwen-opus": 0.002,
+        "omnicoder": 0.9955
+      }
+    },
+    {
+      "index": 368,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.9957
+      }
+    },
+    {
+      "index": 369,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a React state-management component and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.0019,
+        "omnicoder": 0.9959
+      }
+    },
+    {
+      "index": 370,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0152,
+        "qwen-opus": 0.0132,
+        "omnicoder": 0.9715
+      }
+    },
+    {
+      "index": 371,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0184,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.9672
+      }
+    },
+    {
+      "index": 372,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0129,
+        "qwen-opus": 0.0121,
+        "omnicoder": 0.975
+      }
+    },
+    {
+      "index": 373,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0172,
+        "qwen-opus": 0.0139,
+        "omnicoder": 0.9689
+      }
+    },
+    {
+      "index": 374,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0155,
+        "qwen-opus": 0.0133,
+        "omnicoder": 0.9713
+      }
+    },
+    {
+      "index": 375,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a PostgreSQL migration and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0158,
+        "qwen-opus": 0.0134,
+        "omnicoder": 0.9708
+      }
+    },
+    {
+      "index": 376,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0026,
+        "qwen-opus": 0.002,
+        "omnicoder": 0.9954
+      }
+    },
+    {
+      "index": 377,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0224,
+        "qwen-opus": 0.016,
+        "omnicoder": 0.9615
+      }
+    },
+    {
+      "index": 378,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0153,
+        "qwen-opus": 0.0134,
+        "omnicoder": 0.9713
+      }
+    },
+    {
+      "index": 379,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0212,
+        "qwen-opus": 0.0155,
+        "omnicoder": 0.9633
+      }
+    },
+    {
+      "index": 380,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0191,
+        "qwen-opus": 0.0148,
+        "omnicoder": 0.9661
+      }
+    },
+    {
+      "index": 381,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Rust async worker and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0191,
+        "qwen-opus": 0.0149,
+        "omnicoder": 0.966
+      }
+    },
+    {
+      "index": 382,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0175,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.9681
+      }
+    },
+    {
+      "index": 383,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0202,
+        "qwen-opus": 0.0153,
+        "omnicoder": 0.9645
+      }
+    },
+    {
+      "index": 384,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0145,
+        "qwen-opus": 0.013,
+        "omnicoder": 0.9724
+      }
+    },
+    {
+      "index": 385,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0196,
+        "qwen-opus": 0.015,
+        "omnicoder": 0.9654
+      }
+    },
+    {
+      "index": 386,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0177,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.9679
+      }
+    },
+    {
+      "index": 387,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Go HTTP handler and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0176,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.968
+      }
+    },
+    {
+      "index": 388,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0155,
+        "qwen-opus": 0.0133,
+        "omnicoder": 0.9712
+      }
+    },
+    {
+      "index": 389,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0196,
+        "qwen-opus": 0.0148,
+        "omnicoder": 0.9656
+      }
+    },
+    {
+      "index": 390,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0133,
+        "qwen-opus": 0.0122,
+        "omnicoder": 0.9745
+      }
+    },
+    {
+      "index": 391,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0181,
+        "qwen-opus": 0.0142,
+        "omnicoder": 0.9677
+      }
+    },
+    {
+      "index": 392,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0156,
+        "qwen-opus": 0.0132,
+        "omnicoder": 0.9711
+      }
+    },
+    {
+      "index": 393,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Docker deployment and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0161,
+        "qwen-opus": 0.0135,
+        "omnicoder": 0.9703
+      }
+    },
+    {
+      "index": 394,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0147,
+        "qwen-opus": 0.0129,
+        "omnicoder": 0.9724
+      }
+    },
+    {
+      "index": 395,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow without breaking compatibility.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0173,
+        "qwen-opus": 0.014,
+        "omnicoder": 0.9687
+      }
+    },
+    {
+      "index": 396,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow and explain the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0129,
+        "qwen-opus": 0.012,
+        "omnicoder": 0.9751
+      }
+    },
+    {
+      "index": 397,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow for production use.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0167,
+        "qwen-opus": 0.0137,
+        "omnicoder": 0.9697
+      }
+    },
+    {
+      "index": 398,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow with safe rollback behavior.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0153,
+        "qwen-opus": 0.0132,
+        "omnicoder": 0.9715
+      }
+    },
+    {
+      "index": 399,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a GitHub Actions workflow and include validation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0159,
+        "qwen-opus": 0.0134,
+        "omnicoder": 0.9707
+      }
+    },
+    {
+      "index": 400,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug a Terraform module with regression tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0164,
+        "qwen-opus": 0.0138,
+        "omnicoder": 0.9698
+      }
+    },
+    {
+      "index": 401,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Python API Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9556,
+        "qwen-opus": 0.0041,
+        "omnicoder": 0.0403
+      }
+    },
+    {
+      "index": 402,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Python API Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.1175,
+        "qwen-opus": 0.0774,
+        "omnicoder": 0.8051
+      }
+    },
+    {
+      "index": 403,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Python API Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9545,
+        "qwen-opus": 0.0042,
+        "omnicoder": 0.0414
+      }
+    },
+    {
+      "index": 404,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Python API Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9609,
+        "qwen-opus": 0.0038,
+        "omnicoder": 0.0354
+      }
+    },
+    {
+      "index": 405,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Debugging Workshop'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.99,
+        "qwen-opus": 0.0043,
+        "omnicoder": 0.0056
+      }
+    },
+    {
+      "index": 406,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Debugging Workshop'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.3936,
+        "qwen-opus": 0.2629,
+        "omnicoder": 0.3435
+      }
+    },
+    {
+      "index": 407,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Debugging Workshop'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9898,
+        "qwen-opus": 0.0044,
+        "omnicoder": 0.0058
+      }
+    },
+    {
+      "index": 408,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Debugging Workshop'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9915,
+        "qwen-opus": 0.0039,
+        "omnicoder": 0.0046
+      }
+    },
+    {
+      "index": 409,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Rust Migration'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9915,
+        "qwen-opus": 0.004,
+        "omnicoder": 0.0045
+      }
+    },
+    {
+      "index": 410,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Rust Migration'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4332,
+        "qwen-opus": 0.2637,
+        "omnicoder": 0.3031
+      }
+    },
+    {
+      "index": 411,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Rust Migration'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9916,
+        "qwen-opus": 0.004,
+        "omnicoder": 0.0045
+      }
+    },
+    {
+      "index": 412,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Rust Migration'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9924,
+        "qwen-opus": 0.0037,
+        "omnicoder": 0.004
+      }
+    },
+    {
+      "index": 413,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Database Architecture'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9919,
+        "qwen-opus": 0.0039,
+        "omnicoder": 0.0042
+      }
+    },
+    {
+      "index": 414,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Database Architecture'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4395,
+        "qwen-opus": 0.2654,
+        "omnicoder": 0.2951
+      }
+    },
+    {
+      "index": 415,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Database Architecture'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9919,
+        "qwen-opus": 0.0039,
+        "omnicoder": 0.0042
+      }
+    },
+    {
+      "index": 416,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Database Architecture'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9926,
+        "qwen-opus": 0.0036,
+        "omnicoder": 0.0038
+      }
+    },
+    {
+      "index": 417,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Race Condition Retrospective'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8653,
+        "qwen-opus": 0.0035,
+        "omnicoder": 0.1312
+      }
+    },
+    {
+      "index": 418,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Race Condition Retrospective'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0389,
+        "qwen-opus": 0.0246,
+        "omnicoder": 0.9366
+      }
+    },
+    {
+      "index": 419,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Race Condition Retrospective'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.867,
+        "qwen-opus": 0.0035,
+        "omnicoder": 0.1295
+      }
+    },
+    {
+      "index": 420,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Race Condition Retrospective'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8766,
+        "qwen-opus": 0.0033,
+        "omnicoder": 0.1202
+      }
+    },
+    {
+      "index": 421,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Terraform Planning'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8902,
+        "qwen-opus": 0.003,
+        "omnicoder": 0.1068
+      }
+    },
+    {
+      "index": 422,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Terraform Planning'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0495,
+        "qwen-opus": 0.0259,
+        "omnicoder": 0.9246
+      }
+    },
+    {
+      "index": 423,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'Terraform Planning'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8912,
+        "qwen-opus": 0.003,
+        "omnicoder": 0.1058
+      }
+    },
+    {
+      "index": 424,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'Terraform Planning'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9019,
+        "qwen-opus": 0.0028,
+        "omnicoder": 0.0954
+      }
+    },
+    {
+      "index": 425,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'CI Failure Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9895,
+        "qwen-opus": 0.0045,
+        "omnicoder": 0.006
+      }
+    },
+    {
+      "index": 426,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'CI Failure Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.382,
+        "qwen-opus": 0.262,
+        "omnicoder": 0.3561
+      }
+    },
+    {
+      "index": 427,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'CI Failure Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9893,
+        "qwen-opus": 0.0046,
+        "omnicoder": 0.0061
+      }
+    },
+    {
+      "index": 428,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'CI Failure Review'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.991,
+        "qwen-opus": 0.004,
+        "omnicoder": 0.005
+      }
+    },
+    {
+      "index": 429,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'OpenAPI Discussion'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.871,
+        "qwen-opus": 0.0034,
+        "omnicoder": 0.1256
+      }
+    },
+    {
+      "index": 430,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'OpenAPI Discussion'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "omnicoder",
+      "correct": false,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0425,
+        "qwen-opus": 0.0246,
+        "omnicoder": 0.9329
+      }
+    },
+    {
+      "index": 431,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Check the calendar event titled 'OpenAPI Discussion'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8706,
+        "qwen-opus": 0.0034,
+        "omnicoder": 0.126
+      }
+    },
+    {
+      "index": 432,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Tell me the time of the calendar event titled 'OpenAPI Discussion'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8812,
+        "qwen-opus": 0.0032,
+        "omnicoder": 0.1157
+      }
+    },
+    {
+      "index": 433,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Find the calendar event titled 'Docker Networking'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9916,
+        "qwen-opus": 0.0039,
+        "omnicoder": 0.0045
+      }
+    },
+    {
+      "index": 434,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Locate the calendar event titled 'Docker Networking'. This is a calendar lookup only; do not analyze its technical words.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4258,
+        "qwen-opus": 0.2635,
+        "omnicoder": 0.3107
+      }
+    },
+    {
+      "index": 435,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this greedy algorithm is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.988,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 436,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this greedy algorithm is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9879,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 437,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this greedy algorithm is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.988,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 438,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this greedy algorithm is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0077,
+        "qwen-opus": 0.9877,
+        "omnicoder": 0.0046
+      }
+    },
+    {
+      "index": 439,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this schema transformation is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0069,
+        "qwen-opus": 0.9882,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 440,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this schema transformation is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0069,
+        "qwen-opus": 0.9883,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 441,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this schema transformation is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0069,
+        "qwen-opus": 0.9884,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 442,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this schema transformation is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9881,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 443,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this lock-free queue is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9878,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 444,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this lock-free queue is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0074,
+        "qwen-opus": 0.9878,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 445,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this lock-free queue is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9879,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 446,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this lock-free queue is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0076,
+        "qwen-opus": 0.9877,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 447,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this database consistency model is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0067,
+        "qwen-opus": 0.9884,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 448,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this database consistency model is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0067,
+        "qwen-opus": 0.9884,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 449,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this database consistency model is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0066,
+        "qwen-opus": 0.9886,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 450,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this database consistency model is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0072,
+        "qwen-opus": 0.9881,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 451,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this compiler optimization is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0072,
+        "qwen-opus": 0.9876,
+        "omnicoder": 0.0051
+      }
+    },
+    {
+      "index": 452,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this compiler optimization is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9876,
+        "omnicoder": 0.0051
+      }
+    },
+    {
+      "index": 453,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this compiler optimization is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9877,
+        "omnicoder": 0.005
+      }
+    },
+    {
+      "index": 454,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this compiler optimization is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0076,
+        "qwen-opus": 0.9874,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 455,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this distributed protocol is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0072,
+        "qwen-opus": 0.988,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 456,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this distributed protocol is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0071,
+        "qwen-opus": 0.9881,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 457,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this distributed protocol is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0071,
+        "qwen-opus": 0.9882,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 458,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this distributed protocol is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0076,
+        "qwen-opus": 0.9879,
+        "omnicoder": 0.0046
+      }
+    },
+    {
+      "index": 459,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this recursive program is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9877,
+        "omnicoder": 0.005
+      }
+    },
+    {
+      "index": 460,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this recursive program is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9877,
+        "omnicoder": 0.005
+      }
+    },
+    {
+      "index": 461,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this recursive program is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0073,
+        "qwen-opus": 0.9878,
+        "omnicoder": 0.0049
+      }
+    },
+    {
+      "index": 462,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this recursive program is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0076,
+        "qwen-opus": 0.9876,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 463,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this caching policy is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.007,
+        "qwen-opus": 0.9882,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 464,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Determine whether this caching policy is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0071,
+        "qwen-opus": 0.9882,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 465,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Establish whether this caching policy is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.007,
+        "qwen-opus": 0.9883,
+        "omnicoder": 0.0047
+      }
+    },
+    {
+      "index": 466,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Reason carefully about whether this caching policy is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0075,
+        "qwen-opus": 0.9879,
+        "omnicoder": 0.0046
+      }
+    },
+    {
+      "index": 467,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement or patch anything. Prove whether this authorization rule is correct for every valid input, and justify all assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0072,
+        "qwen-opus": 0.988,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 468,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Python API deadlock and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.005,
+        "qwen-opus": 0.003,
+        "omnicoder": 0.9921
+      }
+    },
+    {
+      "index": 469,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Python API deadlock and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0055,
+        "qwen-opus": 0.0031,
+        "omnicoder": 0.9914
+      }
+    },
+    {
+      "index": 470,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Python API deadlock and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0043,
+        "qwen-opus": 0.0028,
+        "omnicoder": 0.9929
+      }
+    },
+    {
+      "index": 471,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Python API deadlock and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0048,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9922
+      }
+    },
+    {
+      "index": 472,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the TypeScript build failure and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0309,
+        "qwen-opus": 0.0195,
+        "omnicoder": 0.9496
+      }
+    },
+    {
+      "index": 473,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the TypeScript build failure and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0345,
+        "qwen-opus": 0.0208,
+        "omnicoder": 0.9448
+      }
+    },
+    {
+      "index": 474,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the TypeScript build failure and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0039,
+        "qwen-opus": 0.0026,
+        "omnicoder": 0.9935
+      }
+    },
+    {
+      "index": 475,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the TypeScript build failure and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0042,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9931
+      }
+    },
+    {
+      "index": 476,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Docker rollback loop and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0337,
+        "qwen-opus": 0.0205,
+        "omnicoder": 0.9458
+      }
+    },
+    {
+      "index": 477,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Docker rollback loop and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0364,
+        "qwen-opus": 0.0215,
+        "omnicoder": 0.9421
+      }
+    },
+    {
+      "index": 478,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Docker rollback loop and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0291,
+        "qwen-opus": 0.019,
+        "omnicoder": 0.9519
+      }
+    },
+    {
+      "index": 479,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Docker rollback loop and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0311,
+        "qwen-opus": 0.0199,
+        "omnicoder": 0.9491
+      }
+    },
+    {
+      "index": 480,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the PostgreSQL migration bug and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0301,
+        "qwen-opus": 0.0193,
+        "omnicoder": 0.9506
+      }
+    },
+    {
+      "index": 481,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the PostgreSQL migration bug and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0331,
+        "qwen-opus": 0.0204,
+        "omnicoder": 0.9465
+      }
+    },
+    {
+      "index": 482,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the PostgreSQL migration bug and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.027,
+        "qwen-opus": 0.0182,
+        "omnicoder": 0.9549
+      }
+    },
+    {
+      "index": 483,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the PostgreSQL migration bug and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0292,
+        "qwen-opus": 0.0192,
+        "omnicoder": 0.9516
+      }
+    },
+    {
+      "index": 484,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the React hydration error and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0042,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9931
+      }
+    },
+    {
+      "index": 485,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the React hydration error and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0047,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9924
+      }
+    },
+    {
+      "index": 486,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the React hydration error and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0038,
+        "qwen-opus": 0.0026,
+        "omnicoder": 0.9936
+      }
+    },
+    {
+      "index": 487,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the React hydration error and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0041,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9932
+      }
+    },
+    {
+      "index": 488,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Rust ownership failure and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0334,
+        "qwen-opus": 0.0209,
+        "omnicoder": 0.9457
+      }
+    },
+    {
+      "index": 489,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Rust ownership failure and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0359,
+        "qwen-opus": 0.022,
+        "omnicoder": 0.9421
+      }
+    },
+    {
+      "index": 490,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Rust ownership failure and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0045,
+        "qwen-opus": 0.0028,
+        "omnicoder": 0.9927
+      }
+    },
+    {
+      "index": 491,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Rust ownership failure and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0045,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9926
+      }
+    },
+    {
+      "index": 492,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Terraform state drift and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0344,
+        "qwen-opus": 0.0214,
+        "omnicoder": 0.9442
+      }
+    },
+    {
+      "index": 493,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Terraform state drift and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0374,
+        "qwen-opus": 0.0226,
+        "omnicoder": 0.94
+      }
+    },
+    {
+      "index": 494,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Terraform state drift and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0323,
+        "qwen-opus": 0.0205,
+        "omnicoder": 0.9472
+      }
+    },
+    {
+      "index": 495,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the Terraform state drift and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0327,
+        "qwen-opus": 0.0211,
+        "omnicoder": 0.9462
+      }
+    },
+    {
+      "index": 496,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the CI release failure and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0285,
+        "qwen-opus": 0.0191,
+        "omnicoder": 0.9524
+      }
+    },
+    {
+      "index": 497,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the CI release failure and provide the configuration change; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0319,
+        "qwen-opus": 0.0204,
+        "omnicoder": 0.9477
+      }
+    },
+    {
+      "index": 498,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the CI release failure and write the regression test; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0262,
+        "qwen-opus": 0.0182,
+        "omnicoder": 0.9556
+      }
+    },
+    {
+      "index": 499,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the CI release failure and show the corrected function; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0273,
+        "qwen-opus": 0.0189,
+        "omnicoder": 0.9538
+      }
+    },
+    {
+      "index": 500,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Skip the broad architecture essay. Diagnose the FastAPI authentication regression and supply the exact patch; keep the change backward-compatible.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0348,
+        "qwen-opus": 0.0212,
+        "omnicoder": 0.944
+      }
+    }
+  ]
+}

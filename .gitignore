@@ -1,0 +1,31 @@
+# Local model-router config (contains your local model paths)
+# Copy config/model-router.example.json here and fill in your paths.
+model-router.json
+
+# Model files
+*.gguf
+*.bin
+*.safetensors
+models/
+
+# Logs and temp
+logs/
+tmp/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Sentence-transformers cache
+.cache/
+
+# IDE
+.vscode/
+.idea/

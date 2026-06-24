@@ -1,0 +1,12 @@
+{
+  "device": "cuda",
+  "iterations": 100,
+  "pairs_per_request": 3,
+  "load_seconds": 1.8802,
+  "latency_ms_mean": 3.999,
+  "latency_ms_p50": 3.971,
+  "latency_ms_p95": 4.493,
+  "requests_per_second": 250.03,
+  "peak_cuda_memory_mib": 171.29,
+  "reserved_cuda_memory_mib": 180.0
+}

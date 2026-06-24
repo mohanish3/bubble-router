@@ -1,0 +1,10 @@
+{
+  "device": "cpu",
+  "iterations": 100,
+  "pairs_per_request": 3,
+  "load_seconds": 1.66,
+  "latency_ms_mean": 16.65,
+  "latency_ms_p50": 16.558,
+  "latency_ms_p95": 18.319,
+  "requests_per_second": 60.06
+}

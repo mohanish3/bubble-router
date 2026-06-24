@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8090,
+    "upstream_base_url": "http://127.0.0.1:8080",
+    "api_key_env": "MODEL_ROUTER_API_KEY",
+    "default_api_key": "",
+    "warm_model": "gemma",
+    "ready_timeout_seconds": 180,
+    "stop_timeout_seconds": 10,
+    "queue_warning_depth": 8,
+    "max_loaded_jobs": 4,
+    "max_loaded_seconds": 30,
+    "llm_classify": false,
+    "llm_classify_timeout": 2.0
+  },
+  "classifier": {
+    "model": "cross-encoder/nli-MiniLM2-L6-H768",
+    "confidence_threshold": 0.55,
+    "labels": {
+      "gemma": "general reasoning, ordinary questions, planning, or tool use",
+      "qwen-opus": "complex multi-step reasoning, difficult analysis, proofs, or deep research",
+      "omnicoder": "software engineering, coding, debugging, code review, or repository work"
+    }
+  },
+  "binary_candidates": [
+    "llama-server",
+    "~/.local/bin/llama-server",
+    "/usr/local/bin/llama-server"
+  ],
+  "aliases": {
+    "auto":             "auto",
+    "general":          "gemma",
+    "complex-reasoning":"qwen-opus",
+    "coding":           "omnicoder"
+  },
+  "models": {
+    "gemma": {
+      "backend":    "llamacpp",
+      "public_id":  "unsloth/gemma-4-12b-it-GGUF:Q5_K_M",
+      "model_path": "/path/to/your-models/gemma-4-12b-it-Q5_K_M.gguf",
+      "context_size": 131072,
+      "max_predict": 16184,
+      "extra_args": ["--no-mmproj"]
+    },
+    "qwen-opus": {
+      "backend":    "llamacpp",
+      "public_id":  "Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-v2:Q5_K_M",
+      "model_path": "/path/to/your-models/Qwen3.5-9B.Q5_K_M.gguf",
+      "context_size": 131072,
+      "max_predict": 8192
+    },
+    "omnicoder": {
+      "backend":    "llamacpp",
+      "public_id":  "Tesslate/OmniCoder-9B:Q6_K",
+      "model_path": "/path/to/your-models/omnicoder-9b-q6_k.gguf",
+      "context_size": 131072,
+      "max_predict": 8192
+    }
+  },
+  "common_args": [
+    "-b", "16384",
+    "-ub", "1024",
+    "-ngl", "99",
+    "-np", "1",
+    "-fa", "on",
+    "-ctk", "q8_0",
+    "-ctv", "q8_0",
+    "--reasoning", "auto",
+    "--reasoning-budget", "0",
+    "--prio", "2",
+    "--prio-batch", "2",
+    "--threads-http", "8",
+    "--cache-reuse", "256",
+    "--metrics",
+    "--log-verbosity", "0",
+    "--no-log-prefix",
+    "--no-log-timestamps"
+  ]
+}

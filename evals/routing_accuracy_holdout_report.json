@@ -1,0 +1,387 @@
+{
+  "classifier": "cross-encoder/nli-MiniLM2-L6-H768",
+  "suite": "holdout",
+  "threshold": 0.55,
+  "overall": {
+    "correct": 25,
+    "total": 25,
+    "accuracy": 1.0
+  },
+  "normal": {
+    "correct": 20,
+    "total": 20,
+    "accuracy": 1.0
+  },
+  "curveball": {
+    "correct": 5,
+    "total": 5,
+    "accuracy": 1.0
+  },
+  "confusion": {
+    "gemma": {
+      "gemma": 9
+    },
+    "qwen-opus": {
+      "qwen-opus": 8
+    },
+    "omnicoder": {
+      "omnicoder": 8
+    }
+  },
+  "failures": [],
+  "results": [
+    {
+      "index": 1,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain how inflation affects household savings.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4629,
+        "qwen-opus": 0.2465,
+        "omnicoder": 0.2906
+      }
+    },
+    {
+      "index": 2,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Draft a short apology for arriving late to an appointment.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4511,
+        "qwen-opus": 0.2436,
+        "omnicoder": 0.3053
+      }
+    },
+    {
+      "index": 3,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Make a packing list for a week-long beach holiday.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4715,
+        "qwen-opus": 0.2388,
+        "omnicoder": 0.2897
+      }
+    },
+    {
+      "index": 4,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Use my contacts and email tools to send Priya the agenda.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5415,
+        "qwen-opus": 0.2241,
+        "omnicoder": 0.2344
+      }
+    },
+    {
+      "index": 5,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Find tomorrow's dentist appointment on my calendar.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9927,
+        "qwen-opus": 0.0032,
+        "omnicoder": 0.004
+      }
+    },
+    {
+      "index": 6,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize this interview transcript into five bullets.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4212,
+        "qwen-opus": 0.256,
+        "omnicoder": 0.3228
+      }
+    },
+    {
+      "index": 7,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Suggest indoor activities for a rainy weekend with children.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5219,
+        "qwen-opus": 0.2292,
+        "omnicoder": 0.2489
+      }
+    },
+    {
+      "index": 8,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Determine whether this voting system satisfies independence of irrelevant alternatives.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0396,
+        "qwen-opus": 0.9305,
+        "omnicoder": 0.0298
+      }
+    },
+    {
+      "index": 9,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Show that the proposed invariant is sufficient to establish termination.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0023,
+        "qwen-opus": 0.9959,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 10,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Reconcile these contradictory witness accounts and rank the plausible timelines.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.058,
+        "qwen-opus": 0.8873,
+        "omnicoder": 0.0547
+      }
+    },
+    {
+      "index": 11,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Assess whether this monetary-policy proposal remains stable under three adverse scenarios.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0022,
+        "qwen-opus": 0.9963,
+        "omnicoder": 0.0015
+      }
+    },
+    {
+      "index": 12,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Work through this probability puzzle and justify each conditional dependency.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.037,
+        "qwen-opus": 0.9261,
+        "omnicoder": 0.0369
+      }
+    },
+    {
+      "index": 13,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Identify hidden assumptions in this argument and test whether its conclusion follows.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0401,
+        "qwen-opus": 0.9289,
+        "omnicoder": 0.0311
+      }
+    },
+    {
+      "index": 14,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Fix an npm dependency conflict that appears only in the CI build.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0253,
+        "qwen-opus": 0.0183,
+        "omnicoder": 0.9564
+      }
+    },
+    {
+      "index": 15,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Add pagination and validation to this Express endpoint.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.034,
+        "qwen-opus": 0.021,
+        "omnicoder": 0.9449
+      }
+    },
+    {
+      "index": 16,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Review this Terraform module for unsafe defaults.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0216,
+        "qwen-opus": 0.0159,
+        "omnicoder": 0.9626
+      }
+    },
+    {
+      "index": 17,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Write unit tests for a Go HTTP handler.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0261,
+        "qwen-opus": 0.0178,
+        "omnicoder": 0.956
+      }
+    },
+    {
+      "index": 18,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Investigate why this Docker container exits with code 137.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0251,
+        "qwen-opus": 0.018,
+        "omnicoder": 0.9569
+      }
+    },
+    {
+      "index": 19,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Replace unsafe type assertions in these test fixtures.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0338,
+        "qwen-opus": 0.0209,
+        "omnicoder": 0.9453
+      }
+    },
+    {
+      "index": 20,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Create a backward-compatible database column rename.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0342,
+        "qwen-opus": 0.0206,
+        "omnicoder": 0.9452
+      }
+    },
+    {
+      "index": 21,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "The book club meeting is named 'Python Debugging'. Locate it in my calendar.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.3199,
+        "qwen-opus": 0.2402,
+        "omnicoder": 0.4399
+      }
+    },
+    {
+      "index": 22,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Do not implement anything. Decide whether eventual consistency can satisfy these four business invariants simultaneously.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0095,
+        "qwen-opus": 0.9828,
+        "omnicoder": 0.0077
+      }
+    },
+    {
+      "index": 23,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "No architecture essay: identify why the production deployment rolls back and supply the configuration change.",
+      "metadata": {
+        "agent_id": "devops-agent"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0343,
+        "qwen-opus": 0.0212,
+        "omnicoder": 0.9445
+      }
+    },
+    {
+      "index": 24,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Explain the phrase 'race condition' using a supermarket checkout analogy.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9796,
+        "qwen-opus": 0.0094,
+        "omnicoder": 0.011
+      }
+    },
+    {
+      "index": 25,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "Although this is about source code, establish whether the transformation preserves semantics for all possible inputs.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.006,
+        "qwen-opus": 0.9883,
+        "omnicoder": 0.0057
+      }
+    }
+  ]
+}

@@ -1,0 +1,737 @@
+{
+  "classifier": "cross-encoder/nli-MiniLM2-L6-H768",
+  "suite": "regression",
+  "threshold": 0.55,
+  "overall": {
+    "correct": 50,
+    "total": 50,
+    "accuracy": 1.0
+  },
+  "normal": {
+    "correct": 40,
+    "total": 40,
+    "accuracy": 1.0
+  },
+  "curveball": {
+    "correct": 10,
+    "total": 10,
+    "accuracy": 1.0
+  },
+  "confusion": {
+    "gemma": {
+      "gemma": 18
+    },
+    "qwen-opus": {
+      "qwen-opus": 16
+    },
+    "omnicoder": {
+      "omnicoder": 16
+    }
+  },
+  "failures": [],
+  "results": [
+    {
+      "index": 1,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain why the sky appears blue during the day.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4427,
+        "qwen-opus": 0.2462,
+        "omnicoder": 0.3111
+      }
+    },
+    {
+      "index": 2,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Summarize the pros and cons of renting versus buying a home.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4709,
+        "qwen-opus": 0.2569,
+        "omnicoder": 0.2723
+      }
+    },
+    {
+      "index": 3,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Draft a polite email rescheduling tomorrow's meeting.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4658,
+        "qwen-opus": 0.236,
+        "omnicoder": 0.2982
+      }
+    },
+    {
+      "index": 4,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Give me a five-day vegetarian meal plan.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5236,
+        "qwen-opus": 0.2275,
+        "omnicoder": 0.2489
+      }
+    },
+    {
+      "index": 5,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "What questions should I ask before adopting a dog?",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4219,
+        "qwen-opus": 0.2687,
+        "omnicoder": 0.3094
+      }
+    },
+    {
+      "index": 6,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Compare solar and wind energy in plain language.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4867,
+        "qwen-opus": 0.233,
+        "omnicoder": 0.2803
+      }
+    },
+    {
+      "index": 7,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Help me plan a three-day itinerary for Jaipur.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.5082,
+        "qwen-opus": 0.2387,
+        "omnicoder": 0.2531
+      }
+    },
+    {
+      "index": 8,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Turn these notes into a concise project update.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.4474,
+        "qwen-opus": 0.2422,
+        "omnicoder": 0.3104
+      }
+    },
+    {
+      "index": 9,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Use my calendar tool to find an open hour next Tuesday.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9945,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.0028
+      }
+    },
+    {
+      "index": 10,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Search my notes for the latest budget decision.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9924,
+        "qwen-opus": 0.0034,
+        "omnicoder": 0.0042
+      }
+    },
+    {
+      "index": 11,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Check the weather tool and suggest what clothing to pack.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.994,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.0031
+      }
+    },
+    {
+      "index": 12,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Create a checklist for moving into a new apartment.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.453,
+        "qwen-opus": 0.2502,
+        "omnicoder": 0.2968
+      }
+    },
+    {
+      "index": 13,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Explain compound interest to a high-school student.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9771,
+        "qwen-opus": 0.0101,
+        "omnicoder": 0.0128
+      }
+    },
+    {
+      "index": 14,
+      "kind": "normal",
+      "expected": "gemma",
+      "prompt": "Rewrite this paragraph to sound more professional.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": true,
+      "scores": {
+        "gemma": 0.3811,
+        "qwen-opus": 0.2616,
+        "omnicoder": 0.3572
+      }
+    },
+    {
+      "index": 15,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Prove that the square root of 2 is irrational.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0421,
+        "qwen-opus": 0.9221,
+        "omnicoder": 0.0359
+      }
+    },
+    {
+      "index": 16,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive the time complexity of this recursive recurrence: T(n)=2T(n/2)+n log n.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.042,
+        "qwen-opus": 0.9272,
+        "omnicoder": 0.0307
+      }
+    },
+    {
+      "index": 17,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Analyze three competing explanations for the Fermi paradox and identify their weakest assumptions.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0019,
+        "qwen-opus": 0.9966,
+        "omnicoder": 0.0016
+      }
+    },
+    {
+      "index": 18,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Design a rigorous experiment to distinguish correlation from causation in this observational study.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0335,
+        "qwen-opus": 0.936,
+        "omnicoder": 0.0305
+      }
+    },
+    {
+      "index": 19,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Solve this multi-step logic puzzle and show every inference.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0346,
+        "qwen-opus": 0.9331,
+        "omnicoder": 0.0324
+      }
+    },
+    {
+      "index": 20,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Find the root cause of a distributed-system outage from these conflicting timelines.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0556,
+        "qwen-opus": 0.8971,
+        "omnicoder": 0.0473
+      }
+    },
+    {
+      "index": 21,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Compare two database architectures under latency, consistency, and failure-domain constraints.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0684,
+        "qwen-opus": 0.8804,
+        "omnicoder": 0.0512
+      }
+    },
+    {
+      "index": 22,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Derive the optimal strategy for this constrained game-theory problem.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0031,
+        "qwen-opus": 0.9953,
+        "omnicoder": 0.0017
+      }
+    },
+    {
+      "index": 23,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Evaluate this acquisition using scenario analysis, sensitivity analysis, and downside risk.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0237,
+        "qwen-opus": 0.9496,
+        "omnicoder": 0.0267
+      }
+    },
+    {
+      "index": 24,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Construct a formal argument for and against this constitutional interpretation.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0395,
+        "qwen-opus": 0.9248,
+        "omnicoder": 0.0357
+      }
+    },
+    {
+      "index": 25,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Explain why this proposed perpetual-motion machine cannot work using thermodynamics.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0517,
+        "qwen-opus": 0.9176,
+        "omnicoder": 0.0307
+      }
+    },
+    {
+      "index": 26,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Develop a causal model for declining customer retention across five interacting factors.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0349,
+        "qwen-opus": 0.9353,
+        "omnicoder": 0.0299
+      }
+    },
+    {
+      "index": 27,
+      "kind": "normal",
+      "expected": "qwen-opus",
+      "prompt": "Optimize this supply chain under uncertain demand and capacity constraints.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0732,
+        "qwen-opus": 0.8759,
+        "omnicoder": 0.0509
+      }
+    },
+    {
+      "index": 28,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Implement a Python LRU cache with O(1) get and put operations.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0286,
+        "qwen-opus": 0.02,
+        "omnicoder": 0.9515
+      }
+    },
+    {
+      "index": 29,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Debug this TypeScript error: Type 'undefined' is not assignable to type 'User'.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.003,
+        "qwen-opus": 0.0023,
+        "omnicoder": 0.9948
+      }
+    },
+    {
+      "index": 30,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Review this pull request for concurrency bugs and missing tests.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0175,
+        "qwen-opus": 0.0144,
+        "omnicoder": 0.9681
+      }
+    },
+    {
+      "index": 31,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Write a SQL migration that adds a unique partial index safely.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0284,
+        "qwen-opus": 0.0194,
+        "omnicoder": 0.9521
+      }
+    },
+    {
+      "index": 32,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Refactor this React component to remove duplicated state.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0035,
+        "qwen-opus": 0.0025,
+        "omnicoder": 0.994
+      }
+    },
+    {
+      "index": 33,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Add integration tests for the FastAPI authentication middleware.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0037,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.9936
+      }
+    },
+    {
+      "index": 34,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Explain why this Rust function fails the borrow checker and fix it.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0044,
+        "qwen-opus": 0.0029,
+        "omnicoder": 0.9926
+      }
+    },
+    {
+      "index": 35,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Design a REST API and provide an OpenAPI schema for it.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.03,
+        "qwen-opus": 0.0201,
+        "omnicoder": 0.9499
+      }
+    },
+    {
+      "index": 36,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Investigate this stack trace and identify the failing code path.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0254,
+        "qwen-opus": 0.0183,
+        "omnicoder": 0.9563
+      }
+    },
+    {
+      "index": 37,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Convert this Bash deployment script to PowerShell.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0339,
+        "qwen-opus": 0.0199,
+        "omnicoder": 0.9462
+      }
+    },
+    {
+      "index": 38,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Optimize this PostgreSQL query and explain the execution plan.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0356,
+        "qwen-opus": 0.0208,
+        "omnicoder": 0.9435
+      }
+    },
+    {
+      "index": 39,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Create a GitHub Actions workflow for lint, tests, and release builds.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0193,
+        "qwen-opus": 0.0153,
+        "omnicoder": 0.9654
+      }
+    },
+    {
+      "index": 40,
+      "kind": "normal",
+      "expected": "omnicoder",
+      "prompt": "Fix the race condition in this asynchronous queue implementation.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0342,
+        "qwen-opus": 0.0206,
+        "omnicoder": 0.9452
+      }
+    },
+    {
+      "index": 41,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Don't write code. Diagnose why our Python API deadlocks under load and describe the exact code-level fix.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0031,
+        "qwen-opus": 0.0024,
+        "omnicoder": 0.9946
+      }
+    },
+    {
+      "index": 42,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "My grocery list contains the words Python, Rust, and Java. Group the groceries by supermarket aisle.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9922,
+        "qwen-opus": 0.0036,
+        "omnicoder": 0.0042
+      }
+    },
+    {
+      "index": 43,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "No code is needed: reason carefully about whether this lock-free algorithm can violate linearizability.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.008,
+        "qwen-opus": 0.9872,
+        "omnicoder": 0.0048
+      }
+    },
+    {
+      "index": 44,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Use the email tool to send the approved release announcement. Do not redesign or debug anything.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8937,
+        "qwen-opus": 0.0027,
+        "omnicoder": 0.1035
+      }
+    },
+    {
+      "index": 45,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "Write the smallest patch for this bug; the business explanation and architecture discussion are already complete.",
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0327,
+        "qwen-opus": 0.0202,
+        "omnicoder": 0.9471
+      }
+    },
+    {
+      "index": 46,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "A program prints the correct answer, but prove whether its underlying greedy algorithm is correct for every input.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0458,
+        "qwen-opus": 0.9233,
+        "omnicoder": 0.0309
+      }
+    },
+    {
+      "index": 47,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "Explain what a software API is to a restaurant owner without discussing implementation.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.9812,
+        "qwen-opus": 0.0089,
+        "omnicoder": 0.0099
+      }
+    },
+    {
+      "index": 48,
+      "kind": "curveball",
+      "expected": "omnicoder",
+      "prompt": "The task sounds simple: rename one field across the schema, migrations, serializers, clients, and tests without breaking compatibility.",
+      "metadata": {
+        "agent_id": "repository-maintainer"
+      },
+      "predicted": "omnicoder",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.0436,
+        "qwen-opus": 0.0214,
+        "omnicoder": 0.9351
+      }
+    },
+    {
+      "index": 49,
+      "kind": "curveball",
+      "expected": "qwen-opus",
+      "prompt": "First ignore the obvious coding solution. Determine whether the requirements are mutually consistent, then derive the feasible cases.",
+      "predicted": "qwen-opus",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.043,
+        "qwen-opus": 0.9225,
+        "omnicoder": 0.0345
+      }
+    },
+    {
+      "index": 50,
+      "kind": "curveball",
+      "expected": "gemma",
+      "prompt": "The meeting title is 'Debug API architecture'. Find it on my calendar and tell me its start time.",
+      "predicted": "gemma",
+      "correct": true,
+      "low_confidence": false,
+      "scores": {
+        "gemma": 0.8081,
+        "qwen-opus": 0.0036,
+        "omnicoder": 0.1882
+      }
+    }
+  ]
+}
