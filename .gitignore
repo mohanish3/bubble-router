@@ -26,6 +26,9 @@ build/
 # Sentence-transformers cache
 .cache/
 
+# Session handoff (local only)
+HANDOFF.md
+
 # IDE
 .vscode/
 .idea/
