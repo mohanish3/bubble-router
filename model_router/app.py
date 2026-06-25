@@ -5,6 +5,8 @@ import hmac
 import json
 import logging
 import os
+import time
+from collections import defaultdict
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
@@ -34,6 +36,7 @@ def create_app(
     key = os.getenv(
         config.server["api_key_env"], config.server.get("default_api_key", "")
     )
+    _metrics: dict = defaultdict(lambda: {"count": 0, "total_latency_s": 0.0})
 
     async def authorize(request: Request) -> None:
         if not key:
@@ -88,6 +91,14 @@ def create_app(
     async def status(_: None = Depends(authorize)) -> dict:
         return service.status()
 
+    @app.get("/metrics")
+    async def metrics_endpoint(_: None = Depends(authorize)) -> dict:
+        rows = []
+        for model_key, m in _metrics.items():
+            avg_lat = m["total_latency_s"] / m["count"] if m["count"] else 0.0
+            rows.append({"model": model_key, "requests": m["count"], "avg_latency_s": round(avg_lat, 3)})
+        return {"routing": rows, "queue_depths": service.scheduler.depths()}
+
     @app.post("/v1/chat/completions")
     async def chat(request: Request, _: None = Depends(authorize)) -> Response:
         try:
@@ -96,21 +107,22 @@ def create_app(
             return openai_error("Malformed JSON request", 400, "invalid_json")
         if not isinstance(payload, dict) or not isinstance(payload.get("messages"), list):
             return openai_error("messages must be an array", 400, "invalid_request")
-        metadata = {
-            key: value
-            for key, value in {
+        req_meta = {
+            k: v
+            for k, v in {
                 "agent_id": request.headers.get("x-bubble-agent-id"),
                 "session_id": request.headers.get("x-bubble-session-id"),
             }.items()
-            if value
+            if v
         }
         try:
-            job = await service.submit(payload, metadata)
+            job = await service.submit(payload, req_meta)
         except KeyError:
             return openai_error(
                 f"Unknown model: {payload.get('model')}", 400, "model_not_found"
             )
 
+        t0 = time.monotonic()
         while job.result and not job.result.done():
             if await request.is_disconnected():
                 await service.scheduler.cancel(job)
@@ -123,6 +135,18 @@ def create_app(
         except Exception as exc:
             job.finished.set()
             return openai_error(str(exc), 502, "upstream_error")
+
+        elapsed = time.monotonic() - t0
+        router_model = job.classification_model or job.model
+        top_score = (
+            max(job.classification_scores.values()) if job.classification_scores else 1.0
+        )
+        _metrics[router_model]["count"] += 1
+        _metrics[router_model]["total_latency_s"] += elapsed
+        extra_headers = {
+            "X-Router-Model": router_model,
+            "X-Router-Confidence": f"{top_score:.3f}",
+        }
 
         if routed.stream:
             async def stream_body() -> AsyncIterator[bytes]:
@@ -138,14 +162,14 @@ def create_app(
             return StreamingResponse(
                 stream_body(),
                 status_code=routed.status_code,
-                headers=routed.headers,
+                headers={**dict(routed.headers), **extra_headers},
                 media_type=routed.headers.get("content-type", "text/event-stream"),
             )
         job.finished.set()
         return Response(
             content=routed.body,
             status_code=routed.status_code,
-            headers=routed.headers,
+            headers={**dict(routed.headers), **extra_headers},
             media_type=routed.headers.get("content-type", "application/json"),
         )
 
