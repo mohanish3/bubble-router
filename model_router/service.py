@@ -98,7 +98,7 @@ class RouterService:
         classification = await self.classify(payload, metadata)
         forwarded = dict(payload)
         forwarded["model"] = self.config.models[classification.model].public_id
-        job = Job(classification.model, forwarded, metadata)
+        job = Job(classification.model, forwarded, metadata, classification.model, classification.scores)
         await self.scheduler.enqueue(job)
         depths = self.scheduler.depths()
         if depths[classification.model] >= int(self.config.server["queue_warning_depth"]):

@@ -1,10 +1,18 @@
 from __future__ import annotations
 
 import json
+import yaml
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
+
+@dataclass(frozen=True)
+class HardPinConfig:
+    labels: dict[str, str] = field(default_factory=dict)
+    aliases: dict[str, str] = field(default_factory=dict)
+    models: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -31,6 +39,7 @@ class RouterConfig:
     raw: dict[str, Any]
     models: dict[str, ModelConfig]
     aliases: dict[str, str]
+    hard_pin: HardPinConfig | None = None
 
     @property
     def server(self) -> dict[str, Any]:
@@ -40,7 +49,21 @@ class RouterConfig:
     def classifier(self) -> dict[str, Any]:
         return self.raw["classifier"]
 
+    @property
+    def pinning(self) -> dict[str, Any]:
+        return self.raw.get("pinning", {})
+
     def resolve_model(self, requested: str) -> str:
+        # First check hard-pin aliases (forces specific model)
+        pinned = self.pinning.get("aliases", {})
+        if requested in pinned:
+            target = pinned[requested]
+            if target == "auto":
+                return "auto"
+            if target in self.pinning.get("models", {}):
+                return target
+            if target in self.models:
+                return target
         value = self.aliases.get(requested, requested)
         if value == "auto":
             return value
@@ -87,8 +110,18 @@ class RouterConfig:
 
 def load_config(path: Path | None = None) -> RouterConfig:
     config_path = path or Path(__file__).parents[1] / "model-router.json"
-    raw = json.loads(config_path.read_text(encoding="utf-8"))
+    if config_path.suffix.lower() == ".yaml" or config_path.suffix.lower() == ".yml":
+        raw = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    else:
+        raw = json.loads(config_path.read_text(encoding="utf-8"))
     root = config_path.parent.resolve()
+    hard_pin = None
+    if "pinning" in raw:
+        hard_pin = HardPinConfig(
+            labels=raw["pinning"].get("labels", {}),
+            aliases=raw["pinning"].get("aliases", {}),
+            models=raw["pinning"].get("models", {}),
+        )
     models: dict[str, ModelConfig] = {}
     for key, value in raw["models"].items():
         backend = value.get("backend", "llamacpp")
@@ -115,4 +148,4 @@ def load_config(path: Path | None = None) -> RouterConfig:
             provider=value.get("provider"),
             api_key_env=value.get("api_key_env"),
         )
-    return RouterConfig(root=root, raw=raw, models=models, aliases=raw["aliases"])
+    return RouterConfig(root=root, raw=raw, models=models, aliases=raw["aliases"], hard_pin=hard_pin)

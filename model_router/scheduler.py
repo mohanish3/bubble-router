@@ -15,6 +15,8 @@ class Job:
     metadata: dict[str, str]
     id: str = field(default_factory=lambda: uuid.uuid4().hex)
     enqueued_at: float = field(default_factory=time.monotonic)
+    classification_model: str | None = None
+    classification_scores: dict[str, float] | None = None
     result: asyncio.Future[Any] | None = None
     finished: asyncio.Event = field(default_factory=asyncio.Event)
     cancelled: bool = False
