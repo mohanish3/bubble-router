@@ -2,7 +2,7 @@
 
 Routes prompts to specialist local models automatically, based on classified intent, instead of picking a model per request by hand.
 
-99.2% routing accuracy (496/500) on a held-out set of 500 prompts — [methodology and known failure modes](docs/accuracy.md). Classifier runs on CPU in ~16ms with zero VRAM overhead, so it doesn't compete with inference for GPU memory.
+99.2% routing accuracy (496/500) on a held-out set of 500 prompts (see [methodology and known failure modes](docs/accuracy.md)). Classifier runs on CPU in ~16ms with zero VRAM overhead, so it doesn't compete with inference for GPU memory.
 
 One OpenAI-compatible endpoint. Multiple specialist backends. No manual model selection.
 
@@ -66,7 +66,7 @@ Use `model="auto"` to route automatically, or pass a model/alias name (e.g. `"co
 | OpenAI API | `openai` | Requires `OPENAI_API_KEY` |
 | Gemini API | `gemini` | Via an OpenAI-compatible endpoint; requires `GEMINI_API_KEY` |
 
-Backends can be mixed — route routine prompts to a local model and hard ones to an API. Example: [config/model-router.mixed.json](config/model-router.mixed.json).
+Backends can be mixed: route routine prompts to a local model and hard ones to an API. Example: [config/model-router.mixed.json](config/model-router.mixed.json).
 
 ## Accuracy
 
