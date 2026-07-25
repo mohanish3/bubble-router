@@ -6,6 +6,8 @@ Routes prompts to specialist local models automatically, based on classified int
 
 One OpenAI-compatible endpoint. Multiple specialist backends. No manual model selection.
 
+![Demo: the real classifier routing three prompts to general, reasoning, and coding models](assets/demo.gif)
+
 ## How it works
 
 ```
