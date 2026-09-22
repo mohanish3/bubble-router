@@ -1,0 +1,1808 @@
+[
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain why the sky appears blue during the day.",
+    "source": "regression_50",
+    "id": "G001"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize the pros and cons of renting versus buying a home.",
+    "source": "regression_50",
+    "id": "G002"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft a polite email rescheduling tomorrow's meeting.",
+    "source": "regression_50",
+    "id": "G003"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Give me a five-day vegetarian meal plan.",
+    "source": "regression_50",
+    "id": "G004"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "What questions should I ask before adopting a dog?",
+    "source": "regression_50",
+    "id": "G005"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Compare solar and wind energy in plain language.",
+    "source": "regression_50",
+    "id": "G006"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Help me plan a three-day itinerary for Jaipur.",
+    "source": "regression_50",
+    "id": "G007"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Turn these notes into a concise project update.",
+    "source": "regression_50",
+    "id": "G008"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Use my calendar tool to find an open hour next Tuesday.",
+    "source": "regression_50",
+    "id": "G009"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Search my notes for the latest budget decision.",
+    "source": "regression_50",
+    "id": "G010"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Check the weather tool and suggest what clothing to pack.",
+    "source": "regression_50",
+    "id": "G011"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Create a checklist for moving into a new apartment.",
+    "source": "regression_50",
+    "id": "G012"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain compound interest to a high-school student.",
+    "source": "regression_50",
+    "id": "G013"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Rewrite this paragraph to sound more professional.",
+    "source": "regression_50",
+    "id": "G014"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that the square root of 2 is irrational.",
+    "source": "regression_50",
+    "id": "G015"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the time complexity of this recursive recurrence: T(n)=2T(n/2)+n log n.",
+    "source": "regression_50",
+    "id": "G016"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Analyze three competing explanations for the Fermi paradox and identify their weakest assumptions.",
+    "source": "regression_50",
+    "id": "G017"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Design a rigorous experiment to distinguish correlation from causation in this observational study.",
+    "source": "regression_50",
+    "id": "G018"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Solve this multi-step logic puzzle and show every inference.",
+    "source": "regression_50",
+    "id": "G019"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Find the root cause of a distributed-system outage from these conflicting timelines.",
+    "source": "regression_50",
+    "id": "G020"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare two database architectures under latency, consistency, and failure-domain constraints.",
+    "source": "regression_50",
+    "id": "G021"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the optimal strategy for this constrained game-theory problem.",
+    "source": "regression_50",
+    "id": "G022"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate this acquisition using scenario analysis, sensitivity analysis, and downside risk.",
+    "source": "regression_50",
+    "id": "G023"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Construct a formal argument for and against this constitutional interpretation.",
+    "source": "regression_50",
+    "id": "G024"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Explain why this proposed perpetual-motion machine cannot work using thermodynamics.",
+    "source": "regression_50",
+    "id": "G025"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Develop a causal model for declining customer retention across five interacting factors.",
+    "source": "regression_50",
+    "id": "G026"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Optimize this supply chain under uncertain demand and capacity constraints.",
+    "source": "regression_50",
+    "id": "G027"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement a Python LRU cache with O(1) get and put operations.",
+    "source": "regression_50",
+    "id": "G028"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Debug this TypeScript error: Type 'undefined' is not assignable to type 'User'.",
+    "source": "regression_50",
+    "id": "G029"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this pull request for concurrency bugs and missing tests.",
+    "source": "regression_50",
+    "id": "G030"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write a SQL migration that adds a unique partial index safely.",
+    "source": "regression_50",
+    "id": "G031"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Refactor this React component to remove duplicated state.",
+    "source": "regression_50",
+    "id": "G032"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add integration tests for the FastAPI authentication middleware.",
+    "source": "regression_50",
+    "id": "G033"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Explain why this Rust function fails the borrow checker and fix it.",
+    "source": "regression_50",
+    "id": "G034"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Design a REST API and provide an OpenAPI schema for it.",
+    "source": "regression_50",
+    "id": "G035"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Investigate this stack trace and identify the failing code path.",
+    "source": "regression_50",
+    "id": "G036"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Convert this Bash deployment script to PowerShell.",
+    "source": "regression_50",
+    "id": "G037"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Optimize this PostgreSQL query and explain the execution plan.",
+    "source": "regression_50",
+    "id": "G038"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a GitHub Actions workflow for lint, tests, and release builds.",
+    "source": "regression_50",
+    "id": "G039"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix the race condition in this asynchronous queue implementation.",
+    "source": "regression_50",
+    "id": "G040"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Don't write code. Diagnose why our Python API deadlocks under load and describe the exact code-level fix.",
+    "source": "regression_50",
+    "id": "G041"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "My grocery list contains the words Python, Rust, and Java. Group the groceries by supermarket aisle.",
+    "source": "regression_50",
+    "id": "G042"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "No code is needed: reason carefully about whether this lock-free algorithm can violate linearizability.",
+    "source": "regression_50",
+    "id": "G043"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Use the email tool to send the approved release announcement. Do not redesign or debug anything.",
+    "source": "regression_50",
+    "id": "G044"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write the smallest patch for this bug; the business explanation and architecture discussion are already complete.",
+    "source": "regression_50",
+    "id": "G045"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "A program prints the correct answer, but prove whether its underlying greedy algorithm is correct for every input.",
+    "source": "regression_50",
+    "id": "G046"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain what a software API is to a restaurant owner without discussing implementation.",
+    "source": "regression_50",
+    "id": "G047"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The task sounds simple: rename one field across the schema, migrations, serializers, clients, and tests without breaking compatibility.",
+    "source": "regression_50",
+    "metadata": {
+      "agent_id": "repository-maintainer"
+    },
+    "id": "G048"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "First ignore the obvious coding solution. Determine whether the requirements are mutually consistent, then derive the feasible cases.",
+    "source": "regression_50",
+    "id": "G049"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The meeting title is 'Debug API architecture'. Find it on my calendar and tell me its start time.",
+    "source": "regression_50",
+    "id": "G050"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain how inflation affects household savings.",
+    "source": "holdout_25",
+    "id": "G051"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft a short apology for arriving late to an appointment.",
+    "source": "holdout_25",
+    "id": "G052"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Make a packing list for a week-long beach holiday.",
+    "source": "holdout_25",
+    "id": "G053"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Use my contacts and email tools to send Priya the agenda.",
+    "source": "holdout_25",
+    "id": "G054"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find tomorrow's dentist appointment on my calendar.",
+    "source": "holdout_25",
+    "id": "G055"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize this interview transcript into five bullets.",
+    "source": "holdout_25",
+    "id": "G056"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest indoor activities for a rainy weekend with children.",
+    "source": "holdout_25",
+    "id": "G057"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether this voting system satisfies independence of irrelevant alternatives.",
+    "source": "holdout_25",
+    "id": "G058"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Show that the proposed invariant is sufficient to establish termination.",
+    "source": "holdout_25",
+    "id": "G059"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Reconcile these contradictory witness accounts and rank the plausible timelines.",
+    "source": "holdout_25",
+    "id": "G060"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether this monetary-policy proposal remains stable under three adverse scenarios.",
+    "source": "holdout_25",
+    "id": "G061"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Work through this probability puzzle and justify each conditional dependency.",
+    "source": "holdout_25",
+    "id": "G062"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Identify hidden assumptions in this argument and test whether its conclusion follows.",
+    "source": "holdout_25",
+    "id": "G063"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix an npm dependency conflict that appears only in the CI build.",
+    "source": "holdout_25",
+    "id": "G064"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add pagination and validation to this Express endpoint.",
+    "source": "holdout_25",
+    "id": "G065"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this Terraform module for unsafe defaults.",
+    "source": "holdout_25",
+    "id": "G066"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write unit tests for a Go HTTP handler.",
+    "source": "holdout_25",
+    "id": "G067"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Investigate why this Docker container exits with code 137.",
+    "source": "holdout_25",
+    "id": "G068"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Replace unsafe type assertions in these test fixtures.",
+    "source": "holdout_25",
+    "id": "G069"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a backward-compatible database column rename.",
+    "source": "holdout_25",
+    "id": "G070"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The book club meeting is named 'Python Debugging'. Locate it in my calendar.",
+    "source": "holdout_25",
+    "id": "G071"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Do not implement anything. Decide whether eventual consistency can satisfy these four business invariants simultaneously.",
+    "source": "holdout_25",
+    "id": "G072"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "No architecture essay: identify why the production deployment rolls back and supply the configuration change.",
+    "source": "holdout_25",
+    "metadata": {
+      "agent_id": "devops-agent"
+    },
+    "id": "G073"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain the phrase 'race condition' using a supermarket checkout analogy.",
+    "source": "holdout_25",
+    "id": "G074"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Although this is about source code, establish whether the transformation preserves semantics for all possible inputs.",
+    "source": "holdout_25",
+    "id": "G075"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain photosynthesis to a twelve-year-old using one everyday analogy.",
+    "source": "new_225",
+    "id": "G076"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize this meeting transcript into decisions and owners.",
+    "source": "new_225",
+    "id": "G077"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Rewrite my cover letter opening in a warmer tone.",
+    "source": "new_225",
+    "id": "G078"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft a short thank-you note to a volunteer coordinator.",
+    "source": "new_225",
+    "id": "G079"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Plan a relaxed weekend in Kochi for two adults.",
+    "source": "new_225",
+    "id": "G080"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Make a grocery list for three simple vegetarian dinners.",
+    "source": "new_225",
+    "id": "G081"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Translate this short Hindi message into natural English.",
+    "source": "new_225",
+    "id": "G082"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain what an interest rate is without using equations.",
+    "source": "new_225",
+    "id": "G083"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest five questions for a first meeting with a new manager.",
+    "source": "new_225",
+    "id": "G084"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Turn these scattered notes into a clear status update.",
+    "source": "new_225",
+    "id": "G085"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Make a packing checklist for a two-day hiking trip.",
+    "source": "new_225",
+    "id": "G086"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Describe the difference between a debit card and a credit card plainly.",
+    "source": "new_225",
+    "id": "G087"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest a bedtime routine for someone with an early commute.",
+    "source": "new_225",
+    "id": "G088"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft a friendly invitation to a neighborhood potluck.",
+    "source": "new_225",
+    "id": "G089"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Condense this long paragraph to one sentence while keeping its point.",
+    "source": "new_225",
+    "id": "G090"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain why leaves change color in autumn to a beginner.",
+    "source": "new_225",
+    "id": "G091"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Help me outline a short talk about my recent vacation.",
+    "source": "new_225",
+    "id": "G092"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Write three subject lines for an appointment reminder.",
+    "source": "new_225",
+    "id": "G093"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Give me a simple weekly cleaning schedule for a small apartment.",
+    "source": "new_225",
+    "id": "G094"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize the main points of this customer interview without analysis.",
+    "source": "new_225",
+    "id": "G095"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find the lunch appointment on my calendar and report its location.",
+    "source": "new_225",
+    "id": "G096"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Check my unread messages for the agenda from Priya.",
+    "source": "new_225",
+    "id": "G097"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Use the weather tool to tell me whether to bring an umbrella today.",
+    "source": "new_225",
+    "id": "G098"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Send the already-approved invitation to the addresses in my contacts.",
+    "source": "new_225",
+    "id": "G099"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Add a reminder to call the dentist next Thursday.",
+    "source": "new_225",
+    "id": "G100"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Look up the train reservation in my email and tell me the departure time.",
+    "source": "new_225",
+    "id": "G101"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find the file named Python Debug Notes in my documents and give me its title.",
+    "source": "new_225",
+    "id": "G102"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Check whether the meeting called API Review is on Tuesday or Wednesday.",
+    "source": "new_225",
+    "id": "G103"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Search my notes for the recipe I saved last month.",
+    "source": "new_225",
+    "id": "G104"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Move tomorrow's personal appointment to Friday using my calendar.",
+    "source": "new_225",
+    "id": "G105"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain what a database is to a café owner without implementation details.",
+    "source": "new_225",
+    "id": "G106"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize this pull request announcement for a nontechnical team.",
+    "source": "new_225",
+    "id": "G107"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Rewrite the release note so customers can understand it; do not edit software.",
+    "source": "new_225",
+    "id": "G108"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The grocery item is called Rust Cleaner. Put it on my shopping list.",
+    "source": "new_225",
+    "id": "G109"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The event title is 'Fix production Docker'; tell me when it starts.",
+    "source": "new_225",
+    "id": "G110"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Read the approved deployment notice aloud in plain language.",
+    "source": "new_225",
+    "id": "G111"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft an apology for a delayed reply to a support email.",
+    "source": "new_225",
+    "id": "G112"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest a three-day itinerary that avoids long walks.",
+    "source": "new_225",
+    "id": "G113"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Organize these book titles by genre, including one called Java Patterns.",
+    "source": "new_225",
+    "id": "G114"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain the phrase race condition with a supermarket analogy.",
+    "source": "new_225",
+    "id": "G115"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Tell me what a REST API means in plain English, without code.",
+    "source": "new_225",
+    "id": "G116"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Turn this interview transcript into five neutral bullet points.",
+    "source": "new_225",
+    "id": "G117"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Make a checklist for preparing a house before guests arrive.",
+    "source": "new_225",
+    "id": "G118"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest names for a neighborhood gardening club.",
+    "source": "new_225",
+    "id": "G119"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Write a birthday message for a colleague I know casually.",
+    "source": "new_225",
+    "id": "G120"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Compare tea and coffee for taste and preparation in simple terms.",
+    "source": "new_225",
+    "id": "G121"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Describe how a rainbow forms for a primary-school student.",
+    "source": "new_225",
+    "id": "G122"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find the latest expense receipt in my inbox and report the amount.",
+    "source": "new_225",
+    "id": "G123"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Schedule the approved team lunch for noon on Friday.",
+    "source": "new_225",
+    "id": "G124"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Look up my saved note titled 'Qwen benchmark' and summarize its first paragraph.",
+    "source": "new_225",
+    "id": "G125"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain the difference between a virus and a bacterium in everyday language.",
+    "source": "new_225",
+    "id": "G126"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Make a morning routine checklist for a remote worker.",
+    "source": "new_225",
+    "id": "G127"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Rewrite these instructions to be shorter and easier to follow.",
+    "source": "new_225",
+    "id": "G128"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Give me a list of conversation starters for a family reunion.",
+    "source": "new_225",
+    "id": "G129"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize this policy announcement without recommending changes.",
+    "source": "new_225",
+    "id": "G130"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Check my calendar for an open half hour tomorrow afternoon.",
+    "source": "new_225",
+    "id": "G131"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Send the final version of the newsletter; its content is already approved.",
+    "source": "new_225",
+    "id": "G132"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find the contact number for the plumber in my address book.",
+    "source": "new_225",
+    "id": "G133"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The restaurant is named 'Theorem'. Find its reservation in my email.",
+    "source": "new_225",
+    "id": "G134"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain why the moon has phases using a simple diagram description.",
+    "source": "new_225",
+    "id": "G135"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Draft a concise reply accepting a conference invitation.",
+    "source": "new_225",
+    "id": "G136"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Prepare a packing list for a child going to a weekend camp.",
+    "source": "new_225",
+    "id": "G137"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Suggest a title for a presentation about team collaboration.",
+    "source": "new_225",
+    "id": "G138"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Paraphrase this legal-sounding sentence in ordinary language.",
+    "source": "new_225",
+    "id": "G139"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain compound interest with a small numerical example.",
+    "source": "new_225",
+    "id": "G140"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Find the note labeled 'SQL migration' and tell me when it was edited.",
+    "source": "new_225",
+    "id": "G141"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Book the available slot with my dentist after 3 p.m. on Monday.",
+    "source": "new_225",
+    "id": "G142"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Summarize these survey comments by recurring topic without drawing causal conclusions.",
+    "source": "new_225",
+    "id": "G143"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Give me five low-cost indoor activities for a rainy day.",
+    "source": "new_225",
+    "id": "G144"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Write a short caption for a photo of a mountain sunrise.",
+    "source": "new_225",
+    "id": "G145"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Explain how a bicycle gear changes pedaling effort to a child.",
+    "source": "new_225",
+    "id": "G146"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Create a weekly meal plan for one person with minimal cooking.",
+    "source": "new_225",
+    "id": "G147"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Check the weather in Jaipur and suggest an outfit.",
+    "source": "new_225",
+    "id": "G148"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "Help me phrase a polite request for a deadline extension.",
+    "source": "new_225",
+    "id": "G149"
+  },
+  {
+    "expected_role": "direct_assistance",
+    "prompt": "The meeting title contains 'Debug the API'. Find its start time; do not troubleshoot it.",
+    "source": "new_225",
+    "id": "G150"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that the sum of two even integers is even.",
+    "source": "new_225",
+    "id": "G151"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the closed form of the sum of the first n positive integers.",
+    "source": "new_225",
+    "id": "G152"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether this greedy coin-change rule is optimal for every denomination set.",
+    "source": "new_225",
+    "id": "G153"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Show whether the proposed loop invariant implies termination.",
+    "source": "new_225",
+    "id": "G154"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Find all feasible allocations under these capacity and fairness constraints.",
+    "source": "new_225",
+    "id": "G155"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare three explanations for a sudden retention drop and identify discriminating evidence.",
+    "source": "new_225",
+    "id": "G156"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the expected value of this game under the stated probabilities.",
+    "source": "new_225",
+    "id": "G157"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether the survey design can separate selection bias from treatment effect.",
+    "source": "new_225",
+    "id": "G158"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove or refute the claim that every connected graph with n vertices has at least n minus one edges.",
+    "source": "new_225",
+    "id": "G159"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Optimize a delivery route under time windows, fuel limits, and uncertain traffic.",
+    "source": "new_225",
+    "id": "G160"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Reconcile two conflicting incident timelines and rank the plausible root causes.",
+    "source": "new_225",
+    "id": "G161"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether the evidence supports a causal claim rather than correlation.",
+    "source": "new_225",
+    "id": "G162"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the break-even point under fixed costs, variable costs, and a tiered price.",
+    "source": "new_225",
+    "id": "G163"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate a merger under three downside scenarios and sensitivity to demand.",
+    "source": "new_225",
+    "id": "G164"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Test whether the proposed voting rule satisfies monotonicity and anonymity.",
+    "source": "new_225",
+    "id": "G165"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Show every inference needed to solve this constrained logic puzzle.",
+    "source": "new_225",
+    "id": "G166"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether these three business invariants can coexist with eventual consistency.",
+    "source": "new_225",
+    "id": "G167"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare two database isolation strategies under latency and anomaly constraints; no implementation plan.",
+    "source": "new_225",
+    "id": "G168"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that this sorting algorithm preserves the multiset of inputs.",
+    "source": "new_225",
+    "id": "G169"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether this transformation preserves program semantics for all valid inputs; do not patch code.",
+    "source": "new_225",
+    "id": "G170"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Analyze whether the claimed perpetual-motion device violates the first or second law of thermodynamics.",
+    "source": "new_225",
+    "id": "G171"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Estimate the probability of a false positive after two dependent tests.",
+    "source": "new_225",
+    "id": "G172"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the optimal stopping rule for this finite-horizon decision problem.",
+    "source": "new_225",
+    "id": "G173"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Identify the weakest assumption in each of these competing market forecasts.",
+    "source": "new_225",
+    "id": "G174"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Decide whether the stated premises logically entail the conclusion.",
+    "source": "new_225",
+    "id": "G175"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether a queueing system can meet its service target under the given arrival distribution.",
+    "source": "new_225",
+    "id": "G176"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that a binary search terminates for every finite sorted array; no code changes.",
+    "source": "new_225",
+    "id": "G177"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate a supply contract with uncertain demand, penalties, and limited storage.",
+    "source": "new_225",
+    "id": "G178"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare two public-health interventions while accounting for confounding factors.",
+    "source": "new_225",
+    "id": "G179"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine which witness account is compatible with all recorded timestamps.",
+    "source": "new_225",
+    "id": "G180"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Show whether the proposed checksum detects every single-bit error.",
+    "source": "new_225",
+    "id": "G181"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive an upper bound on the runtime of this recursive algorithm.",
+    "source": "new_225",
+    "id": "G182"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether the security argument holds if an attacker controls the network.",
+    "source": "new_225",
+    "id": "G183"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Construct a counterexample to this claimed theorem, or explain why none exists.",
+    "source": "new_225",
+    "id": "G184"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Optimize staffing across shifts with coverage rules and a fixed budget.",
+    "source": "new_225",
+    "id": "G185"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare the long-term effects of two monetary policies under adverse shocks.",
+    "source": "new_225",
+    "id": "G186"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether the observed outage pattern is consistent with a single point of failure.",
+    "source": "new_225",
+    "id": "G187"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Analyze the sensitivity of a pricing decision to churn and acquisition cost.",
+    "source": "new_225",
+    "id": "G188"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove or disprove that the scheduling policy is starvation-free.",
+    "source": "new_225",
+    "id": "G189"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive necessary and sufficient conditions for this matrix to be invertible.",
+    "source": "new_225",
+    "id": "G190"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Explain the causal chain behind a bank run using an explicit model of incentives.",
+    "source": "new_225",
+    "id": "G191"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate whether these experimental results rule out the null hypothesis under multiple testing.",
+    "source": "new_225",
+    "id": "G192"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Find the Nash equilibrium of this two-player game and justify each response.",
+    "source": "new_225",
+    "id": "G193"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether a lock-free queue remains linearizable under this interleaving.",
+    "source": "new_225",
+    "id": "G194"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Rank four hypotheses for the anomaly by how well each explains the evidence.",
+    "source": "new_225",
+    "id": "G195"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that the proposed recurrence is bounded by n log n.",
+    "source": "new_225",
+    "id": "G196"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether the argument for a constitutional interpretation is internally consistent.",
+    "source": "new_225",
+    "id": "G197"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Estimate how measurement error changes the inferred treatment effect.",
+    "source": "new_225",
+    "id": "G198"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine if a network partition makes these availability guarantees mutually impossible.",
+    "source": "new_225",
+    "id": "G199"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare two architectural options under explicit failure-domain and cost constraints, without designing either.",
+    "source": "new_225",
+    "id": "G200"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the posterior odds after updating on this new evidence.",
+    "source": "new_225",
+    "id": "G201"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Find the minimal set of assumptions needed for the claimed conclusion.",
+    "source": "new_225",
+    "id": "G202"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate a clinical trial interpretation given dropout and uneven baseline risk.",
+    "source": "new_225",
+    "id": "G203"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove whether this cache eviction policy always retains the most recently used item; no fix requested.",
+    "source": "new_225",
+    "id": "G204"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Analyze if a proposed tax change is revenue-neutral under three elasticity estimates.",
+    "source": "new_225",
+    "id": "G205"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether the optimization problem has a feasible solution before solving it.",
+    "source": "new_225",
+    "id": "G206"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Reconcile contradictory customer interviews into the most plausible demand hypotheses.",
+    "source": "new_225",
+    "id": "G207"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Show why this probability puzzle's intuitive answer is wrong using conditional probabilities.",
+    "source": "new_225",
+    "id": "G208"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether the data distinguish a seasonal effect from a product change.",
+    "source": "new_225",
+    "id": "G209"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the conservation constraint that makes the proposed engine impossible.",
+    "source": "new_225",
+    "id": "G210"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate the robust choice among three suppliers when lead times are uncertain.",
+    "source": "new_225",
+    "id": "G211"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that this graph coloring requires at least four colors under the given edges.",
+    "source": "new_225",
+    "id": "G212"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether the stated formal specification admits any implementation.",
+    "source": "new_225",
+    "id": "G213"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Analyze the tradeoffs between stronger consistency and lower latency for this workload.",
+    "source": "new_225",
+    "id": "G214"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compute the worst-case loss under the proposed hedging strategy and stated shocks.",
+    "source": "new_225",
+    "id": "G215"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Explain why the purported statistical significance disappears after correcting for selection.",
+    "source": "new_225",
+    "id": "G216"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Find a counterexample to the claim that this greedy allocation is always fair.",
+    "source": "new_225",
+    "id": "G217"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether a sequence of logs proves the incident began before the deploy.",
+    "source": "new_225",
+    "id": "G218"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Derive the equilibrium price when two firms have the stated cost curves.",
+    "source": "new_225",
+    "id": "G219"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Compare plausible failure mechanisms for a bridge under the recorded load history.",
+    "source": "new_225",
+    "id": "G220"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Determine whether the proof uses circular reasoning at any step.",
+    "source": "new_225",
+    "id": "G221"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Evaluate whether two explanations of the Fermi paradox make distinguishable predictions.",
+    "source": "new_225",
+    "id": "G222"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Prove that the proposed data transformation is idempotent for all inputs.",
+    "source": "new_225",
+    "id": "G223"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Optimize the allocation of a limited vaccine stock under the stated objectives and constraints.",
+    "source": "new_225",
+    "id": "G224"
+  },
+  {
+    "expected_role": "deliberative_work",
+    "prompt": "Assess whether this experimental design can identify the effect of the policy change.",
+    "source": "new_225",
+    "id": "G225"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement a Python rate limiter with per-user quotas and tests.",
+    "source": "new_225",
+    "id": "G226"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix the TypeScript null-reference error in this component and add a regression test.",
+    "source": "new_225",
+    "id": "G227"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this pull request for deadlocks and propose the smallest patch.",
+    "source": "new_225",
+    "id": "G228"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write a PostgreSQL migration that adds a column without locking the table for long.",
+    "source": "new_225",
+    "id": "G229"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Refactor the React form to keep one source of truth for validation state.",
+    "source": "new_225",
+    "id": "G230"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add unit tests for the Go HTTP handler's timeout behavior.",
+    "source": "new_225",
+    "id": "G231"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Trace this stack trace to the failing function and provide a code-level fix.",
+    "source": "new_225",
+    "id": "G232"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write an OpenAPI schema for the new customer creation endpoint.",
+    "source": "new_225",
+    "id": "G233"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Configure the CI workflow to run lint and tests on pull requests.",
+    "source": "new_225",
+    "id": "G234"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Optimize this SQL query by changing its indexes and show the revised query.",
+    "source": "new_225",
+    "id": "G235"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Replace the unsafe Rust unwrap with explicit error handling.",
+    "source": "new_225",
+    "id": "G236"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add pagination to the FastAPI endpoint and document its response schema.",
+    "source": "new_225",
+    "id": "G237"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review the Terraform plan for unsafe network exposure and edit the module.",
+    "source": "new_225",
+    "id": "G238"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a shell script to rotate logs and verify it on a sample directory.",
+    "source": "new_225",
+    "id": "G239"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Repair the Docker health check so deployment stops restarting the container.",
+    "source": "new_225",
+    "id": "G240"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Update the authentication middleware to reject expired tokens and test the case.",
+    "source": "new_225",
+    "id": "G241"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement a cache invalidation strategy in the service and add tests.",
+    "source": "new_225",
+    "id": "G242"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Convert this Bash automation to PowerShell without changing its behavior.",
+    "source": "new_225",
+    "id": "G243"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add a unique partial index through a reversible migration.",
+    "source": "new_225",
+    "id": "G244"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix the race between enqueue and cancel in this asynchronous worker.",
+    "source": "new_225",
+    "id": "G245"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review the serializer change for backward compatibility and update the tests.",
+    "source": "new_225",
+    "id": "G246"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write a minimal patch for the memory leak in this event listener.",
+    "source": "new_225",
+    "id": "G247"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add a GitHub Actions matrix for the supported Python versions.",
+    "source": "new_225",
+    "id": "G248"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Refactor the API client to retry only idempotent requests.",
+    "source": "new_225",
+    "id": "G249"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a JSON Schema for the configuration file and validate examples against it.",
+    "source": "new_225",
+    "id": "G250"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The server returns 500 after login; find the failing code path and patch it.",
+    "source": "new_225",
+    "id": "G251"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "I do not need an essay. Give the exact Nginx configuration change for the redirect loop.",
+    "source": "new_225",
+    "id": "G252"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Diagnose why this npm build fails only in CI and supply a reproducible fix.",
+    "source": "new_225",
+    "id": "G253"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The query plan shows a sequential scan; change the query or index to avoid it.",
+    "source": "new_225",
+    "id": "G254"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this database migration for data loss and provide a safer migration.",
+    "source": "new_225",
+    "id": "G255"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The React component renders twice after the effect runs; fix the state update.",
+    "source": "new_225",
+    "id": "G256"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write tests that reproduce the lost-update bug in this repository.",
+    "source": "new_225",
+    "id": "G257"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Update the protobuf schema while preserving compatibility with old clients.",
+    "source": "new_225",
+    "id": "G258"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Instrument the queue worker with metrics for retries and failures.",
+    "source": "new_225",
+    "id": "G259"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement a parser that rejects malformed CSV rows with clear errors.",
+    "source": "new_225",
+    "id": "G260"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix the Makefile so the release target works on Windows.",
+    "source": "new_225",
+    "id": "G261"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add rate-limit headers to the Express endpoint and test boundary values.",
+    "source": "new_225",
+    "id": "G262"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this Kubernetes manifest and patch its readiness probe.",
+    "source": "new_225",
+    "id": "G263"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create the SQL and rollback steps for renaming the customer_id column.",
+    "source": "new_225",
+    "id": "G264"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Explain the borrow-checker error and provide the corrected Rust function.",
+    "source": "new_225",
+    "id": "G265"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Repair this WebSocket reconnect loop so it stops duplicating subscriptions.",
+    "source": "new_225",
+    "id": "G266"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add a property-based test for the URL parser's round-trip behavior.",
+    "source": "new_225",
+    "id": "G267"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Rewrite this Python function to use a streaming iterator rather than loading all rows.",
+    "source": "new_225",
+    "id": "G268"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Configure the reverse proxy to forward the required authentication header.",
+    "source": "new_225",
+    "id": "G269"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix the stale cache bug in the frontend and add a regression test.",
+    "source": "new_225",
+    "id": "G270"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review the concurrency behavior of this Java executor and propose a patch.",
+    "source": "new_225",
+    "id": "G271"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a CLI command that validates config files before deployment.",
+    "source": "new_225",
+    "id": "G272"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Make the Terraform resource names stable across environment changes.",
+    "source": "new_225",
+    "id": "G273"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The ORM migration fails on existing rows; write a data backfill and constraint migration.",
+    "source": "new_225",
+    "id": "G274"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Update the API contract and client types for the new optional field.",
+    "source": "new_225",
+    "id": "G275"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write a test fixture that reproduces the timezone parsing failure.",
+    "source": "new_225",
+    "id": "G276"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Patch the Dockerfile to run as a non-root user without breaking startup.",
+    "source": "new_225",
+    "id": "G277"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement the requested feature flag in both backend and frontend code.",
+    "source": "new_225",
+    "id": "G278"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Debug the intermittent 401 response in this token refresh flow.",
+    "source": "new_225",
+    "id": "G279"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add an idempotency key check to the payment endpoint and test duplicate requests.",
+    "source": "new_225",
+    "id": "G280"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Replace the custom date parser with the standard library and preserve error messages.",
+    "source": "new_225",
+    "id": "G281"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review the pull request for SQL injection paths and fix the unsafe query.",
+    "source": "new_225",
+    "id": "G282"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a migration that splits the address column into structured fields.",
+    "source": "new_225",
+    "id": "G283"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Change the scheduler so canceled jobs cannot be forwarded upstream.",
+    "source": "new_225",
+    "id": "G284"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write a Git hook that blocks committing generated secrets.",
+    "source": "new_225",
+    "id": "G285"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Fix this C++ use-after-free and provide a regression test.",
+    "source": "new_225",
+    "id": "G286"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add validation for missing environment variables at application startup.",
+    "source": "new_225",
+    "id": "G287"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Implement exponential backoff for this HTTP client with a retry cap.",
+    "source": "new_225",
+    "id": "G288"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Modify the GraphQL resolver to batch database lookups.",
+    "source": "new_225",
+    "id": "G289"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Update the deployment script to roll back when health checks fail.",
+    "source": "new_225",
+    "id": "G290"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Test and fix the off-by-one error in this pagination helper.",
+    "source": "new_225",
+    "id": "G291"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Review this codebase's authorization checks and patch the missing guard.",
+    "source": "new_225",
+    "id": "G292"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Create a typed interface for these event payloads and update callers.",
+    "source": "new_225",
+    "id": "G293"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Improve the query planner hints in this stored procedure and measure the plan.",
+    "source": "new_225",
+    "id": "G294"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "The build log mentions Python and Rust; fix the actual linker configuration.",
+    "source": "new_225",
+    "id": "G295"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Write the smallest patch that makes the parser handle empty input.",
+    "source": "new_225",
+    "id": "G296"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Add integration tests for the OAuth callback's invalid-state path.",
+    "source": "new_225",
+    "id": "G297"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Make this background task restart safely after a process crash.",
+    "source": "new_225",
+    "id": "G298"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Refactor duplicated validation across the two API handlers.",
+    "source": "new_225",
+    "id": "G299"
+  },
+  {
+    "expected_role": "engineering_work",
+    "prompt": "Update the service configuration to enforce TLS for database connections.",
+    "source": "new_225",
+    "id": "G300"
+  }
+]

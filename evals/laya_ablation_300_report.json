@@ -1,0 +1,126 @@
+{
+  "dataset": "golden_300.json",
+  "device": "cuda",
+  "configs": {
+    "english | A baseline (_text + nicknames + jev prompt)": {
+      "argmax_accuracy": 0.7233,
+      "median_max_probability": 0.4377,
+      "median_seconds": 0.0213,
+      "by_role": {
+        "direct_assistance": "80/102",
+        "deliberative_work": "42/99",
+        "engineering_work": "95/99"
+      }
+    },
+    "english | B raw string + nicknames + jev prompt": {
+      "argmax_accuracy": 0.77,
+      "median_max_probability": 0.4627,
+      "median_seconds": 0.0211,
+      "by_role": {
+        "direct_assistance": "86/102",
+        "deliberative_work": "56/99",
+        "engineering_work": "89/99"
+      }
+    },
+    "english | C dict request + nicknames + field prompt": {
+      "argmax_accuracy": 0.7633,
+      "median_max_probability": 0.5368,
+      "median_seconds": 0.0211,
+      "by_role": {
+        "direct_assistance": "81/102",
+        "deliberative_work": "55/99",
+        "engineering_work": "93/99"
+      }
+    },
+    "english | D dict request + semantic keys + field prompt": {
+      "argmax_accuracy": 0.7167,
+      "median_max_probability": 0.6458,
+      "median_seconds": 0.0216,
+      "by_role": {
+        "direct_assistance": "82/102",
+        "deliberative_work": "36/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "english | E dict request + semantic keys + plain criteria": {
+      "argmax_accuracy": 0.8033,
+      "median_max_probability": 0.6444,
+      "median_seconds": 0.0213,
+      "by_role": {
+        "direct_assistance": "88/102",
+        "deliberative_work": "56/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "english | F laya router preset (difficulty+domain)": {
+      "argmax_accuracy": 0.7667,
+      "median_max_probability": null,
+      "median_seconds": 0.0315,
+      "by_role": {
+        "direct_assistance": "75/102",
+        "deliberative_work": "61/99",
+        "engineering_work": "94/99"
+      }
+    },
+    "typed-decisions | A baseline (_text + nicknames + jev prompt)": {
+      "argmax_accuracy": 0.7967,
+      "median_max_probability": 0.4557,
+      "median_seconds": 0.0224,
+      "by_role": {
+        "direct_assistance": "94/102",
+        "deliberative_work": "50/99",
+        "engineering_work": "95/99"
+      }
+    },
+    "typed-decisions | B raw string + nicknames + jev prompt": {
+      "argmax_accuracy": 0.7967,
+      "median_max_probability": 0.4299,
+      "median_seconds": 0.0223,
+      "by_role": {
+        "direct_assistance": "90/102",
+        "deliberative_work": "54/99",
+        "engineering_work": "95/99"
+      }
+    },
+    "typed-decisions | C dict request + nicknames + field prompt": {
+      "argmax_accuracy": 0.8333,
+      "median_max_probability": 0.4942,
+      "median_seconds": 0.0224,
+      "by_role": {
+        "direct_assistance": "91/102",
+        "deliberative_work": "61/99",
+        "engineering_work": "98/99"
+      }
+    },
+    "typed-decisions | D dict request + semantic keys + field prompt": {
+      "argmax_accuracy": 0.7967,
+      "median_max_probability": 0.5305,
+      "median_seconds": 0.0223,
+      "by_role": {
+        "direct_assistance": "91/102",
+        "deliberative_work": "49/99",
+        "engineering_work": "99/99"
+      }
+    },
+    "typed-decisions | E dict request + semantic keys + plain criteria": {
+      "argmax_accuracy": 0.87,
+      "median_max_probability": 0.5487,
+      "median_seconds": 0.0224,
+      "by_role": {
+        "direct_assistance": "94/102",
+        "deliberative_work": "69/99",
+        "engineering_work": "98/99"
+      }
+    },
+    "typed-decisions | F laya router preset (difficulty+domain)": {
+      "argmax_accuracy": 0.7667,
+      "median_max_probability": null,
+      "median_seconds": 0.0315,
+      "by_role": {
+        "direct_assistance": "76/102",
+        "deliberative_work": "58/99",
+        "engineering_work": "96/99"
+      }
+    }
+  }
+}
