@@ -327,9 +327,13 @@ class SecurityScanner:
         # dedicated provider credential after principal classification.
         trusted_framework = meta.get("trusted_system") is True
         report = SecurityReport()
+        # With the provider credential, assistant turns are the model's own
+        # earlier replies; re-screening them lets one odd reply block the whole
+        # session. Other clients can forge assistant turns, so keep scanning them.
         untrusted = [
             index for index, message in enumerate(clean)
             if not self._is_trusted(message, self._source(message), trusted_framework)
+            and not (trusted_framework and message.get("role") == "assistant")
         ]
         recent = self.policy.scan_recent_messages
         selected = set(untrusted[-recent:] if recent else untrusted)
