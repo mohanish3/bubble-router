@@ -26,6 +26,12 @@ dev = [
     "pytest>=8",
     "pytest-asyncio>=0.23",
 ]
+mac = [
+    "laya[onnx]>=0.3.28,<0.4",
+    "onnxruntime>=1.30,<2",
+    "psutil>=7.2,<8",
+    "python-multipart>=0.0.32,<1",
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
