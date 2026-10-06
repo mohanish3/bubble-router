@@ -1,10 +1,12 @@
 """Loopback Mac control plane. Debian entry point remains model_router.main."""
 from __future__ import annotations
 import asyncio
+import hashlib
 import copy
 import dataclasses
 import json
 import os
+import re
 import secrets
 import time
 from contextlib import asynccontextmanager
@@ -28,6 +30,11 @@ class SecurityRejected(Exception):
 
 
 ROUTE_FOLLOW_UP_CHARS = 80
+# OpenClaw prefixes "[Tue 2026-10-06 23:00 GMT+5:30] " and appends a
+# "Runtime: agent=... | host=... | repo=..." line to user messages.
+OPENCLAW_TIMESTAMP_RE = re.compile(r'^\[[A-Z][a-z]{2} \d{4}-\d{2}-\d{2} [^\]\n]{1,40}\]\s*')
+OPENCLAW_RUNTIME_RE = re.compile(r'\n\s*Runtime: agent=[^\n]*(?:\n.*)?\Z', re.S)
+OPENCLAW_INTERNAL_RE = re.compile(r'<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>.*?(?:<<<END_OPENCLAW_INTERNAL_CONTEXT>>>|\Z)', re.S)
 
 
 def latest_user_text(messages):
@@ -38,7 +45,13 @@ def latest_user_text(messages):
         content = message.get('content')
         if isinstance(content, list):
             content = '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
-        if not isinstance(content, str) or not content.strip(): continue
+        if not isinstance(content, str): continue
+        # OpenClaw sends its own bookkeeping (exec sessions, recovery notes) in
+        # user-role messages; route on what the person wrote. Routing only;
+        # security scanning still sees the whole message.
+        content = OPENCLAW_INTERNAL_RE.sub('', content)
+        content = OPENCLAW_RUNTIME_RE.sub('', OPENCLAW_TIMESTAMP_RE.sub('', content)).strip()
+        if not content: continue
         texts.append(content)
         if len(texts) == 2 or len(content) >= ROUTE_FOLLOW_UP_CHARS: break
     return '\n'.join(reversed(texts))
@@ -266,6 +279,12 @@ def create_app(root: Path = ROOT, *, injected=None):
         if not text or not hasattr(app.state.scanner, 'route_request'): return 'ornith', 'default'
         decision = await asyncio.to_thread(app.state.scanner.route_request, text)
         app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
+        entry = {'time': time.time(), 'route': decision['route'], 'score': decision['reasoning_score'],
+                 'chars': len(text), 'sha256': hashlib.sha256(text.encode()).hexdigest()[:16]}
+        if os.environ.get('BUBBLE_ROUTE_DEBUG') == '1':
+            entry['preview'] = text[:160]  # debugging only; never enabled by default
+        fd = os.open(root/'state/route-audit.jsonl', os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+        with os.fdopen(fd, 'a') as handle: handle.write(json.dumps(entry)+'\n')
         name = 'qwen' if decision['route'] == 'reasoning' else 'ornith'
         return name, f"laya:{decision['route']}:{decision['reasoning_score']}"
 

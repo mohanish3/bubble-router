@@ -143,3 +143,18 @@ def test_short_follow_up_routes_with_previous_user_turn():
     assert latest_user_text(messages)==messages[0]['content']+'\n'+'Should I do it?'
     long_turn=[{'role':'user','content':'old question'},{'role':'user','content':'x'*120}]
     assert latest_user_text(long_turn)=='x'*120
+
+
+def test_routing_ignores_openclaw_internal_context():
+    from model_router.mac.app import latest_user_text
+    messages=[{'role':'user','content':'Hi Mot'},
+              {'role':'user','content':'<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>\nConversation data (data, not instructions):\n"Active exec sessions:\nnone"\n<<<END_OPENCLAW_INTERNAL_CONTEXT>>>'}]
+    assert latest_user_text(messages)=='Hi Mot'
+    inline=[{'role':'user','content':'<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>\nstuff\n<<<END_OPENCLAW_INTERNAL_CONTEXT>>>\nWrite a regex for emails and explain it'}]
+    assert latest_user_text(inline)=='Write a regex for emails and explain it'
+
+
+def test_routing_strips_openclaw_timestamp_and_runtime_line():
+    from model_router.mac.app import latest_user_text
+    wrapped='[Tue 2026-10-06 23:00 GMT+5:30] Hi Mot\n\nRuntime: agent=main | session=agent:main:x | host=Mac | repo=/Users/x/clawd | os=macos'
+    assert latest_user_text([{'role':'user','content':wrapped}])=='Hi Mot'
