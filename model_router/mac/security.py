@@ -123,6 +123,9 @@ class SecurityPolicy:
     max_input_chars: int = MAX_INPUT_CHARS
     chunk_chars: int = CHUNK_CHARS
     chunk_overlap: int = CHUNK_OVERLAP
+    # Scan only the newest N untrusted messages; earlier history was screened
+    # when it was new. 0 scans the whole conversation.
+    scan_recent_messages: int = 3
 
     @classmethod
     def from_value(cls, value: "SecurityPolicy | Mapping[str, Any] | None") -> "SecurityPolicy":
@@ -133,6 +136,8 @@ class SecurityPolicy:
             raise ValueError("security thresholds must satisfy 0 <= flag <= quarantine <= block <= 1")
         if policy.max_input_chars <= 0 or policy.chunk_chars <= 0 or not 0 <= policy.chunk_overlap < policy.chunk_chars:
             raise ValueError("security input/chunk limits are invalid")
+        if policy.scan_recent_messages < 0:
+            raise ValueError("scan_recent_messages cannot be negative")
         return policy
 
 
@@ -151,6 +156,7 @@ class SecurityReport:
     action: str = "allow"
     scanned_messages: int = 0
     scanned_chunks: int = 0
+    skipped_history_messages: int = 0
     latency_ms: float = 0.0
     findings: list[SecurityFinding] = field(default_factory=list)
     raw_scores: list[dict[str, Any]] = field(default_factory=list)
@@ -321,7 +327,14 @@ class SecurityScanner:
         # dedicated provider credential after principal classification.
         trusted_framework = meta.get("trusted_system") is True
         report = SecurityReport()
-        total_chars = sum(self._text_chars(m.get("content")) for m in clean)
+        untrusted = [
+            index for index, message in enumerate(clean)
+            if not self._is_trusted(message, self._source(message), trusted_framework)
+        ]
+        recent = self.policy.scan_recent_messages
+        selected = set(untrusted[-recent:] if recent else untrusted)
+        report.skipped_history_messages = len(untrusted) - len(selected)
+        total_chars = sum(self._text_chars(clean[index].get("content")) for index in selected)
         if total_chars > self.policy.max_input_chars:
             raise SecurityInputTooLarge("request exceeds the security scanner input limit")
         activity_id = self._begin_activity(total_chars)
@@ -330,9 +343,9 @@ class SecurityScanner:
             self._check_cancelled(cancelled)
             for index, message in enumerate(clean):
                 self._check_cancelled(cancelled)
-                source = self._source(message)
-                if self._is_trusted(message, source, trusted_framework):
+                if index not in selected:
                     continue
+                source = self._source(message)
                 if not trusted_framework and message.get("role") in {"system", "developer"} and source == "framework":
                     source = "user"
                 texts = list(self._text_leaves(message.get("content"), message))
