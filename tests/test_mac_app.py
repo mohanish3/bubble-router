@@ -102,16 +102,21 @@ def routed(tmp_path):
     for path in ('state','outputs/audio','test-assets'):(tmp_path/path).mkdir(parents=True,exist_ok=True)
     class RoutingScanner(Scanner):
         def route_request(self,text):
-            return {'route':'reasoning' if 'quit my job' in text else 'general','reasoning_score':0.9 if 'quit my job' in text else 0.1}
+            if 'quit my job' in text: return {'route':'reasoner','scores':{'general':0.05,'swift':0.05,'reasoner':0.9}}
+            if 'race condition' in text: return {'route':'swift','scores':{'general':0.1,'swift':0.8,'reasoner':0.1}}
+            return {'route':'general','scores':{'general':0.9,'swift':0.05,'reasoner':0.05}}
     manager=Manager();scanner=RoutingScanner();scheduler=LazyScheduler(tmp_path/'state/jobs.sqlite3',manager)
     config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/qwen',
-            'chat_models':{'ornith':{'resource':'ornith','url':'http://ornith.test','model':'/local/ornith'}},
+            'chat_models':{'ornith':{'resource':'ornith','url':'http://ornith.test','model':'/local/ornith'},
+                           'swift':{'resource':'swift','url':'http://swift.test','model':'/local/swift'}},
+            'escalate':{'ornith':'swift'},
             'backends':{'qwen-vlm':{},'ornith':{}},'audio_models':{'tts':'/local/tts','asr':'/local/asr'}}
     app=create_app(tmp_path,injected=(config,manager,scheduler,scanner,object()))
     with TestClient(app) as client:
         seen=[]
         def handler(request):
             seen.append((str(request.url),json.loads(request.content)['model']))
+            if 'ornith' in str(request.url) and 'BROKEN' in request.content.decode(): return httpx.Response(500,json={'error':'boom'})
             return httpx.Response(200,json={'choices':[{'message':{'content':'ok'}}],'usage':{'total_tokens':2}})
         app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(handler))
         yield client,manager,seen
@@ -124,7 +129,7 @@ def test_auto_routes_general_to_ornith_and_reasoning_to_qwen(routed):
     general=ask(client,'auto','what is the weather like')
     assert general.json()['model']=='ornith' and general.headers['X-Bubble-Route'].startswith('ornith;laya:general')
     reasoning=ask(client,'local/auto','should I quit my job to start a company?')
-    assert reasoning.json()['model']=='qwen' and reasoning.headers['X-Bubble-Route'].startswith('qwen;laya:reasoning')
+    assert reasoning.json()['model']=='qwen' and reasoning.headers['X-Bubble-Route'].startswith('qwen;laya:reasoner')
     assert manager.calls==['ornith','qwen-vlm']
     assert seen==[('http://ornith.test/v1/chat/completions','/local/ornith'),('http://127.0.0.1:8080/v1/chat/completions','/local/qwen')]
 
@@ -158,3 +163,13 @@ def test_routing_strips_openclaw_timestamp_and_runtime_line():
     from model_router.mac.app import latest_user_text
     wrapped='[Tue 2026-10-06 23:00 GMT+5:30] Hi Mot\n\nRuntime: agent=main | session=agent:main:x | host=Mac | repo=/Users/x/clawd | os=macos'
     assert latest_user_text([{'role':'user','content':wrapped}])=='Hi Mot'
+
+
+def test_swift_route_and_ornith_failure_escalates(routed):
+    client,manager,seen=routed
+    swift=ask(client,'auto','there is a race condition in my worker pool')
+    assert swift.json()['model']=='swift' and swift.headers['X-Bubble-Route'].startswith('swift;laya:swift')
+    escalated=ask(client,'auto','BROKEN hello')
+    assert escalated.status_code==200 and escalated.json()['model']=='swift'
+    assert 'escalated-from-ornith' in escalated.headers['X-Bubble-Route']
+    assert [url for url,_ in seen][-2:]==['http://ornith.test/v1/chat/completions','http://swift.test/v1/chat/completions']

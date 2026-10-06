@@ -242,7 +242,7 @@ def create_app(root: Path = ROOT, *, injected=None):
 
     @app.get('/v1/models')
     async def models():
-        return {'object':'list','data':[{'id': name,'object':'model','owned_by':'local'} for name in ('auto','qwen','ornith','qwen-asr','qwen-tts','qwen-image','minimax-h3')]}
+        return {'object':'list','data':[{'id': name,'object':'model','owned_by':'local'} for name in ('auto','qwen','ornith','swift','arex','qwen-asr','qwen-tts','qwen-image','minimax-h3')]}
 
     @app.get('/router/status')
     async def status():
@@ -267,9 +267,19 @@ def create_app(root: Path = ROOT, *, injected=None):
         targets.update(config.get('chat_models', {}))
         return targets
 
+    def route_target(route):
+        """Model for a Laya route class; config route_targets may override."""
+        targets = chat_targets()
+        mapping = {'general': 'ornith', 'swift': 'swift', 'reasoner': 'qwen', **app.state.config.get('route_targets', {})}
+        for name in (mapping.get(route), 'qwen' if route != 'general' else 'ornith', 'qwen'):
+            if name in targets: return name
+        return 'qwen'
+
     async def choose_chat_model(requested, messages, visual):
-        """Explicit qwen/ornith win; auto and legacy aliases are routed by Laya:
-        coding and reasoning go to Qwen, general and agentic work to Ornith."""
+        """Explicit model names win; auto and legacy aliases are routed by Laya:
+        general and simple agentic work to Ornith, deep agentic work, simple
+        coding, subtle bugs and costly plans to Swift, and long-horizon
+        reasoning and complex coding to the reasoner tier."""
         targets = chat_targets()
         requested = str(requested or 'auto').split('/')[-1]
         if requested in targets: return requested, 'requested'
@@ -279,23 +289,19 @@ def create_app(root: Path = ROOT, *, injected=None):
         if not text or not hasattr(app.state.scanner, 'route_request'): return 'ornith', 'default'
         decision = await asyncio.to_thread(app.state.scanner.route_request, text)
         app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
-        entry = {'time': time.time(), 'route': decision['route'], 'score': decision['reasoning_score'],
+        entry = {'time': time.time(), 'route': decision['route'], 'scores': decision['scores'],
                  'chars': len(text), 'sha256': hashlib.sha256(text.encode()).hexdigest()[:16]}
         if os.environ.get('BUBBLE_ROUTE_DEBUG') == '1':
             entry['preview'] = text[:160]  # debugging only; never enabled by default
         fd = os.open(root/'state/route-audit.jsonl', os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
         with os.fdopen(fd, 'a') as handle: handle.write(json.dumps(entry)+'\n')
-        name = 'qwen' if decision['route'] == 'reasoning' else 'ornith'
-        return name, f"laya:{decision['route']}:{decision['reasoning_score']}"
+        score = decision['scores'].get(decision['route'], 0.0)
+        return route_target(decision['route']), f"laya:{decision['route']}:{score}"
 
-    @app.post('/v1/chat/completions')
-    async def chat(request: Request):
-        original = await request.json()
-        original['messages'], report = await scan(original.get('messages', []), metadata(request))
-        payload, visual = prepare_chat(original, root)
-        name, reason = await choose_chat_model(original.get('model'), original['messages'], visual)
+    async def dispatch_chat(name, payload, visual, meta):
+        """Queue one chat request on a model; returns (job, ready future, consumed event)."""
         target = chat_targets()[name]
-        payload['model']=target['model']
+        payload = {**payload, 'model': target['model']}
         ready = asyncio.get_running_loop().create_future()
         consumed = asyncio.Event()
         async def operation(job):
@@ -318,13 +324,37 @@ def create_app(root: Path = ROOT, *, injected=None):
                 raise
             finally:
                 if response is not None: await response.aclose()
-        job = await app.state.scheduler.submit(target['resource'], 2 if visual else 1, operation, metadata(request))
+        job = await app.state.scheduler.submit(target['resource'], 2 if visual else 1, operation, meta)
         # Consume exceptions on the durable job future; the endpoint awaits ready.
         job.future.add_done_callback(lambda f: f.exception() if not f.cancelled() else None)
-        try: result = await asyncio.shield(ready)
-        except asyncio.CancelledError:
-            await app.state.scheduler.cancel(job.id); raise
-        except Exception: raise HTTPException(503,detail={'job_id':job.id,'error':f'{name} backend unavailable'})
+        return job, ready, consumed
+
+    @app.post('/v1/chat/completions')
+    async def chat(request: Request):
+        original = await request.json()
+        original['messages'], report = await scan(original.get('messages', []), metadata(request))
+        payload, visual = prepare_chat(original, root)
+        name, reason = await choose_chat_model(original.get('model'), original['messages'], visual)
+        meta = metadata(request)
+        attempts = [name]
+        # Ornith is the first try for general work; if it fails before
+        # answering, escalate the same request to Swift.
+        escalate_to = app.state.config.get('escalate', {}).get(name)
+        if escalate_to in chat_targets(): attempts.append(escalate_to)
+        for index, current in enumerate(attempts):
+            job, ready, consumed = await dispatch_chat(current, payload, visual, meta)
+            try:
+                result = await asyncio.shield(ready)
+                break
+            except asyncio.CancelledError:
+                await app.state.scheduler.cancel(job.id); raise
+            except Exception:
+                if index + 1 < len(attempts):
+                    app.state.metrics['escalations'] = app.state.metrics.get('escalations', 0) + 1
+                    reason += f';escalated-from-{current}'
+                    continue
+                raise HTTPException(503,detail={'job_id':job.id,'error':f'{current} backend unavailable'})
+        name = current
         headers = {'X-Bubble-Job-ID':job.id, 'X-Bubble-Security': str(plain(report).get('action','allow')),
                    'X-Bubble-Route': f'{name};{reason}'}
         if not payload.get('stream'): return JSONResponse(result,headers=headers)

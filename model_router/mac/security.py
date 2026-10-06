@@ -36,8 +36,21 @@ _SCORE_CACHE_LIMIT = 2_048
 USER_BLOCKING_CATEGORIES = ("injection", "extraction", "encoded_payload")
 
 ROUTE_TEXT_CHARS = 1600
-ROUTE_QUESTION_REVISION = "route-v2"
+ROUTE_QUESTION_REVISION = "route-v3"
+ROUTE_CLASSES = {"A": "general", "B": "swift", "C": "reasoner"}
 _ROUTE_QUESTION = {
+    "route": {
+        "type": "choice",
+        "instructions": "Which kind of help does this request need?",
+        "criteria": {
+            "A": "general or simple agentic: everyday chat, quick facts, short summaries or rewrites, ordinary emails and messages, reminders and scheduling, media requests, a short follow-up, or a straightforward tool task with an obvious procedure",
+            "B": "deep agentic work or simple coding: a multi-step tool workflow that needs judgment or recovery, routine code (a function, script, query, small fix, error explanation, test), a subtle bug (race, edge case, intermittent or silent wrong result), or planning where mistakes are expensive or irreversible",
+            "C": "long-horizon reflective reasoning or complex coding: hard maths or logic, multi-step quantitative or research analysis, high-stakes life, career, money, legal or medical judgment, emotionally sensitive situations, system design with trade-offs, complex multi-part implementations, critique of a plan, subtle long-form writing",
+        },
+    },
+}
+
+_QUESTION = {
     "route": {
         "type": "choice",
         "instructions": "Is this a coding or reasoning request, rather than general chat or an agentic task for the assistant to carry out with its tools?",
@@ -155,8 +168,6 @@ class SecurityPolicy:
     # Scan only the newest N untrusted messages; earlier history was screened
     # when it was new. 0 scans the whole conversation.
     scan_recent_messages: int = 3
-    # Laya probability of "coding or reasoning" at or above which chat goes to Qwen.
-    route_reasoning_threshold: float = 0.5
 
     @classmethod
     def from_value(cls, value: "SecurityPolicy | Mapping[str, Any] | None") -> "SecurityPolicy":
@@ -167,8 +178,6 @@ class SecurityPolicy:
             raise ValueError("security thresholds must satisfy 0 <= flag <= quarantine <= block <= 1")
         if policy.max_input_chars <= 0 or policy.chunk_chars <= 0 or not 0 <= policy.chunk_overlap < policy.chunk_chars:
             raise ValueError("security input/chunk limits are invalid")
-        if not 0 <= policy.route_reasoning_threshold <= 1:
-            raise ValueError("route_reasoning_threshold must be between 0 and 1")
         if policy.scan_recent_messages < 0:
             raise ValueError("scan_recent_messages cannot be negative")
         return policy
@@ -243,7 +252,7 @@ class SecurityScanner:
         self._next_activity_id = 0
         self._active_scans: dict[int, dict[str, int]] = {}
         self._cache_lock = threading.Lock()
-        self._route_cache: OrderedDict[tuple[str, ...], float] = OrderedDict()
+        self._route_cache: OrderedDict[tuple[str, ...], dict[str, float]] = OrderedDict()
         self._score_cache: OrderedDict[
             tuple[str, str, str, str], tuple[tuple[str, float, float], ...]
         ] = OrderedDict()
@@ -508,7 +517,7 @@ class SecurityScanner:
         return self._route_agent, self._route_lock
 
     def route_request(self, text: str) -> dict[str, Any]:
-        """Classify a user request as reasoning (coding/reasoning model) or general (agentic daily driver)."""
+        """Classify a user request into a route class: general, swift or reasoner."""
         agent, lock = self._routing_agent()
         if len(text) > ROUTE_TEXT_CHARS:
             # Keep the opening request and the closing question of long pastes.
@@ -516,21 +525,23 @@ class SecurityScanner:
             text = text[:half] + "\n…\n" + text[-half:]
         key = (self.route_path or self.path, "route", ROUTE_QUESTION_REVISION, hashlib.sha256(text.encode("utf-8")).hexdigest())
         with self._cache_lock:
-            score = self._route_cache.get(key)
-            if score is not None:
+            scores = self._route_cache.get(key)
+            if scores is not None:
                 self._route_cache.move_to_end(key)
-        if score is None:
+        if scores is None:
             with lock:
                 result = agent.predict({"source": "user message", "content": text}, _ROUTE_QUESTION)
             answer = result.get("answers", {}).get("route", {})
             probs = answer.get("probabilities", {})
-            score = float(probs.get("A", 1.0 if answer.get("choice") == "A" else 0.0))
+            if not probs and answer.get("choice") in ROUTE_CLASSES:
+                probs = {answer["choice"]: 1.0}
+            scores = {ROUTE_CLASSES[k]: round(float(probs.get(k, 0.0)), 4) for k in ROUTE_CLASSES}
             with self._cache_lock:
-                self._route_cache[key] = score
+                self._route_cache[key] = scores
                 if len(self._route_cache) > _SCORE_CACHE_LIMIT:
                     self._route_cache.popitem(last=False)
-        route = "reasoning" if score >= self.policy.route_reasoning_threshold else "general"
-        return {"route": route, "reasoning_score": round(score, 4)}
+        route = max(scores, key=scores.get)
+        return {"route": route, "scores": dict(scores)}
 
     def _predict(self, text: str, source: str = "user") -> tuple[dict[str, float], set[str]]:
         self.load()
