@@ -168,6 +168,9 @@ class SecurityPolicy:
     # Scan only the newest N untrusted messages; earlier history was screened
     # when it was new. 0 scans the whole conversation.
     scan_recent_messages: int = 3
+    # False = monitor mode: model scores are logged and flagged but never block
+    # or quarantine; only the hard-coded attack rules still enforce.
+    enforce_model: bool = True
 
     @classmethod
     def from_value(cls, value: "SecurityPolicy | Mapping[str, Any] | None") -> "SecurityPolicy":
@@ -426,6 +429,8 @@ class SecurityScanner:
                         report.raw_scores.append({"message_index": index, "chunk_start": start, "scores": scores})
                         score = max(scores.values(), default=0.0)
                         rule_categories = self._matched_rule_categories(chunk)
+                        if not self.policy.enforce_model:
+                            categories = set(rule_categories)
                         categories.update(rule_categories)
                         if rule_categories:
                             score = 1.0
@@ -433,7 +438,7 @@ class SecurityScanner:
                         blocking_score = max(
                             blocking_score,
                             1.0 if rule_categories else 0.0,
-                            *(scores.get(name, 0.0) for name in USER_BLOCKING_CATEGORIES),
+                            *((scores.get(name, 0.0) for name in USER_BLOCKING_CATEGORIES) if self.policy.enforce_model else ()),
                         )
                         message_categories.update(categories)
                         if categories or score >= self.policy.flag_threshold:
@@ -456,7 +461,8 @@ class SecurityScanner:
                                 report.action = "flag"
                     elif source in {"tool", "external"}:
                         quarantine_spans = self._merge_spans(
-                            [(s, e) for s, e, cats, score in suspicious if score >= self.policy.quarantine_threshold or cats]
+                            [(s, e) for s, e, cats, score in suspicious
+                             if cats or (self.policy.enforce_model and score >= self.policy.quarantine_threshold)]
                         )
                         if quarantine_spans:
                             self._replace_spans(leaf, quarantine_spans)
