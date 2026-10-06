@@ -162,3 +162,22 @@ async def test_model_crash_response_restarts_and_retries_once():
     finally:
         await service.close()
         await client.aclose()
+
+@pytest.mark.asyncio
+async def test_job_identity_and_timing_are_not_classification_fields():
+    async def handler(_):
+        return httpx.Response(200, json={"choices": []})
+    client = httpx.AsyncClient(transport=httpx.MockTransport(handler), base_url="http://upstream")
+    service = RouterService(load_config(FIXTURE), backend=FakeBackend(client))
+    await service.start(warm=False)
+    try:
+        jobs = [await service.submit({"model": "general", "messages": [{"role": "user", "content": "x"}]}, {}) for _ in range(2)]
+        assert jobs[0].id != jobs[1].id
+        for job in jobs:
+            assert isinstance(job.enqueued_at, float)
+            assert job.classification_model == "gemma"
+            await asyncio.wait_for(job.result, 2)
+            job.finished.set()
+    finally:
+        await service.close()
+        await client.aclose()
