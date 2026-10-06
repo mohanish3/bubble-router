@@ -122,6 +122,11 @@ def routed(tmp_path):
         def handler(request):
             seen.append((str(request.url),json.loads(request.content)['model']))
             if 'ornith' in str(request.url) and 'BROKEN' in request.content.decode(): return httpx.Response(500,json={'error':'boom'})
+            if 'ornith' in str(request.url) and 'PRINT' in request.content.decode():
+                return httpx.Response(200,json={'choices':[{'message':{'content':'Running it now.\n\n/Users/me/AI/bin/openclaw-local-ai video --text "fox"'},'finish_reason':'stop'}]})
+            if 'ornith' in str(request.url) and 'CALL' in request.content.decode():
+                call={'id':'c1','type':'function','function':{'name':'exec','arguments':'{"command":"/Users/me/AI/bin/x"}'}}
+                return httpx.Response(200,json={'id':'r1','choices':[{'message':{'content':'On it.','tool_calls':[call]},'finish_reason':'tool_calls'}],'usage':{'total_tokens':5}})
             return httpx.Response(200,json={'choices':[{'message':{'content':'ok'}}],'usage':{'total_tokens':2}})
         app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(handler))
         yield client,manager,seen
@@ -194,3 +199,28 @@ def test_long_conversation_promotes_to_long_context_tier(routed):
     assert r.status_code==200 and r.json()['model']=='arex' and r.headers['X-Bubble-Route'].endswith(';long-context')
     too_long=[{'role':'user','content':'x'*600000}]
     assert client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':too_long}).status_code==422
+
+
+EXEC_TOOL=[{'type':'function','function':{'name':'exec','parameters':{'type':'object','properties':{'command':{'type':'string'}}}}}]
+
+def test_printed_command_instead_of_tool_call_escalates(routed):
+    client,manager,seen=routed
+    body={'model':'auto','tools':EXEC_TOOL,'stream':True,'messages':[{'role':'user','content':'PRINT make a fox video'}]}
+    r=client.post('/v1/chat/completions',headers=AUTH,json=body)
+    assert r.status_code==200 and r.headers['X-Bubble-Route'].startswith('swift;') and 'printed-command' in r.headers['X-Bubble-Route']
+    assert [url for url,_ in seen][-2:]==['http://ornith.test/v1/chat/completions','http://swift.test/v1/chat/completions']
+    # After tool results, paths in the answer are normal and stay on Ornith.
+    after_tool=body|{'stream':False,'messages':body['messages']+[{'role':'assistant','content':'','tool_calls':[]},{'role':'tool','tool_call_id':'c1','content':'ok'}]}
+    assert client.post('/v1/chat/completions',headers=AUTH,json=after_tool).json()['model']=='ornith'
+
+
+def test_buffered_tool_call_replays_as_stream(routed):
+    client,manager,seen=routed
+    body={'model':'auto','tools':EXEC_TOOL,'stream':True,'stream_options':{'include_usage':True},'messages':[{'role':'user','content':'CALL make a fox video'}]}
+    r=client.post('/v1/chat/completions',headers=AUTH,json=body)
+    assert r.status_code==200 and r.headers['X-Bubble-Route'].startswith('ornith;') and r.headers['content-type'].startswith('text/event-stream')
+    events=[json.loads(line[6:]) for line in r.text.splitlines() if line.startswith('data: {')]
+    assert events[0]['choices'][0]['delta']['tool_calls'][0]['index']==0
+    assert events[0]['choices'][0]['delta']['tool_calls'][0]['function']['name']=='exec'
+    assert events[-1]['choices'][0]['finish_reason']=='tool_calls' and events[-1]['usage']=={'total_tokens':5}
+    assert r.text.endswith('data: [DONE]\n\n')

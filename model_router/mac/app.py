@@ -52,6 +52,34 @@ def fits_context(payload, context):
     return text_chars(payload) <= context * 4
 
 
+# A line that runs a local program: `/path/prog args`, `~/path/prog`, or a `$ ` prompt.
+UNRUN_COMMAND_RE = re.compile(r'^\s*(?:\$\s+\S|(?:/|~/)[\w.-]+/[\w./-]*[\w-]+(?:\s|$))', re.M)
+
+
+def printed_instead_of_calling(result):
+    """True when a tool-enabled reply prints a local command but calls no tool,
+    i.e. the model described the action instead of taking it."""
+    message = (result.get('choices') or [{}])[0].get('message') or {}
+    return not message.get('tool_calls') and bool(UNRUN_COMMAND_RE.search(message.get('content') or ''))
+
+
+def completion_as_sse(result):
+    """Replay a finished chat completion as an OpenAI-style event stream."""
+    choice = (result.get('choices') or [{}])[0]
+    message = choice.get('message') or {}
+    delta = {'role': 'assistant', 'content': message.get('content')}
+    for key in ('reasoning_content', 'reasoning'):
+        if message.get(key): delta[key] = message[key]
+    if message.get('tool_calls'):
+        delta['tool_calls'] = [{**call, 'index': index} for index, call in enumerate(message['tool_calls'])]
+    base = {'id': result.get('id', 'chatcmpl-bubble'), 'object': 'chat.completion.chunk',
+            'created': result.get('created', int(time.time())), 'model': result.get('model')}
+    events = [{**base, 'choices': [{'index': 0, 'delta': delta, 'finish_reason': None}]},
+              {**base, 'choices': [{'index': 0, 'delta': {}, 'finish_reason': choice.get('finish_reason') or 'stop'}],
+               **({'usage': result['usage']} if result.get('usage') else {})}]
+    return ''.join(f'data: {json.dumps(event)}\n\n' for event in events) + 'data: [DONE]\n\n'
+
+
 def latest_user_text(messages):
     """Latest user text; a short follow-up is routed with the user turn before it."""
     texts = []
@@ -372,10 +400,27 @@ def create_app(root: Path = ROOT, *, injected=None):
         # answering, escalate the same request to Swift.
         escalate_to = app.state.config.get('escalate', {}).get(name)
         if escalate_to in chat_targets(): attempts.append(escalate_to)
+        # With tools offered, Ornith sometimes prints the command instead of
+        # calling the tool. Its reply is buffered so that case can escalate too.
+        # Only a reply to a fresh user turn is checked; after tool results,
+        # listing paths is a normal answer.
+        check_tools = len(attempts) > 1 and bool(payload.get('tools')) and \
+            (payload['messages'] or [{}])[-1].get('role') == 'user'
         for index, current in enumerate(attempts):
-            job, ready, consumed = await dispatch_chat(current, payload, visual, meta)
+            buffered = check_tools and index == 0
+            attempt = {k: v for k, v in payload.items() if k != 'stream_options'} | {'stream': False} if buffered else payload
+            job, ready, consumed = await dispatch_chat(current, attempt, visual, meta)
             try:
                 result = await asyncio.shield(ready)
+                if buffered and printed_instead_of_calling(result):
+                    app.state.metrics['escalations'] = app.state.metrics.get('escalations', 0) + 1
+                    reason += f';escalated-from-{current}:printed-command'
+                    continue
+                if buffered and payload.get('stream'):
+                    sse = completion_as_sse(result)
+                    headers = {'X-Bubble-Job-ID': job.id, 'X-Bubble-Security': str(plain(report).get('action', 'allow')),
+                               'X-Bubble-Route': f'{current};{reason}'}
+                    return Response(sse, media_type='text/event-stream', headers=headers)
                 break
             except asyncio.CancelledError:
                 await app.state.scheduler.cancel(job.id); raise
