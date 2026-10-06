@@ -31,8 +31,19 @@ QUARANTINE_MARKER = "[Security quarantine: suspicious external content omitted]"
 _SCORE_CACHE_LIMIT = 2_048
 
 ROUTE_TEXT_CHARS = 1600
-ROUTE_QUESTION_REVISION = "route-v1"
+ROUTE_QUESTION_REVISION = "route-v2"
 _ROUTE_QUESTION = {
+    "route": {
+        "type": "choice",
+        "instructions": "Is this a coding or reasoning request, rather than general chat or an agentic task for the assistant to carry out with its tools?",
+        "criteria": {
+            "A": "coding or reasoning: write, fix, review, explain or design code; explain an error or traceback; maths, logic or careful analysis; trade-offs, critique, or high-stakes judgment (career, money, legal, medical, emotional); subtle long-form writing; an ambiguous request that needs weighing interpretations",
+            "B": "general or agentic: everyday chat, quick facts, short summaries or rewrites, ordinary emails and messages, reminders and scheduling, media requests, a short follow-up, or asking the assistant to do something with its tools (run a command, check git, manage files, search, fetch, update calendar or email, start a deploy or test run and report back)",
+        },
+    },
+}
+
+_QUESTION = {
     "route": {
         "type": "choice",
         "instructions": "Does answering this request well need careful judgment, deep multi-step reasoning, or sensitivity because the stakes are high?",
@@ -139,8 +150,8 @@ class SecurityPolicy:
     # Scan only the newest N untrusted messages; earlier history was screened
     # when it was new. 0 scans the whole conversation.
     scan_recent_messages: int = 3
-    # Laya probability of "nuanced" at or above which chat requests go to Qwen.
-    route_nuanced_threshold: float = 0.5
+    # Laya probability of "coding or reasoning" at or above which chat goes to Qwen.
+    route_reasoning_threshold: float = 0.5
 
     @classmethod
     def from_value(cls, value: "SecurityPolicy | Mapping[str, Any] | None") -> "SecurityPolicy":
@@ -151,8 +162,8 @@ class SecurityPolicy:
             raise ValueError("security thresholds must satisfy 0 <= flag <= quarantine <= block <= 1")
         if policy.max_input_chars <= 0 or policy.chunk_chars <= 0 or not 0 <= policy.chunk_overlap < policy.chunk_chars:
             raise ValueError("security input/chunk limits are invalid")
-        if not 0 <= policy.route_nuanced_threshold <= 1:
-            raise ValueError("route_nuanced_threshold must be between 0 and 1")
+        if not 0 <= policy.route_reasoning_threshold <= 1:
+            raise ValueError("route_reasoning_threshold must be between 0 and 1")
         if policy.scan_recent_messages < 0:
             raise ValueError("scan_recent_messages cannot be negative")
         return policy
@@ -467,7 +478,7 @@ class SecurityScanner:
             self._stats["errors"] += report.action == "error"
 
     def route_request(self, text: str) -> dict[str, Any]:
-        """Classify a user request as general (daily-driver model) or nuanced."""
+        """Classify a user request as reasoning (coding/reasoning model) or general (agentic daily driver)."""
         self.load()
         if len(text) > ROUTE_TEXT_CHARS:
             # Keep the opening request and the closing question of long pastes.
@@ -488,8 +499,8 @@ class SecurityScanner:
                 self._route_cache[key] = score
                 if len(self._route_cache) > _SCORE_CACHE_LIMIT:
                     self._route_cache.popitem(last=False)
-        route = "nuanced" if score >= self.policy.route_nuanced_threshold else "general"
-        return {"route": route, "nuanced_score": round(score, 4)}
+        route = "reasoning" if score >= self.policy.route_reasoning_threshold else "general"
+        return {"route": route, "reasoning_score": round(score, 4)}
 
     def _predict(self, text: str, source: str = "user") -> tuple[dict[str, float], set[str]]:
         self.load()

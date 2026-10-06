@@ -27,14 +27,21 @@ class SecurityRejected(Exception):
         self.report = report
 
 
+ROUTE_FOLLOW_UP_CHARS = 80
+
+
 def latest_user_text(messages):
+    """Latest user text; a short follow-up is routed with the user turn before it."""
+    texts = []
     for message in reversed(messages or []):
         if message.get('role') != 'user': continue
         content = message.get('content')
-        if isinstance(content, str): return content
         if isinstance(content, list):
-            return '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
-    return ''
+            content = '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
+        if not isinstance(content, str) or not content.strip(): continue
+        texts.append(content)
+        if len(texts) == 2 or len(content) >= ROUTE_FOLLOW_UP_CHARS: break
+    return '\n'.join(reversed(texts))
 
 
 def plain(value):
@@ -245,7 +252,8 @@ def create_app(root: Path = ROOT, *, injected=None):
         return targets
 
     async def choose_chat_model(requested, messages, visual):
-        """Explicit qwen/ornith win; auto and legacy aliases are routed by Laya."""
+        """Explicit qwen/ornith win; auto and legacy aliases are routed by Laya:
+        coding and reasoning go to Qwen, general and agentic work to Ornith."""
         targets = chat_targets()
         requested = str(requested or 'auto').split('/')[-1]
         if requested in targets: return requested, 'requested'
@@ -255,8 +263,8 @@ def create_app(root: Path = ROOT, *, injected=None):
         if not text or not hasattr(app.state.scanner, 'route_request'): return 'ornith', 'default'
         decision = await asyncio.to_thread(app.state.scanner.route_request, text)
         app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
-        name = 'qwen' if decision['route'] == 'nuanced' else 'ornith'
-        return name, f"laya:{decision['route']}:{decision['nuanced_score']}"
+        name = 'qwen' if decision['route'] == 'reasoning' else 'ornith'
+        return name, f"laya:{decision['route']}:{decision['reasoning_score']}"
 
     @app.post('/v1/chat/completions')
     async def chat(request: Request):
