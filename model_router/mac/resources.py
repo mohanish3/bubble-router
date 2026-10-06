@@ -27,6 +27,7 @@ from typing import Any, Mapping, Sequence
 
 GIB = 1024**3
 EXCLUSIVE_WAIT_SECONDS = 900.0
+RECLAIM_WAIT_SECONDS = 15.0
 DEFAULT_ESTIMATES_GIB = {
     "qwen-vlm": 20.0,
     "qwen-audio": 8.0,
@@ -538,6 +539,13 @@ class ResourceManager:
         for other in group:
             await self._stop_locked(other)
             self._metrics["evictions"] += 1
+        if group:
+            # Unified memory returns to the OS shortly after the process exits;
+            # wait for it rather than refusing admission on a stale reading.
+            needed = config.estimate(name) + extra_gib + self.reserve_gib
+            deadline = time.monotonic() + RECLAIM_WAIT_SECONDS
+            while self._snapshot().available_gib < needed and time.monotonic() < deadline:
+                await asyncio.sleep(0.5)
         failures = self._failure_times.setdefault(name, deque())
         now = time.monotonic()
         while failures and now - failures[0] >= 60.0:

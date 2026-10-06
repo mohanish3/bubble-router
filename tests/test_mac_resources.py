@@ -570,3 +570,27 @@ async def test_exclusive_group_runs_one_model_at_a_time():
     assert order == ["swift-start", "swift-end", "ornith"]
     for name in ("ornith", "swift", "qwen-audio"):
         await manager.stop(name)
+
+
+@pytest.mark.asyncio
+async def test_exclusive_switch_waits_for_memory_reclaim():
+    sleeper = (sys.executable, "-c", "import time; time.sleep(60)")
+    telemetry = FakeTelemetry(available=40.0)
+    manager = ResourceManager(
+        {"ornith": BackendConfig(command=sleeper, core=True, estimate_gib=19, exclusive_group="chat"),
+         "swift": BackendConfig(command=sleeper, core=True, restore=False, estimate_gib=19, exclusive_group="chat")},
+        telemetry=telemetry,
+    )
+    async with manager.lease("ornith", incremental_gib=0):
+        pass
+    telemetry.available = 20.0          # Ornith still resident
+    original_stop = manager._stop_locked
+    async def stop_then_reclaim_later(name):
+        await original_stop(name)
+        async def reclaim():
+            await asyncio.sleep(1.0); telemetry.available = 40.0
+        asyncio.get_running_loop().create_task(reclaim())
+    manager._stop_locked = stop_then_reclaim_later
+    async with manager.lease("swift", incremental_gib=0):
+        assert (await manager.status())["resources"]["swift"]["running"]
+    await manager.stop("swift")
