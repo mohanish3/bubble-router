@@ -21,6 +21,12 @@ from .media import MediaBackend
 
 ROOT = Path(os.environ.get('AI_STACK_ROOT', str(Path.home() / 'AI')))
 
+class SecurityRejected(Exception):
+    def __init__(self, report):
+        super().__init__('request blocked by security policy')
+        self.report = report
+
+
 def plain(value):
     if hasattr(value, 'to_dict'): return value.to_dict()
     if dataclasses.is_dataclass(value): return dataclasses.asdict(value)
@@ -125,6 +131,12 @@ def create_app(root: Path = ROOT, *, injected=None):
 
     app = FastAPI(title='BubbleRouter Mac control plane', lifespan=lifespan)
 
+    @app.exception_handler(SecurityRejected)
+    async def security_rejected(request: Request, exc: SecurityRejected):
+        return JSONResponse({'error': {'message': 'Request blocked by the local security policy (Laya).',
+                                       'type': 'invalid_request_error', 'code': 'content_policy_violation'},
+                             'security': exc.report}, status_code=400)
+
     @app.exception_handler(QueueFullError)
     async def queue_full(request, exc): return JSONResponse({'error':'queue is full'},status_code=429)
 
@@ -170,7 +182,9 @@ def create_app(root: Path = ROOT, *, injected=None):
         except SecurityBlocked as exc:
             audit(exc.report)
             app.state.metrics['security_blocks'] += 1
-            raise HTTPException(403, detail=plain(exc.report))
+            # 400 + content_policy_violation, not 403: OpenAI-style clients such as
+            # OpenClaw read 401/403 as bad credentials and disable the key.
+            raise SecurityRejected(plain(exc.report))
         except SecurityInputTooLarge: raise HTTPException(413,'Security scanner input limit exceeded')
         except SecurityUnavailable: raise HTTPException(503,'Security scanner unavailable; inference rejected')
         finally: app.state.metrics['security_active']-=1

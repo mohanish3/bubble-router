@@ -67,7 +67,8 @@ def test_auth_health_and_control_boundary(running):
 def test_security_runs_before_backend(running):
     client,app,manager,scanner,requests=running
     response=client.post('/v1/chat/completions',headers=AUTH,json={'messages':[{'role':'user','content':'attack'}]})
-    assert response.status_code==403
+    assert response.status_code==400
+    assert response.json()['error']['code']=='content_policy_violation'
     assert scanner.calls==1 and requests==[] and manager.calls==[]
     good=client.post('/v1/chat/completions',headers=AUTH,json={'messages':[{'role':'user','content':'hello'}]})
     assert good.status_code==200 and good.json()['model']=='qwen'
