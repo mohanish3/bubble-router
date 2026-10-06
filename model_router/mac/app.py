@@ -37,6 +37,19 @@ OPENCLAW_RUNTIME_RE = re.compile(r'\n\s*Runtime: agent=[^\n]*(?:\n.*)?\Z', re.S)
 OPENCLAW_INTERNAL_RE = re.compile(r'<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>.*?(?:<<<END_OPENCLAW_INTERNAL_CONTEXT>>>|\Z)', re.S)
 
 
+def text_chars(payload):
+    total = 0
+    for message in payload['messages']:
+        content = message.get('content', '')
+        total += len(content) if isinstance(content, str) else sum(len(item.get('text', '')) for item in content or [] if isinstance(item, dict))
+    return total
+
+
+def fits_context(payload, context):
+    """Conservative text admission bound (~3 chars/token); actual KV grows per request."""
+    return text_chars(payload) <= context * 3
+
+
 def latest_user_text(messages):
     """Latest user text; a short follow-up is routed with the user turn before it."""
     texts = []
@@ -80,15 +93,11 @@ def prepare_chat(payload, root=ROOT):
     max_tokens = int(result.get('max_tokens', result.pop('max_completion_tokens', 2048)))
     if not 1 <= max_tokens <= 8192: raise ValueError('max_tokens must be 1..8192')
     result['max_tokens'] = max_tokens
-    # A conservative text admission bound; actual KV grows with each request.
-    context = int(result.pop('context_length', 32768))
-    if not 1024 <= context <= 131072: raise ValueError('context_length must be 1024..131072')
-    text_chars = 0
-    for message in result['messages']:
-        content=message.get('content','')
-        text_chars += len(content) if isinstance(content,str) else sum(len(item.get('text','')) for item in content or [] if isinstance(item,dict))
-    if text_chars > context * 3:
-        raise ValueError('Text exceeds requested context budget')
+    # The context budget is checked per model after routing (check_context).
+    if 'context_length' in result:
+        context = int(result.pop('context_length'))
+        if not 1024 <= context <= 131072: raise ValueError('context_length must be 1024..131072')
+        result['_context_length'] = context
     visual = False
     for message in result['messages']:
         message.pop('source', None); message.pop('provenance', None)
@@ -342,7 +351,19 @@ def create_app(root: Path = ROOT, *, injected=None):
         original = await request.json()
         original['messages'], report = await scan(original.get('messages', []), metadata(request))
         payload, visual = prepare_chat(original, root)
+        requested_context = payload.pop('_context_length', None)
         name, reason = await choose_chat_model(original.get('model'), original['messages'], visual)
+        targets = chat_targets()
+        context = requested_context or targets[name].get('context', 32768)
+        if not fits_context(payload, context):
+            # Long conversations go to the long-context tier when the routed
+            # model's working window is smaller.
+            longest = max(targets, key=lambda n: targets[n].get('context', 32768))
+            if requested_context is None and (not visual or targets[longest].get('vision')) \
+                    and fits_context(payload, targets[longest].get('context', 32768)):
+                name, reason = longest, reason + ';long-context'
+            else:
+                raise HTTPException(422, 'Text exceeds the model context budget')
         meta = metadata(request)
         attempts = [name]
         # Ornith is the first try for general work; if it fails before

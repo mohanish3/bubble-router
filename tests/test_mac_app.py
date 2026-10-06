@@ -93,7 +93,10 @@ def test_media_paths_and_native_overrides_are_restricted(tmp_path):
     assert result['messages'][0]['content'][1]['image_url']['url'].endswith('A'*10)
 
 def test_context_is_admitted_without_silent_truncation():
-    with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'A'*4000}],'context_length':1024})
+    from model_router.mac.app import fits_context
+    payload,_=prepare_chat({'messages':[{'role':'user','content':'A'*4000}],'context_length':1024})
+    assert payload['_context_length']==1024 and not fits_context(payload,1024)
+    with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'context_length':999999})
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'max_tokens':100000})
 
 
@@ -108,6 +111,7 @@ def routed(tmp_path):
     manager=Manager();scanner=RoutingScanner();scheduler=LazyScheduler(tmp_path/'state/jobs.sqlite3',manager)
     config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/qwen',
             'chat_models':{'ornith':{'resource':'ornith','url':'http://ornith.test','model':'/local/ornith'},
+                           'arex':{'resource':'arex','url':'http://arex.test','model':'/local/arex','vision':True,'context':131072},
                            'swift':{'resource':'swift','url':'http://swift.test','model':'/local/swift','vision':True}},
             'vision_default':'swift',
             'escalate':{'ornith':'swift'},
@@ -181,3 +185,12 @@ def test_images_avoid_text_only_tier(routed):
     image={'type':'image_url','image_url':{'url':'data:image/png;base64,iVBORw0KGgo='}}
     r=client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':[{'role':'user','content':[{'type':'text','text':'what is in this picture'},image]}]})
     assert r.status_code==200 and r.json()['model']=='swift' and r.headers['X-Bubble-Route'].endswith(';vision')
+
+
+def test_long_conversation_promotes_to_long_context_tier(routed):
+    client,manager,seen=routed
+    history=[{'role':'user','content':'background '*12000},{'role':'assistant','content':'noted'}]
+    r=client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':history+[{'role':'user','content':'what is the weather like'}]})
+    assert r.status_code==200 and r.json()['model']=='arex' and r.headers['X-Bubble-Route'].endswith(';long-context')
+    too_long=[{'role':'user','content':'x'*400000}]
+    assert client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':too_long}).status_code==422
