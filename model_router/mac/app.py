@@ -121,7 +121,10 @@ def create_app(root: Path = ROOT, *, injected=None):
             app.state.manager = ResourceManager(backends, reserve_gib=config.get('reserve_gib', 12), ownership_path=root/'state/owned-processes.json')
             app.state.scheduler = Scheduler(root/'state/jobs.sqlite3', app.state.manager)
             paths = json.loads((root/'config/model-paths.json').read_text())
-            app.state.scanner = SecurityScanner(paths['convaiinnovations/laya']['path'], config.get('security_policy', {'max_input_chars':393216}))
+            # Optional fine-tuned checkpoints: laya-security screens, laya-route routes.
+            security_path = paths.get('laya-security', paths['convaiinnovations/laya'])['path']
+            route_path = paths.get('laya-route', {}).get('path')
+            app.state.scanner = SecurityScanner(security_path, config.get('security_policy', {'max_input_chars':393216}), route_path=route_path)
             app.state.media = MediaBackend(app.state.manager, paths, root)
         app.state.metrics = {'requests': 0, 'backend_requests': 0, 'security_blocks': 0, 'security_active':0, 'started': time.time()}
         app.state.http = httpx.AsyncClient(timeout=httpx.Timeout(900, connect=5), trust_env=False)

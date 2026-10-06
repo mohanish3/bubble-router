@@ -30,6 +30,11 @@ CHUNK_OVERLAP = 200
 QUARANTINE_MARKER = "[Security quarantine: suspicious external content omitted]"
 _SCORE_CACHE_LIMIT = 2_048
 
+# A user's own message asking to send data or run a tool is a request, not an
+# attack; those categories only flag user turns. Tool output still quarantines
+# on every category, since that is where indirect exfiltration comes from.
+USER_BLOCKING_CATEGORIES = ("injection", "extraction", "encoded_payload")
+
 ROUTE_TEXT_CHARS = 1600
 ROUTE_QUESTION_REVISION = "route-v2"
 _ROUTE_QUESTION = {
@@ -220,8 +225,14 @@ class SecurityScanner:
         self,
         path: str | Path | None = None,
         policy: SecurityPolicy | Mapping[str, Any] | None = None,
+        route_path: str | Path | None = None,
     ) -> None:
         self.path = str(path or os.environ.get("LAYA_MODEL_PATH") or "convaiinnovations/laya")
+        # A separate routing checkpoint keeps security and routing training
+        # independent and lets routing run while a security scan holds _lock.
+        self.route_path = str(route_path) if route_path else None
+        self._route_agent: Any = None
+        self._route_lock = threading.Lock()
         self.policy = SecurityPolicy.from_value(policy)
         self._agent: Any = None
         self._lock = threading.RLock()
@@ -296,6 +307,7 @@ class SecurityScanner:
             "load_error": load_error,
             "model": "convaiinnovations/laya",
             "path": self.path if Path(self.path).exists() else None,
+            "route_path": self.route_path,
             "revision": MODEL_REVISION,
             "license": MODEL_LICENSE,
             "backend": "cpu",
@@ -387,6 +399,7 @@ class SecurityScanner:
                 report.scanned_messages += 1
                 message_categories: set[str] = set()
                 message_score = 0.0
+                blocking_score = 0.0
                 chunks_count = 0
                 for leaf in texts:
                     self._check_cancelled(cancelled)
@@ -408,6 +421,11 @@ class SecurityScanner:
                         if rule_categories:
                             score = 1.0
                         message_score = max(message_score, score)
+                        blocking_score = max(
+                            blocking_score,
+                            1.0 if rule_categories else 0.0,
+                            *(scores.get(name, 0.0) for name in USER_BLOCKING_CATEGORIES),
+                        )
                         message_categories.update(categories)
                         if categories or score >= self.policy.flag_threshold:
                             suspicious.append((start, end, categories, score))
@@ -415,8 +433,9 @@ class SecurityScanner:
                         if self._safe_exact_output_request(content):
                             report.policy_adjustments.append({"message_index": index, "reason": "benign_format_directive"})
                             continue
-                        if message_score >= self.policy.block_threshold or self._strong_match(content):
-                            finding = SecurityFinding(index, source, "block", sorted(message_categories or {"injection"}), max(message_score, 1.0 if self._strong_match(content) else 0.0), chunks_count)
+                        if blocking_score >= self.policy.block_threshold or self._strong_match(content):
+                            blocking = message_categories & set(USER_BLOCKING_CATEGORIES)
+                            finding = SecurityFinding(index, source, "block", sorted(blocking or {"injection"}), max(blocking_score, 1.0 if self._strong_match(content) else 0.0), chunks_count)
                             report.findings.append(finding)
                             report.action = "block"
                             report.latency_ms = (time.perf_counter() - started) * 1000
@@ -477,21 +496,32 @@ class SecurityScanner:
             self._stats["flagged"] += report.action == "flag"
             self._stats["errors"] += report.action == "error"
 
+    def _routing_agent(self) -> tuple[Any, Any]:
+        if self.route_path is None:
+            self.load()
+            return self._agent, self._lock
+        with self._route_lock:
+            if self._route_agent is None:
+                import laya
+
+                self._route_agent = laya.load(self.route_path, device="cpu")
+        return self._route_agent, self._route_lock
+
     def route_request(self, text: str) -> dict[str, Any]:
         """Classify a user request as reasoning (coding/reasoning model) or general (agentic daily driver)."""
-        self.load()
+        agent, lock = self._routing_agent()
         if len(text) > ROUTE_TEXT_CHARS:
             # Keep the opening request and the closing question of long pastes.
             half = ROUTE_TEXT_CHARS // 2
             text = text[:half] + "\n…\n" + text[-half:]
-        key = (MODEL_REVISION, "route", ROUTE_QUESTION_REVISION, hashlib.sha256(text.encode("utf-8")).hexdigest())
+        key = (self.route_path or self.path, "route", ROUTE_QUESTION_REVISION, hashlib.sha256(text.encode("utf-8")).hexdigest())
         with self._cache_lock:
             score = self._route_cache.get(key)
             if score is not None:
                 self._route_cache.move_to_end(key)
         if score is None:
-            with self._lock:
-                result = self._agent.predict({"source": "user message", "content": text}, _ROUTE_QUESTION)
+            with lock:
+                result = agent.predict({"source": "user message", "content": text}, _ROUTE_QUESTION)
             answer = result.get("answers", {}).get("route", {})
             probs = answer.get("probabilities", {})
             score = float(probs.get("A", 1.0 if answer.get("choice") == "A" else 0.0))
