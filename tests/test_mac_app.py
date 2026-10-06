@@ -94,7 +94,7 @@ def test_media_paths_and_native_overrides_are_restricted(tmp_path):
 
 def test_context_is_admitted_without_silent_truncation():
     from model_router.mac.app import fits_context
-    payload,_=prepare_chat({'messages':[{'role':'user','content':'A'*4000}],'context_length':1024})
+    payload,_=prepare_chat({'messages':[{'role':'user','content':'A'*5000}],'context_length':1024})
     assert payload['_context_length']==1024 and not fits_context(payload,1024)
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'context_length':999999})
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'max_tokens':100000})
@@ -189,8 +189,8 @@ def test_images_avoid_text_only_tier(routed):
 
 def test_long_conversation_promotes_to_long_context_tier(routed):
     client,manager,seen=routed
-    history=[{'role':'user','content':'background '*12000},{'role':'assistant','content':'noted'}]
+    history=[{'role':'user','content':'background '*13000},{'role':'assistant','content':'noted'}]
     r=client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':history+[{'role':'user','content':'what is the weather like'}]})
     assert r.status_code==200 and r.json()['model']=='arex' and r.headers['X-Bubble-Route'].endswith(';long-context')
-    too_long=[{'role':'user','content':'x'*400000}]
+    too_long=[{'role':'user','content':'x'*600000}]
     assert client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':too_long}).status_code==422

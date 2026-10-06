@@ -46,8 +46,10 @@ def text_chars(payload):
 
 
 def fits_context(payload, context):
-    """Conservative text admission bound (~3 chars/token); actual KV grows per request."""
-    return text_chars(payload) <= context * 3
+    """Text admission bound at ~4 chars/token. English averages ~4.5; denser text
+    (code, Devanagari) may run past the working window, which the models' native
+    262K context absorbs. Actual KV grows per request."""
+    return text_chars(payload) <= context * 4
 
 
 def latest_user_text(messages):
