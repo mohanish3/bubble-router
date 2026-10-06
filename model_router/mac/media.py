@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import os
 import shutil
 import time
@@ -10,6 +11,8 @@ from pathlib import Path
 from typing import Any, Mapping
 
 import httpx
+
+logger = logging.getLogger(__name__)
 
 
 class MediaBackend:
@@ -215,5 +218,7 @@ class MediaBackend:
                 "--ssd-streaming"]
         result = await self.manager.run_owned("minimax-h3", args, cwd=self.root / "repos" / "h3.c")
         if result.returncode != 0 or not output.is_file() or output.stat().st_size == 0:
-            raise RuntimeError("h3.c video generation failed")
+            stderr_tail = (result.stderr or b"")[-1500:].decode(errors="replace")
+            logger.warning("h3.c exited %s; stderr tail:\n%s", result.returncode, stderr_tail)
+            raise RuntimeError(f"h3.c video generation failed (exit {result.returncode})")
         return {"artifact": str(output), "content_type": "video/mp4"}

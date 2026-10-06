@@ -10,6 +10,7 @@ from model_router.mac.resources import (
     MemorySnapshot,
     ResourceAdmissionError,
     ResourceManager,
+    reclaimable_available_gib,
 )
 
 
@@ -472,3 +473,26 @@ async def test_failed_generator_admission_restores_cores_it_evicted():
     assert status["metrics"]["evictions"] == 2
     await manager.stop("qwen-vlm")
     await manager.stop("qwen-audio")
+
+
+def test_reclaimable_available_counts_active_file_cache():
+    # Values observed after an h3.c run: ~40 GiB of file-backed pages stayed
+    # active, so free + inactive understated what the kernel could reclaim.
+    page = 16384
+    vm_stat = {
+        "page_size_bytes": page,
+        "anonymous_pages": 1_085_267,
+        "wired_pages": 203_567,
+        "compressor_pages": 219_981,
+        "file_backed_pages": 2_613_906,
+    }
+    available = reclaimable_available_gib(64 * 1024**3, vm_stat)
+    held = (1_085_267 + 203_567 + 219_981) * page / 1024**3
+    assert available == pytest.approx(64 - held)
+    assert 40 < available < 42
+
+
+def test_reclaimable_available_needs_complete_vm_stat():
+    assert reclaimable_available_gib(64 * 1024**3, {"page_size_bytes": 16384, "wired_pages": 1}) is None
+    assert reclaimable_available_gib(0, {"page_size_bytes": 16384, "anonymous_pages": 1,
+                                         "wired_pages": 1, "compressor_pages": 1}) is None

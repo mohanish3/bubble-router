@@ -84,16 +84,33 @@ class MemorySnapshot:
     vm_stat: Mapping[str, int | float] = field(default_factory=dict)
 
 
+def reclaimable_available_gib(total_bytes: int, vm_stat: Mapping[str, int | float]) -> float | None:
+    """Memory not held by anonymous, wired, or compressed pages.
+
+    psutil's macOS ``available`` is free + inactive, so file cache that stays on
+    the active list (for example, mmap-loaded weights of an exited h3.c run)
+    is reported as used even though the kernel can reclaim it.
+    """
+    page_size = int(vm_stat.get("page_size_bytes", 0))
+    keys = ("anonymous_pages", "wired_pages", "compressor_pages")
+    if not total_bytes or not page_size or any(key not in vm_stat for key in keys):
+        return None
+    held = sum(int(vm_stat[key]) for key in keys) * page_size
+    return max(0.0, (total_bytes - held) / GIB)
+
+
 class SystemTelemetry:
     """Best-effort psutil and macOS memory telemetry."""
 
     def snapshot(self) -> MemorySnapshot:
         available = swap = rss = 0.0
+        total_bytes = 0
         try:
             import psutil  # type: ignore[import-not-found]
 
             vm = psutil.virtual_memory()
             available = vm.available / GIB
+            total_bytes = int(vm.total)
             swap = psutil.swap_memory().used / GIB
             for proc in psutil.process_iter(["memory_info"]):
                 try:
@@ -139,6 +156,8 @@ class SystemTelemetry:
                     ("Pages speculative", "speculative_pages"),
                     ("Pages wired down", "wired_pages"),
                     ("Pages occupied by compressor", "compressor_pages"),
+                    ("File-backed pages", "file_backed_pages"),
+                    ("Anonymous pages", "anonymous_pages"),
                 ):
                     match = re.search(rf"^{re.escape(label)}:\s+([\d.]+)", output, re.MULTILINE)
                     if match:
@@ -148,6 +167,9 @@ class SystemTelemetry:
                             vm_stat[key.replace("_pages", "_gib")] = pages * page_size / GIB
             except (OSError, subprocess.TimeoutExpired):
                 pass
+            reclaimable = reclaimable_available_gib(total_bytes, vm_stat)
+            if reclaimable is not None:
+                available = max(available, reclaimable)
         return MemorySnapshot(available, swap, rss, pressure, vm_stat)
 
 
@@ -785,7 +807,7 @@ class ResourceManager:
             env=env,
             stdin=asyncio.subprocess.PIPE if input_data is not None else asyncio.subprocess.DEVNULL,
             stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.DEVNULL,
+            stderr=asyncio.subprocess.PIPE,
             start_new_session=True,
         )
         self._oneshots[process.pid] = _OwnedOneShot(
@@ -796,8 +818,8 @@ class ResourceManager:
         )
         self._write_journal()
         try:
-            out, _ = await process.communicate(input_data)
-            return subprocess.CompletedProcess(command, int(process.returncode or 0), out, b"")
+            out, err = await process.communicate(input_data)
+            return subprocess.CompletedProcess(command, int(process.returncode or 0), out, err or b"")
         except asyncio.CancelledError:
             await self._terminate(process)
             raise
