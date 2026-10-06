@@ -108,7 +108,8 @@ def routed(tmp_path):
     manager=Manager();scanner=RoutingScanner();scheduler=LazyScheduler(tmp_path/'state/jobs.sqlite3',manager)
     config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/qwen',
             'chat_models':{'ornith':{'resource':'ornith','url':'http://ornith.test','model':'/local/ornith'},
-                           'swift':{'resource':'swift','url':'http://swift.test','model':'/local/swift'}},
+                           'swift':{'resource':'swift','url':'http://swift.test','model':'/local/swift','vision':True}},
+            'vision_default':'swift',
             'escalate':{'ornith':'swift'},
             'backends':{'qwen-vlm':{},'ornith':{}},'audio_models':{'tts':'/local/tts','asr':'/local/asr'}}
     app=create_app(tmp_path,injected=(config,manager,scheduler,scanner,object()))
@@ -173,3 +174,10 @@ def test_swift_route_and_ornith_failure_escalates(routed):
     assert escalated.status_code==200 and escalated.json()['model']=='swift'
     assert 'escalated-from-ornith' in escalated.headers['X-Bubble-Route']
     assert [url for url,_ in seen][-2:]==['http://ornith.test/v1/chat/completions','http://swift.test/v1/chat/completions']
+
+
+def test_images_avoid_text_only_tier(routed):
+    client,manager,seen=routed
+    image={'type':'image_url','image_url':{'url':'data:image/png;base64,iVBORw0KGgo='}}
+    r=client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':[{'role':'user','content':[{'type':'text','text':'what is in this picture'},image]}]})
+    assert r.status_code==200 and r.json()['model']=='swift' and r.headers['X-Bubble-Route'].endswith(';vision')

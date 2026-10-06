@@ -535,3 +535,38 @@ async def test_on_demand_core_is_not_auto_restored():
     assert status["resources"]["ornith"]["running"]
     assert not status["resources"]["qwen-vlm"]["running"]
     await manager.stop("ornith")
+
+
+@pytest.mark.asyncio
+async def test_exclusive_group_runs_one_model_at_a_time():
+    sleeper = (sys.executable, "-c", "import time; time.sleep(60)")
+    manager = ResourceManager(
+        {
+            "ornith": BackendConfig(command=sleeper, core=True, estimate_gib=19, exclusive_group="chat"),
+            "swift": BackendConfig(command=sleeper, core=True, restore=False, estimate_gib=17, exclusive_group="chat"),
+            "qwen-audio": BackendConfig(command=sleeper, core=True, estimate_gib=7),
+        },
+        telemetry=FakeTelemetry(available=64.0),
+    )
+    async with manager.lease("ornith"):
+        pass
+    async with manager.lease("qwen-audio"):
+        pass
+    async with manager.lease("swift"):
+        status = await manager.status()
+        assert status["resources"]["swift"]["running"]
+        assert not status["resources"]["ornith"]["running"]
+        assert status["resources"]["qwen-audio"]["running"]
+
+    order = []
+    async def hold_swift():
+        async with manager.lease("swift"):
+            order.append("swift-start"); await asyncio.sleep(0.6); order.append("swift-end")
+    async def then_ornith():
+        await asyncio.sleep(0.1)
+        async with manager.lease("ornith"):
+            order.append("ornith")
+    await asyncio.gather(hold_swift(), then_ornith())
+    assert order == ["swift-start", "swift-end", "ornith"]
+    for name in ("ornith", "swift", "qwen-audio"):
+        await manager.stop(name)

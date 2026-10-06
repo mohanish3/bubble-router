@@ -26,6 +26,7 @@ from typing import Any, Mapping, Sequence
 
 
 GIB = 1024**3
+EXCLUSIVE_WAIT_SECONDS = 900.0
 DEFAULT_ESTIMATES_GIB = {
     "qwen-vlm": 20.0,
     "qwen-audio": 8.0,
@@ -58,6 +59,9 @@ class BackendConfig:
     # Core resources are evictable and shared; restore=False keeps one out of
     # automatic core restoration so it only loads when a request needs it.
     restore: bool = True
+    # Resources sharing a group never run together: loading one unloads the
+    # idle others, and a request waits while another member is busy.
+    exclusive_group: str | None = None
     health_timeout: float = 300.0
     env: Mapping[str, str] | None = None
 
@@ -523,6 +527,17 @@ class ResourceManager:
             return await self._admit_locked(name, incremental_gib=config.estimate(name) + extra_gib)
         if not config.command:
             raise ResourceError(f"persistent resource {name} has no command")
+        group = [
+            other for other, other_config in self.backends.items()
+            if config.exclusive_group and other != name and other_config.exclusive_group == config.exclusive_group
+            and (owned := self._processes.get(other)) is not None and owned.process.returncode is None
+        ]
+        busy = [other for other in group if self._leases.get(other, 0)]
+        if busy:
+            raise ResourceAdmissionError(f"cannot admit {name}: exclusive group member {busy[0]} is in use")
+        for other in group:
+            await self._stop_locked(other)
+            self._metrics["evictions"] += 1
         failures = self._failure_times.setdefault(name, deque())
         now = time.monotonic()
         while failures and now - failures[0] >= 60.0:
@@ -758,6 +773,20 @@ class ResourceManager:
     async def lease(self, name: str, *, incremental_gib: float | None = None):
         evicted: list[str] = []
         config = self._config(name)
+        if config.exclusive_group:
+            # Wait (without holding the manager lock) while another member of
+            # the exclusive group is serving a request.
+            deadline = time.monotonic() + EXCLUSIVE_WAIT_SECONDS
+            while True:
+                async with self._lock:
+                    busy = any(
+                        self._leases.get(other, 0)
+                        for other, other_config in self.backends.items()
+                        if other != name and other_config.exclusive_group == config.exclusive_group
+                    )
+                if not busy or time.monotonic() > deadline:
+                    break
+                await asyncio.sleep(0.25)
         try:
             async with self._lock:
                 if incremental_gib is not None and (

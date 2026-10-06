@@ -263,7 +263,7 @@ def create_app(root: Path = ROOT, *, injected=None):
 
     def chat_targets():
         config = app.state.config
-        targets = {'qwen': {'resource': 'qwen-vlm', 'url': 'http://127.0.0.1:8080', 'model': config['qwen_model']}}
+        targets = {'qwen': {'resource': 'qwen-vlm', 'url': 'http://127.0.0.1:8080', 'model': config['qwen_model'], 'vision': True}}
         targets.update(config.get('chat_models', {}))
         return targets
 
@@ -284,9 +284,9 @@ def create_app(root: Path = ROOT, *, injected=None):
         requested = str(requested or 'auto').split('/')[-1]
         if requested in targets: return requested, 'requested'
         if 'ornith' not in targets: return 'qwen', 'only-model'
-        if visual: return 'qwen', 'vision'
         text = latest_user_text(messages)
-        if not text or not hasattr(app.state.scanner, 'route_request'): return 'ornith', 'default'
+        if not text or not hasattr(app.state.scanner, 'route_request'):
+            return (vision_fallback(), 'vision') if visual else ('ornith', 'default')
         decision = await asyncio.to_thread(app.state.scanner.route_request, text)
         app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
         entry = {'time': time.time(), 'route': decision['route'], 'scores': decision['scores'],
@@ -296,7 +296,15 @@ def create_app(root: Path = ROOT, *, injected=None):
         fd = os.open(root/'state/route-audit.jsonl', os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
         with os.fdopen(fd, 'a') as handle: handle.write(json.dumps(entry)+'\n')
         score = decision['scores'].get(decision['route'], 0.0)
-        return route_target(decision['route']), f"laya:{decision['route']}:{score}"
+        name = route_target(decision['route'])
+        if visual and not targets[name].get('vision'):
+            return vision_fallback(), f"laya:{decision['route']}:{score};vision"
+        return name, f"laya:{decision['route']}:{score}"
+
+    def vision_fallback():
+        targets = chat_targets()
+        name = app.state.config.get('vision_default', 'qwen')
+        return name if targets.get(name, {}).get('vision') else 'qwen'
 
     async def dispatch_chat(name, payload, visual, meta):
         """Queue one chat request on a model; returns (job, ready future, consumed event)."""
