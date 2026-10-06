@@ -95,3 +95,42 @@ def test_media_paths_and_native_overrides_are_restricted(tmp_path):
 def test_context_is_admitted_without_silent_truncation():
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'A'*4000}],'context_length':1024})
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'max_tokens':100000})
+
+
+@pytest.fixture
+def routed(tmp_path):
+    for path in ('state','outputs/audio','test-assets'):(tmp_path/path).mkdir(parents=True,exist_ok=True)
+    class RoutingScanner(Scanner):
+        def route_request(self,text):
+            return {'route':'nuanced' if 'quit my job' in text else 'general','nuanced_score':0.9 if 'quit my job' in text else 0.1}
+    manager=Manager();scanner=RoutingScanner();scheduler=LazyScheduler(tmp_path/'state/jobs.sqlite3',manager)
+    config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/qwen',
+            'chat_models':{'ornith':{'resource':'ornith','url':'http://ornith.test','model':'/local/ornith'}},
+            'backends':{'qwen-vlm':{},'ornith':{}},'audio_models':{'tts':'/local/tts','asr':'/local/asr'}}
+    app=create_app(tmp_path,injected=(config,manager,scheduler,scanner,object()))
+    with TestClient(app) as client:
+        seen=[]
+        def handler(request):
+            seen.append((str(request.url),json.loads(request.content)['model']))
+            return httpx.Response(200,json={'choices':[{'message':{'content':'ok'}}],'usage':{'total_tokens':2}})
+        app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        yield client,manager,seen
+
+def ask(client,model,text):
+    return client.post('/v1/chat/completions',headers=AUTH,json={'model':model,'messages':[{'role':'user','content':text}]})
+
+def test_auto_routes_general_to_ornith_and_nuanced_to_qwen(routed):
+    client,manager,seen=routed
+    general=ask(client,'auto','what is the weather like')
+    assert general.json()['model']=='ornith' and general.headers['X-Bubble-Route'].startswith('ornith;laya:general')
+    nuanced=ask(client,'local/auto','should I quit my job to start a company?')
+    assert nuanced.json()['model']=='qwen' and nuanced.headers['X-Bubble-Route'].startswith('qwen;laya:nuanced')
+    assert manager.calls==['ornith','qwen-vlm']
+    assert seen==[('http://ornith.test/v1/chat/completions','/local/ornith'),('http://127.0.0.1:8080/v1/chat/completions','/local/qwen')]
+
+def test_explicit_models_and_legacy_aliases(routed):
+    client,manager,seen=routed
+    assert ask(client,'qwen','hi').json()['model']=='qwen'
+    assert ask(client,'ornith','should I quit my job?').json()['model']=='ornith'
+    assert ask(client,'qwythos','hello').json()['model']=='ornith'
+    assert manager.calls==['qwen-vlm','ornith','ornith']

@@ -496,3 +496,42 @@ def test_reclaimable_available_needs_complete_vm_stat():
     assert reclaimable_available_gib(64 * 1024**3, {"page_size_bytes": 16384, "wired_pages": 1}) is None
     assert reclaimable_available_gib(0, {"page_size_bytes": 16384, "anonymous_pages": 1,
                                          "wired_pages": 1, "compressor_pages": 1}) is None
+
+
+@pytest.mark.asyncio
+async def test_on_demand_core_defers_restore_instead_of_failing():
+    telemetry = FakeTelemetry(available=40.0)
+    sleeper = (sys.executable, "-c", "import time; time.sleep(60)")
+    manager = ResourceManager(
+        {
+            "ornith": BackendConfig(command=sleeper, core=True, estimate_gib=19),
+            "qwen-vlm": BackendConfig(command=sleeper, core=True, restore=False, estimate_gib=21),
+        },
+        telemetry=telemetry,
+    )
+    async with manager.lease("qwen-vlm"):
+        telemetry.available = 20.0
+    await manager.restore_core()
+    status = await manager.status()
+    assert status["core_restore"]["ready"] is True
+    assert set(status["core_restore"]["deferred"]) == {"ornith"}
+    assert status["resources"]["qwen-vlm"]["running"]
+    assert not status["resources"]["ornith"]["running"]
+    await manager.stop("qwen-vlm")
+
+
+@pytest.mark.asyncio
+async def test_on_demand_core_is_not_auto_restored():
+    sleeper = (sys.executable, "-c", "import time; time.sleep(60)")
+    manager = ResourceManager(
+        {
+            "ornith": BackendConfig(command=sleeper, core=True, estimate_gib=19),
+            "qwen-vlm": BackendConfig(command=sleeper, core=True, restore=False, estimate_gib=21),
+        },
+        telemetry=FakeTelemetry(available=64.0),
+    )
+    await manager.restore_core()
+    status = await manager.status()
+    assert status["resources"]["ornith"]["running"]
+    assert not status["resources"]["qwen-vlm"]["running"]
+    await manager.stop("ornith")

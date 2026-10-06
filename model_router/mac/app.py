@@ -27,6 +27,16 @@ class SecurityRejected(Exception):
         self.report = report
 
 
+def latest_user_text(messages):
+    for message in reversed(messages or []):
+        if message.get('role') != 'user': continue
+        content = message.get('content')
+        if isinstance(content, str): return content
+        if isinstance(content, list):
+            return '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
+    return ''
+
+
 def plain(value):
     if hasattr(value, 'to_dict'): return value.to_dict()
     if dataclasses.is_dataclass(value): return dataclasses.asdict(value)
@@ -209,7 +219,7 @@ def create_app(root: Path = ROOT, *, injected=None):
 
     @app.get('/v1/models')
     async def models():
-        return {'object':'list','data':[{'id': name,'object':'model','owned_by':'local'} for name in ('qwen','qwen-asr','qwen-tts','qwen-image','minimax-h3')]}
+        return {'object':'list','data':[{'id': name,'object':'model','owned_by':'local'} for name in ('auto','qwen','ornith','qwen-asr','qwen-tts','qwen-image','minimax-h3')]}
 
     @app.get('/router/status')
     async def status():
@@ -228,42 +238,65 @@ def create_app(root: Path = ROOT, *, injected=None):
     async def metrics(): return {**app.state.metrics, 'security': plain(app.state.scanner.status()), 'queues': await app.state.scheduler.queues(),
                                  'jobs':await app.state.scheduler.metrics(), 'resources':await app.state.manager.status()}
 
+    def chat_targets():
+        config = app.state.config
+        targets = {'qwen': {'resource': 'qwen-vlm', 'url': 'http://127.0.0.1:8080', 'model': config['qwen_model']}}
+        targets.update(config.get('chat_models', {}))
+        return targets
+
+    async def choose_chat_model(requested, messages, visual):
+        """Explicit qwen/ornith win; auto and legacy aliases are routed by Laya."""
+        targets = chat_targets()
+        requested = str(requested or 'auto').split('/')[-1]
+        if requested in targets: return requested, 'requested'
+        if 'ornith' not in targets: return 'qwen', 'only-model'
+        if visual: return 'qwen', 'vision'
+        text = latest_user_text(messages)
+        if not text or not hasattr(app.state.scanner, 'route_request'): return 'ornith', 'default'
+        decision = await asyncio.to_thread(app.state.scanner.route_request, text)
+        app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
+        name = 'qwen' if decision['route'] == 'nuanced' else 'ornith'
+        return name, f"laya:{decision['route']}:{decision['nuanced_score']}"
+
     @app.post('/v1/chat/completions')
     async def chat(request: Request):
         original = await request.json()
         original['messages'], report = await scan(original.get('messages', []), metadata(request))
         payload, visual = prepare_chat(original, root)
-        payload['model']=app.state.config['qwen_model']
+        name, reason = await choose_chat_model(original.get('model'), original['messages'], visual)
+        target = chat_targets()[name]
+        payload['model']=target['model']
         ready = asyncio.get_running_loop().create_future()
         consumed = asyncio.Event()
         async def operation(job):
             response = None
             try:
-                async with app.state.manager.lease('qwen-vlm', incremental_gib=chat_incremental_gib(payload)):
+                async with app.state.manager.lease(target['resource'], incremental_gib=chat_incremental_gib(payload)):
                     app.state.metrics['backend_requests'] += 1
                     headers = {'authorization':'Bearer '+app.state.config.get('backend_key','')}
                     if payload.get('stream'):
-                        response = await app.state.http.send(app.state.http.build_request('POST','http://127.0.0.1:8080/v1/chat/completions',json=payload,headers=headers), stream=True)
+                        response = await app.state.http.send(app.state.http.build_request('POST',target['url']+'/v1/chat/completions',json=payload,headers=headers), stream=True)
                         response.raise_for_status()
                         ready.set_result(response)
                         await consumed.wait()
                         return {'stream':'consumed'}
-                    response = await app.state.http.post('http://127.0.0.1:8080/v1/chat/completions',json=payload,headers=headers)
+                    response = await app.state.http.post(target['url']+'/v1/chat/completions',json=payload,headers=headers)
                     response.raise_for_status()
-                    result = response.json(); result['model']='qwen'; ready.set_result(result); return {'completed':True}
+                    result = response.json(); result['model']=name; ready.set_result(result); return {'completed':True}
             except BaseException as exc:
                 if not ready.done(): ready.set_exception(exc)
                 raise
             finally:
                 if response is not None: await response.aclose()
-        job = await app.state.scheduler.submit('qwen-vlm', 2 if visual else 1, operation, metadata(request))
+        job = await app.state.scheduler.submit(target['resource'], 2 if visual else 1, operation, metadata(request))
         # Consume exceptions on the durable job future; the endpoint awaits ready.
         job.future.add_done_callback(lambda f: f.exception() if not f.cancelled() else None)
         try: result = await asyncio.shield(ready)
         except asyncio.CancelledError:
             await app.state.scheduler.cancel(job.id); raise
-        except Exception: raise HTTPException(503,detail={'job_id':job.id,'error':'Qwen backend unavailable'})
-        headers = {'X-Bubble-Job-ID':job.id, 'X-Bubble-Security': str(plain(report).get('action','allow'))}
+        except Exception: raise HTTPException(503,detail={'job_id':job.id,'error':f'{name} backend unavailable'})
+        headers = {'X-Bubble-Job-ID':job.id, 'X-Bubble-Security': str(plain(report).get('action','allow')),
+                   'X-Bubble-Route': f'{name};{reason}'}
         if not payload.get('stream'): return JSONResponse(result,headers=headers)
         async def chunks():
             try:

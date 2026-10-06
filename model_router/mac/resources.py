@@ -55,6 +55,9 @@ class BackendConfig:
     reload_seconds: float | None = None
     persistent: bool = True
     core: bool = False
+    # Core resources are evictable and shared; restore=False keeps one out of
+    # automatic core restoration so it only loads when a request needs it.
+    restore: bool = True
     health_timeout: float = 300.0
     env: Mapping[str, str] | None = None
 
@@ -611,7 +614,10 @@ class ResourceManager:
     async def restore_core(self) -> None:
         """Best-effort restore core servers and report each final readiness state."""
         async with self._lock:
-            names = [name for name, config in self.backends.items() if config.core and config.persistent]
+            names = [
+                name for name, config in self.backends.items()
+                if config.core and config.persistent and config.restore
+            ]
             running = {
                 name for name in names
                 if (owned := self._processes.get(name)) is not None and owned.process.returncode is None
@@ -620,11 +626,13 @@ class ResourceManager:
             estimated_sum = sum(self.backends[name].estimate(name) for name in missing)
             memory = self._snapshot()
             errors: dict[str, str] = {}
+            deferred: dict[str, str] = {}
             self._core_restore = {
                 "attempted": True,
                 "ready": False,
                 "resources": {name: name in running for name in names},
                 "errors": errors,
+                "deferred": deferred,
                 "available_gib": memory.available_gib,
                 "estimated_missing_peak_sum_gib": estimated_sum,
                 "reserve_gib": self.reserve_gib,
@@ -635,7 +643,15 @@ class ResourceManager:
                 # Restore one profile at a time against actual available memory.
                 # Hold temporary leases on already-ready cores so a later load
                 # cannot evict them when its own peak does not fit.
-                for name in running:
+                # Warm on-demand cores are protected too: restoring the daily
+                # driver must not evict a model the user is actively using.
+                on_demand = {
+                    name for name, config in self.backends.items()
+                    if config.core and not config.restore
+                    and (owned := self._processes.get(name)) is not None
+                    and owned.process.returncode is None
+                }
+                for name in running | on_demand:
                     self._leases[name] = self._leases.get(name, 0) + 1
                     protected.append(name)
                 for name in names:
@@ -643,6 +659,20 @@ class ResourceManager:
                         continue
                     try:
                         await self._ensure_locked(name)
+                    except ResourceAdmissionError as exc:
+                        # An on-demand core that is still warm holds the memory;
+                        # this resource loads on its next request instead.
+                        on_demand_warm = any(
+                            not config.restore
+                            and (owned := self._processes.get(other)) is not None
+                            and owned.process.returncode is None
+                            for other, config in self.backends.items() if config.core
+                        )
+                        if on_demand_warm:
+                            deferred[name] = str(exc)
+                        else:
+                            errors[name] = f"{type(exc).__name__}: {exc}"
+                        continue
                     except Exception as exc:
                         errors[name] = f"{type(exc).__name__}: {exc}"
                         continue
@@ -661,13 +691,14 @@ class ResourceManager:
                 for name in names
             }
             for name, ready in final_running.items():
-                if not ready and name not in errors:
+                if not ready and name not in errors and name not in deferred:
                     errors[name] = "not running after restore attempt"
             self._core_restore = {
                 "attempted": True,
-                "ready": all(final_running.values()),
+                "ready": not errors,
                 "resources": final_running,
                 "errors": errors,
+                "deferred": deferred,
                 "available_gib": self._snapshot().available_gib,
                 "estimated_missing_peak_sum_gib": estimated_sum,
                 "reserve_gib": self.reserve_gib,
