@@ -380,3 +380,28 @@ def test_media_guard_preserves_real_tool_calls_and_plain_text():
     assert printed_instead_of_calling(response('Boss.\nMEDIA:/missing/video.mp4'))
     assert not printed_instead_of_calling(response('Video generation takes a minute.'))
     assert not printed_instead_of_calling(response('MEDIA:/missing/video.mp4',tool_calls=[{'id':'t1'}]))
+
+def test_embeddings_endpoint_proxies_to_local_service_without_scan(running):
+    client,app,manager,scanner,requests=running
+    seen=[]
+    def handler(request):
+        seen.append((str(request.url),json.loads(request.content)))
+        body=json.loads(request.content)
+        return httpx.Response(200,json={'data':[{'index':i,'embedding':[float(len(t)),0.0]} for i,t in reversed(list(enumerate(body['input'])))]})
+    app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    assert client.post('/v1/embeddings',json={'input':'hi'}).status_code==401
+    response=client.post('/v1/embeddings',headers=AUTH,json={'model':'x','input':['ab','abc'],'input_type':'query'})
+    assert response.status_code==200
+    body=response.json()
+    assert body['model']=='embeddinggemma-2'
+    q='task: search result | query: '
+    assert [d['embedding'][0] for d in body['data']]==[len(q)+2.0,len(q)+3.0] and [d['index'] for d in body['data']]==[0,1]
+    assert seen==[('http://127.0.0.1:8766/v1/embeddings',{'input':[q+'ab',q+'abc']})]
+    client.post('/v1/embeddings',headers=AUTH,json={'input':'doc'})
+    assert seen[-1][1]['input']==['title: none | text: doc']
+    assert scanner.calls==0 and manager.calls==[]
+    assert client.post('/v1/embeddings',headers=AUTH,json={'input':[]}).status_code==422
+    assert client.post('/v1/embeddings',headers=AUTH,json={'input':['x']*257}).status_code==422
+    def down(request): raise httpx.ConnectError('refused')
+    app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(down))
+    assert client.post('/v1/embeddings',headers=AUTH,json={'input':'x'}).status_code==503

@@ -21,6 +21,7 @@ from .resources import BackendConfig, ResourceManager
 from .scheduler import Scheduler, QueueFullError, SchedulerDrainingError
 from .security import SecurityScanner, SecurityPolicy, SecurityBlocked, SecurityUnavailable, SecurityInputTooLarge
 from .media import MediaBackend, video_frame_plan
+from .embeddings import EMBED_URL, MODEL_ID as EMBED_MODEL_ID, parse_inputs as parse_embedding_inputs, prompted as embedding_prompted
 
 ROOT = Path(os.environ.get('AI_STACK_ROOT', str(Path.home() / 'AI')))
 
@@ -499,6 +500,23 @@ def create_app(root: Path = ROOT, *, injected=None):
                 async for chunk in result.aiter_bytes(): yield chunk
             finally: consumed.set()
         return StreamingResponse(chunks(),media_type='text/event-stream',headers=headers)
+
+    @app.post('/v1/embeddings')
+    async def embeddings(request: Request):
+        # Vectors only, for OpenClaw memory search: nothing is generated or
+        # executed, so the input is not routed through the Laya scan.
+        payload = await request.json()
+        texts = parse_embedding_inputs(payload)
+        app.state.metrics['requests'] += 1
+        try:
+            response = await app.state.http.post(EMBED_URL, json={'input': embedding_prompted(payload, texts)})
+            response.raise_for_status()
+        except httpx.HTTPError:
+            raise HTTPException(503, 'embedding service unavailable')
+        vectors = [item['embedding'] for item in sorted(response.json()['data'], key=lambda item: item['index'])]
+        return {'object': 'list', 'model': EMBED_MODEL_ID,
+                'data': [{'object': 'embedding', 'index': i, 'embedding': v} for i, v in enumerate(vectors)],
+                'usage': {'prompt_tokens': 0, 'total_tokens': 0}}
 
     @app.post('/v1/audio/speech')
     async def speech(request: Request):
