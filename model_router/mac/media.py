@@ -6,13 +6,81 @@ import json
 import logging
 import os
 import shutil
+import math
 import time
+from fractions import Fraction
 from pathlib import Path
 from typing import Any, Mapping
 
 import httpx
 
 logger = logging.getLogger(__name__)
+H3_FPS = 24
+H3_MIN_GENERATION_FRAMES = 22
+H3_MAX_FRAMES = 362
+H3_MAX_DURATION_SECONDS = 15.0
+
+
+def video_frame_plan(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Resolve the requested output length and H3's trained temporal chunk.
+
+    H3 generates at 24 fps and its decoder only accepts 5 + 17k frames. The
+    generated native clip is later trimmed to the requested 24 fps frame count.
+    """
+    has_duration = "duration" in payload
+    has_seconds = "seconds" in payload
+    has_frames = "frames" in payload
+    if has_duration and has_seconds:
+        duration = payload["duration"]
+        seconds = payload["seconds"]
+        if (isinstance(duration, bool) or isinstance(seconds, bool)
+                or not isinstance(duration, (int, float)) or not isinstance(seconds, (int, float))):
+            raise ValueError("duration and seconds must be finite positive numbers")
+        try:
+            duration_value, seconds_value = float(duration), float(seconds)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError("duration and seconds must be finite positive numbers") from exc
+        if duration_value != seconds_value:
+            raise ValueError("duration and seconds conflict")
+    elif has_duration or has_seconds:
+        value = payload["duration"] if has_duration else payload["seconds"]
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError("duration must be a finite positive number")
+        try:
+            duration_value = float(value)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError("duration must be a finite positive number") from exc
+    else:
+        duration_value = 3.0
+
+    if (has_duration or has_seconds) and has_frames:
+        raise ValueError("provide duration/seconds or frames, not both")
+    if not math.isfinite(duration_value) or duration_value <= 0 or duration_value > H3_MAX_DURATION_SECONDS:
+        raise ValueError("duration must be finite and greater than 0, up to 15 seconds")
+
+    if has_frames:
+        requested_frames = payload["frames"]
+        if isinstance(requested_frames, bool) or not isinstance(requested_frames, int):
+            raise ValueError("frames must be an integer")
+        if not 5 <= requested_frames <= round(H3_MAX_DURATION_SECONDS * H3_FPS):
+            raise ValueError("frames must be between 5 and 360 (15 seconds at 24 fps)")
+        requested_seconds = requested_frames / H3_FPS
+        target_frames = requested_frames
+    else:
+        requested_seconds = duration_value
+        target_frames = max(1, round(requested_seconds * H3_FPS))
+    native_frames = max(H3_MIN_GENERATION_FRAMES, target_frames)
+    native_frames = 5 + ((native_frames - 5 + 16) // 17) * 17
+    if native_frames > H3_MAX_FRAMES:
+        raise ValueError("requested duration exceeds H3's 362-frame generation limit")
+    return {
+        "requested_seconds": requested_seconds,
+        "requested_frames": target_frames,
+        "native_frames": native_frames,
+        "effective_frames": target_frames,
+        "fps": H3_FPS,
+        "effective_duration_seconds": target_frames / H3_FPS,
+    }
 
 
 class MediaBackend:
@@ -192,7 +260,7 @@ class MediaBackend:
         image = self._asset(payload.get("image", payload.get("image_path")))
         return await self._generate_comfy(options, job_id, image)
 
-    async def generate_video(self, payload: Mapping[str, Any], job_id: str) -> dict[str, str]:
+    async def generate_video(self, payload: Mapping[str, Any], job_id: str) -> dict[str, Any]:
         self._current_paths()
         prompt = self._prompt(payload)
         entry = self.paths.get("MiniMaxAI/MiniMax-H3", self.paths.get("minimax-h3", {}))
@@ -205,20 +273,58 @@ class MediaBackend:
             raise RuntimeError("h3.c executable is missing")
         width = self._int(payload, "width", 512, 64, 720)
         height = self._int(payload, "height", 512, 64, 720)
-        if width % 16 or height % 16:
-            raise ValueError("H3 width and height must be multiples of 16")
-        frames = self._int(payload, "frames", 22, 1, 56)
+        if width % 32 or height % 32:
+            raise ValueError("H3 width and height must be multiples of 32")
+        plan = video_frame_plan(payload)
         steps = self._int(payload, "steps", 4, 1, 20)
         seed = self._int(payload, "seed", 42, 0, 2**63 - 1)
         output_dir = self.root / "outputs" / "video"
         output_dir.mkdir(parents=True, exist_ok=True)
         output = output_dir / f"{job_id}.mp4"
         args = [str(executable), "-d", str(model_dir), "-p", prompt, "-o", str(output), "--width", str(width),
-                "--height", str(height), "--frames", str(frames), "--steps", str(steps), "--seed", str(seed),
+                "--height", str(height), "--frames", str(plan["native_frames"]), "--steps", str(steps), "--seed", str(seed),
                 "--ssd-streaming"]
         result = await self.manager.run_owned("minimax-h3", args, cwd=self.root / "repos" / "h3.c")
         if result.returncode != 0 or not output.is_file() or output.stat().st_size == 0:
             stderr_tail = (result.stderr or b"")[-1500:].decode(errors="replace")
             logger.warning("h3.c exited %s; stderr tail:\n%s", result.returncode, stderr_tail)
             raise RuntimeError(f"h3.c video generation failed (exit {result.returncode})")
-        return {"artifact": str(output), "content_type": "video/mp4"}
+        ffmpeg = shutil.which("ffmpeg") or str(Path("/opt/homebrew/bin/ffmpeg"))
+        ffprobe = shutil.which("ffprobe") or str(Path("/opt/homebrew/bin/ffprobe"))
+        ffmpeg = ffmpeg if Path(ffmpeg).is_file() else None
+        ffprobe = ffprobe if Path(ffprobe).is_file() else None
+        if not ffmpeg or not ffprobe:
+            raise RuntimeError("ffmpeg and ffprobe are required to trim and verify H3 output")
+        trimmed = output.with_name(f".{output.stem}.trimmed.mp4")
+        trim_args = [ffmpeg, "-y", "-v", "error", "-i", str(output), "-map", "0:v:0", "-map", "0:a?",
+                     "-vf", f"fps={plan['fps']}", "-frames:v", str(plan["effective_frames"]),
+                     "-t", f"{plan['effective_duration_seconds']:.9f}", "-c:v", "libx264", "-preset", "veryfast",
+                     "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+                     "-movflags", "+faststart", str(trimmed)]
+        trim_result = await self.manager.run_owned("minimax-h3", trim_args, cwd=output_dir)
+        if trim_result.returncode != 0 or not trimmed.is_file() or trimmed.stat().st_size == 0:
+            stderr_tail = (trim_result.stderr or b"")[-1500:].decode(errors="replace")
+            logger.warning("ffmpeg trim exited %s; stderr tail:\n%s", trim_result.returncode, stderr_tail)
+            raise RuntimeError("could not trim H3 output to the requested duration")
+        probe = await self.manager.run_owned("minimax-h3", [ffprobe, "-v", "error", "-show_entries",
+            "format=duration:stream=codec_type,nb_frames,r_frame_rate", "-of", "json", str(trimmed)], cwd=output_dir)
+        try:
+            probe_data = json.loads(probe.stdout) if probe.returncode == 0 else {}
+            actual_duration = float(probe_data["format"]["duration"])
+            video_stream = next(s for s in probe_data.get("streams", []) if s.get("codec_type") == "video")
+            actual_frames = int(video_stream["nb_frames"])
+            actual_fps = float(Fraction(video_stream["r_frame_rate"]))
+        except (ValueError, TypeError, KeyError, StopIteration, ZeroDivisionError, json.JSONDecodeError) as exc:
+            trimmed.unlink(missing_ok=True)
+            raise RuntimeError("ffprobe could not verify the trimmed H3 output") from exc
+        duration_tolerance = 1 / H3_FPS
+        if (not math.isfinite(actual_duration) or actual_duration <= 0
+                or actual_duration > H3_MAX_DURATION_SECONDS + duration_tolerance
+                or abs(actual_duration - plan["effective_duration_seconds"]) > duration_tolerance
+                or actual_frames != plan["effective_frames"]
+                or not math.isclose(actual_fps, H3_FPS, rel_tol=0, abs_tol=1e-6)):
+            trimmed.unlink(missing_ok=True)
+            raise RuntimeError("trimmed H3 output does not match the requested duration, frame count, or 24 fps")
+        os.replace(trimmed, output)
+        return {"artifact": str(output), "content_type": "video/mp4", **plan,
+                "actual_duration_seconds": actual_duration, "actual_frames": actual_frames, "actual_fps": actual_fps}

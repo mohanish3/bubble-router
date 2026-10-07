@@ -1,18 +1,23 @@
 from contextlib import asynccontextmanager
 import json
 from pathlib import Path
+import sqlite3
+import time
+from types import SimpleNamespace
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from model_router.mac.app import create_app, prepare_chat, safe_asset
+from model_router.mac.app import apply_tool_reasoning_defaults, create_app, prepare_chat, safe_asset
 from model_router.mac.scheduler import Scheduler
 from model_router.mac.security import SecurityBlocked
 
 class Manager:
-    def __init__(self): self.active=0;self.calls=[]
+    def __init__(self):
+        self.active=0;self.calls=[];self.lease_calls=[]
+        self.backends={'minimax-h3':SimpleNamespace(estimate_gib=28.0)}
     @asynccontextmanager
     async def lease(self,name,**kwargs):
-        self.calls.append(name);self.active+=1
+        self.calls.append(name);self.lease_calls.append((name,dict(kwargs)));self.active+=1
         try:yield
         finally:self.active-=1
     async def status(self):return {'active':self.active}
@@ -39,9 +44,13 @@ class LazyScheduler:
 @pytest.fixture
 def running(tmp_path):
     for path in ('state','outputs/audio','test-assets'):(tmp_path/path).mkdir(parents=True,exist_ok=True)
+    (tmp_path/'config').mkdir(exist_ok=True)
+    (tmp_path/'config/model-paths.json').write_text(json.dumps({'MiniMaxAI/MiniMax-H3':{'path':'/not-loaded'}}))
     manager=Manager();scanner=Scanner();scheduler=LazyScheduler(tmp_path/'state/jobs.sqlite3',manager)
-    config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/selected-model','backends':{'qwen-vlm':{}},'audio_models':{'tts':'/local/tts','asr':'/local/asr'}}
-    app=create_app(tmp_path,injected=(config,manager,scheduler,scanner,object()))
+    config={'api_key':'test-only','admin_key':'admin-only','provider_key':'provider-only','backend_key':'backend-only','qwen_model':'/local/selected-model','backends':{'qwen-vlm':{},'minimax-h3':{'estimate_gib':28}},'h3_long_estimate_gib':40,'audio_models':{'tts':'/local/tts','asr':'/local/asr'}}
+    class Media:
+        async def generate_video(self,*args): raise AssertionError('invalid payload should not queue')
+    app=create_app(tmp_path,injected=(config,manager,scheduler,scanner,Media()))
     with TestClient(app) as client:
         requests=[]
         def handler(request):
@@ -92,12 +101,134 @@ def test_media_paths_and_native_overrides_are_restricted(tmp_path):
     assert visual and result['model']=='qwen' and 'adapter_path' not in result
     assert result['messages'][0]['content'][1]['image_url']['url'].endswith('A'*10)
 
+def test_video_duration_is_validated_before_security_scan_or_queue(running):
+    client,app,manager,scanner,*_=running
+    invalid=client.post('/v1/videos/generations',headers=AUTH,json={'prompt':'a short scene','duration':15.01})
+    assert invalid.status_code==422
+    assert '15 seconds' in invalid.json()['error']
+    assert scanner.calls==0 and manager.calls==[]
+    conflict=client.post('/v1/videos/generations',headers=AUTH,json={'prompt':'a short scene','duration':5,'frames':120})
+    assert conflict.status_code==422
+    assert scanner.calls==0 and manager.calls==[]
+
+
+def _submit_h3_video(client, duration):
+    response=client.post('/v1/videos/generations',headers=AUTH,json={'prompt':'a short scene','duration':duration})
+    assert response.status_code==202
+    job_id=response.json()['id']
+    deadline=time.monotonic()+2
+    while time.monotonic()<deadline:
+        job=client.get(f'/v1/jobs/{job_id}',headers=AUTH).json()
+        if job['state'] in ('succeeded','failed','cancelled'): return job
+        time.sleep(.01)
+    raise AssertionError('H3 injected job did not reach a terminal state')
+
+
+def test_h3_short_video_uses_base_estimate_and_records_metadata(running):
+    client,app,manager,scanner,*_=running
+    async def complete(*args): return {'artifact':'fake'}
+    app.state.media.generate_video=complete
+    job=_submit_h3_video(client,5)
+    assert job['state']=='succeeded'
+    assert job['metadata']['estimated_peak_gib']==28.0
+    assert manager.lease_calls==[('minimax-h3',{})]
+
+
+def test_h3_long_video_requests_headroom_and_persists_long_estimate(running):
+    client,app,manager,scanner,*_=running
+    async def complete(*args): return {'artifact':'fake'}
+    app.state.media.generate_video=complete
+    job=_submit_h3_video(client,15)
+    assert job['state']=='succeeded'
+    assert job['metadata']['estimated_peak_gib']==40.0
+    assert manager.lease_calls==[('minimax-h3',{'incremental_gib':12.0})]
+    with sqlite3.connect(f'file:{app.state.scheduler.path}?mode=ro',uri=True) as db:
+        persisted=db.execute('select metadata_json from jobs where id=?',(job['id'],)).fetchone()
+    assert json.loads(persisted[0])['estimated_peak_gib']==40.0
+
+
+@pytest.mark.parametrize(('base_estimate','long_estimate'), [
+    (28, float('nan')), (float('inf'), 40), (41, 40),
+])
+def test_h3_admission_rejects_invalid_estimates_before_scan_or_queue(running, base_estimate, long_estimate):
+    client,app,manager,scanner,*_=running
+    app.state.config['backends']['minimax-h3']['estimate_gib']=base_estimate
+    app.state.config['h3_long_estimate_gib']=long_estimate
+    response=client.post('/v1/videos/generations',headers=AUTH,json={'prompt':'a short scene','duration':15})
+    assert response.status_code==422
+    assert 'estimate' in response.json()['error'] or 'finite positive number' in response.json()['error']
+    assert scanner.calls==0 and manager.calls==[]
+    conflict=client.post('/v1/videos/generations',headers=AUTH,json={'prompt':'a short scene','duration':5,'frames':120})
+    assert conflict.status_code==422
+    assert scanner.calls==0 and manager.calls==[]
+
 def test_context_is_admitted_without_silent_truncation():
     from model_router.mac.app import fits_context
     payload,_=prepare_chat({'messages':[{'role':'user','content':'A'*5000}],'context_length':1024})
     assert payload['_context_length']==1024 and not fits_context(payload,1024)
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'context_length':999999})
     with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'ok'}],'max_tokens':100000})
+
+@pytest.mark.parametrize('effort',['low','medium','xhigh','none','off'])
+def test_reasoning_effort_is_forwarded_and_normalized(effort):
+    payload,_=prepare_chat({'messages':[{'role':'user','content':'hi'}],'reasoning_effort':effort.upper()})
+    assert payload['reasoning_effort']==effort
+
+@pytest.mark.parametrize('effort',[None,True,1,{},[],'high','disabled',' '])
+def test_invalid_reasoning_effort_is_rejected(effort):
+    with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'hi'}],'reasoning_effort':effort})
+
+@pytest.mark.parametrize('budget',[True,1.5,'12',{},-1,8193])
+def test_invalid_thinking_budget_is_rejected(budget):
+    with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'hi'}],'thinking_budget':budget})
+
+def test_thinking_budget_is_bounded_by_completion_limit():
+    payload,_=prepare_chat({'messages':[{'role':'user','content':'hi'}],'max_tokens':512,'thinking_budget':512})
+    assert payload['thinking_budget']==512
+    with pytest.raises(ValueError):prepare_chat({'messages':[{'role':'user','content':'hi'}],'max_tokens':512,'thinking_budget':513})
+
+def test_arex_tool_reasoning_defaults_only_apply_to_tool_calls():
+    profile={'name':'arex','resource':'arex','tool_reasoning_effort':'low','tool_thinking_budget':1024}
+    plain={'messages':[{'role':'user','content':'hello'}],'max_tokens':512}
+    assert apply_tool_reasoning_defaults(plain,profile)==plain
+    with_tools={**plain,'tools':[{'type':'function','function':{'name':'f','parameters':{}}}]}
+    result=apply_tool_reasoning_defaults(with_tools,profile)
+    assert result['reasoning_effort']=='low' and result['thinking_budget']==512
+    explicit={**with_tools,'reasoning_effort':'medium','thinking_budget':128}
+    result=apply_tool_reasoning_defaults(explicit,profile)
+    assert result['reasoning_effort']=='medium' and result['thinking_budget']==128
+    disabled={**with_tools,'reasoning_effort':'off'}
+    assert 'thinking_budget' not in apply_tool_reasoning_defaults(disabled,profile)
+    assert 'reasoning_effort' not in apply_tool_reasoning_defaults(with_tools,{'name':'swift','resource':'swift'})
+
+def test_arex_tool_reasoning_defaults_reach_backend(running):
+    client,app,manager,scanner,_=running
+    app.state.config['chat_models']={'arex':{'resource':'arex','url':'http://arex.test','model':'/local/arex',
+        'vision':True,'context':131072,'tool_reasoning_effort':'low','tool_thinking_budget':1024}}
+    seen=[]
+    def handler(request):
+        body=json.loads(request.content);seen.append(body)
+        return httpx.Response(200,json={'choices':[{'message':{'content':'ok'}}],'usage':{'total_tokens':2}})
+    app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    tools=[{'type':'function','function':{'name':'f','parameters':{'type':'object'}}}]
+    response=client.post('/v1/chat/completions',headers=AUTH,json={'model':'arex','messages':[{'role':'user','content':'call f'}],
+        'tools':tools,'max_tokens':512})
+    assert response.status_code==200
+    assert seen[0]['reasoning_effort']=='low' and seen[0]['thinking_budget']==512
+    assert manager.calls==['arex']
+
+def test_reasoning_values_forward_to_backend_and_invalid_values_stop_before_backend(running):
+    client,app,manager,scanner,requests=running
+    for effort in ('low','none'):
+        response=client.post('/v1/chat/completions',headers=AUTH,json={'model':'qwen','messages':[{'role':'user','content':'hi'}],
+            'reasoning_effort':effort})
+        assert response.status_code==200
+        assert json.loads(requests[-1].content)['reasoning_effort']==effort
+    before=len(requests);leases=len(manager.calls)
+    for field,value in [('reasoning_effort','high'),('reasoning_effort',{}),('thinking_budget',True),('thinking_budget',9000)]:
+        response=client.post('/v1/chat/completions',headers=AUTH,json={'model':'qwen','messages':[{'role':'user','content':'hi'}],field:value})
+        assert response.status_code==422
+    assert len(requests)==before and len(manager.calls)==leases
 
 
 @pytest.fixture
@@ -124,6 +255,8 @@ def routed(tmp_path):
             if 'ornith' in str(request.url) and 'BROKEN' in request.content.decode(): return httpx.Response(500,json={'error':'boom'})
             if 'ornith' in str(request.url) and 'PRINT' in request.content.decode():
                 return httpx.Response(200,json={'choices':[{'message':{'content':'Running it now.\n\n/Users/me/AI/bin/openclaw-local-ai video --text "fox"'},'finish_reason':'stop'}]})
+            if 'ornith' in str(request.url) and 'FAKEMEDIA' in request.content.decode():
+                return httpx.Response(200,json={'choices':[{'message':{'content':'Generating now.\nMEDIA:/Users/me/AI/assets/images/invented.mp4'},'finish_reason':'stop'}]})
             if 'ornith' in str(request.url) and 'CALL' in request.content.decode():
                 call={'id':'c1','type':'function','function':{'name':'exec','arguments':'{"command":"/Users/me/AI/bin/x"}'}}
                 return httpx.Response(200,json={'id':'r1','choices':[{'message':{'content':'On it.','tool_calls':[call]},'finish_reason':'tool_calls'}],'usage':{'total_tokens':5}})
@@ -224,3 +357,26 @@ def test_buffered_tool_call_replays_as_stream(routed):
     assert events[0]['choices'][0]['delta']['tool_calls'][0]['function']['name']=='exec'
     assert events[-1]['choices'][0]['finish_reason']=='tool_calls' and events[-1]['usage']=={'total_tokens':5}
     assert r.text.endswith('data: [DONE]\n\n')
+
+
+def test_fabricated_media_in_first_reply_escalates(routed):
+    client,manager,seen=routed
+    body={'model':'auto','tools':EXEC_TOOL,'messages':[{'role':'user','content':'FAKEMEDIA generate a video'}]}
+    r=client.post('/v1/chat/completions',headers=AUTH,json=body)
+    assert r.status_code==200 and r.json()['model']=='swift'
+    assert 'escalated-from-ornith:printed-command' in r.headers['X-Bubble-Route']
+    assert manager.calls==['ornith','swift']
+    assert 'MEDIA:' not in r.json()['choices'][0]['message']['content']
+    # An attachment after actual tool output is allowed through unchanged.
+    after=body|{'messages':body['messages']+[{'role':'assistant','content':'','tool_calls':[]},{'role':'tool','tool_call_id':'c1','content':'artifact path'}]}
+    r=client.post('/v1/chat/completions',headers=AUTH,json=after)
+    assert r.json()['model']=='ornith'
+
+
+def test_media_guard_preserves_real_tool_calls_and_plain_text():
+    from model_router.mac.app import printed_instead_of_calling
+    def response(content,**extra):
+        return {'choices':[{'message':{'content':content,**extra}}]}
+    assert printed_instead_of_calling(response('Boss.\nMEDIA:/missing/video.mp4'))
+    assert not printed_instead_of_calling(response('Video generation takes a minute.'))
+    assert not printed_instead_of_calling(response('MEDIA:/missing/video.mp4',tool_calls=[{'id':'t1'}]))

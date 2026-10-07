@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from model_router.mac.media import MediaBackend
+from model_router.mac.media import MediaBackend, video_frame_plan
 
 
 def media_paths(tmp_path: Path) -> dict[str, dict[str, str]]:
@@ -71,8 +71,39 @@ def test_asset_only_accepts_approved_roots_and_regular_files(tmp_path):
     outside.unlink()
 
 
+@pytest.mark.parametrize(("duration", "native_frames", "effective_frames"), [
+    (3.0, 73, 72), (5.0, 124, 120), (15.0, 362, 360),
+])
+def test_video_duration_plans_align_native_chunk_then_trim(duration, native_frames, effective_frames):
+    plan = video_frame_plan({"duration": duration})
+    assert plan["requested_seconds"] == duration
+    assert plan["native_frames"] == native_frames
+    assert plan["effective_frames"] == effective_frames
+    assert plan["effective_duration_seconds"] == effective_frames / 24
+
+
+def test_video_duration_defaults_to_three_seconds_and_accepts_seconds_alias():
+    assert video_frame_plan({})["effective_frames"] == 72
+    assert video_frame_plan({"seconds": 5})["native_frames"] == 124
+    assert video_frame_plan({"duration": 5, "seconds": 5})["effective_frames"] == 120
+
+
+@pytest.mark.parametrize("payload", [
+    {"duration": 0}, {"duration": -1}, {"duration": float("nan")},
+    {"duration": float("inf")}, {"duration": 15.001}, {"duration": "5"},
+    {"duration": 3, "seconds": 5}, {"duration": 5, "frames": 120},
+    {"frames": 361}, {"frames": 4},
+])
+def test_video_length_rejects_invalid_or_conflicting_values(payload):
+    with pytest.raises(ValueError):
+        video_frame_plan(payload)
+
+
 @pytest.mark.asyncio
-async def test_video_invokes_only_bounded_manager_owned_command(tmp_path):
+async def test_video_invokes_native_h3_then_trims_and_measures_requested_duration(tmp_path, monkeypatch):
+    for tool in ("ffmpeg", "ffprobe"):
+        (tmp_path / tool).touch()
+    monkeypatch.setattr("model_router.mac.media.shutil.which", lambda name: str(tmp_path / name))
     root = tmp_path
     model = root / "models" / "h3"
     model.mkdir(parents=True)
@@ -87,22 +118,41 @@ async def test_video_invokes_only_bounded_manager_owned_command(tmp_path):
             self.name = None
             self.args = None
             self.cwd = None
+            self.calls = []
 
         async def run_owned(self, name, args, *, cwd=None):
             self.name, self.args, self.cwd = name, list(args), Path(cwd)
-            Path(args[args.index("-o") + 1]).write_bytes(b"mp4")
-            return SimpleNamespace(returncode=0)
+            self.calls.append((list(args), Path(cwd)))
+            if args[0].endswith("h3"):
+                Path(args[args.index("-o") + 1]).write_bytes(b"native-mp4")
+                return SimpleNamespace(returncode=0, stderr=b"", stdout=b"")
+            if args[0].endswith("ffmpeg"):
+                Path(args[-1]).write_bytes(b"trimmed-mp4")
+                return SimpleNamespace(returncode=0, stderr=b"", stdout=b"")
+            return SimpleNamespace(returncode=0, stderr=b"", stdout=(
+                '{"format":{"duration":"5.000000"},"streams":[{"codec_type":"video",'
+                '"nb_frames":"120","r_frame_rate":"24/1"}]}'
+            ).encode())
 
     manager = Manager()
     backend = MediaBackend(manager, paths, root)
     result = await backend.generate_video({"prompt": "slow camera pan", "width": 256, "height": 256,
-                                           "frames": 8, "steps": 4, "seed": 9}, "job-a")
+                                           "duration": 5, "steps": 4, "seed": 9}, "job-a")
     assert manager.name == "minimax-h3"
-    assert manager.cwd == h3_dir
-    assert manager.args[0] == str(exe)
-    assert manager.args[manager.args.index("--frames") + 1] == "8"
-    assert manager.args[manager.args.index("--steps") + 1] == "4"
-    assert result == {"artifact": str(root / "outputs" / "video" / "job-a.mp4"), "content_type": "video/mp4"}
+    h3_args, h3_cwd = manager.calls[0]
+    trim_args, _ = manager.calls[1]
+    assert h3_cwd == h3_dir
+    assert h3_args[0] == str(exe)
+    assert h3_args[h3_args.index("--frames") + 1] == "124"
+    assert h3_args[h3_args.index("--steps") + 1] == "4"
+    assert trim_args[trim_args.index("-frames:v") + 1] == "120"
+    assert result["artifact"] == str(root / "outputs" / "video" / "job-a.mp4")
+    assert result["content_type"] == "video/mp4"
+    assert result["requested_seconds"] == 5
+    assert result["native_frames"] == 124
+    assert result["effective_frames"] == result["actual_frames"] == 120
+    assert result["actual_duration_seconds"] == 5
+    assert result["actual_fps"] == 24
 
 
 @pytest.mark.asyncio

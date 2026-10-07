@@ -265,7 +265,11 @@ class Scheduler:
             estimate_fn = getattr(profile, "estimate", None)
             try:
                 estimate = estimate_fn(resource) if builtins.callable(estimate_fn) else getattr(profile, "estimate_gib", None)
-                if estimate is not None and float(estimate) > 0:
+                if estimate is not None and math.isfinite(float(estimate)) and float(estimate) > 0:
+                    metadata_estimate = clean_metadata.get("estimated_peak_gib", 0.0)
+                    if (isinstance(metadata_estimate, (int, float)) and not isinstance(metadata_estimate, bool)
+                            and math.isfinite(float(metadata_estimate)) and float(metadata_estimate) > 0):
+                        estimate = max(float(estimate), float(metadata_estimate))
                     clean_metadata["estimated_peak_gib"] = float(estimate)
             except (TypeError, ValueError, AttributeError):
                 pass

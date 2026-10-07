@@ -28,6 +28,7 @@ from typing import Any, Mapping, Sequence
 GIB = 1024**3
 EXCLUSIVE_WAIT_SECONDS = 900.0
 RECLAIM_WAIT_SECONDS = 15.0
+RUNTIME_GUARD_POLL_SECONDS = 1.0
 DEFAULT_ESTIMATES_GIB = {
     "qwen-vlm": 20.0,
     "qwen-audio": 8.0,
@@ -65,6 +66,11 @@ class BackendConfig:
     exclusive_group: str | None = None
     health_timeout: float = 300.0
     env: Mapping[str, str] | None = None
+    # Optional in-flight guard for one-shot jobs. The manager watches system
+    # availability below reserve+margin, memory-pressure state, and swap
+    # growth from the pre-spawn baseline.
+    runtime_memory_margin_gib: float | None = None
+    runtime_swap_growth_gib: float | None = None
 
     def estimate(self, name: str) -> float:
         value = self.estimate_gib
@@ -864,6 +870,12 @@ class ResourceManager:
         command = [*config.command, *map(str, args)] if config.command else list(map(str, args))
         if not command:
             raise ResourceError(f"no command supplied for {name}")
+        guard = self._runtime_guard_settings(config, name)
+        baseline = self._runtime_guard_snapshot(name) if guard is not None else None
+        if guard is not None and baseline is not None:
+            violation = self._runtime_guard_violation(name, baseline, baseline, *guard)
+            if violation:
+                raise ResourceAdmissionError(violation)
         env = os.environ.copy()
         if config.env:
             env.update({str(key): str(value) for key, value in config.env.items()})
@@ -886,7 +898,14 @@ class ResourceManager:
         )
         self._write_journal()
         try:
-            out, err = await process.communicate(input_data)
+            if guard is not None and baseline is not None:
+                communication = asyncio.create_task(process.communicate(input_data))
+                await self._communicate_with_runtime_guard(
+                    name, process, communication, baseline, *guard
+                )
+                out, err = await communication
+            else:
+                out, err = await process.communicate(input_data)
             return subprocess.CompletedProcess(command, int(process.returncode or 0), out, err or b"")
         except asyncio.CancelledError:
             await self._terminate(process)
@@ -894,6 +913,123 @@ class ResourceManager:
         finally:
             self._oneshots.pop(process.pid, None)
             self._write_journal()
+
+    def _runtime_guard_settings(self, config: BackendConfig, name: str) -> tuple[float | None, float | None] | None:
+        margin = config.runtime_memory_margin_gib
+        swap_growth = config.runtime_swap_growth_gib
+        if margin is None and swap_growth is None:
+            return None
+        for field_name, value in (
+            ("runtime_memory_margin_gib", margin),
+            ("runtime_swap_growth_gib", swap_growth),
+        ):
+            if value is not None and (
+                isinstance(value, bool) or not isinstance(value, (int, float))
+                or not math.isfinite(float(value)) or float(value) <= 0
+            ):
+                raise ValueError(f"{field_name} for {name} must be finite and positive")
+        return (float(margin) if margin is not None else None,
+                float(swap_growth) if swap_growth is not None else None)
+
+    def _runtime_guard_snapshot(self, name: str) -> MemorySnapshot:
+        try:
+            snapshot = self._snapshot()
+            if (not math.isfinite(snapshot.available_gib) or snapshot.available_gib < 0
+                    or not math.isfinite(snapshot.swap_used_gib) or snapshot.swap_used_gib < 0):
+                raise ValueError("telemetry returned invalid memory counters")
+            return snapshot
+        except Exception as exc:
+            raise ResourceAdmissionError(
+                f"runtime memory guard telemetry failed for {name}: {type(exc).__name__}"
+            ) from exc
+
+    async def _watch_runtime_memory(
+        self,
+        name: str,
+        process: asyncio.subprocess.Process,
+        baseline: MemorySnapshot,
+        margin_gib: float | None,
+        swap_growth_gib: float | None,
+    ) -> None:
+        while process.returncode is None:
+            await asyncio.sleep(RUNTIME_GUARD_POLL_SECONDS)
+            if process.returncode is not None:
+                return
+            snapshot = await asyncio.to_thread(self._runtime_guard_snapshot, name)
+            if process.returncode is not None:
+                return
+            violation = self._runtime_guard_violation(
+                name, snapshot, baseline, margin_gib, swap_growth_gib
+            )
+            if violation:
+                raise ResourceAdmissionError(violation)
+
+    def _runtime_guard_violation(
+        self,
+        name: str,
+        snapshot: MemorySnapshot,
+        baseline: MemorySnapshot,
+        margin_gib: float | None,
+        swap_growth_gib: float | None,
+    ) -> str | None:
+        floor = self.reserve_gib + (margin_gib or 0.0)
+        if margin_gib is not None and snapshot.available_gib < floor:
+            return (f"runtime memory guard stopped {name}: available={snapshot.available_gib:.1f}GiB "
+                    f"below reserve+margin={floor:.1f}GiB")
+        if self._pressure_is_high(snapshot.pressure):
+            return f"runtime memory guard stopped {name}: memory pressure warning/high"
+        if (swap_growth_gib is not None
+                and snapshot.swap_used_gib - baseline.swap_used_gib > swap_growth_gib):
+            return f"runtime memory guard stopped {name}: swap growth exceeded {swap_growth_gib:.1f}GiB"
+        return None
+
+    async def _communicate_with_runtime_guard(
+        self,
+        name: str,
+        process: asyncio.subprocess.Process,
+        communication: asyncio.Task[tuple[bytes, bytes]],
+        baseline: MemorySnapshot,
+        margin_gib: float | None,
+        swap_growth_gib: float | None,
+    ) -> None:
+        monitor = asyncio.create_task(self._watch_runtime_memory(
+            name, process, baseline, margin_gib, swap_growth_gib
+        ))
+        try:
+            done, _ = await asyncio.wait(
+                (communication, monitor), return_when=asyncio.FIRST_COMPLETED
+            )
+            if monitor in done:
+                try:
+                    monitor.result()
+                except ResourceAdmissionError:
+                    await self._terminate(process)
+                    await communication
+                    raise
+                except asyncio.CancelledError as exc:
+                    await self._terminate(process)
+                    await communication
+                    raise ResourceAdmissionError(
+                        f"runtime memory guard monitor was cancelled for {name}"
+                    ) from exc
+                except Exception as exc:
+                    await self._terminate(process)
+                    await communication
+                    raise ResourceAdmissionError(
+                        f"runtime memory guard monitor failed for {name}: {type(exc).__name__}"
+                    ) from exc
+            monitor.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await monitor
+            await communication
+        except asyncio.CancelledError:
+            monitor.cancel()
+            await self._terminate(process)
+            with contextlib.suppress(BaseException):
+                await asyncio.shield(communication)
+            with contextlib.suppress(asyncio.CancelledError):
+                await monitor
+            raise
 
     async def stop_owned_oneshots(self) -> None:
         """Stop only one-shot subprocess groups this manager currently owns."""

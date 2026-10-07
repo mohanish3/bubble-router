@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import sys
+import threading
 
 import pytest
 
@@ -22,6 +23,20 @@ class FakeTelemetry:
 
     def snapshot(self):
         return MemorySnapshot(self.available, 0.0, 0.0, self.pressure, self.vm_stat)
+
+
+class SequenceTelemetry:
+    def __init__(self, snapshots):
+        self.snapshots = list(snapshots)
+        self.lock = threading.Lock()
+
+    def snapshot(self):
+        with self.lock:
+            if len(self.snapshots) > 1:
+                return self.snapshots.pop(0)
+            if self.snapshots:
+                return self.snapshots[0]
+            raise RuntimeError("telemetry unavailable")
 
 
 @pytest.mark.asyncio
@@ -258,6 +273,135 @@ async def test_cancelling_during_health_wait_stops_starting_server():
     with pytest.raises(asyncio.CancelledError):
         await task
     assert not (await manager.status())["resources"]["qwen-vlm"]["running"]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("trigger", ["available", "pressure", "swap", "telemetry"])
+async def test_runtime_guard_stops_only_owned_process_on_memory_trigger(tmp_path, monkeypatch, trigger):
+    import model_router.mac.resources as resources
+
+    pytest.importorskip("psutil")
+    monkeypatch.setattr(resources, "RUNTIME_GUARD_POLL_SECONDS", 0.01)
+    baseline = MemorySnapshot(64.0, 2.0, 0.0, "normal")
+    changes = {
+        "available": MemorySnapshot(15.9, 2.0, 0.0, "normal"),
+        "pressure": MemorySnapshot(64.0, 2.0, 0.0, "warning"),
+        "swap": MemorySnapshot(64.0, 3.1, 0.0, "normal"),
+    }
+
+    class ErrorAfterBaseline:
+        calls = 0
+        def snapshot(self):
+            self.calls += 1
+            if self.calls == 1:
+                return baseline
+            raise RuntimeError("telemetry fault")
+
+    telemetry = ErrorAfterBaseline() if trigger == "telemetry" else SequenceTelemetry([baseline, changes[trigger]])
+    outsider = await asyncio.create_subprocess_exec(
+        sys.executable, "-c", "import time; time.sleep(60)",
+        start_new_session=True,
+        stdout=asyncio.subprocess.DEVNULL,
+        stderr=asyncio.subprocess.DEVNULL,
+    )
+    journal = tmp_path / "owned-processes.json"
+    manager = ResourceManager(
+        {"minimax-h3": BackendConfig(
+            persistent=False,
+            runtime_memory_margin_gib=4,
+            runtime_swap_growth_gib=1,
+        )},
+        telemetry=telemetry,
+        ownership_path=journal,
+    )
+    task = asyncio.create_task(manager.run_owned(
+        "minimax-h3", [sys.executable, "-c", "import time; time.sleep(60)"]
+    ))
+    try:
+        while not journal.exists():
+            await asyncio.sleep(0.005)
+        pid = json.loads(journal.read_text())["oneshots"][0]["pid"]
+        with pytest.raises(ResourceAdmissionError, match="runtime memory guard"):
+            await asyncio.wait_for(task, timeout=5)
+        assert not __import__("psutil").pid_exists(pid)
+        assert outsider.returncode is None
+        assert json.loads(journal.read_text())["oneshots"] == []
+    finally:
+        if not task.done():
+            task.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await task
+        if outsider.returncode is None:
+            outsider.terminate()
+            await outsider.wait()
+
+
+@pytest.mark.asyncio
+async def test_runtime_guard_allows_normal_completion_and_drains_output(monkeypatch):
+    import model_router.mac.resources as resources
+
+    monkeypatch.setattr(resources, "RUNTIME_GUARD_POLL_SECONDS", 0.01)
+    manager = ResourceManager(
+        {"minimax-h3": BackendConfig(
+            persistent=False,
+            runtime_memory_margin_gib=4,
+            runtime_swap_growth_gib=1,
+        )},
+        telemetry=FakeTelemetry(available=64.0),
+    )
+    result = await asyncio.wait_for(
+        manager.run_owned("minimax-h3", [sys.executable, "-c", "print('complete')"]), timeout=5
+    )
+    assert result.returncode == 0 and result.stdout == b"complete\n"
+    assert not (await manager.status())["ownership"]["owned_oneshots"]
+
+
+@pytest.mark.asyncio
+async def test_cancelling_runtime_guard_cleans_owned_child_and_journal(tmp_path, monkeypatch):
+    import model_router.mac.resources as resources
+
+    pytest.importorskip("psutil")
+    monkeypatch.setattr(resources, "RUNTIME_GUARD_POLL_SECONDS", 0.01)
+    journal = tmp_path / "owned-processes.json"
+    manager = ResourceManager(
+        {"minimax-h3": BackendConfig(
+            persistent=False,
+            runtime_memory_margin_gib=4,
+            runtime_swap_growth_gib=1,
+        )},
+        telemetry=FakeTelemetry(available=64.0),
+        ownership_path=journal,
+    )
+    task = asyncio.create_task(manager.run_owned(
+        "minimax-h3", [sys.executable, "-c", "import time; time.sleep(60)"]
+    ))
+    while not journal.exists():
+        await asyncio.sleep(0.005)
+    pid = json.loads(journal.read_text())["oneshots"][0]["pid"]
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await asyncio.wait_for(task, timeout=5)
+    assert not __import__("psutil").pid_exists(pid)
+    assert json.loads(journal.read_text())["oneshots"] == []
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("field,value", [
+    ("runtime_memory_margin_gib", 0),
+    ("runtime_memory_margin_gib", float("inf")),
+    ("runtime_swap_growth_gib", -1),
+    ("runtime_swap_growth_gib", True),
+])
+async def test_runtime_guard_configuration_is_validated_before_spawn(tmp_path, field, value):
+    journal = tmp_path / "owned-processes.json"
+    manager = ResourceManager(
+        {"minimax-h3": BackendConfig(persistent=False, **{field: value})},
+        telemetry=FakeTelemetry(),
+        ownership_path=journal,
+    )
+    with pytest.raises(ValueError, match=field):
+        await manager.run_owned("minimax-h3", [sys.executable, "-c", "raise SystemExit(0)"])
+    assert not journal.exists()
 
 
 @pytest.mark.asyncio

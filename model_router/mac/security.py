@@ -10,6 +10,7 @@ import asyncio
 import copy
 import hashlib
 import logging
+import math
 import os
 import re
 import threading
@@ -29,6 +30,14 @@ CHUNK_CHARS = 1_000
 CHUNK_OVERLAP = 200
 QUARANTINE_MARKER = "[Security quarantine: suspicious external content omitted]"
 _SCORE_CACHE_LIMIT = 2_048
+_PREDICTION_RESCAN_OVERLAP = 64
+_PREDICTION_RESCAN_MIN_CHARS = 64
+_PREDICTION_RESCAN_MAX_DEPTH = 4
+# Laya leaves ~483 state tokens for two-option questions; keep room for the message wrapper.
+# Non-Latin text runs ~4x the tokens per character of English, so 1,000-character chunks of it
+# would otherwise truncate and be rescanned only after a wasted prediction.
+_STATE_TOKEN_BUDGET = 420
+_CPU_THREADS = 4
 
 # A user's own message asking to send data or run a tool is a request, not an
 # attack; those categories only flag user turns. Tool output still quarantines
@@ -140,6 +149,18 @@ _STRONG_PATTERNS: dict[str, re.Pattern[str]] = {
     ),
 }
 
+# Tool adapters often serialize a page or command result as ``Page text:
+# <untrusted text>``. The colon is a useful boundary for direct instructions,
+# but only for tool/external content: applying it to ordinary user prose would
+# flag benign descriptions such as "The article says: ...". Quoted and inline
+# code examples do not match because the directive is not the first token after
+# the colon.
+_TOOL_COLON_INJECTION = re.compile(
+    r"(?:^|:)\s*(?:please\s+)?(ignore|disregard|override|forget)\s+(all\s+)?"
+    r"(the\s+)?(previous|prior|above|system|developer)\s+(instructions?|rules?|directives?)\b",
+    re.I,
+)
+
 
 class SecurityError(RuntimeError):
     """Base class for fail-closed screening errors."""
@@ -155,6 +176,10 @@ class SecurityInputTooLarge(SecurityError):
 
 class _ScanCancelled(Exception):
     """Internal signal used to stop worker-thread scans after client disconnect."""
+
+
+class _IncompletePrediction(Exception):
+    """Laya returned a truncated or incomplete set of security answers."""
 
 
 @dataclass
@@ -257,7 +282,7 @@ class SecurityScanner:
         self._cache_lock = threading.Lock()
         self._route_cache: OrderedDict[tuple[str, ...], dict[str, float]] = OrderedDict()
         self._score_cache: OrderedDict[
-            tuple[str, str, str, str], tuple[tuple[str, float, float], ...]
+            tuple[str, str, str, str], tuple[tuple[str, float, float, str, float], ...]
         ] = OrderedDict()
         self._stats = {
             "scans": 0,
@@ -280,17 +305,18 @@ class SecurityScanner:
             if self._load_error:
                 raise SecurityUnavailable("security model is unavailable") from RuntimeError(self._load_error)
             try:
-                # Bound native CPU thread pools before importing the model.
-                # The service also sets these in its LaunchAgent environment.
-                os.environ["OMP_NUM_THREADS"] = "1"
-                os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+                # Bound native CPU thread pools before importing the model. Chat models run on
+                # the GPU, so a few CPU threads cut Laya latency (1.1 s -> 0.8 s per English
+                # chunk, 2.2 s -> 1.4 s per dense-script piece) without crowding other work.
+                os.environ["OMP_NUM_THREADS"] = str(_CPU_THREADS)
+                os.environ["VECLIB_MAXIMUM_THREADS"] = str(_CPU_THREADS)
                 import laya
 
                 agent = laya.load(self.path, device="cpu")
                 try:
                     import torch
 
-                    torch.set_num_threads(1)
+                    torch.set_num_threads(_CPU_THREADS)
                 except (ImportError, RuntimeError):
                     pass
                 with self._status_lock:
@@ -428,7 +454,7 @@ class SecurityScanner:
                         self._check_cancelled(cancelled)
                         report.raw_scores.append({"message_index": index, "chunk_start": start, "scores": scores})
                         score = max(scores.values(), default=0.0)
-                        rule_categories = self._matched_rule_categories(chunk)
+                        rule_categories = self._matched_rule_categories(chunk, source=source)
                         if not self.policy.enforce_model:
                             categories = set(rule_categories)
                         categories.update(rule_categories)
@@ -560,38 +586,26 @@ class SecurityScanner:
         if cached_scores is not None:
             with self._status_lock:
                 self._stats["cache_hits"] += 1
-            probability_pairs = {name: (prob_a, prob_b) for name, prob_a, prob_b in cached_scores}
-            scores = {name: probs[0] for name, probs in probability_pairs.items()}
+            scores = {name: prob_a for name, prob_a, _prob_b, _choice, _flag_score in cached_scores}
             categories = {
                 name
-                for name, (prob_a, prob_b) in probability_pairs.items()
-                if prob_a >= prob_b and prob_a >= self.policy.quarantine_threshold
+                for name, _prob_a, _prob_b, _choice, flag_score in cached_scores
+                if flag_score >= self.policy.quarantine_threshold
             }
             return scores, categories
 
         with self._status_lock:
             self._stats["cache_misses"] += 1
         with self._lock:
-            result = self._agent.predict({"source": f"{source} message", "content": text}, _QUESTION)
-        usage = result.get("usage", {})
-        if usage.get("truncated") or usage.get("truncated_questions"):
-            raise RuntimeError("Laya truncated one or more security questions")
-        answers = result.get("answers", {})
-        scores: dict[str, float] = {}
-        categories: set[str] = set()
-        probability_pairs: dict[str, tuple[float, float]] = {}
-        for category in _QUESTION:
-            answer = answers.get(category, {})
-            probs = answer.get("probabilities", {})
-            score = float(probs.get("A", 1.0 if answer.get("choice") == "A" else 0.0))
-            scores[category] = max(0.0, min(1.0, score))
-            score_b = max(0.0, min(1.0, float(probs.get("B", 0.0))))
-            probability_pairs[category] = (scores[category], score_b)
-            if answer.get("choice") == "A" and score >= self.policy.quarantine_threshold:
-                categories.add(category)
+            scores, probability_pairs = self._predict_fitted(text, source)
+        categories = {
+            name
+            for name, (_prob_a, _prob_b, _choice, flag_score) in probability_pairs.items()
+            if flag_score >= self.policy.quarantine_threshold
+        }
         immutable_scores = tuple(
-            (name, probabilities[0], probabilities[1])
-            for name, probabilities in sorted(probability_pairs.items())
+            (name, values[0], values[1], values[2], values[3])
+            for name, values in sorted(probability_pairs.items())
         )
         with self._cache_lock:
             self._score_cache[key] = immutable_scores
@@ -599,6 +613,114 @@ class SecurityScanner:
             if len(self._score_cache) > _SCORE_CACHE_LIMIT:
                 self._score_cache.popitem(last=False)
         return scores, categories
+
+    def _predict_complete(
+        self, text: str, source: str
+    ) -> tuple[dict[str, float], dict[str, tuple[float, float, str, float]]]:
+        """Return one complete inference result, rejecting truncation and missing answers."""
+        result = self._agent.predict({"source": f"{source} message", "content": text}, _QUESTION)
+        if not isinstance(result, Mapping):
+            raise _IncompletePrediction("Laya returned an invalid security result")
+        usage = result.get("usage", {})
+        if isinstance(usage, Mapping) and (usage.get("truncated") or usage.get("truncated_questions")):
+            raise _IncompletePrediction("Laya truncated one or more security questions")
+        answers = result.get("answers")
+        if not isinstance(answers, Mapping) or any(category not in answers for category in _QUESTION):
+            raise _IncompletePrediction("Laya omitted one or more security answers")
+
+        scores: dict[str, float] = {}
+        probability_pairs: dict[str, tuple[float, float, str, float]] = {}
+        for category in _QUESTION:
+            answer = answers.get(category)
+            if not isinstance(answer, Mapping):
+                raise _IncompletePrediction("Laya returned an invalid security answer")
+            probs = answer.get("probabilities", {})
+            if not isinstance(probs, Mapping):
+                raise _IncompletePrediction("Laya returned invalid security probabilities")
+            choice = answer.get("choice")
+            has_pair = "A" in probs and "B" in probs
+            if choice not in {"A", "B"}:
+                if not has_pair:
+                    raise _IncompletePrediction("Laya omitted a security choice and its probabilities")
+                try:
+                    choice = "A" if float(probs["A"]) >= float(probs["B"]) else "B"
+                except (TypeError, ValueError, OverflowError):
+                    raise _IncompletePrediction("Laya returned invalid security probabilities") from None
+            try:
+                score = float(probs.get("A", 1.0 if choice == "A" else 0.0))
+                score_b = float(probs.get("B", 1.0 if choice == "B" else 0.0))
+            except (TypeError, ValueError, OverflowError):
+                raise _IncompletePrediction("Laya returned invalid security probabilities") from None
+            if not math.isfinite(score) or not math.isfinite(score_b):
+                raise _IncompletePrediction("Laya returned invalid security probabilities")
+            scores[category] = max(0.0, min(1.0, score))
+            probability_pairs[category] = (
+                scores[category],
+                max(0.0, min(1.0, score_b)),
+                choice,
+                scores[category] if choice == "A" else 0.0,
+            )
+        return scores, probability_pairs
+
+    def _predict_fitted(
+        self, text: str, source: str
+    ) -> tuple[dict[str, float], dict[str, tuple[float, float, str, float]]]:
+        """Predict text, first splitting it into overlapping pieces that fit Laya's token budget."""
+        pieces = [text]
+        tokenizer = getattr(self._agent, "tok", None)
+        if tokenizer is not None:
+            try:
+                tokens = len(tokenizer(text, add_special_tokens=False)["input_ids"])
+            except Exception:
+                tokens = 0
+            count = -(-tokens // _STATE_TOKEN_BUDGET)
+            if count > 1:
+                size = -(-len(text) // count)
+                pieces = [text[max(0, start - _PREDICTION_RESCAN_OVERLAP):start + size]
+                          for start in range(0, len(text), size)]
+        results = []
+        for piece in pieces:
+            try:
+                results.append(self._predict_complete(piece, source)[1])
+            except _IncompletePrediction:
+                results.append(self._predict_by_splitting(piece, source)[1])
+        return self._combine_pairs(results)
+
+    @staticmethod
+    def _combine_pairs(
+        results: list[dict[str, tuple[float, float, str, float]]]
+    ) -> tuple[dict[str, float], dict[str, tuple[float, float, str, float]]]:
+        """Keep each category's highest score across overlapping slices."""
+        combined: dict[str, tuple[float, float, str, float]] = {}
+        for category in _QUESTION:
+            candidates = [result[category] for result in results]
+            winner = max(candidates, key=lambda pair: pair[0])
+            flag_score = max(pair[3] for pair in candidates)
+            combined[category] = (winner[0], winner[1], winner[2], flag_score)
+        return {name: values[0] for name, values in combined.items()}, combined
+
+    def _predict_by_splitting(
+        self, text: str, source: str, depth: int = 0
+    ) -> tuple[dict[str, float], dict[str, tuple[float, float, str, float]]]:
+        """Rescan all text in smaller overlapping slices after incomplete inference."""
+        if depth >= _PREDICTION_RESCAN_MAX_DEPTH or len(text) <= _PREDICTION_RESCAN_MIN_CHARS:
+            raise RuntimeError("Laya security inference remained incomplete after bounded rescanning")
+        midpoint = len(text) // 2
+        overlap = min(_PREDICTION_RESCAN_OVERLAP, max(1, len(text) // 8))
+        left_end = min(len(text), midpoint + overlap)
+        right_start = max(0, midpoint - overlap)
+        left_text, right_text = text[:left_end], text[right_start:]
+        if not left_text or not right_text or (left_text == text and right_text == text):
+            raise RuntimeError("Laya security inference remained incomplete after bounded rescanning")
+
+        results: list[dict[str, tuple[float, float, str, float]]] = []
+        for part in (left_text, right_text):
+            try:
+                _scores, pairs = self._predict_complete(part, source)
+            except _IncompletePrediction:
+                _scores, pairs = self._predict_by_splitting(part, source, depth + 1)
+            results.append(pairs)
+        return self._combine_pairs(results)
 
     def _source(self, message: Mapping[str, Any]) -> str:
         explicit = str(message.get("source", message.get("provenance", ""))).lower()
@@ -693,8 +815,11 @@ class SecurityScanner:
         return any(pattern.search(text) for pattern in _STRONG_PATTERNS.values())
 
     @staticmethod
-    def _matched_rule_categories(text: str) -> set[str]:
-        return {category for category, pattern in _STRONG_PATTERNS.items() if pattern.search(text)}
+    def _matched_rule_categories(text: str, source: str = "user") -> set[str]:
+        categories = {category for category, pattern in _STRONG_PATTERNS.items() if pattern.search(text)}
+        if source in {"tool", "external"} and _TOOL_COLON_INJECTION.search(text):
+            categories.add("injection")
+        return categories
 
     @staticmethod
     def _safe_exact_output_request(text: str) -> bool:

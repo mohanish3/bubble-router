@@ -5,6 +5,7 @@ import hashlib
 import copy
 import dataclasses
 import json
+import math
 import os
 import re
 import secrets
@@ -19,7 +20,7 @@ from fastapi.responses import JSONResponse, StreamingResponse, Response, FileRes
 from .resources import BackendConfig, ResourceManager
 from .scheduler import Scheduler, QueueFullError, SchedulerDrainingError
 from .security import SecurityScanner, SecurityPolicy, SecurityBlocked, SecurityUnavailable, SecurityInputTooLarge
-from .media import MediaBackend
+from .media import MediaBackend, video_frame_plan
 
 ROOT = Path(os.environ.get('AI_STACK_ROOT', str(Path.home() / 'AI')))
 
@@ -53,14 +54,15 @@ def fits_context(payload, context):
 
 
 # A line that runs a local program: `/path/prog args`, `~/path/prog`, or a `$ ` prompt.
+UNVERIFIED_MEDIA_RE = re.compile(r'(?:^|\s)MEDIA:\S+', re.M)
 UNRUN_COMMAND_RE = re.compile(r'^\s*(?:\$\s+\S|(?:/|~/)[\w.-]+/[\w./-]*[\w-]+(?:\s|$))', re.M)
 
 
 def printed_instead_of_calling(result):
-    """True when a tool-enabled reply prints a local command but calls no tool,
-    i.e. the model described the action instead of taking it."""
+    """Detect a first-turn command or media attachment without a tool call."""
     message = (result.get('choices') or [{}])[0].get('message') or {}
-    return not message.get('tool_calls') and bool(UNRUN_COMMAND_RE.search(message.get('content') or ''))
+    content = message.get('content') or ''
+    return not message.get('tool_calls') and bool(UNRUN_COMMAND_RE.search(content) or UNVERIFIED_MEDIA_RE.search(content))
 
 
 def completion_as_sse(result):
@@ -115,7 +117,7 @@ def safe_asset(value: str, root: Path = ROOT) -> Path:
     return path
 
 def prepare_chat(payload, root=ROOT):
-    allowed = {'model','messages','max_tokens','max_completion_tokens','stream','stream_options','temperature','top_p','seed','tools','tool_choice','parallel_tool_calls','response_format','stop','frequency_penalty','presence_penalty','context_length'}
+    allowed = {'model','messages','max_tokens','max_completion_tokens','stream','stream_options','temperature','top_p','seed','tools','tool_choice','parallel_tool_calls','response_format','stop','frequency_penalty','presence_penalty','context_length','reasoning_effort','thinking_budget'}
     result = {key:copy.deepcopy(value) for key,value in payload.items() if key in allowed}
     result['model'] = 'qwen'
     if not isinstance(result.get('messages'), list) or not result['messages']:
@@ -123,6 +125,19 @@ def prepare_chat(payload, root=ROOT):
     max_tokens = int(result.get('max_tokens', result.pop('max_completion_tokens', 2048)))
     if not 1 <= max_tokens <= 8192: raise ValueError('max_tokens must be 1..8192')
     result['max_tokens'] = max_tokens
+    if 'reasoning_effort' in result:
+        effort = result['reasoning_effort']
+        if not isinstance(effort, str): raise ValueError('reasoning_effort must be a supported string')
+        effort = effort.strip().lower()
+        if effort not in {'low','medium','xhigh','none','off'}:
+            raise ValueError('reasoning_effort must be low, medium, xhigh, none, or off')
+        result['reasoning_effort'] = effort
+    if 'thinking_budget' in result:
+        budget = result['thinking_budget']
+        if isinstance(budget, bool) or not isinstance(budget, int):
+            raise ValueError('thinking_budget must be an integer')
+        if not 0 <= budget <= min(max_tokens, 8192):
+            raise ValueError('thinking_budget must be 0..max_tokens (up to 8192)')
     # The context budget is checked per model after routing (check_context).
     if 'context_length' in result:
         context = int(result.pop('context_length'))
@@ -148,6 +163,26 @@ def prepare_chat(payload, root=ROOT):
                         else: item[key] = url
     return result, visual
 
+def apply_tool_reasoning_defaults(payload, target):
+    """Bound AREX reasoning on tool calls unless the caller explicitly chose values."""
+    if not payload.get('tools'):
+        return payload
+    profile = target or {}
+    if profile.get('resource') != 'arex' and profile.get('name') != 'arex':
+        return payload
+    result = dict(payload)
+    if 'reasoning_effort' not in result:
+        effort = profile.get('tool_reasoning_effort', 'low')
+        if not isinstance(effort, str) or effort.strip().lower() not in {'low','medium','xhigh','none','off'}:
+            raise ValueError('AREX tool_reasoning_effort configuration is invalid')
+        result['reasoning_effort'] = effort.strip().lower()
+    if 'thinking_budget' not in result and result.get('reasoning_effort') not in {'none','off'}:
+        budget = profile.get('tool_thinking_budget', 1024)
+        if isinstance(budget, bool) or not isinstance(budget, int) or not 0 <= budget <= 8192:
+            raise ValueError('AREX tool_thinking_budget configuration must be 0..8192')
+        result['thinking_budget'] = min(budget, result.get('max_tokens', 2048))
+    return result
+
 def chat_incremental_gib(payload):
     # The pinned Qwen config has 16 full-attention layers, 4 KV heads and
     # 256-dimensional BF16 keys/values: 65536 bytes per cached token.
@@ -160,6 +195,30 @@ def chat_incremental_gib(payload):
                   for item in message['content'] if item.get('type') in ('image_url','video_url','input_video'))
     tokens = min(131072, tokens + visuals * 16384)
     return 4.0 + tokens * 65536 / 1024**3
+
+
+def h3_video_admission(config, payload):
+    """Return the H3 frame plan and duration-aware memory admission values."""
+    plan = video_frame_plan(payload)
+    profile = config.get('backends', {}).get('minimax-h3', {})
+    base_value = profile.get('estimate_gib', 40.0) if isinstance(profile, dict) else None
+    long_value = config.get('h3_long_estimate_gib', 40.0)
+    def finite_positive(name, value):
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f'{name} must be a finite positive number')
+        try: numeric = float(value)
+        except (OverflowError, ValueError) as exc: raise ValueError(f'{name} must be a finite positive number') from exc
+        if not math.isfinite(numeric) or numeric <= 0:
+            raise ValueError(f'{name} must be a finite positive number')
+        return numeric
+    base = finite_positive('minimax-h3 estimate_gib', base_value)
+    long_peak = finite_positive('h3_long_estimate_gib', long_value)
+    if long_peak < base:
+        raise ValueError('h3_long_estimate_gib must be at least the H3 base estimate')
+    needs_long_headroom = plan['native_frames'] > 124
+    peak = long_peak if needs_long_headroom else base
+    incremental = max(0.0, long_peak - base) if needs_long_headroom else 0.0
+    return plan, incremental, peak
 
 def create_app(root: Path = ROOT, *, injected=None):
     @asynccontextmanager
@@ -394,6 +453,7 @@ def create_app(root: Path = ROOT, *, injected=None):
                 name, reason = longest, reason + ';long-context'
             else:
                 raise HTTPException(422, 'Text exceeds the model context budget')
+        payload = apply_tool_reasoning_defaults(payload, {'name':name, **targets[name]})
         meta = metadata(request)
         attempts = [name]
         # Ornith is the first try for general work; if it fails before
@@ -500,16 +560,24 @@ def create_app(root: Path = ROOT, *, injected=None):
         required='abenzerps/Qwen-Image-2.1-Uncensored-GGUF' if resource=='qwen-image' else 'MiniMaxAI/MiniMax-H3'
         if required not in paths: raise HTTPException(503,'Selected model download is not complete')
         payload = await request.json()
+        h3_incremental = 0.0
+        job_metadata = metadata(request)
+        if resource == 'minimax-h3':
+            _, h3_incremental, peak = h3_video_admission(app.state.config, payload)
+            job_metadata['estimated_peak_gib'] = peak
         messages=[{'role':'user','content':payload.get('prompt','')}]
         if payload.get('negative_prompt'): messages.append({'role':'user','content':payload['negative_prompt']})
         filtered, _ = await scan(messages, metadata(request))
         payload['prompt'] = filtered[0]['content']
         if len(filtered)>1: payload['negative_prompt']=filtered[1]['content']
         async def operation(job):
-            async with app.state.manager.lease(resource):
+            lease = (app.state.manager.lease(resource, incremental_gib=h3_incremental)
+                     if resource == 'minimax-h3' and h3_incremental > 0
+                     else app.state.manager.lease(resource))
+            async with lease:
                 app.state.metrics['backend_requests'] += 1
                 return await method(payload,job.id)
-        job = await app.state.scheduler.submit(resource,4 if resource=='qwen-image' else 5,operation,metadata(request))
+        job = await app.state.scheduler.submit(resource,4 if resource=='qwen-image' else 5,operation,job_metadata)
         job.future.add_done_callback(lambda f:f.exception() if not f.cancelled() else None)
         return JSONResponse({'id':job.id,'status':'queued','url':f'/v1/jobs/{job.id}'},status_code=202)
     @app.post('/v1/images/generations')
