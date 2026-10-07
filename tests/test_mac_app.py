@@ -447,3 +447,11 @@ def test_chat_incremental_estimate_uses_model_kv_size_and_bytes_per_token():
     assert chat_incremental_gib(payload)==pytest.approx(4.0+tokens*65536/1024**3)
     assert chat_incremental_gib(payload,20480)==pytest.approx(4.0+tokens*20480/1024**3)
     assert chat_incremental_gib(payload,20480)<chat_incremental_gib(payload)<6.1
+
+
+def test_sampling_defaults_fill_only_missing_values():
+    from model_router.mac.app import apply_sampling_defaults
+    assert apply_sampling_defaults({'model':'m'},{}) == {'model':'m','temperature':1.0,'top_p':0.95,'top_k':20}
+    assert apply_sampling_defaults({'model':'m','temperature':0.2,'top_p':None},{'sampling':{'top_k':40}}) == \
+        {'model':'m','temperature':0.2,'top_p':0.95,'top_k':40}
+    assert prepare_chat({'messages':[{'role':'user','content':'hi'}],'top_k':5})[0]['top_k'] == 5

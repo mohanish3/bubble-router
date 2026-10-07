@@ -118,7 +118,7 @@ def safe_asset(value: str, root: Path = ROOT) -> Path:
     return path
 
 def prepare_chat(payload, root=ROOT):
-    allowed = {'model','messages','max_tokens','max_completion_tokens','stream','stream_options','temperature','top_p','seed','tools','tool_choice','parallel_tool_calls','response_format','stop','frequency_penalty','presence_penalty','context_length','reasoning_effort','thinking_budget'}
+    allowed = {'model','messages','max_tokens','max_completion_tokens','stream','stream_options','temperature','top_p','top_k','seed','tools','tool_choice','parallel_tool_calls','response_format','stop','frequency_penalty','presence_penalty','context_length','reasoning_effort','thinking_budget'}
     result = {key:copy.deepcopy(value) for key,value in payload.items() if key in allowed}
     result['model'] = 'qwen'
     if not isinstance(result.get('messages'), list) or not result['messages']:
@@ -185,6 +185,19 @@ def apply_tool_reasoning_defaults(payload, target):
     return result
 
 BYTES_PER_TOKEN_ESTIMATE = 3
+
+# mlx_vlm.server samples greedily (temperature 0) when a request omits it, and
+# OpenClaw omits it. Greedy decoding replays an identical reply for an
+# identical context, so agent tool loops never break. These are the
+# generation_config.json values of Ornith, Swift and Qwen; a chat model's
+# "sampling" config overrides them, and request values always win.
+DEFAULT_SAMPLING = {'temperature': 1.0, 'top_p': 0.95, 'top_k': 20}
+
+
+def apply_sampling_defaults(payload, target):
+    defaults = {**DEFAULT_SAMPLING, **target.get('sampling', {})}
+    return {**{key: value for key, value in defaults.items() if payload.get(key) is None}, **{
+        key: value for key, value in payload.items() if value is not None or key not in defaults}}
 
 
 def chat_incremental_gib(payload, kv_bytes_per_token=65536):
@@ -433,7 +446,7 @@ def create_app(root: Path = ROOT, *, injected=None):
     async def dispatch_chat(name, payload, visual, meta):
         """Queue one chat request on a model; returns (job, ready future, consumed event)."""
         target = chat_targets()[name]
-        payload = {**payload, 'model': target['model']}
+        payload = apply_sampling_defaults({**payload, 'model': target['model']}, target)
         ready = asyncio.get_running_loop().create_future()
         consumed = asyncio.Event()
         async def operation(job):
