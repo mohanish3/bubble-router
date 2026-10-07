@@ -83,24 +83,53 @@ def completion_as_sse(result):
     return ''.join(f'data: {json.dumps(event)}\n\n' for event in events) + 'data: [DONE]\n\n'
 
 
+def person_text(message):
+    """What the person wrote in a user message, without OpenClaw bookkeeping."""
+    if message.get('role') != 'user': return ''
+    content = message.get('content')
+    if isinstance(content, list):
+        content = '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
+    if not isinstance(content, str): return ''
+    # OpenClaw sends its own bookkeeping (exec sessions, recovery notes) in
+    # user-role messages; route on what the person wrote. Routing only;
+    # security scanning still sees the whole message.
+    content = OPENCLAW_INTERNAL_RE.sub('', content)
+    return OPENCLAW_RUNTIME_RE.sub('', OPENCLAW_TIMESTAMP_RE.sub('', content)).strip()
+
+
 def latest_user_text(messages):
     """Latest user text; a short follow-up is routed with the user turn before it."""
     texts = []
     for message in reversed(messages or []):
-        if message.get('role') != 'user': continue
-        content = message.get('content')
-        if isinstance(content, list):
-            content = '\n'.join(part.get('text', '') for part in content if isinstance(part, dict) and part.get('type') == 'text')
-        if not isinstance(content, str): continue
-        # OpenClaw sends its own bookkeeping (exec sessions, recovery notes) in
-        # user-role messages; route on what the person wrote. Routing only;
-        # security scanning still sees the whole message.
-        content = OPENCLAW_INTERNAL_RE.sub('', content)
-        content = OPENCLAW_RUNTIME_RE.sub('', OPENCLAW_TIMESTAMP_RE.sub('', content)).strip()
+        content = person_text(message)
         if not content: continue
         texts.append(content)
         if len(texts) == 2 or len(content) >= ROUTE_FOLLOW_UP_CHARS: break
     return '\n'.join(reversed(texts))
+
+
+CODE_PATH_RE = re.compile(
+    r'\.(?:rs|py|pyi|ts|tsx|js|jsx|mjs|cjs|go|java|kt|swift|c|cc|cpp|h|hpp|cs|rb|php|scala|sql|sh|zsh|vue|svelte)\b'
+    r'|\b(?:Cargo\.toml|package\.json|pyproject\.toml|Makefile|go\.mod)\b')
+CODE_COMMAND_RE = re.compile(
+    r'\b(?:cargo|rustc|pytest|tsc|npm|pnpm|yarn|bun|gradle|mvn|xcodebuild|make|go (?:build|test|run|vet)'
+    r'|python3? -m (?:pytest|mypy|ruff)|swift (?:build|test)|git (?:diff|apply))\b')
+
+
+def coding_run(messages):
+    """(tool calls, code tool calls) since the person's latest message: one
+    agent run. A call counts as code when its arguments name a source file
+    or a build/test command."""
+    calls = code = 0
+    for message in reversed(messages or []):
+        if person_text(message): break
+        if message.get('role') != 'assistant': continue
+        for call in message.get('tool_calls') or []:
+            arguments = (call.get('function') or {}).get('arguments') or ''
+            arguments = arguments if isinstance(arguments, str) else json.dumps(arguments)
+            calls += 1
+            code += bool(CODE_PATH_RE.search(arguments) or CODE_COMMAND_RE.search(arguments))
+    return calls, code
 
 
 def plain(value):
@@ -403,6 +432,14 @@ def create_app(root: Path = ROOT, *, injected=None):
         requested = str(requested or 'auto').split('/')[-1]
         if requested in targets: return requested, 'requested'
         if 'ornith' not in targets: return 'qwen', 'only-model'
+        # Long, complex coding goes to the reasoner tier (AREX) as soon as the
+        # agent run shows it, without waiting for the sticky switch: Laya sees
+        # only the person's message, which stays the same for the whole run.
+        rule = {'min_tool_calls': 6, 'min_code_calls': 3, **app.state.config.get('coding_escalation', {})}
+        calls, code = coding_run(messages)
+        if calls >= rule['min_tool_calls'] and code >= rule['min_code_calls']:
+            app.state.route_affinity.update(target=None, count=0)
+            return route_target('reasoner'), f'coding-run:{code}/{calls}'
         text = latest_user_text(messages)
         if not text or not hasattr(app.state.scanner, 'route_request'):
             return (vision_fallback(), 'vision') if visual else sticky_choice('ornith', 'default', visual)

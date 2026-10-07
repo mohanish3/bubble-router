@@ -457,3 +457,36 @@ def test_sampling_defaults_fill_only_missing_values():
     assert apply_sampling_defaults({'model':'m','temperature':0.2,'top_p':None,'seed':7},{'sampling':{'top_k':40}}) == \
         {'model':'m','temperature':0.2,'top_p':0.95,'top_k':40,'seed':7}
     assert prepare_chat({'messages':[{'role':'user','content':'hi'}],'top_k':5})[0]['top_k'] == 5
+
+
+def agent_run(user_text, calls):
+    messages=[{'role':'user','content':user_text}]
+    for name,args in calls:
+        messages.append({'role':'assistant','content':None,'tool_calls':[{'id':'c','type':'function','function':{'name':name,'arguments':json.dumps(args)}}]})
+        messages.append({'role':'tool','tool_call_id':'c','content':'ok'})
+    return messages
+
+CODE_CALLS=[('read',{'path':'src/strategy.rs'}),('edit',{'path':'src/strategy.rs','old':'a','new':'b'}),('exec',{'command':'cargo build'}),
+            ('read',{'path':'notes.md'}),('exec',{'command':'ls'}),('read',{'path':'src/main.rs'})]
+
+def test_coding_run_counts_only_the_current_agent_run():
+    from model_router.mac.app import coding_run
+    assert coding_run(agent_run('fix the strategy', CODE_CALLS))==(6,4)
+    later=agent_run('fix the strategy', CODE_CALLS)+[{'role':'assistant','content':'done'},{'role':'user','content':'thanks, what time is it?'}]
+    assert coding_run(later)==(0,0)
+    bookkeeping=agent_run('fix the strategy', CODE_CALLS)+[{'role':'user','content':'<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>\nx\n<<<END_OPENCLAW_INTERNAL_CONTEXT>>>'}]
+    assert coding_run(bookkeeping)==(6,4)
+    assert coding_run(agent_run('tidy my notes',[('read',{'path':f'notes{i}.md'}) for i in range(8)]))==(8,0)
+
+def test_long_coding_run_goes_to_arex_immediately(routed):
+    client,manager,seen=routed
+    client.app.state.config['route_targets']={'reasoner':'arex'}
+    manager.is_loaded=lambda resource: resource=='ornith'
+    post=lambda messages: client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':messages})
+    short=post(agent_run('fix the strategy', CODE_CALLS[:5]))
+    assert short.json()['model']=='ornith'
+    long=post(agent_run('fix the strategy', CODE_CALLS))
+    assert long.json()['model']=='arex' and long.headers['X-Bubble-Route']=='arex;coding-run:4/6'
+    notes=post(agent_run('tidy my notes',[('read',{'path':f'notes{i}.md'}) for i in range(8)]))
+    assert notes.json()['model']=='ornith'
+    assert client.post('/v1/chat/completions',headers=AUTH,json={'model':'swift','messages':agent_run('x',CODE_CALLS)}).json()['model']=='swift'
