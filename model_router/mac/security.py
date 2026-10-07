@@ -15,6 +15,7 @@ import os
 import re
 import threading
 import time
+import traceback
 from collections import OrderedDict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -516,7 +517,13 @@ class SecurityScanner:
             report.error = type(exc).__name__
             report.latency_ms = (time.perf_counter() - started) * 1000
             self._record(report)
-            logger.error("Laya scan failed (%s)", type(exc).__name__)
+            frame = traceback.extract_tb(exc.__traceback__)[-1] if exc.__traceback__ else None
+            logger.error(
+                "Laya scan failed (%s: %s) at %s",
+                type(exc).__name__,
+                self._safe_error_detail(exc, clean, selected),
+                f"{os.path.basename(frame.filename)}:{frame.lineno}" if frame else "?",
+            )
             raise SecurityUnavailable("security scan failed; request rejected") from exc
         finally:
             self._end_activity(activity_id)
@@ -809,6 +816,18 @@ class SecurityScanner:
         for start, end in reversed(spans):
             updated = updated[:start] + QUARANTINE_MARKER + updated[end:]
         setter(updated)
+
+    @staticmethod
+    def _safe_error_detail(exc: Exception, messages: list[dict[str, Any]], selected: set[int]) -> str:
+        """Exception text for the log, withheld if it echoes any request text."""
+        detail = " ".join(str(exc).split())[:200] or "-"
+        request_text = "\n".join(
+            leaf[0] for index in selected for leaf in SecurityScanner._text_leaves(messages[index].get("content"), messages[index])
+        )
+        window = 16
+        if any(detail[i:i + window] in request_text for i in range(0, len(detail) - window + 1, 4)):
+            return "<withheld: contains request text>"
+        return detail
 
     @staticmethod
     def _strong_match(text: str) -> bool:

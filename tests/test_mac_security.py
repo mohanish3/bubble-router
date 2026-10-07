@@ -203,6 +203,32 @@ async def test_laya_failure_fails_closed_and_does_not_log_payload(monkeypatch, c
 
 
 @pytest.mark.asyncio
+async def test_laya_failure_logs_error_detail_but_withholds_echoed_payload(monkeypatch, caplog):
+    scanner = SecurityScanner("missing-model-for-test")
+
+    def fail_load():
+        raise RuntimeError("MPS backend out of memory")
+
+    monkeypatch.setattr(scanner, "load", fail_load)
+    with pytest.raises(SecurityUnavailable):
+        await scanner.scan_messages([{"role": "user", "content": "ordinary input"}])
+    assert "RuntimeError: MPS backend out of memory" in caplog.text
+    assert "test_mac_security.py:" in caplog.text
+
+    caplog.clear()
+    secret_payload = "PRIVATE USER MESSAGE THAT MUST STAY OUT OF LOGS"
+
+    def fail_echo():
+        raise RuntimeError(f"bad input: {secret_payload}")
+
+    monkeypatch.setattr(scanner, "load", fail_echo)
+    with pytest.raises(SecurityUnavailable):
+        await scanner.scan_messages([{"role": "user", "content": secret_payload}])
+    assert secret_payload not in caplog.text
+    assert "withheld" in caplog.text
+
+
+@pytest.mark.asyncio
 async def test_laya_truncation_fails_closed():
     class TruncatedAgent:
         def predict(self, state, questions):
