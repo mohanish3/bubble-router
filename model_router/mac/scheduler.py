@@ -1,8 +1,9 @@
 """Durable, priority-aware scheduler for Mac model resources.
 
-SQLite stores job identifiers, resource/priority, caller-supplied metadata and
-state only. Job callables, results, prompts and generated content stay in
-memory and are never replayed after a restart.
+SQLite stores job identifiers, resource/priority, caller-supplied metadata,
+state and a finished job's artifact path/measurements. Job callables, other
+results, prompts and generated content stay in memory and are never replayed
+after a restart.
 """
 
 from __future__ import annotations
@@ -22,6 +23,10 @@ from dataclasses import dataclass, field
 from enum import IntEnum
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Mapping
+
+# Artifact fields kept in SQLite so a finished media job can still be polled after a restart.
+ARTIFACT_FIELDS = frozenset({"artifact_path", "artifact_id", "content_type", "filename", "size_bytes",
+                             "actual_duration_seconds", "actual_frames", "actual_fps", "width", "height"})
 
 
 class Priority(IntEnum):
@@ -182,10 +187,9 @@ class Scheduler:
         for key, value in dict(metadata or {}).items():
             if key not in cls.METADATA_FIELDS:
                 if key == "artifact" and allow_artifact and isinstance(value, Mapping):
-                    allowed = {"artifact_path", "artifact_id", "content_type", "filename", "size_bytes"}
                     artifact = {
                         str(subkey): subvalue for subkey, subvalue in value.items()
-                        if subkey in allowed and isinstance(subvalue, (str, int, float, bool, type(None)))
+                        if subkey in ARTIFACT_FIELDS and isinstance(subvalue, (str, int, float, bool, type(None)))
                     }
                     if artifact:
                         safe[key] = artifact
@@ -384,13 +388,23 @@ class Scheduler:
     def _persist_artifact_metadata(job: Job, result: Any) -> None:
         if not isinstance(result, Mapping):
             return
-        allowed = {"artifact_path", "artifact_id", "content_type", "filename", "size_bytes"}
-        artifact = {key: result[key] for key in allowed if key in result}
+        artifact = {key: result[key] for key in ARTIFACT_FIELDS if key in result}
+        if "artifact_path" not in artifact and isinstance(result.get("artifact"), (str, os.PathLike)):
+            artifact["artifact_path"] = result["artifact"]
         if not artifact:
             return
         if "artifact_path" in artifact:
             artifact["artifact_path"] = os.fspath(artifact["artifact_path"])
         job.metadata["artifact"] = artifact
+
+    @staticmethod
+    def _restored_result(metadata: Mapping[str, Any]) -> dict[str, Any] | None:
+        """Rebuild a finished media job's result from its persisted artifact metadata."""
+        artifact = metadata.get("artifact")
+        if not isinstance(artifact, Mapping) or "artifact_path" not in artifact:
+            return None
+        return {"artifact": artifact["artifact_path"],
+                **{key: value for key, value in artifact.items() if key != "artifact_path"}}
 
     async def _finish_cancelled(self, job: Job) -> None:
         job.state = "cancelled"
@@ -422,6 +436,8 @@ class Scheduler:
             error=row["error_class"],
             _scheduler=self,
         )
+        if job.state == "succeeded":
+            job.result = self._restored_result(job.metadata)
         self._jobs[job_id] = job
         return job
 

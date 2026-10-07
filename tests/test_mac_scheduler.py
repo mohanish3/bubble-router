@@ -217,3 +217,26 @@ async def test_scheduler_metrics_are_body_free_and_include_modality_latency(tmp_
     assert metrics["queue_depth"] == 0
     assert "SECRET" not in str(metrics)
     await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_media_result_survives_restart(tmp_path):
+    path = tmp_path / "restart.sqlite"
+    scheduler = Scheduler(path)
+    await scheduler.start()
+
+    async def render(job):
+        return {"artifact": str(tmp_path / "clip.mp4"), "content_type": "video/mp4",
+                "actual_duration_seconds": 5.0, "actual_frames": 120, "prompt": "private"}
+
+    job = await scheduler.submit("minimax-h3", Priority.P5_VIDEO, render)
+    await job.future
+    await scheduler.close()
+
+    restarted = Scheduler(path)
+    await restarted.start()
+    loaded = await restarted.get(job.id)
+    assert loaded.state == "succeeded"
+    assert loaded.result == {"artifact": str(tmp_path / "clip.mp4"), "content_type": "video/mp4",
+                             "actual_duration_seconds": 5.0, "actual_frames": 120}
+    await restarted.close()
