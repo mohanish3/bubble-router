@@ -439,3 +439,11 @@ def test_auto_sticky_threshold_is_configurable(routed):
     client.app.state.config['route_switch_after']=1
     manager.is_loaded=lambda resource: resource=='ornith'
     assert ask(client,'auto','fix this race condition').json()['model']=='swift'
+
+def test_chat_incremental_estimate_uses_model_kv_size_and_bytes_per_token():
+    from model_router.mac.app import chat_incremental_gib
+    payload={'messages':[{'role':'user','content':'x'*90000}],'max_tokens':2048}
+    tokens=len(json.dumps(payload['messages']).encode())//3+2048
+    assert chat_incremental_gib(payload)==pytest.approx(4.0+tokens*65536/1024**3)
+    assert chat_incremental_gib(payload,20480)==pytest.approx(4.0+tokens*20480/1024**3)
+    assert chat_incremental_gib(payload,20480)<chat_incremental_gib(payload)<6.1

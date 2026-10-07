@@ -184,18 +184,22 @@ def apply_tool_reasoning_defaults(payload, target):
         result['thinking_budget'] = min(budget, result.get('max_tokens', 2048))
     return result
 
-def chat_incremental_gib(payload):
-    # The pinned Qwen config has 16 full-attention layers, 4 KV heads and
-    # 256-dimensional BF16 keys/values: 65536 bytes per cached token.
-    # UTF-8 byte count bounds text token growth without reserving 128K on
-    # short requests. Visual inputs receive a separate conservative allowance.
+BYTES_PER_TOKEN_ESTIMATE = 3
+
+
+def chat_incremental_gib(payload, kv_bytes_per_token=65536):
+    # KV bytes per cached token come from each model's config: Qwen and Swift
+    # have 16 full-attention layers x 4 KV heads x 256-dim BF16 (65536);
+    # Ornith has 10 layers x 2 heads (20480). Chat/JSON text averages 3.5-4
+    # UTF-8 bytes per token, so bytes/3 stays conservative without charging
+    # one token per byte. Visual inputs receive a separate allowance.
     messages = payload.get('messages', [])
     text = json.dumps(messages, ensure_ascii=False) + json.dumps(payload.get('tools', []), ensure_ascii=False)
-    tokens = len(text.encode('utf-8')) + int(payload.get('max_tokens', 2048))
+    tokens = len(text.encode('utf-8')) // BYTES_PER_TOKEN_ESTIMATE + int(payload.get('max_tokens', 2048))
     visuals = sum(1 for message in messages if isinstance(message.get('content'), list)
                   for item in message['content'] if item.get('type') in ('image_url','video_url','input_video'))
     tokens = min(131072, tokens + visuals * 16384)
-    return 4.0 + tokens * 65536 / 1024**3
+    return 4.0 + tokens * kv_bytes_per_token / 1024**3
 
 
 def h3_video_admission(config, payload):
@@ -435,7 +439,7 @@ def create_app(root: Path = ROOT, *, injected=None):
         async def operation(job):
             response = None
             try:
-                async with app.state.manager.lease(target['resource'], incremental_gib=chat_incremental_gib(payload)):
+                async with app.state.manager.lease(target['resource'], incremental_gib=chat_incremental_gib(payload, target.get('kv_bytes_per_token', 65536))):
                     app.state.metrics['backend_requests'] += 1
                     headers = {'authorization':'Bearer '+app.state.config.get('backend_key','')}
                     if payload.get('stream'):

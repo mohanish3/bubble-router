@@ -761,3 +761,53 @@ async def test_exclusive_switch_waits_for_memory_reclaim():
     async with manager.lease("swift", incremental_gib=0):
         assert (await manager.status())["resources"]["swift"]["running"]
     await manager.stop("swift")
+
+
+@pytest.mark.asyncio
+async def test_lease_on_loaded_model_waits_for_memory_instead_of_failing(monkeypatch):
+    from model_router.mac import resources
+
+    monkeypatch.setattr(resources, "ADMISSION_WAIT_SECONDS", 5.0)
+    monkeypatch.setattr(resources, "ADMISSION_RETRY_SECONDS", 0.05)
+    telemetry = FakeTelemetry(available=64.0)
+    manager = ResourceManager(
+        {"swift": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=19)},
+        telemetry=telemetry,
+        reserve_gib=10,
+    )
+    await manager.ensure("swift")
+    pid = (await manager.status())["resources"]["swift"]["pid"]
+    telemetry.available = 17.0
+
+    async def memory_frees_up():
+        await asyncio.sleep(0.3)
+        telemetry.available = 20.0
+
+    freer = asyncio.create_task(memory_frees_up())
+    async with manager.lease("swift", incremental_gib=8.0):
+        status = await manager.status()
+        assert status["resources"]["swift"]["pid"] == pid
+        assert status["metrics"]["admission_waits"] >= 1
+    await freer
+    await manager.stop("swift")
+
+
+@pytest.mark.asyncio
+async def test_lease_still_fails_after_the_admission_wait(monkeypatch):
+    from model_router.mac import resources
+
+    monkeypatch.setattr(resources, "ADMISSION_WAIT_SECONDS", 0.2)
+    monkeypatch.setattr(resources, "ADMISSION_RETRY_SECONDS", 0.05)
+    telemetry = FakeTelemetry(available=64.0)
+    manager = ResourceManager(
+        {"swift": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=19)},
+        telemetry=telemetry,
+        reserve_gib=10,
+    )
+    await manager.ensure("swift")
+    telemetry.available = 5.0
+    with pytest.raises(ResourceAdmissionError):
+        async with manager.lease("swift", incremental_gib=8.0):
+            pass
+    assert (await manager.status())["resources"]["swift"]["running"]
+    await manager.stop("swift")

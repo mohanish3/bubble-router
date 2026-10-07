@@ -28,6 +28,10 @@ from typing import Any, Mapping, Sequence
 GIB = 1024**3
 EXCLUSIVE_WAIT_SECONDS = 900.0
 RECLAIM_WAIT_SECONDS = 15.0
+# A request that does not fit yet waits in line for memory (earlier requests
+# finishing, the OS reclaiming pages) instead of failing on the first check.
+ADMISSION_WAIT_SECONDS = 120.0
+ADMISSION_RETRY_SECONDS = 1.0
 RUNTIME_GUARD_POLL_SECONDS = 1.0
 DEFAULT_ESTIMATES_GIB = {
     "qwen-vlm": 20.0,
@@ -807,33 +811,20 @@ class ResourceManager:
                 if not busy or time.monotonic() > deadline:
                     break
                 await asyncio.sleep(0.25)
-        try:
-            async with self._lock:
-                if incremental_gib is not None and (
-                    not math.isfinite(float(incremental_gib))
-                    or float(incremental_gib) < 0
-                    or float(incremental_gib) > MAX_REQUEST_INCREMENTAL_GIB
-                ):
-                    raise ValueError(f"incremental_gib must be between 0 and {MAX_REQUEST_INCREMENTAL_GIB:g}")
-                requested = config.incremental(name) if incremental_gib is None else float(incremental_gib)
-                incremental = max(config.incremental(name), requested)
-                if not config.core and any(
-                    self._leases.get(other, 0) for other, item in self.backends.items() if not item.core
-                ):
-                    raise ResourceBusyError("another generator resource is active")
-                existing = self._processes.get(name)
-                if existing is not None and existing.process.returncode is None:
-                    evicted = await self._admit_locked(name, incremental_gib=incremental)
-                else:
-                    extra_gib = max(0.0, incremental - config.incremental(name))
-                    evicted = await self._ensure_locked(name, extra_gib=extra_gib)
-                self._leases[name] = self._leases.get(name, 0) + 1
-                self._last_used[name] = time.monotonic()
-        except ResourceAdmissionError as admission_error:
-            evicted = list(getattr(admission_error, "evicted", ()))
-            if evicted:
-                await self._restore_after_eviction()
-            raise
+        admission_deadline = time.monotonic() + ADMISSION_WAIT_SECONDS
+        while True:
+            try:
+                await self._lease_admit_once(name, config, incremental_gib)
+                break
+            except ResourceAdmissionError as admission_error:
+                evicted.extend(getattr(admission_error, "evicted", ()))
+                if time.monotonic() < admission_deadline:
+                    self._metrics["admission_waits"] = self._metrics.get("admission_waits", 0) + 1
+                    await asyncio.sleep(ADMISSION_RETRY_SECONDS)
+                    continue
+                if evicted:
+                    await self._restore_after_eviction()
+                raise
         try:
             yield self
         except asyncio.CancelledError:
@@ -847,6 +838,29 @@ class ResourceManager:
             # The resource stays loaded for the next request of the same kind;
             # evicted cores reload on demand rather than being restored here,
             # which used to bounce chat models back and forth.
+
+    async def _lease_admit_once(self, name: str, config: BackendConfig, incremental_gib: float | None) -> None:
+        async with self._lock:
+            if incremental_gib is not None and (
+                not math.isfinite(float(incremental_gib))
+                or float(incremental_gib) < 0
+                or float(incremental_gib) > MAX_REQUEST_INCREMENTAL_GIB
+            ):
+                raise ValueError(f"incremental_gib must be between 0 and {MAX_REQUEST_INCREMENTAL_GIB:g}")
+            requested = config.incremental(name) if incremental_gib is None else float(incremental_gib)
+            incremental = max(config.incremental(name), requested)
+            if not config.core and any(
+                self._leases.get(other, 0) for other, item in self.backends.items() if not item.core
+            ):
+                raise ResourceBusyError("another generator resource is active")
+            existing = self._processes.get(name)
+            if existing is not None and existing.process.returncode is None:
+                await self._admit_locked(name, incremental_gib=incremental)
+            else:
+                extra_gib = max(0.0, incremental - config.incremental(name))
+                await self._ensure_locked(name, extra_gib=extra_gib)
+            self._leases[name] = self._leases.get(name, 0) + 1
+            self._last_used[name] = time.monotonic()
 
     async def _restore_after_eviction(self) -> None:
         try:
