@@ -238,6 +238,7 @@ def create_app(root: Path = ROOT, *, injected=None):
             route_path = paths.get('laya-route', {}).get('path')
             app.state.scanner = SecurityScanner(security_path, config.get('security_policy', {'max_input_chars':393216}), route_path=route_path)
             app.state.media = MediaBackend(app.state.manager, paths, root)
+        app.state.route_affinity = {'target': None, 'count': 0}
         app.state.metrics = {'requests': 0, 'backend_requests': 0, 'security_blocks': 0, 'security_active':0, 'started': time.time()}
         app.state.http = httpx.AsyncClient(timeout=httpx.Timeout(900, connect=5), trust_env=False)
         await app.state.scheduler.start()
@@ -385,7 +386,7 @@ def create_app(root: Path = ROOT, *, injected=None):
         if 'ornith' not in targets: return 'qwen', 'only-model'
         text = latest_user_text(messages)
         if not text or not hasattr(app.state.scanner, 'route_request'):
-            return (vision_fallback(), 'vision') if visual else ('ornith', 'default')
+            return (vision_fallback(), 'vision') if visual else sticky_choice('ornith', 'default', visual)
         decision = await asyncio.to_thread(app.state.scanner.route_request, text)
         app.state.metrics[f"route_{decision['route']}"] = app.state.metrics.get(f"route_{decision['route']}", 0) + 1
         entry = {'time': time.time(), 'route': decision['route'], 'scores': decision['scores'],
@@ -398,7 +399,27 @@ def create_app(root: Path = ROOT, *, injected=None):
         name = route_target(decision['route'])
         if visual and not targets[name].get('vision'):
             return vision_fallback(), f"laya:{decision['route']}:{score};vision"
-        return name, f"laya:{decision['route']}:{score}"
+        return sticky_choice(name, f"laya:{decision['route']}:{score}", visual)
+
+    def sticky_choice(preferred, reason, visual):
+        """Keep using the chat model that is already loaded. Switching costs a
+        19-22 GB reload, so auto requests move only after route_switch_after
+        consecutive requests prefer the same other model."""
+        targets = chat_targets()
+        is_loaded = getattr(app.state.manager, 'is_loaded', None)
+        loaded = [name for name, target in targets.items() if is_loaded and is_loaded(target['resource'])]
+        affinity = app.state.route_affinity
+        current = loaded[0] if loaded else None
+        if current is None or preferred in loaded or (visual and not targets[current].get('vision')):
+            affinity.update(target=None, count=0)
+            return preferred, reason
+        affinity['count'] = affinity['count'] + 1 if affinity['target'] == preferred else 1
+        affinity['target'] = preferred
+        threshold = max(1, int(app.state.config.get('route_switch_after', 3)))
+        if affinity['count'] >= threshold:
+            affinity.update(target=None, count=0)
+            return preferred, f'{reason};switch:after-{threshold}'
+        return current, f"{reason};sticky:{current}:{affinity['count']}/{threshold}"
 
     def vision_fallback():
         targets = chat_targets()

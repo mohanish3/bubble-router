@@ -68,7 +68,7 @@ async def test_low_memory_rejects_without_starting_process():
 
 
 @pytest.mark.asyncio
-async def test_generator_lease_restores_configured_core_servers():
+async def test_generator_lease_does_not_load_idle_cores_afterwards():
     manager = ResourceManager(
         {
             "qwen-audio": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True),
@@ -78,8 +78,9 @@ async def test_generator_lease_restores_configured_core_servers():
     )
     async with manager.lease("qwen-image"):
         assert (await manager.status())["resources"]["qwen-image"]["leased"] == 1
-    assert (await manager.status())["resources"]["qwen-audio"]["running"]
-    await manager.stop("qwen-audio")
+    status = await manager.status()
+    assert not status["resources"]["qwen-audio"]["running"]
+    assert status["core_restore"].get("attempted") is not True
 
 
 @pytest.mark.asyncio
@@ -114,21 +115,41 @@ async def test_cancelling_a_core_lease_stops_its_owned_server():
 
 
 @pytest.mark.asyncio
-async def test_persistent_generator_stops_before_core_restore():
+async def test_persistent_generator_stays_loaded_until_memory_is_needed():
+    telemetry = FakeTelemetry(available=64.0)
     manager = ResourceManager(
         {
-            "qwen-audio": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True),
+            "qwen-audio": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=10),
             "qwen-image": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), estimate_gib=40),
+            "qwen-vlm": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=21),
         },
-        telemetry=FakeTelemetry(),
+        telemetry=telemetry,
+        reserve_gib=10,
     )
     await manager.ensure("qwen-audio")
     async with manager.lease("qwen-image"):
-        assert (await manager.status())["resources"]["qwen-image"]["running"]
+        pid = (await manager.status())["resources"]["qwen-image"]["pid"]
     status = await manager.status()
-    assert not status["resources"]["qwen-image"]["running"]
+    assert status["resources"]["qwen-image"]["running"]
     assert status["resources"]["qwen-audio"]["running"]
-    await manager.stop("qwen-audio")
+    async with manager.lease("qwen-image"):
+        assert (await manager.status())["resources"]["qwen-image"]["pid"] == pid
+    telemetry.available = 14.0
+    original_stop = manager._stop_locked
+
+    async def stop_frees_memory(name):
+        await original_stop(name)
+        if name == "qwen-image":
+            telemetry.available = 54.0
+
+    manager._stop_locked = stop_frees_memory
+    async with manager.lease("qwen-vlm"):
+        status = await manager.status()
+        assert status["resources"]["qwen-vlm"]["running"]
+        assert not status["resources"]["qwen-image"]["running"]
+        assert status["resources"]["qwen-audio"]["running"]
+    for name in ("qwen-vlm", "qwen-audio"):
+        await manager.stop(name)
 
 
 @pytest.mark.asyncio
@@ -466,7 +487,7 @@ async def test_cold_start_adds_only_requested_peak_above_profile_floor():
 
 
 @pytest.mark.asyncio
-async def test_generator_restoration_failure_is_visible_without_failing_artifact():
+async def test_generator_artifact_is_unaffected_by_later_memory_drop():
     telemetry = FakeTelemetry(available=64.0)
     manager = ResourceManager(
         {
@@ -480,8 +501,8 @@ async def test_generator_restoration_failure_is_visible_without_failing_artifact
         artifact = {"artifact_path": "/tmp/result.png"}
     assert artifact["artifact_path"] == "/tmp/result.png"
     status = await manager.status()
-    assert status["core_restore"]["ready"] is False
-    assert "qwen-vlm" in status["core_restore"]["errors"]
+    assert not status["resources"]["qwen-vlm"]["running"]
+    assert status["core_restore"].get("attempted") is not True
 
 
 @pytest.mark.asyncio
@@ -516,7 +537,7 @@ async def test_restore_core_reports_partial_readiness_without_evicting_first_cor
 
 
 @pytest.mark.asyncio
-async def test_incremental_eviction_is_followed_by_best_effort_core_restore():
+async def test_evicted_core_reloads_on_its_next_request_not_after_the_lease():
     telemetry = FakeTelemetry(available=64.0)
     manager = ResourceManager(
         {
@@ -542,8 +563,10 @@ async def test_incremental_eviction_is_followed_by_best_effort_core_restore():
         assert not status["resources"]["qwen-audio"]["running"]
     status = await manager.status()
     assert status["resources"]["qwen-vlm"]["running"]
-    assert status["resources"]["qwen-audio"]["running"]
-    assert status["core_restore"]["ready"] is True
+    assert not status["resources"]["qwen-audio"]["running"]
+    telemetry.available = 64.0
+    async with manager.lease("qwen-audio"):
+        assert (await manager.status())["resources"]["qwen-audio"]["running"]
     await manager.stop("qwen-audio")
     await manager.stop("qwen-vlm")
 

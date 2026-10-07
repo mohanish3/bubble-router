@@ -342,7 +342,9 @@ class ResourceManager:
     async def _admit_locked(self, name: str, *, incremental_gib: float | None = None) -> list[str]:
         config = self._config(name)
         # Available memory already accounts for resident server RSS. Evicting
-        # idle manager-owned core servers is the only adjustment made here.
+        # idle manager-owned servers is the only adjustment made here: models
+        # stay loaded after use and are unloaded only when another request
+        # needs their memory.
         additional = config.estimate(name) if incremental_gib is None else float(incremental_gib)
         needed = additional + self.reserve_gib
         snapshot = self._snapshot()
@@ -353,7 +355,7 @@ class ResourceManager:
         while snapshot.available_gib < needed or pressure_bad:
             candidates = [
                 key for key, proc in self._processes.items()
-                if key != name and self.backends[key].core and self._leases.get(key, 0) == 0
+                if key != name and self._leases.get(key, 0) == 0
                 and proc.process.returncode is None
                 and self._queued_resources.get(key, 0) == 0
             ]
@@ -602,6 +604,10 @@ class ResourceManager:
             await self._stop_locked(name)
             raise
 
+    def is_loaded(self, name: str) -> bool:
+        owned = self._processes.get(name)
+        return owned is not None and owned.process.returncode is None
+
     async def ensure(self, name: str) -> None:
         async with self._lock:
             await self._ensure_locked(name)
@@ -838,11 +844,9 @@ class ResourceManager:
                 self._last_used[name] = time.monotonic()
                 if asyncio.current_task() and asyncio.current_task().cancelling() and config.persistent:
                     await self._stop_locked(name)
-                elif not config.core and config.persistent:
-                    await self._stop_locked(name)
-            should_restore = bool(evicted) or (not config.core and config.estimate(name) >= 32)
-            if should_restore:
-                await self._restore_after_eviction()
+            # The resource stays loaded for the next request of the same kind;
+            # evicted cores reload on demand rather than being restored here,
+            # which used to bounce chat models back and forth.
 
     async def _restore_after_eviction(self) -> None:
         try:

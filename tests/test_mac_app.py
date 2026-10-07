@@ -405,3 +405,37 @@ def test_embeddings_endpoint_proxies_to_local_service_without_scan(running):
     def down(request): raise httpx.ConnectError('refused')
     app.state.http=httpx.AsyncClient(transport=httpx.MockTransport(down))
     assert client.post('/v1/embeddings',headers=AUTH,json={'input':'x'}).status_code==503
+
+def test_auto_stays_on_loaded_chat_model_until_repeated_demand_switches(routed):
+    client,manager,seen=routed
+    loaded={'ornith'}
+    manager.is_loaded=lambda resource: resource in loaded
+    # Swift is preferred, but Ornith is loaded: the first two stay put.
+    for expected in ('1/3','2/3'):
+        reply=ask(client,'auto','fix this race condition')
+        assert reply.json()['model']=='ornith'
+        assert reply.headers['X-Bubble-Route'].endswith(f'sticky:ornith:{expected}')
+    # A request that prefers the loaded model resets the streak.
+    assert ask(client,'auto','what is the weather like').headers['X-Bubble-Route']=='ornith;laya:general:0.9'
+    for _ in range(2): ask(client,'auto','fix this race condition')
+    third=ask(client,'auto','fix this race condition')
+    assert third.json()['model']=='swift' and third.headers['X-Bubble-Route'].endswith('switch:after-3')
+    loaded.clear(); loaded.add('swift')
+    # Now Swift is loaded, so general requests stay on Swift.
+    reply=ask(client,'auto','what is the weather like')
+    assert reply.json()['model']=='swift' and 'sticky:swift:1/3' in reply.headers['X-Bubble-Route']
+    # Explicit model names always switch immediately.
+    assert ask(client,'ornith','what is the weather like').json()['model']=='ornith'
+
+def test_auto_sticky_skips_loaded_model_without_vision(routed):
+    client,manager,seen=routed
+    manager.is_loaded=lambda resource: resource=='ornith'
+    image={'type':'image_url','image_url':{'url':'data:image/png;base64,iVBORw0KGgo='}}
+    reply=client.post('/v1/chat/completions',headers=AUTH,json={'model':'auto','messages':[{'role':'user','content':[{'type':'text','text':'what is in this picture'},image]}]})
+    assert reply.json()['model']!='ornith'
+
+def test_auto_sticky_threshold_is_configurable(routed):
+    client,manager,seen=routed
+    client.app.state.config['route_switch_after']=1
+    manager.is_loaded=lambda resource: resource=='ornith'
+    assert ask(client,'auto','fix this race condition').json()['model']=='swift'
