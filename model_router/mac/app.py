@@ -190,12 +190,14 @@ BYTES_PER_TOKEN_ESTIMATE = 3
 # OpenClaw omits it. Greedy decoding replays an identical reply for an
 # identical context, so agent tool loops never break. These are the
 # generation_config.json values of Ornith, Swift and Qwen; a chat model's
-# "sampling" config overrides them, and request values always win.
+# "sampling" config overrides them, and request values always win. The
+# server also uses a fixed seed when none is sent, which makes sampled
+# replies repeat for an identical context, so each request gets a fresh one.
 DEFAULT_SAMPLING = {'temperature': 1.0, 'top_p': 0.95, 'top_k': 20}
 
 
 def apply_sampling_defaults(payload, target):
-    defaults = {**DEFAULT_SAMPLING, **target.get('sampling', {})}
+    defaults = {**DEFAULT_SAMPLING, **target.get('sampling', {}), 'seed': secrets.randbelow(2**31)}
     return {**{key: value for key, value in defaults.items() if payload.get(key) is None}, **{
         key: value for key, value in payload.items() if value is not None or key not in defaults}}
 
