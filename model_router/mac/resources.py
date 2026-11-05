@@ -32,6 +32,9 @@ RECLAIM_WAIT_SECONDS = 15.0
 # finishing, the OS reclaiming pages) instead of failing on the first check.
 ADMISSION_WAIT_SECONDS = 120.0
 ADMISSION_RETRY_SECONDS = 1.0
+# While another model holds the memory because it is still serving, a request
+# waits for it to finish and unload rather than failing (safety cap only).
+ADMISSION_QUEUE_MAX_SECONDS = 3 * 3600.0
 RUNTIME_GUARD_POLL_SECONDS = 1.0
 DEFAULT_ESTIMATES_GIB = {
     "qwen-vlm": 20.0,
@@ -207,6 +210,10 @@ class ResourceAdmissionError(ResourceError):
         self.evicted = list(evicted)
 
 
+class ResourceUnloadWait(ResourceAdmissionError):
+    """Memory is held by another model that is still in use; wait until it can be unloaded."""
+
+
 class ResourceRestoreError(ResourceError):
     """Raised when one or more configured core services remain cold."""
 
@@ -343,7 +350,8 @@ class ResourceManager:
 
         return await asyncio.to_thread(probe)
 
-    async def _admit_locked(self, name: str, *, incremental_gib: float | None = None) -> list[str]:
+    async def _admit_locked(self, name: str, *, incremental_gib: float | None = None,
+                            evict_queued: bool = False) -> list[str]:
         config = self._config(name)
         # Available memory already accounts for resident server RSS. Evicting
         # idle manager-owned servers is the only adjustment made here: models
@@ -357,19 +365,25 @@ class ResourceManager:
             self._metrics["pressure_events"] += 1
         evicted: list[str] = []
         while snapshot.available_gib < needed or pressure_bad:
+            # A waiting request (evict_queued) may also unload an idle model
+            # that has its own queued work; that work reloads it afterwards.
             candidates = [
                 key for key, proc in self._processes.items()
                 if key != name and self._leases.get(key, 0) == 0
                 and proc.process.returncode is None
-                and self._queued_resources.get(key, 0) == 0
+                and (evict_queued or self._queued_resources.get(key, 0) == 0)
             ]
             if not candidates:
-                self._metrics["failed_admissions"] += 1
                 detail = f"available={snapshot.available_gib:.1f}GiB needed={needed:.1f}GiB"
                 if pressure_bad:
                     detail += f" pressure={snapshot.pressure[:80]}"
+                in_use = sorted(key for key, count in self._leases.items() if count and key != name)
+                if evict_queued and in_use:
+                    raise ResourceUnloadWait(f"cannot admit {name} yet: waiting for {', '.join(in_use)} to finish and unload ({detail})",
+                                             evicted=evicted)
+                self._metrics["failed_admissions"] += 1
                 raise ResourceAdmissionError(f"cannot admit {name}: {detail}", evicted=evicted)
-            candidate = max(candidates, key=self._eviction_score)
+            candidate = max(candidates, key=lambda key: (self._queued_resources.get(key, 0) == 0, self._eviction_score(key)))
             await self._stop_locked(candidate)
             self._metrics["evictions"] += 1
             evicted.append(candidate)
@@ -529,7 +543,7 @@ class ResourceManager:
         encoded = json.dumps(list(map(str, argv)), ensure_ascii=False, separators=(",", ":")).encode("utf-8")
         return hashlib.sha256(encoded).hexdigest()
 
-    async def _ensure_locked(self, name: str, *, extra_gib: float = 0.0) -> list[str]:
+    async def _ensure_locked(self, name: str, *, extra_gib: float = 0.0, evict_queued: bool = False) -> list[str]:
         await self._recover_orphans()
         config = self._config(name)
         existing = self._processes.get(name)
@@ -537,7 +551,7 @@ class ResourceManager:
             self._last_used[name] = time.monotonic()
             return []
         if not config.persistent:
-            return await self._admit_locked(name, incremental_gib=config.estimate(name) + extra_gib)
+            return await self._admit_locked(name, incremental_gib=config.estimate(name) + extra_gib, evict_queued=evict_queued)
         if not config.command:
             raise ResourceError(f"persistent resource {name} has no command")
         group = [
@@ -547,7 +561,8 @@ class ResourceManager:
         ]
         busy = [other for other in group if self._leases.get(other, 0)]
         if busy:
-            raise ResourceAdmissionError(f"cannot admit {name}: exclusive group member {busy[0]} is in use")
+            error = ResourceUnloadWait if evict_queued else ResourceAdmissionError
+            raise error(f"cannot admit {name}: exclusive group member {busy[0]} is in use")
         for other in group:
             await self._stop_locked(other)
             self._metrics["evictions"] += 1
@@ -564,7 +579,7 @@ class ResourceManager:
             failures.popleft()
         if len(failures) >= 3:
             raise ResourceError(f"{name} startup is backed off after three failures in 60 seconds")
-        evicted = await self._admit_locked(name, incremental_gib=config.estimate(name) + extra_gib)
+        evicted = await self._admit_locked(name, incremental_gib=config.estimate(name) + extra_gib, evict_queued=evict_queued)
         env = os.environ.copy()
         if config.env:
             env.update({str(key): str(value) for key, value in config.env.items()})
@@ -812,12 +827,20 @@ class ResourceManager:
                     break
                 await asyncio.sleep(0.25)
         admission_deadline = time.monotonic() + ADMISSION_WAIT_SECONDS
+        queue_deadline = time.monotonic() + ADMISSION_QUEUE_MAX_SECONDS
         while True:
             try:
                 await self._lease_admit_once(name, config, incremental_gib)
                 break
             except ResourceAdmissionError as admission_error:
                 evicted.extend(getattr(admission_error, "evicted", ()))
+                if isinstance(admission_error, ResourceUnloadWait) and time.monotonic() < queue_deadline:
+                    # Another model is still serving: stay queued until it is
+                    # idle and can be unloaded; the memory wait restarts after.
+                    self._metrics["admission_queued"] = self._metrics.get("admission_queued", 0) + 1
+                    admission_deadline = time.monotonic() + ADMISSION_WAIT_SECONDS
+                    await asyncio.sleep(ADMISSION_RETRY_SECONDS)
+                    continue
                 if time.monotonic() < admission_deadline:
                     self._metrics["admission_waits"] = self._metrics.get("admission_waits", 0) + 1
                     await asyncio.sleep(ADMISSION_RETRY_SECONDS)
@@ -833,7 +856,10 @@ class ResourceManager:
             async with self._lock:
                 self._leases[name] = max(0, self._leases.get(name, 1) - 1)
                 self._last_used[name] = time.monotonic()
-                if asyncio.current_task() and asyncio.current_task().cancelling() and config.persistent:
+                # A cancelled request stops its server (MLX servers keep
+                # generating otherwise) unless other requests still share it.
+                if (asyncio.current_task() and asyncio.current_task().cancelling() and config.persistent
+                        and not self._leases.get(name)):
                     await self._stop_locked(name)
             # The resource stays loaded for the next request of the same kind;
             # evicted cores reload on demand rather than being restored here,
@@ -855,10 +881,10 @@ class ResourceManager:
                 raise ResourceBusyError("another generator resource is active")
             existing = self._processes.get(name)
             if existing is not None and existing.process.returncode is None:
-                await self._admit_locked(name, incremental_gib=incremental)
+                await self._admit_locked(name, incremental_gib=incremental, evict_queued=True)
             else:
                 extra_gib = max(0.0, incremental - config.incremental(name))
-                await self._ensure_locked(name, extra_gib=extra_gib)
+                await self._ensure_locked(name, extra_gib=extra_gib, evict_queued=True)
             self._leases[name] = self._leases.get(name, 0) + 1
             self._last_used[name] = time.monotonic()
 
@@ -882,8 +908,10 @@ class ResourceManager:
         *,
         cwd: str | Path | None = None,
         input_data: bytes | None = None,
+        env: Mapping[str, str] | None = None,
     ) -> subprocess.CompletedProcess[bytes]:
-        """Run a manager-owned one-shot process and return captured stdout."""
+        """Run a manager-owned one-shot process and return captured stdout.
+        env adds variables for this run on top of the backend's own env."""
         config = self._config(name)
         command = [*config.command, *map(str, args)] if config.command else list(map(str, args))
         if not command:
@@ -894,9 +922,11 @@ class ResourceManager:
             violation = self._runtime_guard_violation(name, baseline, baseline, *guard)
             if violation:
                 raise ResourceAdmissionError(violation)
-        env = os.environ.copy()
+        extra, env = env, os.environ.copy()
         if config.env:
             env.update({str(key): str(value) for key, value in config.env.items()})
+        if extra:
+            env.update({str(key): str(value) for key, value in extra.items()})
         token = secrets.token_hex(32)
         env["AI_STACK_OWNERSHIP_TOKEN"] = token
         process = await asyncio.create_subprocess_exec(

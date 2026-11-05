@@ -197,6 +197,9 @@ class SecurityPolicy:
     # False = monitor mode: model scores are logged and flagged but never block
     # or quarantine; only the hard-coded attack rules still enforce.
     enforce_model: bool = True
+    # Sampling applies only in monitor mode; deterministic rules still run.
+    model_sample_rate: float = 1.0
+    max_model_chunks: int = 0
 
     @classmethod
     def from_value(cls, value: "SecurityPolicy | Mapping[str, Any] | None") -> "SecurityPolicy":
@@ -209,6 +212,8 @@ class SecurityPolicy:
             raise ValueError("security input/chunk limits are invalid")
         if policy.scan_recent_messages < 0:
             raise ValueError("scan_recent_messages cannot be negative")
+        if not 0 <= policy.model_sample_rate <= 1 or type(policy.max_model_chunks) is not int or policy.max_model_chunks < 0:
+            raise ValueError("invalid security sampling policy")
         return policy
 
 
@@ -227,6 +232,7 @@ class SecurityReport:
     action: str = "allow"
     scanned_messages: int = 0
     scanned_chunks: int = 0
+    model_chunks: int = 0
     skipped_history_messages: int = 0
     latency_ms: float = 0.0
     findings: list[SecurityFinding] = field(default_factory=list)
@@ -422,6 +428,10 @@ class SecurityScanner:
         if total_chars > self.policy.max_input_chars:
             raise SecurityInputTooLarge("request exceeds the security scanner input limit")
         activity_id = self._begin_activity(total_chars)
+        model_chunks = 0
+        sample_key = ''.join(leaf[0][:300] for i in sorted(selected)
+                             for leaf in self._text_leaves(clean[i].get('content'),clean[i]))
+        sample_model = int(hashlib.sha256(sample_key.encode()).hexdigest()[:8],16)/2**32 < self.policy.model_sample_rate
 
         try:
             self._check_cancelled(cancelled)
@@ -450,7 +460,21 @@ class SecurityScanner:
                     for start, end in spans:
                         self._check_cancelled(cancelled)
                         chunk = content[start:end]
-                        scores, categories = self._predict(chunk, source=source)
+                        selected_model = self.policy.enforce_model or (
+                            sample_model
+                            and (not self.policy.max_model_chunks or model_chunks < self.policy.max_model_chunks))
+                        if selected_model:
+                            try:
+                                scores, categories = self._predict(chunk, source=source)
+                            except SecurityUnavailable:
+                                if self.policy.enforce_model:
+                                    raise
+                                scores, categories = {}, set()
+                                report.policy_adjustments.append({'message_index':index,'reason':'monitor_model_unavailable'})
+                            model_chunks += 1
+                            report.model_chunks += 1
+                        else:
+                            scores, categories = {}, set()
                         self._advance_activity(activity_id)
                         self._check_cancelled(cancelled)
                         report.raw_scores.append({"message_index": index, "chunk_start": start, "scores": scores})

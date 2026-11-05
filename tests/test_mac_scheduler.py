@@ -13,6 +13,74 @@ from model_router.mac.scheduler import (
 
 
 @pytest.mark.asyncio
+async def test_media_prompt_is_durable_and_deleted_with_job_and_output(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    output = tmp_path / 'outputs' / 'images' / 'fixture.png'
+    output.parent.mkdir(parents=True)
+    output.write_bytes(b'disposable media fixture')
+    async def generate(job):
+        return {'artifact': str(output), 'content_type': 'image/png'}
+    job = await scheduler.submit('qwen-image', 4, generate, prompt='Exact media prompt <test>')
+    await job.future
+    await scheduler._idle.wait()
+    assert scheduler.get_prompt(job.id) == 'Exact media prompt <test>'
+    await scheduler.close()
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    assert scheduler.get_prompt(job.id) == 'Exact media prompt <test>'
+    assert (await scheduler.get(job.id)).state == 'succeeded'
+    result = await scheduler.delete_media(job.id, tmp_path / 'outputs')
+    assert result == {'deleted': True, 'media_files_deleted': 1}
+    assert not output.exists()
+    assert await scheduler.get(job.id) is None
+    assert scheduler.get_prompt(job.id) is None
+    assert job.id not in scheduler._jobs
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_delete_rejects_active_jobs_and_artifacts_outside_outputs(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    gate = asyncio.Event()
+    async def hold(job):
+        await gate.wait()
+    active = await scheduler.submit('minimax-h3', 5, hold, prompt='Active prompt')
+    with pytest.raises(ValueError, match='Finish or cancel'):
+        await scheduler.delete_media(active.id, tmp_path / 'outputs')
+    assert await scheduler.get(active.id) is active
+    gate.set()
+    await active.future
+    await scheduler._idle.wait()
+    outside = tmp_path / 'private.txt'
+    outside.write_text('Protected fixture')
+    active.result = {'artifact': str(outside)}
+    with pytest.raises(ValueError, match='inside the output'):
+        await scheduler.delete_media(active.id, tmp_path / 'outputs')
+    assert outside.exists()
+    assert await scheduler.get(active.id) is active
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_delete_failed_job_finds_legacy_media_by_exact_id(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    async def fail(job):
+        raise RuntimeError('Fixture failure')
+    job = await scheduler.submit('qwen-image', 4, fail, prompt='Failed prompt')
+    with pytest.raises(RuntimeError):
+        await job.future
+    await scheduler._idle.wait()
+    output = tmp_path / 'outputs' / 'images' / (job.id + '.png')
+    output.parent.mkdir(parents=True)
+    output.write_bytes(b'partial output fixture')
+    unrelated = output.with_name('unrelated.png')
+    unrelated.write_bytes(b'protected media fixture')
+    assert (await scheduler.delete_media(job.id, tmp_path / 'outputs'))['media_files_deleted'] == 1
+    assert not output.exists()
+    assert unrelated.exists()
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
 async def test_priority_order_and_bounded_resource_affinity(tmp_path):
     scheduler = Scheduler(tmp_path / "jobs.sqlite", affinity_batch=2)
     gate = asyncio.Event()
@@ -239,4 +307,256 @@ async def test_media_result_survives_restart(tmp_path):
     assert loaded.state == "succeeded"
     assert loaded.result == {"artifact": str(tmp_path / "clip.mp4"), "content_type": "video/mp4",
                              "actual_duration_seconds": 5.0, "actual_frames": 120}
+    await restarted.close()
+
+
+@pytest.mark.asyncio
+async def test_manual_work_shelves_background_until_grace_window_ends(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', aging_seconds=0.01, shelf_grace_seconds=0.3)
+    order = []
+    gate = asyncio.Event()
+    def record(name):
+        async def run(job):
+            if name == 'manual-1':
+                await gate.wait()
+            order.append(name)
+        return run
+    manual = await scheduler.submit('swift', 1, record('manual-1'), lane='manual')
+    await asyncio.sleep(0.05)
+    background = await scheduler.submit('arex', 1, record('background'), lane='background')
+    # Background has aged past the manual job's priority but is still held.
+    await asyncio.sleep(0.05)
+    follow_up = await scheduler.submit('swift', 1, record('manual-2'), lane='manual')
+    status = scheduler.shelf_status()
+    assert status['shelved'] and status['held_background_jobs'] == 1
+    assert [job['held'] for job in (await scheduler.queues())['arex']] == [True]
+    gate.set()
+    await follow_up.future
+    await asyncio.sleep(0.1)
+    # Manual traffic stopped less than the grace window ago.
+    assert order == ['manual-1', 'manual-2'] and background.state == 'queued'
+    await background.future
+    assert order == ['manual-1', 'manual-2', 'background']
+    assert background.metadata['lane'] == 'background' and manual.metadata['lane'] == 'manual'
+    assert not scheduler.shelf_status()['shelved']
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_held_background_runs_after_max_hold_even_while_manual_is_queued(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', shelf_grace_seconds=60, shelf_max_hold_seconds=0.2)
+    order = []
+    def record(name):
+        async def run(job):
+            order.append(name)
+            await asyncio.sleep(0.05)
+        return run
+    background = await scheduler.submit('arex', 1, record('background'), lane='background')
+    await scheduler.submit('swift', 1, record('manual-1'), lane='manual')
+    await asyncio.sleep(0.1)
+    assert order == ['manual-1']
+    await asyncio.sleep(0.15)
+    await scheduler.submit('swift', 1, record('manual-2'), lane='manual')
+    await background.future
+    await scheduler._idle.wait()
+    # Past the cap the background job runs although manual traffic continues.
+    assert order == ['manual-1', 'background', 'manual-2']
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_operator_shelve_holds_background_but_not_untagged_work(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', shelf_grace_seconds=0)
+    with pytest.raises(ValueError):
+        await scheduler.shelve(0)
+    with pytest.raises(ValueError):
+        await scheduler.submit('swift', 1, lambda job: None, lane='urgent')
+    assert (await scheduler.shelve(60))['operator_hold_seconds'] > 59
+    background = await scheduler.submit('arex', 1, lambda job: 'bg', lane='background')
+    other = await scheduler.submit('qwen-image', 4, lambda job: 'image')
+    assert await other.future == 'image'
+    await asyncio.sleep(0.05)
+    assert background.state == 'queued' and 'lane' not in other.metadata
+    status = await scheduler.unshelve()
+    assert status['operator_hold_seconds'] == 0
+    assert await background.future == 'bg'
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_drain_releases_shelved_background_work(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', shelf_grace_seconds=60)
+    await scheduler.submit('swift', 1, lambda job: None, lane='manual')
+    background = await scheduler.submit('arex', 1, lambda job: 'bg', lane='background')
+    await asyncio.wait_for(scheduler.drain(), 2)
+    assert background.state == 'succeeded'
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_cancelling_a_held_background_job_leaves_worker_idle(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', shelf_grace_seconds=60)
+    await (await scheduler.submit('swift', 1, lambda job: None, lane='manual')).future
+    background = await scheduler.submit('arex', 1, lambda job: 'bg', lane='background')
+    await asyncio.sleep(0.05)
+    assert await scheduler.cancel(background.id)
+    await asyncio.wait_for(scheduler._idle.wait(), 2)
+    assert background.state == 'cancelled'
+    await scheduler.close()
+
+
+async def _until(predicate, timeout=2.0):
+    deadline = asyncio.get_running_loop().time() + timeout
+    while not predicate():
+        assert asyncio.get_running_loop().time() < deadline, 'condition not reached'
+        await asyncio.sleep(0.005)
+
+
+@pytest.mark.asyncio
+async def test_resource_with_slots_runs_comparable_jobs_together(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    scheduler.resource_slots = {'swift': 2}
+    scheduler.set_kv_capacity('swift', 100_000)
+    gate = asyncio.Event(); running = set(); peak = []
+    async def work(job):
+        running.add(job.id); peak.append(len(running))
+        await gate.wait(); running.discard(job.id)
+        return job.resource
+    jobs = [await scheduler.submit(r, 1, work, {'kv_tokens': 10_000}) for r in ('swift', 'swift', 'swift', 'arex')]
+    await _until(lambda: len(running) == 2)
+    await asyncio.sleep(0.05)
+    # Two slots: the third Swift job and the AREX job wait.
+    assert len(running) == 2 and jobs[2].state == 'queued' and jobs[3].state == 'queued'
+    gate.set()
+    assert [await job.future for job in jobs] == ['swift', 'swift', 'swift', 'arex']
+    assert max(peak) == 2
+    # AREX started only after every Swift job finished: one resource at a time.
+    assert jobs[3].started_at >= max(job.finished_at for job in jobs[:3])
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_resources_without_slots_stay_serial(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    running = set(); peak = []
+    async def work(job):
+        running.add(job.id); peak.append(len(running))
+        await asyncio.sleep(0.01); running.discard(job.id)
+    jobs = [await scheduler.submit('swift', 1, work) for _ in range(3)]
+    for job in jobs: await job.future
+    assert max(peak) == 1
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_waiting_job_for_another_resource_stops_new_admissions(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', aging_seconds=0.1)
+    scheduler.resource_slots = {'swift': 4}
+    gate = asyncio.Event()
+    async def work(job):
+        await gate.wait(); return job.resource
+    first = await scheduler.submit('swift', 4, work)
+    await _until(lambda: first.state == 'running')
+    other = await scheduler.submit('arex', 4, work)
+    await asyncio.sleep(0.35)  # AREX has aged three steps past fresh Swift work
+    late = await scheduler.submit('swift', 4, work)
+    await asyncio.sleep(0.03)
+    assert late.state == 'queued' and other.state == 'queued'
+    gate.set()
+    await late.future
+    # The aged AREX job ran before the later Swift job.
+    assert other.started_at <= late.started_at
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_cancelling_one_concurrent_job_leaves_the_other_running(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    scheduler.resource_slots = {'swift': 2}
+    scheduler.set_kv_capacity('swift', 100_000)
+    gate = asyncio.Event()
+    async def work(job):
+        await gate.wait(); return 'done'
+    a = await scheduler.submit('swift', 1, work, {'kv_tokens': 10_000})
+    b = await scheduler.submit('swift', 1, work, {'kv_tokens': 10_000})
+    await _until(lambda: a.state == 'running' and b.state == 'running')
+    assert await scheduler.cancel(a.id)
+    with pytest.raises(asyncio.CancelledError):
+        await a.future
+    assert b.state == 'running'
+    gate.set()
+    assert await b.future == 'done'
+    metrics = await scheduler.metrics()
+    assert metrics['running'] == 0
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_jobs_that_overflow_the_kv_cache_wait_in_order(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    scheduler.resource_slots = {'arex': 4}
+    scheduler.set_kv_capacity('arex', 73_000, per_request=1_000)
+    gates = {}; running = set(); peak = []
+    async def work(job):
+        running.add(job.id); peak.append(len(running))
+        gates[job.id] = asyncio.Event()
+        await gates[job.id].wait(); running.discard(job.id)
+    big = [await scheduler.submit('arex', 1, work, {'kv_tokens': 40_000}) for _ in range(2)]
+    small = await scheduler.submit('arex', 1, work, {'kv_tokens': 5_000})
+    await _until(lambda: big[0].state == 'running')
+    await asyncio.sleep(0.05)
+    # 41k + 41k > 73k: the second long prompt waits, and the short one behind
+    # it does not start in its place.
+    assert big[1].state == 'queued' and small.state == 'queued'
+    gates[big[0].id].set()
+    await _until(lambda: big[1].state == 'running' and small.state == 'running')
+    assert max(peak) == 2
+    for job in (big[1], small):
+        gates[job.id].set()
+    await asyncio.gather(*(job.future for job in big + [small]))
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_unknown_kv_capacity_runs_one_at_a_time_until_reported(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite')
+    scheduler.resource_slots = {'arex': 4}
+    gate = asyncio.Event()
+    async def work(job):
+        await gate.wait()
+    a = await scheduler.submit('arex', 1, work, {'kv_tokens': 1_000})
+    b = await scheduler.submit('arex', 1, work, {'kv_tokens': 1_000})
+    await _until(lambda: a.state == 'running')
+    await asyncio.sleep(0.05)
+    assert b.state == 'queued'
+    scheduler.set_kv_capacity('arex', 10_000)
+    await _until(lambda: b.state == 'running')
+    gate.set()
+    await asyncio.gather(a.future, b.future)
+    await scheduler.close()
+
+
+@pytest.mark.asyncio
+async def test_queue_view_and_restart_keep_job_origin(tmp_path):
+    scheduler = Scheduler(tmp_path / 'jobs.sqlite', shelf_grace_seconds=0.05)
+    gate = asyncio.Event()
+    async def wait(job):
+        await gate.wait()
+    loop_origin = {'source': 'loop', 'origin': 'loop', 'origin_label': 'Loop · Daily AI & business trends',
+                   'loop_id': 'loop_daily-trends', 'loop_run_id': 'run_1', 'loop_name': 'Daily AI & business trends',
+                   'prompt': 'never stored'}
+    manual = await scheduler.submit('swift', 1, wait, {'source': '', 'origin': 'manual', 'origin_label': 'Manual'}, lane='manual')
+    loop = await scheduler.submit('swift', 1, wait, loop_origin, lane='background')
+    listed = {job['id']: job for job in (await scheduler.queues())['swift']}
+    # The loop job is held behind the manual chat yet still says which loop it is.
+    assert listed[loop.id]['held'] and listed[loop.id]['metadata']['lane'] == 'background'
+    assert listed[loop.id]['metadata']['origin_label'] == 'Loop · Daily AI & business trends'
+    assert 'prompt' not in listed[loop.id]['metadata']
+    assert listed[manual.id]['metadata']['origin_label'] == 'Manual'
+    gate.set()
+    await asyncio.gather(manual.future, loop.future)
+    await scheduler.close()
+    restarted = Scheduler(tmp_path / 'jobs.sqlite')
+    stored = (await restarted.get(loop.id)).metadata
+    assert (stored['origin'], stored['loop_run_id'], stored['loop_name']) == ('loop', 'run_1', 'Daily AI & business trends')
     await restarted.close()

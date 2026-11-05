@@ -115,6 +115,33 @@ async def test_cancelling_a_core_lease_stops_its_owned_server():
 
 
 @pytest.mark.asyncio
+async def test_cancelling_one_shared_lease_keeps_the_server_for_the_others():
+    manager = ResourceManager(
+        {"qwen-vlm": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True)},
+        telemetry=FakeTelemetry(),
+    )
+    release = asyncio.Event()
+
+    async def request(wait):
+        async with manager.lease("qwen-vlm", incremental_gib=0.0):
+            await wait()
+
+    first = asyncio.create_task(request(lambda: asyncio.sleep(60)))
+    while not (await manager.status())["resources"]["qwen-vlm"]["running"]:
+        await asyncio.sleep(0.01)
+    second = asyncio.create_task(request(release.wait))
+    while manager._leases.get("qwen-vlm", 0) < 2:
+        await asyncio.sleep(0.01)
+    first.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await first
+    assert (await manager.status())["resources"]["qwen-vlm"]["running"]
+    release.set()
+    await second
+    await manager.stop("qwen-vlm")
+
+
+@pytest.mark.asyncio
 async def test_persistent_generator_stays_loaded_until_memory_is_needed():
     telemetry = FakeTelemetry(available=64.0)
     manager = ResourceManager(
@@ -811,3 +838,66 @@ async def test_lease_still_fails_after_the_admission_wait(monkeypatch):
             pass
     assert (await manager.status())["resources"]["swift"]["running"]
     await manager.stop("swift")
+
+
+@pytest.mark.asyncio
+async def test_lease_unloads_an_idle_model_even_with_queued_work():
+    telemetry = FakeTelemetry(available=64.0)
+    configs = {
+        "swift": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=30),
+        "minimax-h3": BackendConfig(persistent=False, estimate_gib=40),
+    }
+    manager = ResourceManager(configs, telemetry=telemetry, reserve_gib=5)
+    await manager.ensure("swift")
+    original_stop = manager._stop_locked
+
+    async def stop_and_reclaim(name):
+        await original_stop(name)
+        telemetry.available += configs[name].estimate(name)
+
+    manager._stop_locked = stop_and_reclaim
+    manager.set_queued_resources({"swift": 1})
+    telemetry.available = 30.0
+    async with manager.lease("minimax-h3"):
+        status = await manager.status()
+        assert not status["resources"]["swift"]["running"]
+        assert status["metrics"]["failed_admissions"] == 0
+
+
+@pytest.mark.asyncio
+async def test_lease_queues_while_another_model_is_in_use_then_unloads_it(monkeypatch):
+    from model_router.mac import resources
+
+    monkeypatch.setattr(resources, "ADMISSION_WAIT_SECONDS", 0.2)
+    monkeypatch.setattr(resources, "ADMISSION_RETRY_SECONDS", 0.05)
+    telemetry = FakeTelemetry(available=64.0)
+    configs = {
+        "swift": BackendConfig(command=(sys.executable, "-c", "import time; time.sleep(60)"), core=True, estimate_gib=30),
+        "minimax-h3": BackendConfig(persistent=False, estimate_gib=40),
+    }
+    manager = ResourceManager(configs, telemetry=telemetry, reserve_gib=5)
+    await manager.ensure("swift")
+    original_stop = manager._stop_locked
+
+    async def stop_and_reclaim(name):
+        await original_stop(name)
+        telemetry.available += configs[name].estimate(name)
+
+    manager._stop_locked = stop_and_reclaim
+    released = asyncio.Event()
+
+    async def chat():
+        async with manager.lease("swift"):
+            telemetry.available = 30.0
+            await asyncio.sleep(0.8)  # longer than the 0.2 s memory wait
+        released.set()
+
+    chat_task = asyncio.create_task(chat())
+    await asyncio.sleep(0.1)
+    async with manager.lease("minimax-h3"):
+        assert released.is_set()
+        status = await manager.status()
+        assert not status["resources"]["swift"]["running"]
+        assert status["metrics"]["admission_queued"] >= 1
+        assert status["metrics"]["failed_admissions"] == 0
+    await chat_task
