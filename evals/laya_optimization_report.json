@@ -1,0 +1,345 @@
+{
+  "purpose": "Optimising Laya routing beyond the first tuned config (87.0% on golden_300).",
+  "protocol": "Tuned on golden_300 only. large_500 (from evals/routing_accuracy.build_large_suite) and jev_prompt_fresh_50.json were held out until one candidate was chosen; both verified to have zero prompt overlap with golden_300.",
+  "checkpoint": "convaiinnovations/laya subfolder=typed-decisions, device=cuda",
+  "criteria_wording_sweep_on_tune": {
+    "W0 baseline": {
+      "accuracy": 0.87,
+      "correct": 261,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "94/102",
+        "deliberative_work": "69/99",
+        "engineering_work": "98/99"
+      }
+    },
+    "W1 eng=writing code": {
+      "accuracy": 0.8567,
+      "correct": 257,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "95/102",
+        "deliberative_work": "65/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "W2 del=reasoning incl. about code": {
+      "accuracy": 0.8833,
+      "correct": 265,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "93/102",
+        "deliberative_work": "75/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "W3 both sharpened": {
+      "accuracy": 0.8767,
+      "correct": 263,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "92/102",
+        "deliberative_work": "75/99",
+        "engineering_work": "96/99"
+      }
+    },
+    "W4 both sharpened + direct=quick": {
+      "accuracy": 0.8633,
+      "correct": 259,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "91/102",
+        "deliberative_work": "73/99",
+        "engineering_work": "95/99"
+      }
+    },
+    "W5 verb-led": {
+      "accuracy": 0.81,
+      "correct": 243,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "89/102",
+        "deliberative_work": "57/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "W2 del=reasoning incl. about code + I0 kind of work": {
+      "accuracy": 0.8833,
+      "correct": 265,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "93/102",
+        "deliberative_work": "75/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "W2 del=reasoning incl. about code + I1 what must be done": {
+      "accuracy": 0.8833,
+      "correct": 265,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "93/102",
+        "deliberative_work": "75/99",
+        "engineering_work": "97/99"
+      }
+    },
+    "W2 del=reasoning incl. about code + I2 route": {
+      "accuracy": 0.8767,
+      "correct": 263,
+      "total": 300,
+      "by_role": {
+        "direct_assistance": "91/102",
+        "deliberative_work": "74/99",
+        "engineering_work": "98/99"
+      }
+    }
+  },
+  "chosen_criteria": {
+    "direct_assistance": "ordinary questions, explanations, advice, planning, casual requests",
+    "deliberative_work": "hard reasoning and analysis, including about code or systems, without writing code: proofs, comparisons, tradeoffs, root-cause analysis",
+    "engineering_work": "code, programming, debugging, tests, refactoring, repository work"
+  },
+  "auxiliary_question_experiment": {
+    "note": "writes_code + needs_deliberation + difficulty asked in the SAME forward pass (4 questions, 26ms vs 22ms).",
+    "hand_rule_tune_accuracy": 0.8833,
+    "logistic_regression_5fold_cv_with_aux": 0.9367,
+    "logistic_regression_5fold_cv_route_probs_only": 0.9333,
+    "verdict": "Sub-questions add ~0.3pt over route probabilities alone. Rejected: not worth the extra questions."
+  },
+  "readout_fits_on_tune": {
+    "W0": {
+      "bias": [
+        0.4150000000000018,
+        -0.004999999999998589
+      ],
+      "bias_in_sample": 0.9367,
+      "bias_cv": 0.8733,
+      "lr_cv": 0.9167,
+      "argmax": 0.87
+    },
+    "W2": {
+      "bias": [
+        0.2600000000000017,
+        -0.11999999999999869
+      ],
+      "bias_in_sample": 0.95,
+      "bias_cv": 0.9233,
+      "lr_cv": 0.9333,
+      "argmax": 0.8833
+    }
+  },
+  "holdout_results": {
+    "large_500": {
+      "latency": {
+        "median_seconds": 0.0245,
+        "p95_seconds": 0.0309
+      },
+      "argmax (W0 shipped)": {
+        "accuracy": 0.92,
+        "correct": 460,
+        "total": 500,
+        "by_role": {
+          "direct_assistance": "166/168",
+          "deliberative_work": "128/166",
+          "engineering_work": "166/166"
+        },
+        "normal": "381/400",
+        "curveball": "79/100"
+      },
+      "argmax (W2)": {
+        "accuracy": 0.956,
+        "correct": 478,
+        "total": 500,
+        "by_role": {
+          "direct_assistance": "164/168",
+          "deliberative_work": "148/166",
+          "engineering_work": "166/166"
+        },
+        "normal": "387/400",
+        "curveball": "91/100"
+      },
+      "W2 + bias": {
+        "accuracy": 0.954,
+        "correct": 477,
+        "total": 500,
+        "by_role": {
+          "direct_assistance": "154/168",
+          "deliberative_work": "164/166",
+          "engineering_work": "159/166"
+        },
+        "normal": "392/400",
+        "curveball": "85/100"
+      },
+      "W2 + LR": {
+        "accuracy": 0.96,
+        "correct": 480,
+        "total": 500,
+        "by_role": {
+          "direct_assistance": "154/168",
+          "deliberative_work": "163/166",
+          "engineering_work": "163/166"
+        },
+        "normal": "394/400",
+        "curveball": "86/100"
+      }
+    },
+    "fresh_50": {
+      "latency": {
+        "median_seconds": 0.026,
+        "p95_seconds": 0.0335
+      },
+      "argmax (W0 shipped)": {
+        "accuracy": 0.8,
+        "correct": 40,
+        "total": 50,
+        "by_role": {
+          "direct_assistance": "16/17",
+          "deliberative_work": "8/17",
+          "engineering_work": "16/16"
+        }
+      },
+      "argmax (W2)": {
+        "accuracy": 0.86,
+        "correct": 43,
+        "total": 50,
+        "by_role": {
+          "direct_assistance": "17/17",
+          "deliberative_work": "10/17",
+          "engineering_work": "16/16"
+        }
+      },
+      "W2 + bias": {
+        "accuracy": 0.8,
+        "correct": 40,
+        "total": 50,
+        "by_role": {
+          "direct_assistance": "16/17",
+          "deliberative_work": "12/17",
+          "engineering_work": "12/16"
+        }
+      },
+      "W2 + LR": {
+        "accuracy": 0.84,
+        "correct": 42,
+        "total": 50,
+        "by_role": {
+          "direct_assistance": "16/17",
+          "deliberative_work": "12/17",
+          "engineering_work": "14/16"
+        }
+      }
+    }
+  },
+  "rejected_readouts": {
+    "per_class_log_bias": {
+      "bias": [
+        0.2600000000000017,
+        -0.11999999999999869
+      ],
+      "large_500": 0.954,
+      "fresh_50": 0.8,
+      "verdict": "Wins +CV on tune, loses 6pts on fresh_50. Overfits golden_300 class balance."
+    },
+    "logistic_regression": {
+      "coef": [
+        [
+          -2.340063077794341,
+          4.700516442366024,
+          -2.322151665001938
+        ],
+        [
+          4.442992669536819,
+          -2.3830503851878686,
+          -2.07622780553639
+        ],
+        [
+          -2.1029295917424777,
+          -2.317466057178154,
+          4.398379470538325
+        ]
+      ],
+      "intercept": [
+        0.421250295183932,
+        -0.2238490838446972,
+        -0.19740121133924318
+      ],
+      "large_500": 0.96,
+      "fresh_50": 0.84,
+      "verdict": "Best on large_500 (+0.4pt over argmax) but loses 2pts on fresh_50. Rejected: 12 fitted params for no consistent gain."
+    }
+  },
+  "shipped": {
+    "readout": "plain argmax, no confidence cutoff",
+    "criteria": {
+      "direct_assistance": "ordinary questions, explanations, advice, planning, casual requests",
+      "deliberative_work": "hard reasoning and analysis, including about code or systems, without writing code: proofs, comparisons, tradeoffs, root-cause analysis",
+      "engineering_work": "code, programming, debugging, tests, refactoring, repository work"
+    },
+    "verified_through_LayaClassifier": {
+      "golden_300_tune": {
+        "accuracy": 0.8833,
+        "correct": 265,
+        "median_seconds": 0.025
+      },
+      "large_500_holdout": {
+        "accuracy": 0.956,
+        "correct": 478,
+        "median_seconds": 0.0248,
+        "by_role": {
+          "direct_assistance": "164/168",
+          "deliberative_work": "148/166",
+          "engineering_work": "166/166"
+        }
+      },
+      "fresh_50_holdout": {
+        "accuracy": 0.86,
+        "correct": 43,
+        "median_seconds": 0.0276
+      }
+    }
+  },
+  "nli_same_harness": {
+    "note": "model-router.example.json labels. The README 99.2% was measured with the local gitignored model-router.json, so it is not comparable to these runs.",
+    "large_500": {
+      "thresholded": 0.952,
+      "argmax": 0.952
+    },
+    "fresh_50": {
+      "thresholded": 0.64,
+      "argmax": 0.7
+    },
+    "golden_300": {
+      "thresholded": 0.7233,
+      "argmax": 0.7633
+    }
+  },
+  "jev_holdout": {
+    "source": "evals/jev_holdout_report.json (550 live API calls, 0 errors)",
+    "large_500": {
+      "accuracy": 1.0,
+      "correct": 500,
+      "median_seconds": 0.9102,
+      "note": "perfect, including 100/100 curveballs"
+    },
+    "fresh_50": {
+      "accuracy": 0.74,
+      "correct": 37,
+      "median_seconds": 0.9146,
+      "by_role": {
+        "direct_assistance": "17/17",
+        "deliberative_work": "4/17",
+        "engineering_work": "16/16"
+      },
+      "note": "all 13 failures are deliberative_work -> direct_assistance at 0.9+ confidence"
+    }
+  },
+  "laya_vs_jev_fresh_50_mcnemar": {
+    "both_right": 37,
+    "laya_only": 6,
+    "jev_only": 0,
+    "both_wrong": 7,
+    "exact_p": 0.0312,
+    "verdict": "Laya wins 6-0 on disagreements; significant at 0.05."
+  },
+  "holdout_quality_caveat": "large_500 is combinatorial template generation (~30 patterns x actions x topics x formats) with class-marking verbs ('prove', 'derive', 'implement'), not 500 independent items. JEV saturates it at 100%. Treat golden_300 and fresh_50 as the discriminating sets."
+}

@@ -1,0 +1,42 @@
+{
+  "dataset": "golden_300.json",
+  "device": "cuda",
+  "variants": {
+    "english": {
+      "argmax_accuracy": 0.7233,
+      "thresholded_accuracy": 0.4333,
+      "median_seconds": 0.0206,
+      "p95_seconds": 0.025,
+      "median_max_probability": 0.4377,
+      "argmax_by_role": {
+        "direct_assistance": "80/102",
+        "deliberative_work": "42/99",
+        "engineering_work": "95/99"
+      }
+    },
+    "multilingual": {
+      "argmax_accuracy": 0.4133,
+      "thresholded_accuracy": 0.3533,
+      "median_seconds": 0.0171,
+      "p95_seconds": 0.0253,
+      "median_max_probability": 0.5413,
+      "argmax_by_role": {
+        "direct_assistance": "16/102",
+        "deliberative_work": "27/99",
+        "engineering_work": "81/99"
+      }
+    },
+    "typed-decisions": {
+      "argmax_accuracy": 0.7967,
+      "thresholded_accuracy": 0.3767,
+      "median_seconds": 0.021,
+      "p95_seconds": 0.026,
+      "median_max_probability": 0.4557,
+      "argmax_by_role": {
+        "direct_assistance": "94/102",
+        "deliberative_work": "50/99",
+        "engineering_work": "95/99"
+      }
+    }
+  }
+}

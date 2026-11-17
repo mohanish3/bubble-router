@@ -1,0 +1,4246 @@
+{
+  "dataset": "golden_300.json",
+  "checkpoint": "typed-decisions",
+  "state": "dict with `request` field",
+  "criteria": {
+    "direct_assistance": "ordinary questions, explanations, advice, planning, casual requests",
+    "deliberative_work": "hard multi-step reasoning, proofs, deep analysis, research, tradeoff study",
+    "engineering_work": "code, programming, debugging, tests, refactoring, repository work"
+  },
+  "argmax_accuracy": 0.87,
+  "argmax_correct": 261,
+  "median_seconds": 0.0216,
+  "p95_seconds": 0.0265,
+  "median_top_p": 0.5487,
+  "median_margin": 0.2894,
+  "threshold_sweep_top_p": {
+    "top_p>=0.00": 0.87,
+    "top_p>=0.35": 0.8633,
+    "top_p>=0.40": 0.8333,
+    "top_p>=0.45": 0.7533,
+    "top_p>=0.50": 0.6533,
+    "top_p>=0.55": 0.5533,
+    "top_p>=0.60": 0.47
+  },
+  "threshold_sweep_margin": {
+    "margin>=0.00": 0.87,
+    "margin>=0.05": 0.82,
+    "margin>=0.10": 0.7767,
+    "margin>=0.15": 0.7233,
+    "margin>=0.20": 0.6633
+  },
+  "confusions": {
+    "deliberative_work -> engineering_work": 22,
+    "deliberative_work -> direct_assistance": 8,
+    "direct_assistance -> engineering_work": 8,
+    "engineering_work -> deliberative_work": 1
+  },
+  "laya_errors_vs_others": {
+    "jev_also_wrong": 10,
+    "nli_also_wrong": 18,
+    "both_also_wrong": 5,
+    "checked": 38
+  },
+  "cases": [
+    {
+      "id": "G001",
+      "prompt": "Explain why the sky appears blue during the day.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5586,
+      "margin": 0.3137,
+      "probabilities": {
+        "direct_assistance": 0.5586,
+        "deliberative_work": 0.2449,
+        "engineering_work": 0.1964
+      },
+      "entropy_confidence": 0.0993
+    },
+    {
+      "id": "G002",
+      "prompt": "Summarize the pros and cons of renting versus buying a home.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4181,
+      "margin": 0.0011000000000000454,
+      "probabilities": {
+        "direct_assistance": 0.4181,
+        "deliberative_work": 0.417,
+        "engineering_work": 0.1649
+      },
+      "entropy_confidence": 0.0656
+    },
+    {
+      "id": "G003",
+      "prompt": "Draft a polite email rescheduling tomorrow's meeting.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5622,
+      "margin": 0.23970000000000002,
+      "probabilities": {
+        "direct_assistance": 0.5622,
+        "deliberative_work": 0.3225,
+        "engineering_work": 0.1153
+      },
+      "entropy_confidence": 0.1464
+    },
+    {
+      "id": "G004",
+      "prompt": "Give me a five-day vegetarian meal plan.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.57,
+      "margin": 0.32499999999999996,
+      "probabilities": {
+        "direct_assistance": 0.57,
+        "deliberative_work": 0.185,
+        "engineering_work": 0.245
+      },
+      "entropy_confidence": 0.1105
+    },
+    {
+      "id": "G005",
+      "prompt": "What questions should I ask before adopting a dog?",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6413,
+      "margin": 0.3992,
+      "probabilities": {
+        "direct_assistance": 0.6413,
+        "deliberative_work": 0.2421,
+        "engineering_work": 0.1166
+      },
+      "entropy_confidence": 0.2
+    },
+    {
+      "id": "G006",
+      "prompt": "Compare solar and wind energy in plain language.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.653,
+      "margin": 0.4687,
+      "probabilities": {
+        "direct_assistance": 0.653,
+        "deliberative_work": 0.1628,
+        "engineering_work": 0.1843
+      },
+      "entropy_confidence": 0.194
+    },
+    {
+      "id": "G007",
+      "prompt": "Help me plan a three-day itinerary for Jaipur.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6516,
+      "margin": 0.44009999999999994,
+      "probabilities": {
+        "direct_assistance": 0.6516,
+        "deliberative_work": 0.2115,
+        "engineering_work": 0.1369
+      },
+      "entropy_confidence": 0.1991
+    },
+    {
+      "id": "G008",
+      "prompt": "Turn these notes into a concise project update.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5906,
+      "margin": 0.3442,
+      "probabilities": {
+        "direct_assistance": 0.5906,
+        "deliberative_work": 0.163,
+        "engineering_work": 0.2464
+      },
+      "entropy_confidence": 0.1336
+    },
+    {
+      "id": "G009",
+      "prompt": "Use my calendar tool to find an open hour next Tuesday.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.644,
+      "margin": 0.4146,
+      "probabilities": {
+        "direct_assistance": 0.644,
+        "deliberative_work": 0.1266,
+        "engineering_work": 0.2294
+      },
+      "entropy_confidence": 0.1964
+    },
+    {
+      "id": "G010",
+      "prompt": "Search my notes for the latest budget decision.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5357,
+      "margin": 0.18949999999999995,
+      "probabilities": {
+        "direct_assistance": 0.5357,
+        "deliberative_work": 0.3462,
+        "engineering_work": 0.1182
+      },
+      "entropy_confidence": 0.1316
+    },
+    {
+      "id": "G011",
+      "prompt": "Check the weather tool and suggest what clothing to pack.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6453,
+      "margin": 0.43019999999999997,
+      "probabilities": {
+        "direct_assistance": 0.6453,
+        "deliberative_work": 0.1396,
+        "engineering_work": 0.2151
+      },
+      "entropy_confidence": 0.1917
+    },
+    {
+      "id": "G012",
+      "prompt": "Create a checklist for moving into a new apartment.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5719,
+      "margin": 0.35119999999999996,
+      "probabilities": {
+        "direct_assistance": 0.5719,
+        "deliberative_work": 0.2207,
+        "engineering_work": 0.2074
+      },
+      "entropy_confidence": 0.1086
+    },
+    {
+      "id": "G013",
+      "prompt": "Explain compound interest to a high-school student.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6942,
+      "margin": 0.5227,
+      "probabilities": {
+        "direct_assistance": 0.6942,
+        "deliberative_work": 0.1715,
+        "engineering_work": 0.1343
+      },
+      "entropy_confidence": 0.2486
+    },
+    {
+      "id": "G014",
+      "prompt": "Rewrite this paragraph to sound more professional.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6665,
+      "margin": 0.4905,
+      "probabilities": {
+        "direct_assistance": 0.6665,
+        "deliberative_work": 0.1575,
+        "engineering_work": 0.176
+      },
+      "entropy_confidence": 0.2106
+    },
+    {
+      "id": "G015",
+      "prompt": "Prove that the square root of 2 is irrational.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5352,
+      "margin": 0.29710000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2267,
+        "deliberative_work": 0.5352,
+        "engineering_work": 0.2381
+      },
+      "entropy_confidence": 0.0782
+    },
+    {
+      "id": "G016",
+      "prompt": "Derive the time complexity of this recursive recurrence: T(n)=2T(n/2)+n log n.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3972,
+      "margin": 0.04870000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2543,
+        "deliberative_work": 0.3972,
+        "engineering_work": 0.3485
+      },
+      "entropy_confidence": 0.0148
+    },
+    {
+      "id": "G017",
+      "prompt": "Analyze three competing explanations for the Fermi paradox and identify their weakest assumptions.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5261,
+      "margin": 0.2566,
+      "probabilities": {
+        "direct_assistance": 0.2695,
+        "deliberative_work": 0.5261,
+        "engineering_work": 0.2044
+      },
+      "entropy_confidence": 0.0754
+    },
+    {
+      "id": "G018",
+      "prompt": "Design a rigorous experiment to distinguish correlation from causation in this observational study.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4314,
+      "margin": 0.06390000000000001,
+      "probabilities": {
+        "direct_assistance": 0.2011,
+        "deliberative_work": 0.4314,
+        "engineering_work": 0.3675
+      },
+      "entropy_confidence": 0.0414
+    },
+    {
+      "id": "G019",
+      "prompt": "Solve this multi-step logic puzzle and show every inference.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4821,
+      "margin": 0.21569999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2664,
+        "deliberative_work": 0.4821,
+        "engineering_work": 0.2514
+      },
+      "entropy_confidence": 0.0431
+    },
+    {
+      "id": "G020",
+      "prompt": "Find the root cause of a distributed-system outage from these conflicting timelines.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4864,
+      "margin": 0.1602,
+      "probabilities": {
+        "direct_assistance": 0.1873,
+        "deliberative_work": 0.3262,
+        "engineering_work": 0.4864
+      },
+      "entropy_confidence": 0.0627
+    },
+    {
+      "id": "G021",
+      "prompt": "Compare two database architectures under latency, consistency, and failure-domain constraints.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4362,
+      "margin": 0.07419999999999999,
+      "probabilities": {
+        "direct_assistance": 0.2017,
+        "deliberative_work": 0.362,
+        "engineering_work": 0.4362
+      },
+      "entropy_confidence": 0.0418
+    },
+    {
+      "id": "G022",
+      "prompt": "Derive the optimal strategy for this constrained game-theory problem.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5329,
+      "margin": 0.2886000000000001,
+      "probabilities": {
+        "direct_assistance": 0.2443,
+        "deliberative_work": 0.5329,
+        "engineering_work": 0.2228
+      },
+      "entropy_confidence": 0.0768
+    },
+    {
+      "id": "G023",
+      "prompt": "Evaluate this acquisition using scenario analysis, sensitivity analysis, and downside risk.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5025,
+      "margin": 0.23179999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2707,
+        "deliberative_work": 0.5025,
+        "engineering_work": 0.2268
+      },
+      "entropy_confidence": 0.057
+    },
+    {
+      "id": "G024",
+      "prompt": "Construct a formal argument for and against this constitutional interpretation.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5222,
+      "margin": 0.2143,
+      "probabilities": {
+        "direct_assistance": 0.3079,
+        "deliberative_work": 0.5222,
+        "engineering_work": 0.1699
+      },
+      "entropy_confidence": 0.0869
+    },
+    {
+      "id": "G025",
+      "prompt": "Explain why this proposed perpetual-motion machine cannot work using thermodynamics.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.3845,
+      "margin": 0.04680000000000001,
+      "probabilities": {
+        "direct_assistance": 0.3845,
+        "deliberative_work": 0.3377,
+        "engineering_work": 0.2778
+      },
+      "entropy_confidence": 0.0079
+    },
+    {
+      "id": "G026",
+      "prompt": "Develop a causal model for declining customer retention across five interacting factors.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4503,
+      "margin": 0.0983,
+      "probabilities": {
+        "direct_assistance": 0.352,
+        "deliberative_work": 0.4503,
+        "engineering_work": 0.1977
+      },
+      "entropy_confidence": 0.0468
+    },
+    {
+      "id": "G027",
+      "prompt": "Optimize this supply chain under uncertain demand and capacity constraints.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3689,
+      "margin": 0.02190000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2841,
+        "deliberative_work": 0.3689,
+        "engineering_work": 0.347
+      },
+      "entropy_confidence": 0.0054
+    },
+    {
+      "id": "G028",
+      "prompt": "Implement a Python LRU cache with O(1) get and put operations.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6165,
+      "margin": 0.37300000000000005,
+      "probabilities": {
+        "direct_assistance": 0.2435,
+        "deliberative_work": 0.14,
+        "engineering_work": 0.6165
+      },
+      "entropy_confidence": 0.1649
+    },
+    {
+      "id": "G029",
+      "prompt": "Debug this TypeScript error: Type 'undefined' is not assignable to type 'User'.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6852,
+      "margin": 0.4939,
+      "probabilities": {
+        "direct_assistance": 0.1913,
+        "deliberative_work": 0.1235,
+        "engineering_work": 0.6852
+      },
+      "entropy_confidence": 0.2411
+    },
+    {
+      "id": "G030",
+      "prompt": "Review this pull request for concurrency bugs and missing tests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5533,
+      "margin": 0.3166,
+      "probabilities": {
+        "direct_assistance": 0.2367,
+        "deliberative_work": 0.21,
+        "engineering_work": 0.5533
+      },
+      "entropy_confidence": 0.0931
+    },
+    {
+      "id": "G031",
+      "prompt": "Write a SQL migration that adds a unique partial index safely.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6293,
+      "margin": 0.42699999999999994,
+      "probabilities": {
+        "direct_assistance": 0.1684,
+        "deliberative_work": 0.2023,
+        "engineering_work": 0.6293
+      },
+      "entropy_confidence": 0.1674
+    },
+    {
+      "id": "G032",
+      "prompt": "Refactor this React component to remove duplicated state.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5626,
+      "margin": 0.3315,
+      "probabilities": {
+        "direct_assistance": 0.2311,
+        "deliberative_work": 0.2063,
+        "engineering_work": 0.5626
+      },
+      "entropy_confidence": 0.1009
+    },
+    {
+      "id": "G033",
+      "prompt": "Add integration tests for the FastAPI authentication middleware.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6393,
+      "margin": 0.44899999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1903,
+        "deliberative_work": 0.1703,
+        "engineering_work": 0.6393
+      },
+      "entropy_confidence": 0.1778
+    },
+    {
+      "id": "G034",
+      "prompt": "Explain why this Rust function fails the borrow checker and fix it.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5302,
+      "margin": 0.2743,
+      "probabilities": {
+        "direct_assistance": 0.2559,
+        "deliberative_work": 0.2139,
+        "engineering_work": 0.5302
+      },
+      "entropy_confidence": 0.076
+    },
+    {
+      "id": "G035",
+      "prompt": "Design a REST API and provide an OpenAPI schema for it.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.498,
+      "margin": 0.2113,
+      "probabilities": {
+        "direct_assistance": 0.2867,
+        "deliberative_work": 0.2152,
+        "engineering_work": 0.498
+      },
+      "entropy_confidence": 0.057
+    },
+    {
+      "id": "G036",
+      "prompt": "Investigate this stack trace and identify the failing code path.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5791,
+      "margin": 0.35079999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2283,
+        "deliberative_work": 0.1926,
+        "engineering_work": 0.5791
+      },
+      "entropy_confidence": 0.1163
+    },
+    {
+      "id": "G037",
+      "prompt": "Convert this Bash deployment script to PowerShell.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.552,
+      "margin": 0.2735,
+      "probabilities": {
+        "direct_assistance": 0.2785,
+        "deliberative_work": 0.1695,
+        "engineering_work": 0.552
+      },
+      "entropy_confidence": 0.1035
+    },
+    {
+      "id": "G038",
+      "prompt": "Optimize this PostgreSQL query and explain the execution plan.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4575,
+      "margin": 0.1778,
+      "probabilities": {
+        "direct_assistance": 0.2629,
+        "deliberative_work": 0.2797,
+        "engineering_work": 0.4575
+      },
+      "entropy_confidence": 0.0303
+    },
+    {
+      "id": "G039",
+      "prompt": "Create a GitHub Actions workflow for lint, tests, and release builds.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6194,
+      "margin": 0.39919999999999994,
+      "probabilities": {
+        "direct_assistance": 0.2202,
+        "deliberative_work": 0.1603,
+        "engineering_work": 0.6194
+      },
+      "entropy_confidence": 0.1595
+    },
+    {
+      "id": "G040",
+      "prompt": "Fix the race condition in this asynchronous queue implementation.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6803,
+      "margin": 0.509,
+      "probabilities": {
+        "direct_assistance": 0.1713,
+        "deliberative_work": 0.1484,
+        "engineering_work": 0.6803
+      },
+      "entropy_confidence": 0.2286
+    },
+    {
+      "id": "G041",
+      "prompt": "Don't write code. Diagnose why our Python API deadlocks under load and describe the exact code-level fix.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6029,
+      "margin": 0.39559999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2073,
+        "deliberative_work": 0.1897,
+        "engineering_work": 0.6029
+      },
+      "entropy_confidence": 0.1383
+    },
+    {
+      "id": "G042",
+      "prompt": "My grocery list contains the words Python, Rust, and Java. Group the groceries by supermarket aisle.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4891,
+      "margin": 0.11409999999999998,
+      "probabilities": {
+        "direct_assistance": 0.4891,
+        "deliberative_work": 0.1359,
+        "engineering_work": 0.375
+      },
+      "entropy_confidence": 0.0999
+    },
+    {
+      "id": "G043",
+      "prompt": "No code is needed: reason carefully about whether this lock-free algorithm can violate linearizability.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4308,
+      "margin": 0.0811,
+      "probabilities": {
+        "direct_assistance": 0.2195,
+        "deliberative_work": 0.4308,
+        "engineering_work": 0.3497
+      },
+      "entropy_confidence": 0.0323
+    },
+    {
+      "id": "G044",
+      "prompt": "Use the email tool to send the approved release announcement. Do not redesign or debug anything.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.4873,
+      "margin": 0.16550000000000004,
+      "probabilities": {
+        "direct_assistance": 0.3218,
+        "deliberative_work": 0.191,
+        "engineering_work": 0.4873
+      },
+      "entropy_confidence": 0.0612
+    },
+    {
+      "id": "G045",
+      "prompt": "Write the smallest patch for this bug; the business explanation and architecture discussion are already complete.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5258,
+      "margin": 0.23670000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2891,
+        "deliberative_work": 0.1851,
+        "engineering_work": 0.5258
+      },
+      "entropy_confidence": 0.0816
+    },
+    {
+      "id": "G046",
+      "prompt": "A program prints the correct answer, but prove whether its underlying greedy algorithm is correct for every input.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4904,
+      "margin": 0.1396,
+      "probabilities": {
+        "direct_assistance": 0.1588,
+        "deliberative_work": 0.3508,
+        "engineering_work": 0.4904
+      },
+      "entropy_confidence": 0.0814
+    },
+    {
+      "id": "G047",
+      "prompt": "Explain what a software API is to a restaurant owner without discussing implementation.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6323,
+      "margin": 0.42569999999999997,
+      "probabilities": {
+        "direct_assistance": 0.6323,
+        "deliberative_work": 0.1611,
+        "engineering_work": 0.2066
+      },
+      "entropy_confidence": 0.1718
+    },
+    {
+      "id": "G048",
+      "prompt": "The task sounds simple: rename one field across the schema, migrations, serializers, clients, and tests without breaking compatibility.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.587,
+      "margin": 0.36749999999999994,
+      "probabilities": {
+        "direct_assistance": 0.2195,
+        "deliberative_work": 0.1935,
+        "engineering_work": 0.587
+      },
+      "entropy_confidence": 0.1231
+    },
+    {
+      "id": "G049",
+      "prompt": "First ignore the obvious coding solution. Determine whether the requirements are mutually consistent, then derive the feasible cases.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3437,
+      "margin": 0.01050000000000001,
+      "probabilities": {
+        "direct_assistance": 0.323,
+        "deliberative_work": 0.3437,
+        "engineering_work": 0.3332
+      },
+      "entropy_confidence": 0.0003
+    },
+    {
+      "id": "G050",
+      "prompt": "The meeting title is 'Debug API architecture'. Find it on my calendar and tell me its start time.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.607,
+      "margin": 0.40369999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1897,
+        "deliberative_work": 0.2033,
+        "engineering_work": 0.607
+      },
+      "entropy_confidence": 0.1423
+    },
+    {
+      "id": "G051",
+      "prompt": "Explain how inflation affects household savings.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5894,
+      "margin": 0.3174,
+      "probabilities": {
+        "direct_assistance": 0.5894,
+        "deliberative_work": 0.272,
+        "engineering_work": 0.1387
+      },
+      "entropy_confidence": 0.1447
+    },
+    {
+      "id": "G052",
+      "prompt": "Draft a short apology for arriving late to an appointment.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6794,
+      "margin": 0.5138,
+      "probabilities": {
+        "direct_assistance": 0.6794,
+        "deliberative_work": 0.155,
+        "engineering_work": 0.1656
+      },
+      "entropy_confidence": 0.2269
+    },
+    {
+      "id": "G053",
+      "prompt": "Make a packing list for a week-long beach holiday.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4852,
+      "margin": 0.2121,
+      "probabilities": {
+        "direct_assistance": 0.4852,
+        "deliberative_work": 0.2417,
+        "engineering_work": 0.2731
+      },
+      "entropy_confidence": 0.0455
+    },
+    {
+      "id": "G054",
+      "prompt": "Use my contacts and email tools to send Priya the agenda.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7013,
+      "margin": 0.5318,
+      "probabilities": {
+        "direct_assistance": 0.7013,
+        "deliberative_work": 0.1293,
+        "engineering_work": 0.1695
+      },
+      "entropy_confidence": 0.259
+    },
+    {
+      "id": "G055",
+      "prompt": "Find tomorrow's dentist appointment on my calendar.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.648,
+      "margin": 0.45640000000000003,
+      "probabilities": {
+        "direct_assistance": 0.648,
+        "deliberative_work": 0.1916,
+        "engineering_work": 0.1604
+      },
+      "entropy_confidence": 0.1887
+    },
+    {
+      "id": "G056",
+      "prompt": "Summarize this interview transcript into five bullets.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6822,
+      "margin": 0.5106,
+      "probabilities": {
+        "direct_assistance": 0.6822,
+        "deliberative_work": 0.1716,
+        "engineering_work": 0.1462
+      },
+      "entropy_confidence": 0.2313
+    },
+    {
+      "id": "G057",
+      "prompt": "Suggest indoor activities for a rainy weekend with children.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.682,
+      "margin": 0.5128,
+      "probabilities": {
+        "direct_assistance": 0.682,
+        "deliberative_work": 0.1692,
+        "engineering_work": 0.1488
+      },
+      "entropy_confidence": 0.2307
+    },
+    {
+      "id": "G058",
+      "prompt": "Determine whether this voting system satisfies independence of irrelevant alternatives.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4245,
+      "margin": 0.1347,
+      "probabilities": {
+        "direct_assistance": 0.2857,
+        "deliberative_work": 0.4245,
+        "engineering_work": 0.2898
+      },
+      "entropy_confidence": 0.0164
+    },
+    {
+      "id": "G059",
+      "prompt": "Show that the proposed invariant is sufficient to establish termination.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3865,
+      "margin": 0.05460000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2817,
+        "deliberative_work": 0.3865,
+        "engineering_work": 0.3319
+      },
+      "entropy_confidence": 0.0075
+    },
+    {
+      "id": "G060",
+      "prompt": "Reconcile these contradictory witness accounts and rank the plausible timelines.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5251,
+      "margin": 0.1436,
+      "probabilities": {
+        "direct_assistance": 0.3815,
+        "deliberative_work": 0.5251,
+        "engineering_work": 0.0934
+      },
+      "entropy_confidence": 0.1559
+    },
+    {
+      "id": "G061",
+      "prompt": "Assess whether this monetary-policy proposal remains stable under three adverse scenarios.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5204,
+      "margin": 0.2254,
+      "probabilities": {
+        "direct_assistance": 0.295,
+        "deliberative_work": 0.5204,
+        "engineering_work": 0.1846
+      },
+      "entropy_confidence": 0.0789
+    },
+    {
+      "id": "G062",
+      "prompt": "Work through this probability puzzle and justify each conditional dependency.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5439,
+      "margin": 0.25970000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2842,
+        "deliberative_work": 0.5439,
+        "engineering_work": 0.1719
+      },
+      "entropy_confidence": 0.0975
+    },
+    {
+      "id": "G063",
+      "prompt": "Identify hidden assumptions in this argument and test whether its conclusion follows.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.432,
+      "margin": 0.04620000000000002,
+      "probabilities": {
+        "direct_assistance": 0.3858,
+        "deliberative_work": 0.432,
+        "engineering_work": 0.1822
+      },
+      "entropy_confidence": 0.0531
+    },
+    {
+      "id": "G064",
+      "prompt": "Fix an npm dependency conflict that appears only in the CI build.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6727,
+      "margin": 0.48369999999999996,
+      "probabilities": {
+        "direct_assistance": 0.189,
+        "deliberative_work": 0.1382,
+        "engineering_work": 0.6727
+      },
+      "entropy_confidence": 0.2216
+    },
+    {
+      "id": "G065",
+      "prompt": "Add pagination and validation to this Express endpoint.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6227,
+      "margin": 0.4217,
+      "probabilities": {
+        "direct_assistance": 0.201,
+        "deliberative_work": 0.1763,
+        "engineering_work": 0.6227
+      },
+      "entropy_confidence": 0.1594
+    },
+    {
+      "id": "G066",
+      "prompt": "Review this Terraform module for unsafe defaults.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5032,
+      "margin": 0.23779999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2314,
+        "deliberative_work": 0.2654,
+        "engineering_work": 0.5032
+      },
+      "entropy_confidence": 0.0567
+    },
+    {
+      "id": "G067",
+      "prompt": "Write unit tests for a Go HTTP handler.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6694,
+      "margin": 0.4578,
+      "probabilities": {
+        "direct_assistance": 0.2116,
+        "deliberative_work": 0.1191,
+        "engineering_work": 0.6694
+      },
+      "entropy_confidence": 0.2257
+    },
+    {
+      "id": "G068",
+      "prompt": "Investigate why this Docker container exits with code 137.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6255,
+      "margin": 0.43639999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1854,
+        "deliberative_work": 0.1891,
+        "engineering_work": 0.6255
+      },
+      "entropy_confidence": 0.1618
+    },
+    {
+      "id": "G069",
+      "prompt": "Replace unsafe type assertions in these test fixtures.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.574,
+      "margin": 0.32589999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2481,
+        "deliberative_work": 0.1779,
+        "engineering_work": 0.574
+      },
+      "entropy_confidence": 0.1156
+    },
+    {
+      "id": "G070",
+      "prompt": "Create a backward-compatible database column rename.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5915,
+      "margin": 0.38260000000000005,
+      "probabilities": {
+        "direct_assistance": 0.2089,
+        "deliberative_work": 0.1996,
+        "engineering_work": 0.5915
+      },
+      "entropy_confidence": 0.1268
+    },
+    {
+      "id": "G071",
+      "prompt": "The book club meeting is named 'Python Debugging'. Locate it in my calendar.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4116,
+      "margin": 0.017400000000000027,
+      "probabilities": {
+        "direct_assistance": 0.4116,
+        "deliberative_work": 0.1942,
+        "engineering_work": 0.3942
+      },
+      "entropy_confidence": 0.0437
+    },
+    {
+      "id": "G072",
+      "prompt": "Do not implement anything. Decide whether eventual consistency can satisfy these four business invariants simultaneously.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3985,
+      "margin": 0.039500000000000035,
+      "probabilities": {
+        "direct_assistance": 0.2425,
+        "deliberative_work": 0.3985,
+        "engineering_work": 0.359
+      },
+      "entropy_confidence": 0.0188
+    },
+    {
+      "id": "G073",
+      "prompt": "No architecture essay: identify why the production deployment rolls back and supply the configuration change.",
+      "expected": "engineering_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3681,
+      "margin": 0.04159999999999997,
+      "probabilities": {
+        "direct_assistance": 0.3055,
+        "deliberative_work": 0.3681,
+        "engineering_work": 0.3265
+      },
+      "entropy_confidence": 0.0027
+    },
+    {
+      "id": "G074",
+      "prompt": "Explain the phrase 'race condition' using a supermarket checkout analogy.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6938,
+      "margin": 0.5369999999999999,
+      "probabilities": {
+        "direct_assistance": 0.6938,
+        "deliberative_work": 0.1494,
+        "engineering_work": 0.1568
+      },
+      "entropy_confidence": 0.2461
+    },
+    {
+      "id": "G075",
+      "prompt": "Although this is about source code, establish whether the transformation preserves semantics for all possible inputs.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4623,
+      "margin": 0.1789,
+      "probabilities": {
+        "direct_assistance": 0.2543,
+        "deliberative_work": 0.2834,
+        "engineering_work": 0.4623
+      },
+      "entropy_confidence": 0.0331
+    },
+    {
+      "id": "G076",
+      "prompt": "Explain photosynthesis to a twelve-year-old using one everyday analogy.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7073,
+      "margin": 0.5597000000000001,
+      "probabilities": {
+        "direct_assistance": 0.7073,
+        "deliberative_work": 0.1476,
+        "engineering_work": 0.145
+      },
+      "entropy_confidence": 0.2651
+    },
+    {
+      "id": "G077",
+      "prompt": "Summarize this meeting transcript into decisions and owners.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4552,
+      "margin": 0.035499999999999976,
+      "probabilities": {
+        "direct_assistance": 0.4552,
+        "deliberative_work": 0.4197,
+        "engineering_work": 0.1251
+      },
+      "entropy_confidence": 0.1055
+    },
+    {
+      "id": "G078",
+      "prompt": "Rewrite my cover letter opening in a warmer tone.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6538,
+      "margin": 0.4676,
+      "probabilities": {
+        "direct_assistance": 0.6538,
+        "deliberative_work": 0.1601,
+        "engineering_work": 0.1862
+      },
+      "entropy_confidence": 0.1952
+    },
+    {
+      "id": "G079",
+      "prompt": "Draft a short thank-you note to a volunteer coordinator.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6493,
+      "margin": 0.4534,
+      "probabilities": {
+        "direct_assistance": 0.6493,
+        "deliberative_work": 0.1548,
+        "engineering_work": 0.1959
+      },
+      "entropy_confidence": 0.1912
+    },
+    {
+      "id": "G080",
+      "prompt": "Plan a relaxed weekend in Kochi for two adults.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6454,
+      "margin": 0.4392,
+      "probabilities": {
+        "direct_assistance": 0.6454,
+        "deliberative_work": 0.2062,
+        "engineering_work": 0.1484
+      },
+      "entropy_confidence": 0.1887
+    },
+    {
+      "id": "G081",
+      "prompt": "Make a grocery list for three simple vegetarian dinners.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5707,
+      "margin": 0.3465,
+      "probabilities": {
+        "direct_assistance": 0.5707,
+        "deliberative_work": 0.2051,
+        "engineering_work": 0.2242
+      },
+      "entropy_confidence": 0.1077
+    },
+    {
+      "id": "G082",
+      "prompt": "Translate this short Hindi message into natural English.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7468,
+      "margin": 0.6151,
+      "probabilities": {
+        "direct_assistance": 0.7468,
+        "deliberative_work": 0.1216,
+        "engineering_work": 0.1317
+      },
+      "entropy_confidence": 0.3254
+    },
+    {
+      "id": "G083",
+      "prompt": "Explain what an interest rate is without using equations.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.627,
+      "margin": 0.4185,
+      "probabilities": {
+        "direct_assistance": 0.627,
+        "deliberative_work": 0.2085,
+        "engineering_work": 0.1645
+      },
+      "entropy_confidence": 0.1658
+    },
+    {
+      "id": "G084",
+      "prompt": "Suggest five questions for a first meeting with a new manager.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6416,
+      "margin": 0.4165,
+      "probabilities": {
+        "direct_assistance": 0.6416,
+        "deliberative_work": 0.2251,
+        "engineering_work": 0.1333
+      },
+      "entropy_confidence": 0.1908
+    },
+    {
+      "id": "G085",
+      "prompt": "Turn these scattered notes into a clear status update.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6192,
+      "margin": 0.40199999999999997,
+      "probabilities": {
+        "direct_assistance": 0.6192,
+        "deliberative_work": 0.1635,
+        "engineering_work": 0.2172
+      },
+      "entropy_confidence": 0.1584
+    },
+    {
+      "id": "G086",
+      "prompt": "Make a packing checklist for a two-day hiking trip.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.464,
+      "margin": 0.15510000000000002,
+      "probabilities": {
+        "direct_assistance": 0.464,
+        "deliberative_work": 0.2271,
+        "engineering_work": 0.3089
+      },
+      "entropy_confidence": 0.039
+    },
+    {
+      "id": "G087",
+      "prompt": "Describe the difference between a debit card and a credit card plainly.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6212,
+      "margin": 0.4261,
+      "probabilities": {
+        "direct_assistance": 0.6212,
+        "deliberative_work": 0.1837,
+        "engineering_work": 0.1951
+      },
+      "entropy_confidence": 0.1573
+    },
+    {
+      "id": "G088",
+      "prompt": "Suggest a bedtime routine for someone with an early commute.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6643,
+      "margin": 0.4764,
+      "probabilities": {
+        "direct_assistance": 0.6643,
+        "deliberative_work": 0.1879,
+        "engineering_work": 0.1479
+      },
+      "entropy_confidence": 0.2095
+    },
+    {
+      "id": "G089",
+      "prompt": "Draft a friendly invitation to a neighborhood potluck.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6545,
+      "margin": 0.45919999999999994,
+      "probabilities": {
+        "direct_assistance": 0.6545,
+        "deliberative_work": 0.1953,
+        "engineering_work": 0.1503
+      },
+      "entropy_confidence": 0.1979
+    },
+    {
+      "id": "G090",
+      "prompt": "Condense this long paragraph to one sentence while keeping its point.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6697,
+      "margin": 0.5005,
+      "probabilities": {
+        "direct_assistance": 0.6697,
+        "deliberative_work": 0.1692,
+        "engineering_work": 0.1611
+      },
+      "entropy_confidence": 0.2143
+    },
+    {
+      "id": "G091",
+      "prompt": "Explain why leaves change color in autumn to a beginner.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7696,
+      "margin": 0.6404,
+      "probabilities": {
+        "direct_assistance": 0.7696,
+        "deliberative_work": 0.1292,
+        "engineering_work": 0.1012
+      },
+      "entropy_confidence": 0.3648
+    },
+    {
+      "id": "G092",
+      "prompt": "Help me outline a short talk about my recent vacation.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7512,
+      "margin": 0.6025,
+      "probabilities": {
+        "direct_assistance": 0.7512,
+        "deliberative_work": 0.1487,
+        "engineering_work": 0.1001
+      },
+      "entropy_confidence": 0.3367
+    },
+    {
+      "id": "G093",
+      "prompt": "Write three subject lines for an appointment reminder.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6583,
+      "margin": 0.4833,
+      "probabilities": {
+        "direct_assistance": 0.6583,
+        "deliberative_work": 0.175,
+        "engineering_work": 0.1667
+      },
+      "entropy_confidence": 0.2
+    },
+    {
+      "id": "G094",
+      "prompt": "Give me a simple weekly cleaning schedule for a small apartment.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7191,
+      "margin": 0.578,
+      "probabilities": {
+        "direct_assistance": 0.7191,
+        "deliberative_work": 0.1411,
+        "engineering_work": 0.1398
+      },
+      "entropy_confidence": 0.2823
+    },
+    {
+      "id": "G095",
+      "prompt": "Summarize the main points of this customer interview without analysis.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6601,
+      "margin": 0.4296,
+      "probabilities": {
+        "direct_assistance": 0.6601,
+        "deliberative_work": 0.2305,
+        "engineering_work": 0.1094
+      },
+      "entropy_confidence": 0.2222
+    },
+    {
+      "id": "G096",
+      "prompt": "Find the lunch appointment on my calendar and report its location.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6896,
+      "margin": 0.52,
+      "probabilities": {
+        "direct_assistance": 0.6896,
+        "deliberative_work": 0.1696,
+        "engineering_work": 0.1408
+      },
+      "entropy_confidence": 0.2416
+    },
+    {
+      "id": "G097",
+      "prompt": "Check my unread messages for the agenda from Priya.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6284,
+      "margin": 0.3732,
+      "probabilities": {
+        "direct_assistance": 0.6284,
+        "deliberative_work": 0.2552,
+        "engineering_work": 0.1163
+      },
+      "entropy_confidence": 0.1892
+    },
+    {
+      "id": "G098",
+      "prompt": "Use the weather tool to tell me whether to bring an umbrella today.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.495,
+      "margin": 0.12729999999999997,
+      "probabilities": {
+        "direct_assistance": 0.495,
+        "deliberative_work": 0.1373,
+        "engineering_work": 0.3677
+      },
+      "entropy_confidence": 0.1002
+    },
+    {
+      "id": "G099",
+      "prompt": "Send the already-approved invitation to the addresses in my contacts.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7373,
+      "margin": 0.5891,
+      "probabilities": {
+        "direct_assistance": 0.7373,
+        "deliberative_work": 0.1482,
+        "engineering_work": 0.1145
+      },
+      "entropy_confidence": 0.312
+    },
+    {
+      "id": "G100",
+      "prompt": "Add a reminder to call the dentist next Thursday.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5635,
+      "margin": 0.2812,
+      "probabilities": {
+        "direct_assistance": 0.5635,
+        "deliberative_work": 0.1542,
+        "engineering_work": 0.2823
+      },
+      "entropy_confidence": 0.1184
+    },
+    {
+      "id": "G101",
+      "prompt": "Look up the train reservation in my email and tell me the departure time.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.705,
+      "margin": 0.5402,
+      "probabilities": {
+        "direct_assistance": 0.705,
+        "deliberative_work": 0.1648,
+        "engineering_work": 0.1302
+      },
+      "entropy_confidence": 0.2636
+    },
+    {
+      "id": "G102",
+      "prompt": "Find the file named Python Debug Notes in my documents and give me its title.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.5769,
+      "margin": 0.3011,
+      "probabilities": {
+        "direct_assistance": 0.2758,
+        "deliberative_work": 0.1473,
+        "engineering_work": 0.5769
+      },
+      "entropy_confidence": 0.1309
+    },
+    {
+      "id": "G103",
+      "prompt": "Check whether the meeting called API Review is on Tuesday or Wednesday.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.3932,
+      "margin": 0.08379999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3094,
+        "deliberative_work": 0.2973,
+        "engineering_work": 0.3932
+      },
+      "entropy_confidence": 0.0073
+    },
+    {
+      "id": "G104",
+      "prompt": "Search my notes for the recipe I saved last month.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7218,
+      "margin": 0.5643,
+      "probabilities": {
+        "direct_assistance": 0.7218,
+        "deliberative_work": 0.1575,
+        "engineering_work": 0.1207
+      },
+      "entropy_confidence": 0.2886
+    },
+    {
+      "id": "G105",
+      "prompt": "Move tomorrow's personal appointment to Friday using my calendar.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6891,
+      "margin": 0.5047,
+      "probabilities": {
+        "direct_assistance": 0.6891,
+        "deliberative_work": 0.1844,
+        "engineering_work": 0.1265
+      },
+      "entropy_confidence": 0.2446
+    },
+    {
+      "id": "G106",
+      "prompt": "Explain what a database is to a caf\u00e9 owner without implementation details.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7094,
+      "margin": 0.5368,
+      "probabilities": {
+        "direct_assistance": 0.7094,
+        "deliberative_work": 0.1181,
+        "engineering_work": 0.1726
+      },
+      "entropy_confidence": 0.2727
+    },
+    {
+      "id": "G107",
+      "prompt": "Summarize this pull request announcement for a nontechnical team.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5365,
+      "margin": 0.2768,
+      "probabilities": {
+        "direct_assistance": 0.5365,
+        "deliberative_work": 0.2039,
+        "engineering_work": 0.2597
+      },
+      "entropy_confidence": 0.0821
+    },
+    {
+      "id": "G108",
+      "prompt": "Rewrite the release note so customers can understand it; do not edit software.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4951,
+      "margin": 0.17669999999999997,
+      "probabilities": {
+        "direct_assistance": 0.4951,
+        "deliberative_work": 0.1865,
+        "engineering_work": 0.3184
+      },
+      "entropy_confidence": 0.0664
+    },
+    {
+      "id": "G109",
+      "prompt": "The grocery item is called Rust Cleaner. Put it on my shopping list.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.5177,
+      "margin": 0.16390000000000005,
+      "probabilities": {
+        "direct_assistance": 0.3538,
+        "deliberative_work": 0.1285,
+        "engineering_work": 0.5177
+      },
+      "entropy_confidence": 0.1152
+    },
+    {
+      "id": "G110",
+      "prompt": "The event title is 'Fix production Docker'; tell me when it starts.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.5529,
+      "margin": 0.29719999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2557,
+        "deliberative_work": 0.1914,
+        "engineering_work": 0.5529
+      },
+      "entropy_confidence": 0.0963
+    },
+    {
+      "id": "G111",
+      "prompt": "Read the approved deployment notice aloud in plain language.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5643,
+      "margin": 0.3093,
+      "probabilities": {
+        "direct_assistance": 0.5643,
+        "deliberative_work": 0.1807,
+        "engineering_work": 0.255
+      },
+      "entropy_confidence": 0.1075
+    },
+    {
+      "id": "G112",
+      "prompt": "Draft an apology for a delayed reply to a support email.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6306,
+      "margin": 0.43520000000000003,
+      "probabilities": {
+        "direct_assistance": 0.6306,
+        "deliberative_work": 0.1954,
+        "engineering_work": 0.1741
+      },
+      "entropy_confidence": 0.1679
+    },
+    {
+      "id": "G113",
+      "prompt": "Suggest a three-day itinerary that avoids long walks.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.702,
+      "margin": 0.5226999999999999,
+      "probabilities": {
+        "direct_assistance": 0.702,
+        "deliberative_work": 0.1793,
+        "engineering_work": 0.1187
+      },
+      "entropy_confidence": 0.2632
+    },
+    {
+      "id": "G114",
+      "prompt": "Organize these book titles by genre, including one called Java Patterns.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5952,
+      "margin": 0.3923,
+      "probabilities": {
+        "direct_assistance": 0.5952,
+        "deliberative_work": 0.202,
+        "engineering_work": 0.2029
+      },
+      "entropy_confidence": 0.1302
+    },
+    {
+      "id": "G115",
+      "prompt": "Explain the phrase race condition with a supermarket analogy.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.602,
+      "margin": 0.3665,
+      "probabilities": {
+        "direct_assistance": 0.602,
+        "deliberative_work": 0.1625,
+        "engineering_work": 0.2355
+      },
+      "entropy_confidence": 0.1432
+    },
+    {
+      "id": "G116",
+      "prompt": "Tell me what a REST API means in plain English, without code.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6756,
+      "margin": 0.4837,
+      "probabilities": {
+        "direct_assistance": 0.6756,
+        "deliberative_work": 0.1325,
+        "engineering_work": 0.1919
+      },
+      "entropy_confidence": 0.2267
+    },
+    {
+      "id": "G117",
+      "prompt": "Turn this interview transcript into five neutral bullet points.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6404,
+      "margin": 0.44109999999999994,
+      "probabilities": {
+        "direct_assistance": 0.6404,
+        "deliberative_work": 0.1993,
+        "engineering_work": 0.1603
+      },
+      "entropy_confidence": 0.1805
+    },
+    {
+      "id": "G118",
+      "prompt": "Make a checklist for preparing a house before guests arrive.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4909,
+      "margin": 0.2031,
+      "probabilities": {
+        "direct_assistance": 0.4909,
+        "deliberative_work": 0.2213,
+        "engineering_work": 0.2878
+      },
+      "entropy_confidence": 0.052
+    },
+    {
+      "id": "G119",
+      "prompt": "Suggest names for a neighborhood gardening club.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6331,
+      "margin": 0.40349999999999997,
+      "probabilities": {
+        "direct_assistance": 0.6331,
+        "deliberative_work": 0.2296,
+        "engineering_work": 0.1372
+      },
+      "entropy_confidence": 0.181
+    },
+    {
+      "id": "G120",
+      "prompt": "Write a birthday message for a colleague I know casually.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6704,
+      "margin": 0.4774,
+      "probabilities": {
+        "direct_assistance": 0.6704,
+        "deliberative_work": 0.1365,
+        "engineering_work": 0.193
+      },
+      "entropy_confidence": 0.2195
+    },
+    {
+      "id": "G121",
+      "prompt": "Compare tea and coffee for taste and preparation in simple terms.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7363,
+      "margin": 0.6017999999999999,
+      "probabilities": {
+        "direct_assistance": 0.7363,
+        "deliberative_work": 0.1345,
+        "engineering_work": 0.1292
+      },
+      "entropy_confidence": 0.3085
+    },
+    {
+      "id": "G122",
+      "prompt": "Describe how a rainbow forms for a primary-school student.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5645,
+      "margin": 0.3398,
+      "probabilities": {
+        "direct_assistance": 0.5645,
+        "deliberative_work": 0.2247,
+        "engineering_work": 0.2107
+      },
+      "entropy_confidence": 0.1021
+    },
+    {
+      "id": "G123",
+      "prompt": "Find the latest expense receipt in my inbox and report the amount.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6662,
+      "margin": 0.47940000000000005,
+      "probabilities": {
+        "direct_assistance": 0.6662,
+        "deliberative_work": 0.1868,
+        "engineering_work": 0.147
+      },
+      "entropy_confidence": 0.2119
+    },
+    {
+      "id": "G124",
+      "prompt": "Schedule the approved team lunch for noon on Friday.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.534,
+      "margin": 0.2902,
+      "probabilities": {
+        "direct_assistance": 0.534,
+        "deliberative_work": 0.2438,
+        "engineering_work": 0.2221
+      },
+      "entropy_confidence": 0.0776
+    },
+    {
+      "id": "G125",
+      "prompt": "Look up my saved note titled 'Qwen benchmark' and summarize its first paragraph.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5565,
+      "margin": 0.2677,
+      "probabilities": {
+        "direct_assistance": 0.5565,
+        "deliberative_work": 0.1546,
+        "engineering_work": 0.2888
+      },
+      "entropy_confidence": 0.1139
+    },
+    {
+      "id": "G126",
+      "prompt": "Explain the difference between a virus and a bacterium in everyday language.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6583,
+      "margin": 0.4552,
+      "probabilities": {
+        "direct_assistance": 0.6583,
+        "deliberative_work": 0.1386,
+        "engineering_work": 0.2031
+      },
+      "entropy_confidence": 0.2055
+    },
+    {
+      "id": "G127",
+      "prompt": "Make a morning routine checklist for a remote worker.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6183,
+      "margin": 0.39309999999999995,
+      "probabilities": {
+        "direct_assistance": 0.6183,
+        "deliberative_work": 0.1565,
+        "engineering_work": 0.2252
+      },
+      "entropy_confidence": 0.1596
+    },
+    {
+      "id": "G128",
+      "prompt": "Rewrite these instructions to be shorter and easier to follow.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6008,
+      "margin": 0.3474,
+      "probabilities": {
+        "direct_assistance": 0.6008,
+        "deliberative_work": 0.1458,
+        "engineering_work": 0.2534
+      },
+      "entropy_confidence": 0.1492
+    },
+    {
+      "id": "G129",
+      "prompt": "Give me a list of conversation starters for a family reunion.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7606,
+      "margin": 0.6306,
+      "probabilities": {
+        "direct_assistance": 0.7606,
+        "deliberative_work": 0.13,
+        "engineering_work": 0.1093
+      },
+      "entropy_confidence": 0.3489
+    },
+    {
+      "id": "G130",
+      "prompt": "Summarize this policy announcement without recommending changes.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5641,
+      "margin": 0.2881,
+      "probabilities": {
+        "direct_assistance": 0.5641,
+        "deliberative_work": 0.276,
+        "engineering_work": 0.1599
+      },
+      "entropy_confidence": 0.1158
+    },
+    {
+      "id": "G131",
+      "prompt": "Check my calendar for an open half hour tomorrow afternoon.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5973,
+      "margin": 0.3924000000000001,
+      "probabilities": {
+        "direct_assistance": 0.5973,
+        "deliberative_work": 0.1978,
+        "engineering_work": 0.2049
+      },
+      "entropy_confidence": 0.1324
+    },
+    {
+      "id": "G132",
+      "prompt": "Send the final version of the newsletter; its content is already approved.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5484,
+      "margin": 0.3036,
+      "probabilities": {
+        "direct_assistance": 0.5484,
+        "deliberative_work": 0.2448,
+        "engineering_work": 0.2068
+      },
+      "entropy_confidence": 0.0899
+    },
+    {
+      "id": "G133",
+      "prompt": "Find the contact number for the plumber in my address book.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7937,
+      "margin": 0.6796,
+      "probabilities": {
+        "direct_assistance": 0.7937,
+        "deliberative_work": 0.0922,
+        "engineering_work": 0.1141
+      },
+      "entropy_confidence": 0.4076
+    },
+    {
+      "id": "G134",
+      "prompt": "The restaurant is named 'Theorem'. Find its reservation in my email.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6851,
+      "margin": 0.5147,
+      "probabilities": {
+        "direct_assistance": 0.6851,
+        "deliberative_work": 0.1446,
+        "engineering_work": 0.1704
+      },
+      "entropy_confidence": 0.2352
+    },
+    {
+      "id": "G135",
+      "prompt": "Explain why the moon has phases using a simple diagram description.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6797,
+      "margin": 0.49449999999999994,
+      "probabilities": {
+        "direct_assistance": 0.6797,
+        "deliberative_work": 0.1351,
+        "engineering_work": 0.1852
+      },
+      "entropy_confidence": 0.2307
+    },
+    {
+      "id": "G136",
+      "prompt": "Draft a concise reply accepting a conference invitation.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7318,
+      "margin": 0.5735,
+      "probabilities": {
+        "direct_assistance": 0.7318,
+        "deliberative_work": 0.1583,
+        "engineering_work": 0.11
+      },
+      "entropy_confidence": 0.3055
+    },
+    {
+      "id": "G137",
+      "prompt": "Prepare a packing list for a child going to a weekend camp.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5405,
+      "margin": 0.3006,
+      "probabilities": {
+        "direct_assistance": 0.5405,
+        "deliberative_work": 0.2399,
+        "engineering_work": 0.2195
+      },
+      "entropy_confidence": 0.0826
+    },
+    {
+      "id": "G138",
+      "prompt": "Suggest a title for a presentation about team collaboration.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5427,
+      "margin": 0.26509999999999995,
+      "probabilities": {
+        "direct_assistance": 0.5427,
+        "deliberative_work": 0.2776,
+        "engineering_work": 0.1797
+      },
+      "entropy_confidence": 0.0935
+    },
+    {
+      "id": "G139",
+      "prompt": "Paraphrase this legal-sounding sentence in ordinary language.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7228,
+      "margin": 0.5527,
+      "probabilities": {
+        "direct_assistance": 0.7228,
+        "deliberative_work": 0.1701,
+        "engineering_work": 0.1072
+      },
+      "entropy_confidence": 0.2943
+    },
+    {
+      "id": "G140",
+      "prompt": "Explain compound interest with a small numerical example.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5631,
+      "margin": 0.31690000000000007,
+      "probabilities": {
+        "direct_assistance": 0.5631,
+        "deliberative_work": 0.2462,
+        "engineering_work": 0.1907
+      },
+      "entropy_confidence": 0.1039
+    },
+    {
+      "id": "G141",
+      "prompt": "Find the note labeled 'SQL migration' and tell me when it was edited.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.5466,
+      "margin": 0.282,
+      "probabilities": {
+        "direct_assistance": 0.2646,
+        "deliberative_work": 0.1888,
+        "engineering_work": 0.5466
+      },
+      "entropy_confidence": 0.0928
+    },
+    {
+      "id": "G142",
+      "prompt": "Book the available slot with my dentist after 3 p.m. on Monday.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6214,
+      "margin": 0.38999999999999996,
+      "probabilities": {
+        "direct_assistance": 0.6214,
+        "deliberative_work": 0.2314,
+        "engineering_work": 0.1472
+      },
+      "entropy_confidence": 0.1659
+    },
+    {
+      "id": "G143",
+      "prompt": "Summarize these survey comments by recurring topic without drawing causal conclusions.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.5526,
+      "margin": 0.2557,
+      "probabilities": {
+        "direct_assistance": 0.5526,
+        "deliberative_work": 0.2969,
+        "engineering_work": 0.1505
+      },
+      "entropy_confidence": 0.114
+    },
+    {
+      "id": "G144",
+      "prompt": "Give me five low-cost indoor activities for a rainy day.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.7195,
+      "margin": 0.5762,
+      "probabilities": {
+        "direct_assistance": 0.7195,
+        "deliberative_work": 0.1433,
+        "engineering_work": 0.1371
+      },
+      "entropy_confidence": 0.283
+    },
+    {
+      "id": "G145",
+      "prompt": "Write a short caption for a photo of a mountain sunrise.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6031,
+      "margin": 0.39059999999999995,
+      "probabilities": {
+        "direct_assistance": 0.6031,
+        "deliberative_work": 0.1844,
+        "engineering_work": 0.2125
+      },
+      "entropy_confidence": 0.1391
+    },
+    {
+      "id": "G146",
+      "prompt": "Explain how a bicycle gear changes pedaling effort to a child.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6389,
+      "margin": 0.45740000000000003,
+      "probabilities": {
+        "direct_assistance": 0.6389,
+        "deliberative_work": 0.1795,
+        "engineering_work": 0.1815
+      },
+      "entropy_confidence": 0.1769
+    },
+    {
+      "id": "G147",
+      "prompt": "Create a weekly meal plan for one person with minimal cooking.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.4264,
+      "margin": 0.06740000000000002,
+      "probabilities": {
+        "direct_assistance": 0.4264,
+        "deliberative_work": 0.2146,
+        "engineering_work": 0.359
+      },
+      "entropy_confidence": 0.0338
+    },
+    {
+      "id": "G148",
+      "prompt": "Check the weather in Jaipur and suggest an outfit.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6404,
+      "margin": 0.45099999999999996,
+      "probabilities": {
+        "direct_assistance": 0.6404,
+        "deliberative_work": 0.1702,
+        "engineering_work": 0.1894
+      },
+      "entropy_confidence": 0.179
+    },
+    {
+      "id": "G149",
+      "prompt": "Help me phrase a polite request for a deadline extension.",
+      "expected": "direct_assistance",
+      "predicted": "direct_assistance",
+      "top_p": 0.6146,
+      "margin": 0.37450000000000006,
+      "probabilities": {
+        "direct_assistance": 0.6146,
+        "deliberative_work": 0.2401,
+        "engineering_work": 0.1453
+      },
+      "entropy_confidence": 0.1608
+    },
+    {
+      "id": "G150",
+      "prompt": "The meeting title contains 'Debug the API'. Find its start time; do not troubleshoot it.",
+      "expected": "direct_assistance",
+      "predicted": "engineering_work",
+      "top_p": 0.508,
+      "margin": 0.25070000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2347,
+        "deliberative_work": 0.2573,
+        "engineering_work": 0.508
+      },
+      "entropy_confidence": 0.0593
+    },
+    {
+      "id": "G151",
+      "prompt": "Prove that the sum of two even integers is even.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4215,
+      "margin": 0.08579999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3357,
+        "deliberative_work": 0.4215,
+        "engineering_work": 0.2428
+      },
+      "entropy_confidence": 0.0222
+    },
+    {
+      "id": "G152",
+      "prompt": "Derive the closed form of the sum of the first n positive integers.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3877,
+      "margin": 0.04849999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3392,
+        "deliberative_work": 0.3877,
+        "engineering_work": 0.2731
+      },
+      "entropy_confidence": 0.0092
+    },
+    {
+      "id": "G153",
+      "prompt": "Determine whether this greedy coin-change rule is optimal for every denomination set.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4828,
+      "margin": 0.15150000000000002,
+      "probabilities": {
+        "direct_assistance": 0.1859,
+        "deliberative_work": 0.4828,
+        "engineering_work": 0.3313
+      },
+      "entropy_confidence": 0.0621
+    },
+    {
+      "id": "G154",
+      "prompt": "Show whether the proposed loop invariant implies termination.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4323,
+      "margin": 0.07430000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2097,
+        "deliberative_work": 0.358,
+        "engineering_work": 0.4323
+      },
+      "entropy_confidence": 0.0371
+    },
+    {
+      "id": "G155",
+      "prompt": "Find all feasible allocations under these capacity and fairness constraints.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.452,
+      "margin": 0.13170000000000004,
+      "probabilities": {
+        "direct_assistance": 0.3203,
+        "deliberative_work": 0.452,
+        "engineering_work": 0.2277
+      },
+      "entropy_confidence": 0.0347
+    },
+    {
+      "id": "G156",
+      "prompt": "Compare three explanations for a sudden retention drop and identify discriminating evidence.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.452,
+      "margin": 0.08200000000000002,
+      "probabilities": {
+        "direct_assistance": 0.37,
+        "deliberative_work": 0.452,
+        "engineering_work": 0.178
+      },
+      "entropy_confidence": 0.0588
+    },
+    {
+      "id": "G157",
+      "prompt": "Derive the expected value of this game under the stated probabilities.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4473,
+      "margin": 0.11939999999999995,
+      "probabilities": {
+        "direct_assistance": 0.3279,
+        "deliberative_work": 0.4473,
+        "engineering_work": 0.2248
+      },
+      "entropy_confidence": 0.0342
+    },
+    {
+      "id": "G158",
+      "prompt": "Assess whether the survey design can separate selection bias from treatment effect.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4161,
+      "margin": 0.11980000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2963,
+        "deliberative_work": 0.4161,
+        "engineering_work": 0.2876
+      },
+      "entropy_confidence": 0.0136
+    },
+    {
+      "id": "G159",
+      "prompt": "Prove or refute the claim that every connected graph with n vertices has at least n minus one edges.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.445,
+      "margin": 0.1652,
+      "probabilities": {
+        "direct_assistance": 0.2752,
+        "deliberative_work": 0.445,
+        "engineering_work": 0.2798
+      },
+      "entropy_confidence": 0.0244
+    },
+    {
+      "id": "G160",
+      "prompt": "Optimize a delivery route under time windows, fuel limits, and uncertain traffic.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.405,
+      "margin": 0.05560000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2455,
+        "deliberative_work": 0.3494,
+        "engineering_work": 0.405
+      },
+      "entropy_confidence": 0.0185
+    },
+    {
+      "id": "G161",
+      "prompt": "Reconcile two conflicting incident timelines and rank the plausible root causes.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4273,
+      "margin": 0.032799999999999996,
+      "probabilities": {
+        "direct_assistance": 0.3945,
+        "deliberative_work": 0.4273,
+        "engineering_work": 0.1782
+      },
+      "entropy_confidence": 0.0555
+    },
+    {
+      "id": "G162",
+      "prompt": "Determine whether the evidence supports a causal claim rather than correlation.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4924,
+      "margin": 0.12070000000000003,
+      "probabilities": {
+        "direct_assistance": 0.4924,
+        "deliberative_work": 0.3717,
+        "engineering_work": 0.1359
+      },
+      "entropy_confidence": 0.1007
+    },
+    {
+      "id": "G163",
+      "prompt": "Derive the break-even point under fixed costs, variable costs, and a tiered price.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4107,
+      "margin": 0.0721,
+      "probabilities": {
+        "direct_assistance": 0.3386,
+        "deliberative_work": 0.4107,
+        "engineering_work": 0.2507
+      },
+      "entropy_confidence": 0.0179
+    },
+    {
+      "id": "G164",
+      "prompt": "Evaluate a merger under three downside scenarios and sensitivity to demand.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4737,
+      "margin": 0.14390000000000003,
+      "probabilities": {
+        "direct_assistance": 0.3298,
+        "deliberative_work": 0.4737,
+        "engineering_work": 0.1965
+      },
+      "entropy_confidence": 0.0538
+    },
+    {
+      "id": "G165",
+      "prompt": "Test whether the proposed voting rule satisfies monotonicity and anonymity.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4448,
+      "margin": 0.10919999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2196,
+        "deliberative_work": 0.4448,
+        "engineering_work": 0.3356
+      },
+      "entropy_confidence": 0.0354
+    },
+    {
+      "id": "G166",
+      "prompt": "Show every inference needed to solve this constrained logic puzzle.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4633,
+      "margin": 0.1679,
+      "probabilities": {
+        "direct_assistance": 0.2413,
+        "deliberative_work": 0.4633,
+        "engineering_work": 0.2954
+      },
+      "entropy_confidence": 0.0354
+    },
+    {
+      "id": "G167",
+      "prompt": "Assess whether these three business invariants can coexist with eventual consistency.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5022,
+      "margin": 0.24269999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2384,
+        "deliberative_work": 0.5022,
+        "engineering_work": 0.2595
+      },
+      "entropy_confidence": 0.0554
+    },
+    {
+      "id": "G168",
+      "prompt": "Compare two database isolation strategies under latency and anomaly constraints; no implementation plan.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.3721,
+      "margin": 0.010599999999999998,
+      "probabilities": {
+        "direct_assistance": 0.2664,
+        "deliberative_work": 0.3615,
+        "engineering_work": 0.3721
+      },
+      "entropy_confidence": 0.0096
+    },
+    {
+      "id": "G169",
+      "prompt": "Prove that this sorting algorithm preserves the multiset of inputs.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4604,
+      "margin": 0.15689999999999998,
+      "probabilities": {
+        "direct_assistance": 0.2361,
+        "deliberative_work": 0.3035,
+        "engineering_work": 0.4604
+      },
+      "entropy_confidence": 0.0353
+    },
+    {
+      "id": "G170",
+      "prompt": "Determine whether this transformation preserves program semantics for all valid inputs; do not patch code.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5337,
+      "margin": 0.26599999999999996,
+      "probabilities": {
+        "direct_assistance": 0.1986,
+        "deliberative_work": 0.2677,
+        "engineering_work": 0.5337
+      },
+      "entropy_confidence": 0.0816
+    },
+    {
+      "id": "G171",
+      "prompt": "Analyze whether the claimed perpetual-motion device violates the first or second law of thermodynamics.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5217,
+      "margin": 0.2624000000000001,
+      "probabilities": {
+        "direct_assistance": 0.219,
+        "deliberative_work": 0.5217,
+        "engineering_work": 0.2593
+      },
+      "entropy_confidence": 0.0697
+    },
+    {
+      "id": "G172",
+      "prompt": "Estimate the probability of a false positive after two dependent tests.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.3694,
+      "margin": 0.020000000000000018,
+      "probabilities": {
+        "direct_assistance": 0.2812,
+        "deliberative_work": 0.3494,
+        "engineering_work": 0.3694
+      },
+      "entropy_confidence": 0.006
+    },
+    {
+      "id": "G173",
+      "prompt": "Derive the optimal stopping rule for this finite-horizon decision problem.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5371,
+      "margin": 0.28340000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2092,
+        "deliberative_work": 0.5371,
+        "engineering_work": 0.2537
+      },
+      "entropy_confidence": 0.0815
+    },
+    {
+      "id": "G174",
+      "prompt": "Identify the weakest assumption in each of these competing market forecasts.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5153,
+      "margin": 0.19489999999999996,
+      "probabilities": {
+        "direct_assistance": 0.3204,
+        "deliberative_work": 0.5153,
+        "engineering_work": 0.1643
+      },
+      "entropy_confidence": 0.087
+    },
+    {
+      "id": "G175",
+      "prompt": "Decide whether the stated premises logically entail the conclusion.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4805,
+      "margin": 0.07549999999999996,
+      "probabilities": {
+        "direct_assistance": 0.405,
+        "deliberative_work": 0.4805,
+        "engineering_work": 0.1146
+      },
+      "entropy_confidence": 0.1203
+    },
+    {
+      "id": "G176",
+      "prompt": "Assess whether a queueing system can meet its service target under the given arrival distribution.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4374,
+      "margin": 0.11980000000000002,
+      "probabilities": {
+        "direct_assistance": 0.3176,
+        "deliberative_work": 0.2451,
+        "engineering_work": 0.4374
+      },
+      "entropy_confidence": 0.0255
+    },
+    {
+      "id": "G177",
+      "prompt": "Prove that a binary search terminates for every finite sorted array; no code changes.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4927,
+      "margin": 0.17850000000000005,
+      "probabilities": {
+        "direct_assistance": 0.1931,
+        "deliberative_work": 0.3142,
+        "engineering_work": 0.4927
+      },
+      "entropy_confidence": 0.0624
+    },
+    {
+      "id": "G178",
+      "prompt": "Evaluate a supply contract with uncertain demand, penalties, and limited storage.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4763,
+      "margin": 0.20650000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2698,
+        "deliberative_work": 0.4763,
+        "engineering_work": 0.2539
+      },
+      "entropy_confidence": 0.0399
+    },
+    {
+      "id": "G179",
+      "prompt": "Compare two public-health interventions while accounting for confounding factors.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4969,
+      "margin": 0.21390000000000003,
+      "probabilities": {
+        "direct_assistance": 0.283,
+        "deliberative_work": 0.4969,
+        "engineering_work": 0.2201
+      },
+      "entropy_confidence": 0.0553
+    },
+    {
+      "id": "G180",
+      "prompt": "Determine which witness account is compatible with all recorded timestamps.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4323,
+      "margin": 0.003400000000000014,
+      "probabilities": {
+        "direct_assistance": 0.4323,
+        "deliberative_work": 0.4289,
+        "engineering_work": 0.1388
+      },
+      "entropy_confidence": 0.0901
+    },
+    {
+      "id": "G181",
+      "prompt": "Show whether the proposed checksum detects every single-bit error.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.458,
+      "margin": 0.17620000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2602,
+        "deliberative_work": 0.2818,
+        "engineering_work": 0.458
+      },
+      "entropy_confidence": 0.0307
+    },
+    {
+      "id": "G182",
+      "prompt": "Derive an upper bound on the runtime of this recursive algorithm.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4621,
+      "margin": 0.1396,
+      "probabilities": {
+        "direct_assistance": 0.2154,
+        "deliberative_work": 0.3225,
+        "engineering_work": 0.4621
+      },
+      "entropy_confidence": 0.0421
+    },
+    {
+      "id": "G183",
+      "prompt": "Assess whether the security argument holds if an attacker controls the network.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4114,
+      "margin": 0.08879999999999999,
+      "probabilities": {
+        "direct_assistance": 0.266,
+        "deliberative_work": 0.4114,
+        "engineering_work": 0.3226
+      },
+      "entropy_confidence": 0.0145
+    },
+    {
+      "id": "G184",
+      "prompt": "Construct a counterexample to this claimed theorem, or explain why none exists.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4702,
+      "margin": 0.1276,
+      "probabilities": {
+        "direct_assistance": 0.3426,
+        "deliberative_work": 0.4702,
+        "engineering_work": 0.1872
+      },
+      "entropy_confidence": 0.0575
+    },
+    {
+      "id": "G185",
+      "prompt": "Optimize staffing across shifts with coverage rules and a fixed budget.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.3847,
+      "margin": 0.033499999999999974,
+      "probabilities": {
+        "direct_assistance": 0.3512,
+        "deliberative_work": 0.2641,
+        "engineering_work": 0.3847
+      },
+      "entropy_confidence": 0.0109
+    },
+    {
+      "id": "G186",
+      "prompt": "Compare the long-term effects of two monetary policies under adverse shocks.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4733,
+      "margin": 0.18480000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2885,
+        "deliberative_work": 0.4733,
+        "engineering_work": 0.2381
+      },
+      "entropy_confidence": 0.0403
+    },
+    {
+      "id": "G187",
+      "prompt": "Determine whether the observed outage pattern is consistent with a single point of failure.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5288,
+      "margin": 0.2931,
+      "probabilities": {
+        "direct_assistance": 0.2355,
+        "deliberative_work": 0.2357,
+        "engineering_work": 0.5288
+      },
+      "entropy_confidence": 0.0733
+    },
+    {
+      "id": "G188",
+      "prompt": "Analyze the sensitivity of a pricing decision to churn and acquisition cost.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4487,
+      "margin": 0.16049999999999998,
+      "probabilities": {
+        "direct_assistance": 0.2631,
+        "deliberative_work": 0.4487,
+        "engineering_work": 0.2882
+      },
+      "entropy_confidence": 0.0266
+    },
+    {
+      "id": "G189",
+      "prompt": "Prove or disprove that the scheduling policy is starvation-free.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4053,
+      "margin": 0.03970000000000001,
+      "probabilities": {
+        "direct_assistance": 0.2291,
+        "deliberative_work": 0.4053,
+        "engineering_work": 0.3656
+      },
+      "entropy_confidence": 0.0247
+    },
+    {
+      "id": "G190",
+      "prompt": "Derive necessary and sufficient conditions for this matrix to be invertible.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4022,
+      "margin": 0.05559999999999998,
+      "probabilities": {
+        "direct_assistance": 0.2513,
+        "deliberative_work": 0.4022,
+        "engineering_work": 0.3466
+      },
+      "entropy_confidence": 0.0164
+    },
+    {
+      "id": "G191",
+      "prompt": "Explain the causal chain behind a bank run using an explicit model of incentives.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.5052,
+      "margin": 0.19,
+      "probabilities": {
+        "direct_assistance": 0.5052,
+        "deliberative_work": 0.3152,
+        "engineering_work": 0.1796
+      },
+      "entropy_confidence": 0.0741
+    },
+    {
+      "id": "G192",
+      "prompt": "Evaluate whether these experimental results rule out the null hypothesis under multiple testing.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4415,
+      "margin": 0.15760000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2746,
+        "deliberative_work": 0.4415,
+        "engineering_work": 0.2839
+      },
+      "entropy_confidence": 0.023
+    },
+    {
+      "id": "G193",
+      "prompt": "Find the Nash equilibrium of this two-player game and justify each response.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5098,
+      "margin": 0.21860000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2912,
+        "deliberative_work": 0.5098,
+        "engineering_work": 0.199
+      },
+      "entropy_confidence": 0.0679
+    },
+    {
+      "id": "G194",
+      "prompt": "Determine whether a lock-free queue remains linearizable under this interleaving.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4383,
+      "margin": 0.05550000000000005,
+      "probabilities": {
+        "direct_assistance": 0.1788,
+        "deliberative_work": 0.3828,
+        "engineering_work": 0.4383
+      },
+      "entropy_confidence": 0.0562
+    },
+    {
+      "id": "G195",
+      "prompt": "Rank four hypotheses for the anomaly by how well each explains the evidence.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.396,
+      "margin": 0.004400000000000015,
+      "probabilities": {
+        "direct_assistance": 0.3916,
+        "deliberative_work": 0.396,
+        "engineering_work": 0.2125
+      },
+      "entropy_confidence": 0.0324
+    },
+    {
+      "id": "G196",
+      "prompt": "Prove that the proposed recurrence is bounded by n log n.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3956,
+      "margin": 0.041600000000000026,
+      "probabilities": {
+        "direct_assistance": 0.2504,
+        "deliberative_work": 0.3956,
+        "engineering_work": 0.354
+      },
+      "entropy_confidence": 0.0158
+    },
+    {
+      "id": "G197",
+      "prompt": "Assess whether the argument for a constitutional interpretation is internally consistent.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4728,
+      "margin": 0.06709999999999999,
+      "probabilities": {
+        "direct_assistance": 0.4057,
+        "deliberative_work": 0.4728,
+        "engineering_work": 0.1216
+      },
+      "entropy_confidence": 0.1113
+    },
+    {
+      "id": "G198",
+      "prompt": "Estimate how measurement error changes the inferred treatment effect.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4443,
+      "margin": 0.14059999999999995,
+      "probabilities": {
+        "direct_assistance": 0.3037,
+        "deliberative_work": 0.4443,
+        "engineering_work": 0.252
+      },
+      "entropy_confidence": 0.0263
+    },
+    {
+      "id": "G199",
+      "prompt": "Determine if a network partition makes these availability guarantees mutually impossible.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4963,
+      "margin": 0.1951,
+      "probabilities": {
+        "direct_assistance": 0.2025,
+        "deliberative_work": 0.4963,
+        "engineering_work": 0.3012
+      },
+      "entropy_confidence": 0.0602
+    },
+    {
+      "id": "G200",
+      "prompt": "Compare two architectural options under explicit failure-domain and cost constraints, without designing either.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4223,
+      "margin": 0.13040000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2858,
+        "deliberative_work": 0.4223,
+        "engineering_work": 0.2919
+      },
+      "entropy_confidence": 0.0157
+    },
+    {
+      "id": "G201",
+      "prompt": "Derive the posterior odds after updating on this new evidence.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5183,
+      "margin": 0.1895,
+      "probabilities": {
+        "direct_assistance": 0.3288,
+        "deliberative_work": 0.5183,
+        "engineering_work": 0.1529
+      },
+      "entropy_confidence": 0.0957
+    },
+    {
+      "id": "G202",
+      "prompt": "Find the minimal set of assumptions needed for the claimed conclusion.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4912,
+      "margin": 0.12960000000000005,
+      "probabilities": {
+        "direct_assistance": 0.4912,
+        "deliberative_work": 0.3616,
+        "engineering_work": 0.1472
+      },
+      "entropy_confidence": 0.0906
+    },
+    {
+      "id": "G203",
+      "prompt": "Evaluate a clinical trial interpretation given dropout and uneven baseline risk.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5044,
+      "margin": 0.16199999999999998,
+      "probabilities": {
+        "direct_assistance": 0.3424,
+        "deliberative_work": 0.5044,
+        "engineering_work": 0.1532
+      },
+      "entropy_confidence": 0.0902
+    },
+    {
+      "id": "G204",
+      "prompt": "Prove whether this cache eviction policy always retains the most recently used item; no fix requested.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4388,
+      "margin": 0.14500000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2674,
+        "deliberative_work": 0.2938,
+        "engineering_work": 0.4388
+      },
+      "entropy_confidence": 0.0224
+    },
+    {
+      "id": "G205",
+      "prompt": "Analyze if a proposed tax change is revenue-neutral under three elasticity estimates.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5072,
+      "margin": 0.19279999999999997,
+      "probabilities": {
+        "direct_assistance": 0.3144,
+        "deliberative_work": 0.5072,
+        "engineering_work": 0.1783
+      },
+      "entropy_confidence": 0.0756
+    },
+    {
+      "id": "G206",
+      "prompt": "Determine whether the optimization problem has a feasible solution before solving it.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4573,
+      "margin": 0.15099999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2364,
+        "deliberative_work": 0.4573,
+        "engineering_work": 0.3063
+      },
+      "entropy_confidence": 0.0341
+    },
+    {
+      "id": "G207",
+      "prompt": "Reconcile contradictory customer interviews into the most plausible demand hypotheses.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4991,
+      "margin": 0.10899999999999999,
+      "probabilities": {
+        "direct_assistance": 0.4991,
+        "deliberative_work": 0.3901,
+        "engineering_work": 0.1108
+      },
+      "entropy_confidence": 0.1281
+    },
+    {
+      "id": "G208",
+      "prompt": "Show why this probability puzzle's intuitive answer is wrong using conditional probabilities.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.485,
+      "margin": 0.16699999999999998,
+      "probabilities": {
+        "direct_assistance": 0.318,
+        "deliberative_work": 0.485,
+        "engineering_work": 0.197
+      },
+      "entropy_confidence": 0.0576
+    },
+    {
+      "id": "G209",
+      "prompt": "Assess whether the data distinguish a seasonal effect from a product change.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4657,
+      "margin": 0.10170000000000001,
+      "probabilities": {
+        "direct_assistance": 0.4657,
+        "deliberative_work": 0.364,
+        "engineering_work": 0.1703
+      },
+      "entropy_confidence": 0.0668
+    },
+    {
+      "id": "G210",
+      "prompt": "Derive the conservation constraint that makes the proposed engine impossible.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4224,
+      "margin": 0.059199999999999975,
+      "probabilities": {
+        "direct_assistance": 0.2144,
+        "deliberative_work": 0.4224,
+        "engineering_work": 0.3632
+      },
+      "entropy_confidence": 0.0333
+    },
+    {
+      "id": "G211",
+      "prompt": "Evaluate the robust choice among three suppliers when lead times are uncertain.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4512,
+      "margin": 0.059699999999999975,
+      "probabilities": {
+        "direct_assistance": 0.3915,
+        "deliberative_work": 0.4512,
+        "engineering_work": 0.1573
+      },
+      "entropy_confidence": 0.0742
+    },
+    {
+      "id": "G212",
+      "prompt": "Prove that this graph coloring requires at least four colors under the given edges.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.398,
+      "margin": 0.031000000000000028,
+      "probabilities": {
+        "direct_assistance": 0.235,
+        "deliberative_work": 0.398,
+        "engineering_work": 0.367
+      },
+      "entropy_confidence": 0.0216
+    },
+    {
+      "id": "G213",
+      "prompt": "Determine whether the stated formal specification admits any implementation.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3501,
+      "margin": 0.011099999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3109,
+        "deliberative_work": 0.3501,
+        "engineering_work": 0.339
+      },
+      "entropy_confidence": 0.0011
+    },
+    {
+      "id": "G214",
+      "prompt": "Analyze the tradeoffs between stronger consistency and lower latency for this workload.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4451,
+      "margin": 0.0922,
+      "probabilities": {
+        "direct_assistance": 0.202,
+        "deliberative_work": 0.3529,
+        "engineering_work": 0.4451
+      },
+      "entropy_confidence": 0.0434
+    },
+    {
+      "id": "G215",
+      "prompt": "Compute the worst-case loss under the proposed hedging strategy and stated shocks.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4787,
+      "margin": 0.2002,
+      "probabilities": {
+        "direct_assistance": 0.2427,
+        "deliberative_work": 0.4787,
+        "engineering_work": 0.2785
+      },
+      "entropy_confidence": 0.0421
+    },
+    {
+      "id": "G216",
+      "prompt": "Explain why the purported statistical significance disappears after correcting for selection.",
+      "expected": "deliberative_work",
+      "predicted": "direct_assistance",
+      "top_p": 0.4408,
+      "margin": 0.06760000000000005,
+      "probabilities": {
+        "direct_assistance": 0.4408,
+        "deliberative_work": 0.3732,
+        "engineering_work": 0.1859
+      },
+      "entropy_confidence": 0.0518
+    },
+    {
+      "id": "G217",
+      "prompt": "Find a counterexample to the claim that this greedy allocation is always fair.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4244,
+      "margin": 0.136,
+      "probabilities": {
+        "direct_assistance": 0.2872,
+        "deliberative_work": 0.4244,
+        "engineering_work": 0.2884
+      },
+      "entropy_confidence": 0.0163
+    },
+    {
+      "id": "G218",
+      "prompt": "Assess whether a sequence of logs proves the incident began before the deploy.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4778,
+      "margin": 0.1951,
+      "probabilities": {
+        "direct_assistance": 0.2827,
+        "deliberative_work": 0.2396,
+        "engineering_work": 0.4778
+      },
+      "entropy_confidence": 0.0421
+    },
+    {
+      "id": "G219",
+      "prompt": "Derive the equilibrium price when two firms have the stated cost curves.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4712,
+      "margin": 0.19519999999999998,
+      "probabilities": {
+        "direct_assistance": 0.276,
+        "deliberative_work": 0.4712,
+        "engineering_work": 0.2528
+      },
+      "entropy_confidence": 0.0374
+    },
+    {
+      "id": "G220",
+      "prompt": "Compare plausible failure mechanisms for a bridge under the recorded load history.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4193,
+      "margin": 0.11320000000000002,
+      "probabilities": {
+        "direct_assistance": 0.2745,
+        "deliberative_work": 0.3061,
+        "engineering_work": 0.4193
+      },
+      "entropy_confidence": 0.0154
+    },
+    {
+      "id": "G221",
+      "prompt": "Determine whether the proof uses circular reasoning at any step.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.5615,
+      "margin": 0.32889999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2326,
+        "deliberative_work": 0.5615,
+        "engineering_work": 0.2059
+      },
+      "entropy_confidence": 0.1
+    },
+    {
+      "id": "G222",
+      "prompt": "Evaluate whether two explanations of the Fermi paradox make distinguishable predictions.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4714,
+      "margin": 0.11559999999999998,
+      "probabilities": {
+        "direct_assistance": 0.3558,
+        "deliberative_work": 0.4714,
+        "engineering_work": 0.1729
+      },
+      "entropy_confidence": 0.0664
+    },
+    {
+      "id": "G223",
+      "prompt": "Prove that the proposed data transformation is idempotent for all inputs.",
+      "expected": "deliberative_work",
+      "predicted": "engineering_work",
+      "top_p": 0.3983,
+      "margin": 0.035099999999999965,
+      "probabilities": {
+        "direct_assistance": 0.2385,
+        "deliberative_work": 0.3632,
+        "engineering_work": 0.3983
+      },
+      "entropy_confidence": 0.0202
+    },
+    {
+      "id": "G224",
+      "prompt": "Optimize the allocation of a limited vaccine stock under the stated objectives and constraints.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.4611,
+      "margin": 0.13430000000000003,
+      "probabilities": {
+        "direct_assistance": 0.3268,
+        "deliberative_work": 0.4611,
+        "engineering_work": 0.2121
+      },
+      "entropy_confidence": 0.043
+    },
+    {
+      "id": "G225",
+      "prompt": "Assess whether this experimental design can identify the effect of the policy change.",
+      "expected": "deliberative_work",
+      "predicted": "deliberative_work",
+      "top_p": 0.3455,
+      "margin": 0.01789999999999997,
+      "probabilities": {
+        "direct_assistance": 0.3269,
+        "deliberative_work": 0.3455,
+        "engineering_work": 0.3276
+      },
+      "entropy_confidence": 0.0003
+    },
+    {
+      "id": "G226",
+      "prompt": "Implement a Python rate limiter with per-user quotas and tests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5494,
+      "margin": 0.3008,
+      "probabilities": {
+        "direct_assistance": 0.2486,
+        "deliberative_work": 0.2019,
+        "engineering_work": 0.5494
+      },
+      "entropy_confidence": 0.0914
+    },
+    {
+      "id": "G227",
+      "prompt": "Fix the TypeScript null-reference error in this component and add a regression test.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6553,
+      "margin": 0.4736,
+      "probabilities": {
+        "direct_assistance": 0.1817,
+        "deliberative_work": 0.163,
+        "engineering_work": 0.6553
+      },
+      "entropy_confidence": 0.1967
+    },
+    {
+      "id": "G228",
+      "prompt": "Review this pull request for deadlocks and propose the smallest patch.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.475,
+      "margin": 0.2097,
+      "probabilities": {
+        "direct_assistance": 0.2653,
+        "deliberative_work": 0.2597,
+        "engineering_work": 0.475
+      },
+      "entropy_confidence": 0.039
+    },
+    {
+      "id": "G229",
+      "prompt": "Write a PostgreSQL migration that adds a column without locking the table for long.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6093,
+      "margin": 0.38869999999999993,
+      "probabilities": {
+        "direct_assistance": 0.1701,
+        "deliberative_work": 0.2206,
+        "engineering_work": 0.6093
+      },
+      "entropy_confidence": 0.1475
+    },
+    {
+      "id": "G230",
+      "prompt": "Refactor the React form to keep one source of truth for validation state.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5913,
+      "margin": 0.36060000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2307,
+        "deliberative_work": 0.178,
+        "engineering_work": 0.5913
+      },
+      "entropy_confidence": 0.1296
+    },
+    {
+      "id": "G231",
+      "prompt": "Add unit tests for the Go HTTP handler's timeout behavior.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6524,
+      "margin": 0.44709999999999994,
+      "probabilities": {
+        "direct_assistance": 0.2053,
+        "deliberative_work": 0.1423,
+        "engineering_work": 0.6524
+      },
+      "entropy_confidence": 0.1979
+    },
+    {
+      "id": "G232",
+      "prompt": "Trace this stack trace to the failing function and provide a code-level fix.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6583,
+      "margin": 0.4486,
+      "probabilities": {
+        "direct_assistance": 0.2097,
+        "deliberative_work": 0.132,
+        "engineering_work": 0.6583
+      },
+      "entropy_confidence": 0.208
+    },
+    {
+      "id": "G233",
+      "prompt": "Write an OpenAPI schema for the new customer creation endpoint.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5191,
+      "margin": 0.2504,
+      "probabilities": {
+        "direct_assistance": 0.2687,
+        "deliberative_work": 0.2122,
+        "engineering_work": 0.5191
+      },
+      "entropy_confidence": 0.0693
+    },
+    {
+      "id": "G234",
+      "prompt": "Configure the CI workflow to run lint and tests on pull requests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5462,
+      "margin": 0.25930000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2869,
+        "deliberative_work": 0.167,
+        "engineering_work": 0.5462
+      },
+      "entropy_confidence": 0.1012
+    },
+    {
+      "id": "G235",
+      "prompt": "Optimize this SQL query by changing its indexes and show the revised query.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4413,
+      "margin": 0.1557,
+      "probabilities": {
+        "direct_assistance": 0.2856,
+        "deliberative_work": 0.2731,
+        "engineering_work": 0.4413
+      },
+      "entropy_confidence": 0.023
+    },
+    {
+      "id": "G236",
+      "prompt": "Replace the unsafe Rust unwrap with explicit error handling.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5767,
+      "margin": 0.3389,
+      "probabilities": {
+        "direct_assistance": 0.2378,
+        "deliberative_work": 0.1855,
+        "engineering_work": 0.5767
+      },
+      "entropy_confidence": 0.1157
+    },
+    {
+      "id": "G237",
+      "prompt": "Add pagination to the FastAPI endpoint and document its response schema.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4523,
+      "margin": 0.10189999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3504,
+        "deliberative_work": 0.1972,
+        "engineering_work": 0.4523
+      },
+      "entropy_confidence": 0.0474
+    },
+    {
+      "id": "G238",
+      "prompt": "Review the Terraform plan for unsafe network exposure and edit the module.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5542,
+      "margin": 0.31770000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2092,
+        "deliberative_work": 0.2365,
+        "engineering_work": 0.5542
+      },
+      "entropy_confidence": 0.094
+    },
+    {
+      "id": "G239",
+      "prompt": "Create a shell script to rotate logs and verify it on a sample directory.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4663,
+      "margin": 0.13129999999999997,
+      "probabilities": {
+        "direct_assistance": 0.335,
+        "deliberative_work": 0.1987,
+        "engineering_work": 0.4663
+      },
+      "entropy_confidence": 0.0505
+    },
+    {
+      "id": "G240",
+      "prompt": "Repair the Docker health check so deployment stops restarting the container.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.596,
+      "margin": 0.37229999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2237,
+        "deliberative_work": 0.1802,
+        "engineering_work": 0.596
+      },
+      "entropy_confidence": 0.1332
+    },
+    {
+      "id": "G241",
+      "prompt": "Update the authentication middleware to reject expired tokens and test the case.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.58,
+      "margin": 0.36439999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2156,
+        "deliberative_work": 0.2044,
+        "engineering_work": 0.58
+      },
+      "entropy_confidence": 0.116
+    },
+    {
+      "id": "G242",
+      "prompt": "Implement a cache invalidation strategy in the service and add tests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6235,
+      "margin": 0.4297000000000001,
+      "probabilities": {
+        "direct_assistance": 0.1938,
+        "deliberative_work": 0.1827,
+        "engineering_work": 0.6235
+      },
+      "entropy_confidence": 0.1597
+    },
+    {
+      "id": "G243",
+      "prompt": "Convert this Bash automation to PowerShell without changing its behavior.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4903,
+      "margin": 0.1658,
+      "probabilities": {
+        "direct_assistance": 0.3245,
+        "deliberative_work": 0.1853,
+        "engineering_work": 0.4903
+      },
+      "entropy_confidence": 0.0652
+    },
+    {
+      "id": "G244",
+      "prompt": "Add a unique partial index through a reversible migration.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4558,
+      "margin": 0.16869999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2571,
+        "deliberative_work": 0.2871,
+        "engineering_work": 0.4558
+      },
+      "entropy_confidence": 0.03
+    },
+    {
+      "id": "G245",
+      "prompt": "Fix the race between enqueue and cancel in this asynchronous worker.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6726,
+      "margin": 0.49,
+      "probabilities": {
+        "direct_assistance": 0.1826,
+        "deliberative_work": 0.1448,
+        "engineering_work": 0.6726
+      },
+      "entropy_confidence": 0.2198
+    },
+    {
+      "id": "G246",
+      "prompt": "Review the serializer change for backward compatibility and update the tests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6204,
+      "margin": 0.3954,
+      "probabilities": {
+        "direct_assistance": 0.1546,
+        "deliberative_work": 0.225,
+        "engineering_work": 0.6204
+      },
+      "entropy_confidence": 0.1622
+    },
+    {
+      "id": "G247",
+      "prompt": "Write a minimal patch for the memory leak in this event listener.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6473,
+      "margin": 0.45699999999999996,
+      "probabilities": {
+        "direct_assistance": 0.1903,
+        "deliberative_work": 0.1624,
+        "engineering_work": 0.6473
+      },
+      "entropy_confidence": 0.1876
+    },
+    {
+      "id": "G248",
+      "prompt": "Add a GitHub Actions matrix for the supported Python versions.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4686,
+      "margin": 0.10600000000000004,
+      "probabilities": {
+        "direct_assistance": 0.3626,
+        "deliberative_work": 0.1688,
+        "engineering_work": 0.4686
+      },
+      "entropy_confidence": 0.0685
+    },
+    {
+      "id": "G249",
+      "prompt": "Refactor the API client to retry only idempotent requests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5509,
+      "margin": 0.32359999999999994,
+      "probabilities": {
+        "direct_assistance": 0.2273,
+        "deliberative_work": 0.2218,
+        "engineering_work": 0.5509
+      },
+      "entropy_confidence": 0.0905
+    },
+    {
+      "id": "G250",
+      "prompt": "Create a JSON Schema for the configuration file and validate examples against it.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4144,
+      "margin": 0.08829999999999999,
+      "probabilities": {
+        "direct_assistance": 0.3261,
+        "deliberative_work": 0.2595,
+        "engineering_work": 0.4144
+      },
+      "entropy_confidence": 0.0165
+    },
+    {
+      "id": "G251",
+      "prompt": "The server returns 500 after login; find the failing code path and patch it.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.7025,
+      "margin": 0.5472,
+      "probabilities": {
+        "direct_assistance": 0.1421,
+        "deliberative_work": 0.1553,
+        "engineering_work": 0.7025
+      },
+      "entropy_confidence": 0.2585
+    },
+    {
+      "id": "G252",
+      "prompt": "I do not need an essay. Give the exact Nginx configuration change for the redirect loop.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4182,
+      "margin": 0.014600000000000002,
+      "probabilities": {
+        "direct_assistance": 0.4036,
+        "deliberative_work": 0.1782,
+        "engineering_work": 0.4182
+      },
+      "entropy_confidence": 0.0551
+    },
+    {
+      "id": "G253",
+      "prompt": "Diagnose why this npm build fails only in CI and supply a reproducible fix.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6597,
+      "margin": 0.46719999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1925,
+        "deliberative_work": 0.1478,
+        "engineering_work": 0.6597
+      },
+      "entropy_confidence": 0.2043
+    },
+    {
+      "id": "G254",
+      "prompt": "The query plan shows a sequential scan; change the query or index to avoid it.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5187,
+      "margin": 0.24170000000000003,
+      "probabilities": {
+        "direct_assistance": 0.277,
+        "deliberative_work": 0.2042,
+        "engineering_work": 0.5187
+      },
+      "entropy_confidence": 0.0711
+    },
+    {
+      "id": "G255",
+      "prompt": "Review this database migration for data loss and provide a safer migration.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5456,
+      "margin": 0.29029999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1992,
+        "deliberative_work": 0.2553,
+        "engineering_work": 0.5456
+      },
+      "entropy_confidence": 0.0893
+    },
+    {
+      "id": "G256",
+      "prompt": "The React component renders twice after the effect runs; fix the state update.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6699,
+      "margin": 0.49840000000000007,
+      "probabilities": {
+        "direct_assistance": 0.1715,
+        "deliberative_work": 0.1587,
+        "engineering_work": 0.6699
+      },
+      "entropy_confidence": 0.2146
+    },
+    {
+      "id": "G257",
+      "prompt": "Write tests that reproduce the lost-update bug in this repository.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5815,
+      "margin": 0.3246,
+      "probabilities": {
+        "direct_assistance": 0.2569,
+        "deliberative_work": 0.1616,
+        "engineering_work": 0.5815
+      },
+      "entropy_confidence": 0.1271
+    },
+    {
+      "id": "G258",
+      "prompt": "Update the protobuf schema while preserving compatibility with old clients.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.498,
+      "margin": 0.2223,
+      "probabilities": {
+        "direct_assistance": 0.2263,
+        "deliberative_work": 0.2757,
+        "engineering_work": 0.498
+      },
+      "entropy_confidence": 0.0546
+    },
+    {
+      "id": "G259",
+      "prompt": "Instrument the queue worker with metrics for retries and failures.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6603,
+      "margin": 0.4581,
+      "probabilities": {
+        "direct_assistance": 0.2022,
+        "deliberative_work": 0.1375,
+        "engineering_work": 0.6603
+      },
+      "entropy_confidence": 0.208
+    },
+    {
+      "id": "G260",
+      "prompt": "Implement a parser that rejects malformed CSV rows with clear errors.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6258,
+      "margin": 0.39,
+      "probabilities": {
+        "direct_assistance": 0.2358,
+        "deliberative_work": 0.1384,
+        "engineering_work": 0.6258
+      },
+      "entropy_confidence": 0.1738
+    },
+    {
+      "id": "G261",
+      "prompt": "Fix the Makefile so the release target works on Windows.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.606,
+      "margin": 0.36929999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2367,
+        "deliberative_work": 0.1572,
+        "engineering_work": 0.606
+      },
+      "entropy_confidence": 0.1485
+    },
+    {
+      "id": "G262",
+      "prompt": "Add rate-limit headers to the Express endpoint and test boundary values.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5011,
+      "margin": 0.24519999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2559,
+        "deliberative_work": 0.243,
+        "engineering_work": 0.5011
+      },
+      "entropy_confidence": 0.0544
+    },
+    {
+      "id": "G263",
+      "prompt": "Review this Kubernetes manifest and patch its readiness probe.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6283,
+      "margin": 0.43229999999999996,
+      "probabilities": {
+        "direct_assistance": 0.1758,
+        "deliberative_work": 0.196,
+        "engineering_work": 0.6283
+      },
+      "entropy_confidence": 0.1653
+    },
+    {
+      "id": "G264",
+      "prompt": "Create the SQL and rollback steps for renaming the customer_id column.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5296,
+      "margin": 0.29209999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2375,
+        "deliberative_work": 0.2329,
+        "engineering_work": 0.5296
+      },
+      "entropy_confidence": 0.0739
+    },
+    {
+      "id": "G265",
+      "prompt": "Explain the borrow-checker error and provide the corrected Rust function.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5192,
+      "margin": 0.2137,
+      "probabilities": {
+        "direct_assistance": 0.3055,
+        "deliberative_work": 0.1754,
+        "engineering_work": 0.5192
+      },
+      "entropy_confidence": 0.0826
+    },
+    {
+      "id": "G266",
+      "prompt": "Repair this WebSocket reconnect loop so it stops duplicating subscriptions.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6923,
+      "margin": 0.5163,
+      "probabilities": {
+        "direct_assistance": 0.176,
+        "deliberative_work": 0.1316,
+        "engineering_work": 0.6923
+      },
+      "entropy_confidence": 0.247
+    },
+    {
+      "id": "G267",
+      "prompt": "Add a property-based test for the URL parser's round-trip behavior.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6323,
+      "margin": 0.4095,
+      "probabilities": {
+        "direct_assistance": 0.2228,
+        "deliberative_work": 0.1449,
+        "engineering_work": 0.6323
+      },
+      "entropy_confidence": 0.1769
+    },
+    {
+      "id": "G268",
+      "prompt": "Rewrite this Python function to use a streaming iterator rather than loading all rows.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5704,
+      "margin": 0.3387,
+      "probabilities": {
+        "direct_assistance": 0.2317,
+        "deliberative_work": 0.1979,
+        "engineering_work": 0.5704
+      },
+      "entropy_confidence": 0.1083
+    },
+    {
+      "id": "G269",
+      "prompt": "Configure the reverse proxy to forward the required authentication header.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.593,
+      "margin": 0.3408,
+      "probabilities": {
+        "direct_assistance": 0.2522,
+        "deliberative_work": 0.1549,
+        "engineering_work": 0.593
+      },
+      "entropy_confidence": 0.1388
+    },
+    {
+      "id": "G270",
+      "prompt": "Fix the stale cache bug in the frontend and add a regression test.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6538,
+      "margin": 0.45610000000000006,
+      "probabilities": {
+        "direct_assistance": 0.1977,
+        "deliberative_work": 0.1485,
+        "engineering_work": 0.6538
+      },
+      "entropy_confidence": 0.1977
+    },
+    {
+      "id": "G271",
+      "prompt": "Review the concurrency behavior of this Java executor and propose a patch.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5736,
+      "margin": 0.3573,
+      "probabilities": {
+        "direct_assistance": 0.2101,
+        "deliberative_work": 0.2163,
+        "engineering_work": 0.5736
+      },
+      "entropy_confidence": 0.11
+    },
+    {
+      "id": "G272",
+      "prompt": "Create a CLI command that validates config files before deployment.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5437,
+      "margin": 0.27109999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2726,
+        "deliberative_work": 0.1837,
+        "engineering_work": 0.5437
+      },
+      "entropy_confidence": 0.0926
+    },
+    {
+      "id": "G273",
+      "prompt": "Make the Terraform resource names stable across environment changes.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4995,
+      "margin": 0.18180000000000002,
+      "probabilities": {
+        "direct_assistance": 0.3177,
+        "deliberative_work": 0.1828,
+        "engineering_work": 0.4995
+      },
+      "entropy_confidence": 0.0701
+    },
+    {
+      "id": "G274",
+      "prompt": "The ORM migration fails on existing rows; write a data backfill and constraint migration.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5545,
+      "margin": 0.3133,
+      "probabilities": {
+        "direct_assistance": 0.2043,
+        "deliberative_work": 0.2412,
+        "engineering_work": 0.5545
+      },
+      "entropy_confidence": 0.0948
+    },
+    {
+      "id": "G275",
+      "prompt": "Update the API contract and client types for the new optional field.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.564,
+      "margin": 0.3207,
+      "probabilities": {
+        "direct_assistance": 0.2433,
+        "deliberative_work": 0.1927,
+        "engineering_work": 0.564
+      },
+      "entropy_confidence": 0.1041
+    },
+    {
+      "id": "G276",
+      "prompt": "Write a test fixture that reproduces the timezone parsing failure.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6039,
+      "margin": 0.3316,
+      "probabilities": {
+        "direct_assistance": 0.2723,
+        "deliberative_work": 0.1238,
+        "engineering_work": 0.6039
+      },
+      "entropy_confidence": 0.1649
+    },
+    {
+      "id": "G277",
+      "prompt": "Patch the Dockerfile to run as a non-root user without breaking startup.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5508,
+      "margin": 0.30879999999999996,
+      "probabilities": {
+        "direct_assistance": 0.242,
+        "deliberative_work": 0.2072,
+        "engineering_work": 0.5508
+      },
+      "entropy_confidence": 0.0916
+    },
+    {
+      "id": "G278",
+      "prompt": "Implement the requested feature flag in both backend and frontend code.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.7029,
+      "margin": 0.5516,
+      "probabilities": {
+        "direct_assistance": 0.1457,
+        "deliberative_work": 0.1513,
+        "engineering_work": 0.7029
+      },
+      "entropy_confidence": 0.2589
+    },
+    {
+      "id": "G279",
+      "prompt": "Debug the intermittent 401 response in this token refresh flow.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6064,
+      "margin": 0.4015000000000001,
+      "probabilities": {
+        "direct_assistance": 0.2049,
+        "deliberative_work": 0.1887,
+        "engineering_work": 0.6064
+      },
+      "entropy_confidence": 0.1418
+    },
+    {
+      "id": "G280",
+      "prompt": "Add an idempotency key check to the payment endpoint and test duplicate requests.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5381,
+      "margin": 0.29710000000000003,
+      "probabilities": {
+        "direct_assistance": 0.221,
+        "deliberative_work": 0.241,
+        "engineering_work": 0.5381
+      },
+      "entropy_confidence": 0.0807
+    },
+    {
+      "id": "G281",
+      "prompt": "Replace the custom date parser with the standard library and preserve error messages.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6008,
+      "margin": 0.3405,
+      "probabilities": {
+        "direct_assistance": 0.2603,
+        "deliberative_work": 0.1389,
+        "engineering_work": 0.6008
+      },
+      "entropy_confidence": 0.1529
+    },
+    {
+      "id": "G282",
+      "prompt": "Review the pull request for SQL injection paths and fix the unsafe query.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5219,
+      "margin": 0.25810000000000005,
+      "probabilities": {
+        "direct_assistance": 0.2143,
+        "deliberative_work": 0.2638,
+        "engineering_work": 0.5219
+      },
+      "entropy_confidence": 0.0706
+    },
+    {
+      "id": "G283",
+      "prompt": "Create a migration that splits the address column into structured fields.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5146,
+      "margin": 0.25589999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2587,
+        "deliberative_work": 0.2267,
+        "engineering_work": 0.5146
+      },
+      "entropy_confidence": 0.0642
+    },
+    {
+      "id": "G284",
+      "prompt": "Change the scheduler so canceled jobs cannot be forwarded upstream.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.3943,
+      "margin": 0.002599999999999991,
+      "probabilities": {
+        "direct_assistance": 0.3917,
+        "deliberative_work": 0.214,
+        "engineering_work": 0.3943
+      },
+      "entropy_confidence": 0.0315
+    },
+    {
+      "id": "G285",
+      "prompt": "Write a Git hook that blocks committing generated secrets.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5067,
+      "margin": 0.21800000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2887,
+        "deliberative_work": 0.2047,
+        "engineering_work": 0.5067
+      },
+      "entropy_confidence": 0.0644
+    },
+    {
+      "id": "G286",
+      "prompt": "Fix this C++ use-after-free and provide a regression test.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6319,
+      "margin": 0.4252,
+      "probabilities": {
+        "direct_assistance": 0.2067,
+        "deliberative_work": 0.1614,
+        "engineering_work": 0.6319
+      },
+      "entropy_confidence": 0.1714
+    },
+    {
+      "id": "G287",
+      "prompt": "Add validation for missing environment variables at application startup.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.549,
+      "margin": 0.26330000000000003,
+      "probabilities": {
+        "direct_assistance": 0.2857,
+        "deliberative_work": 0.1653,
+        "engineering_work": 0.549
+      },
+      "entropy_confidence": 0.1037
+    },
+    {
+      "id": "G288",
+      "prompt": "Implement exponential backoff for this HTTP client with a retry cap.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.596,
+      "margin": 0.3883,
+      "probabilities": {
+        "direct_assistance": 0.1963,
+        "deliberative_work": 0.2077,
+        "engineering_work": 0.596
+      },
+      "entropy_confidence": 0.1312
+    },
+    {
+      "id": "G289",
+      "prompt": "Modify the GraphQL resolver to batch database lookups.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6089,
+      "margin": 0.40190000000000003,
+      "probabilities": {
+        "direct_assistance": 0.207,
+        "deliberative_work": 0.1841,
+        "engineering_work": 0.6089
+      },
+      "entropy_confidence": 0.1447
+    },
+    {
+      "id": "G290",
+      "prompt": "Update the deployment script to roll back when health checks fail.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6423,
+      "margin": 0.43679999999999997,
+      "probabilities": {
+        "direct_assistance": 0.2055,
+        "deliberative_work": 0.1521,
+        "engineering_work": 0.6423
+      },
+      "entropy_confidence": 0.1845
+    },
+    {
+      "id": "G291",
+      "prompt": "Test and fix the off-by-one error in this pagination helper.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.7205,
+      "margin": 0.5405,
+      "probabilities": {
+        "direct_assistance": 0.18,
+        "deliberative_work": 0.0995,
+        "engineering_work": 0.7205
+      },
+      "entropy_confidence": 0.295
+    },
+    {
+      "id": "G292",
+      "prompt": "Review this codebase's authorization checks and patch the missing guard.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5924,
+      "margin": 0.38040000000000007,
+      "probabilities": {
+        "direct_assistance": 0.212,
+        "deliberative_work": 0.1955,
+        "engineering_work": 0.5924
+      },
+      "entropy_confidence": 0.1279
+    },
+    {
+      "id": "G293",
+      "prompt": "Create a typed interface for these event payloads and update callers.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.574,
+      "margin": 0.32749999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2465,
+        "deliberative_work": 0.1794,
+        "engineering_work": 0.574
+      },
+      "entropy_confidence": 0.1152
+    },
+    {
+      "id": "G294",
+      "prompt": "Improve the query planner hints in this stored procedure and measure the plan.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.4408,
+      "margin": 0.1547,
+      "probabilities": {
+        "direct_assistance": 0.273,
+        "deliberative_work": 0.2861,
+        "engineering_work": 0.4408
+      },
+      "entropy_confidence": 0.0228
+    },
+    {
+      "id": "G295",
+      "prompt": "The build log mentions Python and Rust; fix the actual linker configuration.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5583,
+      "margin": 0.2717,
+      "probabilities": {
+        "direct_assistance": 0.2866,
+        "deliberative_work": 0.1551,
+        "engineering_work": 0.5583
+      },
+      "entropy_confidence": 0.1146
+    },
+    {
+      "id": "G296",
+      "prompt": "Write the smallest patch that makes the parser handle empty input.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6255,
+      "margin": 0.38499999999999995,
+      "probabilities": {
+        "direct_assistance": 0.2405,
+        "deliberative_work": 0.1341,
+        "engineering_work": 0.6255
+      },
+      "entropy_confidence": 0.1757
+    },
+    {
+      "id": "G297",
+      "prompt": "Add integration tests for the OAuth callback's invalid-state path.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6564,
+      "margin": 0.48229999999999995,
+      "probabilities": {
+        "direct_assistance": 0.1741,
+        "deliberative_work": 0.1695,
+        "engineering_work": 0.6564
+      },
+      "entropy_confidence": 0.1976
+    },
+    {
+      "id": "G298",
+      "prompt": "Make this background task restart safely after a process crash.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.6716,
+      "margin": 0.5012,
+      "probabilities": {
+        "direct_assistance": 0.1704,
+        "deliberative_work": 0.158,
+        "engineering_work": 0.6716
+      },
+      "entropy_confidence": 0.2168
+    },
+    {
+      "id": "G299",
+      "prompt": "Refactor duplicated validation across the two API handlers.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5612,
+      "margin": 0.33430000000000004,
+      "probabilities": {
+        "direct_assistance": 0.2269,
+        "deliberative_work": 0.2118,
+        "engineering_work": 0.5612
+      },
+      "entropy_confidence": 0.0993
+    },
+    {
+      "id": "G300",
+      "prompt": "Update the service configuration to enforce TLS for database connections.",
+      "expected": "engineering_work",
+      "predicted": "engineering_work",
+      "top_p": 0.5948,
+      "margin": 0.37639999999999996,
+      "probabilities": {
+        "direct_assistance": 0.2184,
+        "deliberative_work": 0.1868,
+        "engineering_work": 0.5948
+      },
+      "entropy_confidence": 0.131
+    }
+  ]
+}

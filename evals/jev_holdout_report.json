@@ -1,0 +1,7740 @@
+{
+  "fresh_50": {
+    "cases": [
+      {
+        "id": "F001",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.3102
+      },
+      {
+        "id": "F002",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9132
+      },
+      {
+        "id": "F003",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9204
+      },
+      {
+        "id": "F004",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0473
+      },
+      {
+        "id": "F005",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9311
+      },
+      {
+        "id": "F006",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8865
+      },
+      {
+        "id": "F007",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8568
+      },
+      {
+        "id": "F008",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8733
+      },
+      {
+        "id": "F009",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9439
+      },
+      {
+        "id": "F010",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.97,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.03
+        },
+        "seconds": 0.8911
+      },
+      {
+        "id": "F011",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9963
+      },
+      {
+        "id": "F012",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8569
+      },
+      {
+        "id": "F013",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.851
+      },
+      {
+        "id": "F014",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9761
+      },
+      {
+        "id": "F015",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9202
+      },
+      {
+        "id": "F016",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9073
+      },
+      {
+        "id": "F017",
+        "expected": "direct_assistance",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8539
+      },
+      {
+        "id": "F018",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.63,
+          "qwen-opus": 0.37,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8864
+      },
+      {
+        "id": "F019",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.01,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9673
+      },
+      {
+        "id": "F020",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.6900000000000001,
+          "qwen-opus": 0.31,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9822
+      },
+      {
+        "id": "F021",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8991
+      },
+      {
+        "id": "F022",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.9400000000000001,
+          "qwen-opus": 0.06,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0184
+      },
+      {
+        "id": "F023",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.94,
+          "qwen-opus": 0.05,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.953
+      },
+      {
+        "id": "F024",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.61,
+          "qwen-opus": 0.39,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8977
+      },
+      {
+        "id": "F025",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.94,
+          "qwen-opus": 0.06,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9078
+      },
+      {
+        "id": "F026",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.41,
+          "qwen-opus": 0.59,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8925
+      },
+      {
+        "id": "F027",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.93,
+          "qwen-opus": 0.07,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9518
+      },
+      {
+        "id": "F028",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": true,
+        "scores": {
+          "gemma": 0.35,
+          "qwen-opus": 0.29,
+          "omnicoder": 0.36
+        },
+        "seconds": 0.871
+      },
+      {
+        "id": "F029",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.85,
+          "omnicoder": 0.1
+        },
+        "seconds": 0.892
+      },
+      {
+        "id": "F030",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.02,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9143
+      },
+      {
+        "id": "F031",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.92,
+          "qwen-opus": 0.08,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9562
+      },
+      {
+        "id": "F032",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.44,
+          "qwen-opus": 0.56,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9317
+      },
+      {
+        "id": "F033",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.89,
+          "qwen-opus": 0.11,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9713
+      },
+      {
+        "id": "F034",
+        "expected": "deliberative_work",
+        "kind": null,
+        "predicted": "gemma",
+        "correct": false,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.86,
+          "qwen-opus": 0.14,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9546
+      },
+      {
+        "id": "F035",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9259
+      },
+      {
+        "id": "F036",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8515
+      },
+      {
+        "id": "F037",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8266
+      },
+      {
+        "id": "F038",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8603
+      },
+      {
+        "id": "F039",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.915
+      },
+      {
+        "id": "F040",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9228
+      },
+      {
+        "id": "F041",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9374
+      },
+      {
+        "id": "F042",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8805
+      },
+      {
+        "id": "F043",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.01,
+          "omnicoder": 0.99
+        },
+        "seconds": 0.8763
+      },
+      {
+        "id": "F044",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9549
+      },
+      {
+        "id": "F045",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9135
+      },
+      {
+        "id": "F046",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8914
+      },
+      {
+        "id": "F047",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.948
+      },
+      {
+        "id": "F048",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9908
+      },
+      {
+        "id": "F049",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8215
+      },
+      {
+        "id": "F050",
+        "expected": "engineering_work",
+        "kind": null,
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.044
+      }
+    ],
+    "summary": {
+      "thresholded_accuracy": 0.74,
+      "argmax_accuracy": 0.74,
+      "argmax_scored": 50,
+      "total": 50,
+      "errors": 0,
+      "median_seconds": 0.9146,
+      "p95_seconds": 1.044,
+      "by_role_argmax": {
+        "direct_assistance": "17/17",
+        "deliberative_work": "4/17",
+        "engineering_work": "16/16"
+      }
+    }
+  },
+  "large_500": {
+    "cases": [
+      {
+        "id": "L000",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9183
+      },
+      {
+        "id": "L001",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9215
+      },
+      {
+        "id": "L002",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9586
+      },
+      {
+        "id": "L003",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8398
+      },
+      {
+        "id": "L004",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9272
+      },
+      {
+        "id": "L005",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9495
+      },
+      {
+        "id": "L006",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9527
+      },
+      {
+        "id": "L007",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9991
+      },
+      {
+        "id": "L008",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9681
+      },
+      {
+        "id": "L009",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0269
+      },
+      {
+        "id": "L010",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9995
+      },
+      {
+        "id": "L011",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0086
+      },
+      {
+        "id": "L012",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9553
+      },
+      {
+        "id": "L013",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8791
+      },
+      {
+        "id": "L014",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9033
+      },
+      {
+        "id": "L015",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8782
+      },
+      {
+        "id": "L016",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9809
+      },
+      {
+        "id": "L017",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8763
+      },
+      {
+        "id": "L018",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9257
+      },
+      {
+        "id": "L019",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9286
+      },
+      {
+        "id": "L020",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9539
+      },
+      {
+        "id": "L021",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8815
+      },
+      {
+        "id": "L022",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9284
+      },
+      {
+        "id": "L023",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8453
+      },
+      {
+        "id": "L024",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8964
+      },
+      {
+        "id": "L025",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8977
+      },
+      {
+        "id": "L026",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8747
+      },
+      {
+        "id": "L027",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9269
+      },
+      {
+        "id": "L028",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9579
+      },
+      {
+        "id": "L029",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9306
+      },
+      {
+        "id": "L030",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.896
+      },
+      {
+        "id": "L031",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9554
+      },
+      {
+        "id": "L032",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8633
+      },
+      {
+        "id": "L033",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9542
+      },
+      {
+        "id": "L034",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8309
+      },
+      {
+        "id": "L035",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8665
+      },
+      {
+        "id": "L036",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8861
+      },
+      {
+        "id": "L037",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8923
+      },
+      {
+        "id": "L038",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9675
+      },
+      {
+        "id": "L039",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9622
+      },
+      {
+        "id": "L040",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9105
+      },
+      {
+        "id": "L041",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9284
+      },
+      {
+        "id": "L042",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9947
+      },
+      {
+        "id": "L043",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8985
+      },
+      {
+        "id": "L044",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8901
+      },
+      {
+        "id": "L045",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9605
+      },
+      {
+        "id": "L046",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9195
+      },
+      {
+        "id": "L047",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8543
+      },
+      {
+        "id": "L048",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8526
+      },
+      {
+        "id": "L049",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8586
+      },
+      {
+        "id": "L050",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9053
+      },
+      {
+        "id": "L051",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9202
+      },
+      {
+        "id": "L052",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9492
+      },
+      {
+        "id": "L053",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9847
+      },
+      {
+        "id": "L054",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.897
+      },
+      {
+        "id": "L055",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9351
+      },
+      {
+        "id": "L056",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8535
+      },
+      {
+        "id": "L057",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.812
+      },
+      {
+        "id": "L058",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9154
+      },
+      {
+        "id": "L059",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9673
+      },
+      {
+        "id": "L060",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8476
+      },
+      {
+        "id": "L061",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8777
+      },
+      {
+        "id": "L062",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9235
+      },
+      {
+        "id": "L063",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8803
+      },
+      {
+        "id": "L064",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9504
+      },
+      {
+        "id": "L065",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8236
+      },
+      {
+        "id": "L066",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8309
+      },
+      {
+        "id": "L067",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0002
+      },
+      {
+        "id": "L068",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9658
+      },
+      {
+        "id": "L069",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9487
+      },
+      {
+        "id": "L070",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9741
+      },
+      {
+        "id": "L071",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8929
+      },
+      {
+        "id": "L072",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9523
+      },
+      {
+        "id": "L073",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9789
+      },
+      {
+        "id": "L074",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0108
+      },
+      {
+        "id": "L075",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9268
+      },
+      {
+        "id": "L076",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0128
+      },
+      {
+        "id": "L077",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8993
+      },
+      {
+        "id": "L078",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9843
+      },
+      {
+        "id": "L079",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8417
+      },
+      {
+        "id": "L080",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8718
+      },
+      {
+        "id": "L081",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0063
+      },
+      {
+        "id": "L082",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9552
+      },
+      {
+        "id": "L083",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.95
+      },
+      {
+        "id": "L084",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9131
+      },
+      {
+        "id": "L085",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8791
+      },
+      {
+        "id": "L086",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9548
+      },
+      {
+        "id": "L087",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9365
+      },
+      {
+        "id": "L088",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8483
+      },
+      {
+        "id": "L089",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8934
+      },
+      {
+        "id": "L090",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9164
+      },
+      {
+        "id": "L091",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.916
+      },
+      {
+        "id": "L092",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.966
+      },
+      {
+        "id": "L093",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9736
+      },
+      {
+        "id": "L094",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9037
+      },
+      {
+        "id": "L095",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9574
+      },
+      {
+        "id": "L096",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9
+      },
+      {
+        "id": "L097",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9894
+      },
+      {
+        "id": "L098",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9505
+      },
+      {
+        "id": "L099",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8716
+      },
+      {
+        "id": "L100",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8618
+      },
+      {
+        "id": "L101",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9126
+      },
+      {
+        "id": "L102",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8859
+      },
+      {
+        "id": "L103",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8989
+      },
+      {
+        "id": "L104",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9299
+      },
+      {
+        "id": "L105",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9215
+      },
+      {
+        "id": "L106",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0065
+      },
+      {
+        "id": "L107",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9369
+      },
+      {
+        "id": "L108",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9484
+      },
+      {
+        "id": "L109",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9715
+      },
+      {
+        "id": "L110",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9608
+      },
+      {
+        "id": "L111",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9041
+      },
+      {
+        "id": "L112",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9479
+      },
+      {
+        "id": "L113",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8876
+      },
+      {
+        "id": "L114",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8788
+      },
+      {
+        "id": "L115",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9739
+      },
+      {
+        "id": "L116",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9301
+      },
+      {
+        "id": "L117",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9188
+      },
+      {
+        "id": "L118",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8883
+      },
+      {
+        "id": "L119",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8299
+      },
+      {
+        "id": "L120",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8682
+      },
+      {
+        "id": "L121",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9641
+      },
+      {
+        "id": "L122",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9606
+      },
+      {
+        "id": "L123",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8592
+      },
+      {
+        "id": "L124",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9172
+      },
+      {
+        "id": "L125",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.902
+      },
+      {
+        "id": "L126",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8609
+      },
+      {
+        "id": "L127",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9837
+      },
+      {
+        "id": "L128",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.985
+      },
+      {
+        "id": "L129",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0596
+      },
+      {
+        "id": "L130",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8938
+      },
+      {
+        "id": "L131",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9302
+      },
+      {
+        "id": "L132",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9674
+      },
+      {
+        "id": "L133",
+        "expected": "direct_assistance",
+        "kind": "normal",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9127
+      },
+      {
+        "id": "L134",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0923
+      },
+      {
+        "id": "L135",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9872
+      },
+      {
+        "id": "L136",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9218
+      },
+      {
+        "id": "L137",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9337
+      },
+      {
+        "id": "L138",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8307
+      },
+      {
+        "id": "L139",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8214
+      },
+      {
+        "id": "L140",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8443
+      },
+      {
+        "id": "L141",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8485
+      },
+      {
+        "id": "L142",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9598
+      },
+      {
+        "id": "L143",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9836
+      },
+      {
+        "id": "L144",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.2869
+      },
+      {
+        "id": "L145",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9135
+      },
+      {
+        "id": "L146",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.904
+      },
+      {
+        "id": "L147",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9052
+      },
+      {
+        "id": "L148",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9292
+      },
+      {
+        "id": "L149",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9599
+      },
+      {
+        "id": "L150",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9479
+      },
+      {
+        "id": "L151",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9183
+      },
+      {
+        "id": "L152",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.864
+      },
+      {
+        "id": "L153",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9276
+      },
+      {
+        "id": "L154",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9401
+      },
+      {
+        "id": "L155",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9253
+      },
+      {
+        "id": "L156",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.874
+      },
+      {
+        "id": "L157",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9373
+      },
+      {
+        "id": "L158",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9292
+      },
+      {
+        "id": "L159",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9181
+      },
+      {
+        "id": "L160",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.901
+      },
+      {
+        "id": "L161",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8956
+      },
+      {
+        "id": "L162",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9144
+      },
+      {
+        "id": "L163",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8429
+      },
+      {
+        "id": "L164",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0085
+      },
+      {
+        "id": "L165",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9091
+      },
+      {
+        "id": "L166",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9638
+      },
+      {
+        "id": "L167",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9794
+      },
+      {
+        "id": "L168",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9019
+      },
+      {
+        "id": "L169",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9385
+      },
+      {
+        "id": "L170",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8655
+      },
+      {
+        "id": "L171",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8684
+      },
+      {
+        "id": "L172",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8918
+      },
+      {
+        "id": "L173",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8963
+      },
+      {
+        "id": "L174",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.887
+      },
+      {
+        "id": "L175",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9085
+      },
+      {
+        "id": "L176",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8967
+      },
+      {
+        "id": "L177",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8938
+      },
+      {
+        "id": "L178",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8724
+      },
+      {
+        "id": "L179",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9803
+      },
+      {
+        "id": "L180",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9401
+      },
+      {
+        "id": "L181",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9552
+      },
+      {
+        "id": "L182",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8652
+      },
+      {
+        "id": "L183",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.07,
+          "qwen-opus": 0.93,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9239
+      },
+      {
+        "id": "L184",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9655
+      },
+      {
+        "id": "L185",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.934
+      },
+      {
+        "id": "L186",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.04,
+          "qwen-opus": 0.96,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9779
+      },
+      {
+        "id": "L187",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8977
+      },
+      {
+        "id": "L188",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.881
+      },
+      {
+        "id": "L189",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9982
+      },
+      {
+        "id": "L190",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9005
+      },
+      {
+        "id": "L191",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8981
+      },
+      {
+        "id": "L192",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9274
+      },
+      {
+        "id": "L193",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9558
+      },
+      {
+        "id": "L194",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9185
+      },
+      {
+        "id": "L195",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.12,
+          "qwen-opus": 0.88,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9646
+      },
+      {
+        "id": "L196",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8692
+      },
+      {
+        "id": "L197",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8499
+      },
+      {
+        "id": "L198",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.04,
+          "qwen-opus": 0.96,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9582
+      },
+      {
+        "id": "L199",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8975
+      },
+      {
+        "id": "L200",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.916
+      },
+      {
+        "id": "L201",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9295
+      },
+      {
+        "id": "L202",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.055
+      },
+      {
+        "id": "L203",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0063
+      },
+      {
+        "id": "L204",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8623
+      },
+      {
+        "id": "L205",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.08,
+          "qwen-opus": 0.92,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9034
+      },
+      {
+        "id": "L206",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.872
+      },
+      {
+        "id": "L207",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9921
+      },
+      {
+        "id": "L208",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8546
+      },
+      {
+        "id": "L209",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9022
+      },
+      {
+        "id": "L210",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8827
+      },
+      {
+        "id": "L211",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8718
+      },
+      {
+        "id": "L212",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9095
+      },
+      {
+        "id": "L213",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.811
+      },
+      {
+        "id": "L214",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9454
+      },
+      {
+        "id": "L215",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9576
+      },
+      {
+        "id": "L216",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8796
+      },
+      {
+        "id": "L217",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8739
+      },
+      {
+        "id": "L218",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.914
+      },
+      {
+        "id": "L219",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8728
+      },
+      {
+        "id": "L220",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8495
+      },
+      {
+        "id": "L221",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9172
+      },
+      {
+        "id": "L222",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9216
+      },
+      {
+        "id": "L223",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8922
+      },
+      {
+        "id": "L224",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8414
+      },
+      {
+        "id": "L225",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.11,
+          "qwen-opus": 0.89,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9016
+      },
+      {
+        "id": "L226",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.08,
+          "qwen-opus": 0.92,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8766
+      },
+      {
+        "id": "L227",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.06,
+          "qwen-opus": 0.94,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9522
+      },
+      {
+        "id": "L228",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.06,
+          "qwen-opus": 0.9400000000000001,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9289
+      },
+      {
+        "id": "L229",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0287
+      },
+      {
+        "id": "L230",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0083
+      },
+      {
+        "id": "L231",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.06,
+          "qwen-opus": 0.94,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8329
+      },
+      {
+        "id": "L232",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.07,
+          "qwen-opus": 0.93,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9118
+      },
+      {
+        "id": "L233",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.07,
+          "qwen-opus": 0.93,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8542
+      },
+      {
+        "id": "L234",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.14,
+          "qwen-opus": 0.86,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8476
+      },
+      {
+        "id": "L235",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8521
+      },
+      {
+        "id": "L236",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9913
+      },
+      {
+        "id": "L237",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.96,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9812
+      },
+      {
+        "id": "L238",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.06,
+          "qwen-opus": 0.9400000000000001,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9039
+      },
+      {
+        "id": "L239",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9887
+      },
+      {
+        "id": "L240",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9361
+      },
+      {
+        "id": "L241",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9378
+      },
+      {
+        "id": "L242",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.806
+      },
+      {
+        "id": "L243",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.14,
+          "qwen-opus": 0.86,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.861
+      },
+      {
+        "id": "L244",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.12,
+          "qwen-opus": 0.88,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9702
+      },
+      {
+        "id": "L245",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.1,
+          "qwen-opus": 0.9,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9541
+      },
+      {
+        "id": "L246",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.08,
+          "qwen-opus": 0.92,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.915
+      },
+      {
+        "id": "L247",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.965
+      },
+      {
+        "id": "L248",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8107
+      },
+      {
+        "id": "L249",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8257
+      },
+      {
+        "id": "L250",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.04,
+          "qwen-opus": 0.96,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9259
+      },
+      {
+        "id": "L251",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8788
+      },
+      {
+        "id": "L252",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8974
+      },
+      {
+        "id": "L253",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8856
+      },
+      {
+        "id": "L254",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9311
+      },
+      {
+        "id": "L255",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.927
+      },
+      {
+        "id": "L256",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8141
+      },
+      {
+        "id": "L257",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8149
+      },
+      {
+        "id": "L258",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.895
+      },
+      {
+        "id": "L259",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8275
+      },
+      {
+        "id": "L260",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9712
+      },
+      {
+        "id": "L261",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8642
+      },
+      {
+        "id": "L262",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8895
+      },
+      {
+        "id": "L263",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.98,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.06
+      },
+      {
+        "id": "L264",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.05,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.0
+        },
+        "seconds": 1.0428
+      },
+      {
+        "id": "L265",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8556
+      },
+      {
+        "id": "L266",
+        "expected": "deliberative_work",
+        "kind": "normal",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.06,
+          "qwen-opus": 0.94,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9417
+      },
+      {
+        "id": "L267",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8448
+      },
+      {
+        "id": "L268",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8741
+      },
+      {
+        "id": "L269",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9406
+      },
+      {
+        "id": "L270",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0036
+      },
+      {
+        "id": "L271",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9194
+      },
+      {
+        "id": "L272",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8922
+      },
+      {
+        "id": "L273",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8964
+      },
+      {
+        "id": "L274",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8752
+      },
+      {
+        "id": "L275",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9349
+      },
+      {
+        "id": "L276",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8483
+      },
+      {
+        "id": "L277",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8615
+      },
+      {
+        "id": "L278",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8296
+      },
+      {
+        "id": "L279",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8435
+      },
+      {
+        "id": "L280",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8702
+      },
+      {
+        "id": "L281",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9323
+      },
+      {
+        "id": "L282",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9099
+      },
+      {
+        "id": "L283",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9633
+      },
+      {
+        "id": "L284",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9264
+      },
+      {
+        "id": "L285",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9508
+      },
+      {
+        "id": "L286",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9002
+      },
+      {
+        "id": "L287",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8433
+      },
+      {
+        "id": "L288",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9052
+      },
+      {
+        "id": "L289",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8287
+      },
+      {
+        "id": "L290",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9757
+      },
+      {
+        "id": "L291",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9741
+      },
+      {
+        "id": "L292",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9469
+      },
+      {
+        "id": "L293",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9305
+      },
+      {
+        "id": "L294",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9486
+      },
+      {
+        "id": "L295",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8771
+      },
+      {
+        "id": "L296",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9795
+      },
+      {
+        "id": "L297",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8926
+      },
+      {
+        "id": "L298",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9235
+      },
+      {
+        "id": "L299",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9595
+      },
+      {
+        "id": "L300",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8241
+      },
+      {
+        "id": "L301",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8557
+      },
+      {
+        "id": "L302",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8661
+      },
+      {
+        "id": "L303",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8658
+      },
+      {
+        "id": "L304",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0144
+      },
+      {
+        "id": "L305",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8951
+      },
+      {
+        "id": "L306",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8205
+      },
+      {
+        "id": "L307",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9367
+      },
+      {
+        "id": "L308",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8864
+      },
+      {
+        "id": "L309",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9032
+      },
+      {
+        "id": "L310",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8849
+      },
+      {
+        "id": "L311",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8902
+      },
+      {
+        "id": "L312",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9604
+      },
+      {
+        "id": "L313",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8963
+      },
+      {
+        "id": "L314",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9174
+      },
+      {
+        "id": "L315",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8709
+      },
+      {
+        "id": "L316",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8736
+      },
+      {
+        "id": "L317",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9291
+      },
+      {
+        "id": "L318",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.908
+      },
+      {
+        "id": "L319",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8888
+      },
+      {
+        "id": "L320",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9262
+      },
+      {
+        "id": "L321",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8002
+      },
+      {
+        "id": "L322",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9396
+      },
+      {
+        "id": "L323",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9833
+      },
+      {
+        "id": "L324",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8107
+      },
+      {
+        "id": "L325",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.845
+      },
+      {
+        "id": "L326",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8885
+      },
+      {
+        "id": "L327",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8797
+      },
+      {
+        "id": "L328",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9038
+      },
+      {
+        "id": "L329",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.981
+      },
+      {
+        "id": "L330",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8944
+      },
+      {
+        "id": "L331",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8241
+      },
+      {
+        "id": "L332",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8203
+      },
+      {
+        "id": "L333",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8573
+      },
+      {
+        "id": "L334",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9013
+      },
+      {
+        "id": "L335",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8602
+      },
+      {
+        "id": "L336",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9414
+      },
+      {
+        "id": "L337",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9358
+      },
+      {
+        "id": "L338",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0287
+      },
+      {
+        "id": "L339",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9563
+      },
+      {
+        "id": "L340",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8514
+      },
+      {
+        "id": "L341",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8664
+      },
+      {
+        "id": "L342",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8138
+      },
+      {
+        "id": "L343",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9149
+      },
+      {
+        "id": "L344",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9139
+      },
+      {
+        "id": "L345",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8148
+      },
+      {
+        "id": "L346",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8887
+      },
+      {
+        "id": "L347",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8746
+      },
+      {
+        "id": "L348",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9212
+      },
+      {
+        "id": "L349",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8993
+      },
+      {
+        "id": "L350",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9622
+      },
+      {
+        "id": "L351",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9089
+      },
+      {
+        "id": "L352",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8895
+      },
+      {
+        "id": "L353",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8828
+      },
+      {
+        "id": "L354",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9395
+      },
+      {
+        "id": "L355",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9169
+      },
+      {
+        "id": "L356",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8943
+      },
+      {
+        "id": "L357",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8806
+      },
+      {
+        "id": "L358",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9073
+      },
+      {
+        "id": "L359",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8419
+      },
+      {
+        "id": "L360",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8652
+      },
+      {
+        "id": "L361",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8002
+      },
+      {
+        "id": "L362",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8319
+      },
+      {
+        "id": "L363",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.961
+      },
+      {
+        "id": "L364",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8374
+      },
+      {
+        "id": "L365",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8236
+      },
+      {
+        "id": "L366",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8523
+      },
+      {
+        "id": "L367",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0576
+      },
+      {
+        "id": "L368",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8559
+      },
+      {
+        "id": "L369",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8579
+      },
+      {
+        "id": "L370",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9362
+      },
+      {
+        "id": "L371",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9291
+      },
+      {
+        "id": "L372",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8512
+      },
+      {
+        "id": "L373",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.884
+      },
+      {
+        "id": "L374",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8996
+      },
+      {
+        "id": "L375",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8737
+      },
+      {
+        "id": "L376",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8895
+      },
+      {
+        "id": "L377",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0444
+      },
+      {
+        "id": "L378",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9533
+      },
+      {
+        "id": "L379",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9333
+      },
+      {
+        "id": "L380",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9975
+      },
+      {
+        "id": "L381",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9818
+      },
+      {
+        "id": "L382",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8439
+      },
+      {
+        "id": "L383",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9005
+      },
+      {
+        "id": "L384",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0017
+      },
+      {
+        "id": "L385",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9217
+      },
+      {
+        "id": "L386",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9704
+      },
+      {
+        "id": "L387",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9061
+      },
+      {
+        "id": "L388",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9491
+      },
+      {
+        "id": "L389",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9337
+      },
+      {
+        "id": "L390",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9288
+      },
+      {
+        "id": "L391",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8854
+      },
+      {
+        "id": "L392",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0091
+      },
+      {
+        "id": "L393",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9602
+      },
+      {
+        "id": "L394",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9847
+      },
+      {
+        "id": "L395",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9087
+      },
+      {
+        "id": "L396",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9344
+      },
+      {
+        "id": "L397",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9404
+      },
+      {
+        "id": "L398",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.861
+      },
+      {
+        "id": "L399",
+        "expected": "engineering_work",
+        "kind": "normal",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8914
+      },
+      {
+        "id": "C000",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8839
+      },
+      {
+        "id": "C001",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8408
+      },
+      {
+        "id": "C002",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8718
+      },
+      {
+        "id": "C003",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9202
+      },
+      {
+        "id": "C004",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9676
+      },
+      {
+        "id": "C005",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8545
+      },
+      {
+        "id": "C006",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8895
+      },
+      {
+        "id": "C007",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9028
+      },
+      {
+        "id": "C008",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8886
+      },
+      {
+        "id": "C009",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9029
+      },
+      {
+        "id": "C010",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9068
+      },
+      {
+        "id": "C011",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8922
+      },
+      {
+        "id": "C012",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9475
+      },
+      {
+        "id": "C013",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9416
+      },
+      {
+        "id": "C014",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 1.07
+      },
+      {
+        "id": "C015",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9772
+      },
+      {
+        "id": "C016",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9561
+      },
+      {
+        "id": "C017",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8201
+      },
+      {
+        "id": "C018",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8478
+      },
+      {
+        "id": "C019",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9367
+      },
+      {
+        "id": "C020",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9798
+      },
+      {
+        "id": "C021",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.927
+      },
+      {
+        "id": "C022",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9461
+      },
+      {
+        "id": "C023",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8822
+      },
+      {
+        "id": "C024",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9118
+      },
+      {
+        "id": "C025",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8876
+      },
+      {
+        "id": "C026",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.98,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.9338
+      },
+      {
+        "id": "C027",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8577
+      },
+      {
+        "id": "C028",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9244
+      },
+      {
+        "id": "C029",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9472
+      },
+      {
+        "id": "C030",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8543
+      },
+      {
+        "id": "C031",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9366
+      },
+      {
+        "id": "C032",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 1.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9116
+      },
+      {
+        "id": "C033",
+        "expected": "direct_assistance",
+        "kind": "curveball",
+        "predicted": "gemma",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.99,
+          "qwen-opus": 0.0,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8383
+      },
+      {
+        "id": "C034",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9749
+      },
+      {
+        "id": "C035",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8589
+      },
+      {
+        "id": "C036",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8158
+      },
+      {
+        "id": "C037",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.02
+        },
+        "seconds": 0.8955
+      },
+      {
+        "id": "C038",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.877
+      },
+      {
+        "id": "C039",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.88,
+          "omnicoder": 0.11
+        },
+        "seconds": 0.9177
+      },
+      {
+        "id": "C040",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.91,
+          "omnicoder": 0.08
+        },
+        "seconds": 0.8711
+      },
+      {
+        "id": "C041",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.85,
+          "omnicoder": 0.13
+        },
+        "seconds": 0.8947
+      },
+      {
+        "id": "C042",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9037
+      },
+      {
+        "id": "C043",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.89,
+          "omnicoder": 0.11
+        },
+        "seconds": 0.8758
+      },
+      {
+        "id": "C044",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.93,
+          "omnicoder": 0.07
+        },
+        "seconds": 0.906
+      },
+      {
+        "id": "C045",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.87,
+          "omnicoder": 0.13
+        },
+        "seconds": 0.9399
+      },
+      {
+        "id": "C046",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9314
+      },
+      {
+        "id": "C047",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.04
+        },
+        "seconds": 0.8671
+      },
+      {
+        "id": "C048",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.97,
+          "omnicoder": 0.03
+        },
+        "seconds": 0.8292
+      },
+      {
+        "id": "C049",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.04
+        },
+        "seconds": 0.8489
+      },
+      {
+        "id": "C050",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.8678
+      },
+      {
+        "id": "C051",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.94,
+          "omnicoder": 0.06
+        },
+        "seconds": 0.948
+      },
+      {
+        "id": "C052",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.96,
+          "omnicoder": 0.04
+        },
+        "seconds": 0.8882
+      },
+      {
+        "id": "C053",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.89,
+          "omnicoder": 0.11
+        },
+        "seconds": 0.9279
+      },
+      {
+        "id": "C054",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9264
+      },
+      {
+        "id": "C055",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9611
+      },
+      {
+        "id": "C056",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 1.0,
+          "omnicoder": 0.0
+        },
+        "seconds": 0.9039
+      },
+      {
+        "id": "C057",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.8972
+      },
+      {
+        "id": "C058",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9764
+      },
+      {
+        "id": "C059",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.9400000000000001,
+          "omnicoder": 0.06
+        },
+        "seconds": 0.9208
+      },
+      {
+        "id": "C060",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.95,
+          "omnicoder": 0.05
+        },
+        "seconds": 0.845
+      },
+      {
+        "id": "C061",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.86,
+          "omnicoder": 0.13
+        },
+        "seconds": 0.978
+      },
+      {
+        "id": "C062",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9108
+      },
+      {
+        "id": "C063",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.02,
+          "qwen-opus": 0.82,
+          "omnicoder": 0.16
+        },
+        "seconds": 0.8746
+      },
+      {
+        "id": "C064",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.01,
+          "qwen-opus": 0.86,
+          "omnicoder": 0.13
+        },
+        "seconds": 0.9126
+      },
+      {
+        "id": "C065",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.03,
+          "qwen-opus": 0.79,
+          "omnicoder": 0.18
+        },
+        "seconds": 0.9075
+      },
+      {
+        "id": "C066",
+        "expected": "deliberative_work",
+        "kind": "curveball",
+        "predicted": "qwen-opus",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.99,
+          "omnicoder": 0.01
+        },
+        "seconds": 0.9388
+      },
+      {
+        "id": "C067",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8526
+      },
+      {
+        "id": "C068",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9502
+      },
+      {
+        "id": "C069",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9106
+      },
+      {
+        "id": "C070",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8852
+      },
+      {
+        "id": "C071",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9758
+      },
+      {
+        "id": "C072",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8532
+      },
+      {
+        "id": "C073",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9598
+      },
+      {
+        "id": "C074",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9878
+      },
+      {
+        "id": "C075",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8706
+      },
+      {
+        "id": "C076",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9044
+      },
+      {
+        "id": "C077",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8754
+      },
+      {
+        "id": "C078",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9593
+      },
+      {
+        "id": "C079",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9438
+      },
+      {
+        "id": "C080",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.92
+      },
+      {
+        "id": "C081",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9281
+      },
+      {
+        "id": "C082",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8249
+      },
+      {
+        "id": "C083",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8278
+      },
+      {
+        "id": "C084",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8312
+      },
+      {
+        "id": "C085",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9249
+      },
+      {
+        "id": "C086",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 1.0285
+      },
+      {
+        "id": "C087",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9666
+      },
+      {
+        "id": "C088",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8549
+      },
+      {
+        "id": "C089",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8332
+      },
+      {
+        "id": "C090",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8268
+      },
+      {
+        "id": "C091",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9275
+      },
+      {
+        "id": "C092",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9146
+      },
+      {
+        "id": "C093",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8711
+      },
+      {
+        "id": "C094",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9011
+      },
+      {
+        "id": "C095",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9825
+      },
+      {
+        "id": "C096",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.9997
+      },
+      {
+        "id": "C097",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8859
+      },
+      {
+        "id": "C098",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8677
+      },
+      {
+        "id": "C099",
+        "expected": "engineering_work",
+        "kind": "curveball",
+        "predicted": "omnicoder",
+        "correct": true,
+        "low_confidence": false,
+        "scores": {
+          "gemma": 0.0,
+          "qwen-opus": 0.0,
+          "omnicoder": 1.0
+        },
+        "seconds": 0.8584
+      }
+    ],
+    "summary": {
+      "thresholded_accuracy": 1.0,
+      "argmax_accuracy": 1.0,
+      "argmax_scored": 500,
+      "total": 500,
+      "errors": 0,
+      "median_seconds": 0.9102,
+      "p95_seconds": 1.0017,
+      "by_role_argmax": {
+        "direct_assistance": "168/168",
+        "deliberative_work": "166/166",
+        "engineering_work": "166/166"
+      },
+      "normal": "400/400",
+      "curveball": "100/100"
+    }
+  }
+}
